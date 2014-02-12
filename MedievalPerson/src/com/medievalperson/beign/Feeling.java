@@ -1,4 +1,4 @@
-package beign;
+package com.medievalperson.beign;
 
 public class Feeling {
 

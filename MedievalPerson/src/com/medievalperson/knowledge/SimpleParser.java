@@ -1,7 +1,7 @@
-package knowledge;
+package com.medievalperson.knowledge;
 
-import beign.Beign;
-import beign.Feeling;
+import com.medievalperson.beign.Beign;
+import com.medievalperson.beign.Feeling;
 
 public class SimpleParser implements Parser{
 		

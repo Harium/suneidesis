@@ -1,4 +1,4 @@
-package beign.human;
+package com.medievalperson.beign.human;
 
 public enum Gender {
 

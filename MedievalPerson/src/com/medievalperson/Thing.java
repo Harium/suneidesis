@@ -1,4 +1,4 @@
-package thing;
+package com.medievalperson;
 
 public class Thing {
 

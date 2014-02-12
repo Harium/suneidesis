@@ -1,6 +1,6 @@
-package knowledge;
+package com.medievalperson.knowledge;
 
-import beign.Beign;
+import com.medievalperson.beign.Beign;
 
 public class FamilyTreeParser implements Parser {
 

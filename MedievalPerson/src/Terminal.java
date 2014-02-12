@@ -1,5 +1,5 @@
-import beign.Beign;
-import beign.human.Gender;
+import com.medievalperson.beign.Beign;
+import com.medievalperson.beign.human.Gender;
 
 
 public class Terminal {

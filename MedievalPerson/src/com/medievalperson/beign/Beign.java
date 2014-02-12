@@ -1,11 +1,13 @@
-package beign;
+package com.medievalperson.beign;
 
-import beign.human.Gender;
-import knowledge.Parser;
-import knowledge.SimpleParser;
-import thing.Thing;
+import com.medievalperson.Thing;
+import com.medievalperson.beign.human.Gender;
+import com.medievalperson.knowledge.Parser;
+import com.medievalperson.knowledge.SimpleParser;
 
-public class Beign extends Thing{
+public class Beign extends Thing {
+	
+	
 
 	private Beign biologicalFather = null;
 	
