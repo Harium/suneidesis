@@ -1,13 +1,13 @@
 package com.medievalperson.beign;
 
+import java.util.List;
+
 import com.medievalperson.Thing;
-import com.medievalperson.beign.human.Gender;
-import com.medievalperson.knowledge.Parser;
-import com.medievalperson.knowledge.SimpleParser;
+import com.medievalperson.action.Action;
 
 public class Beign extends Thing {
 	
-	
+	private List<Action> actions;
 
 	private Beign biologicalFather = null;
 	
@@ -16,9 +16,7 @@ public class Beign extends Thing {
 	protected Feeling feeling = new Feeling();
 	
 	protected Gender gender = Gender.UNKNOWN;
-	
-	private Parser parser = new SimpleParser();
-	
+		
 	public Beign(String name) {
 		super(name);
 	}
@@ -29,12 +27,12 @@ public class Beign extends Thing {
 		this.gender = gender;
 	}
 	
-	public String listen(String sentence){
-		return parser.parse(sentence, this);
-	}
-
 	public Feeling getFeeling() {
 		return feeling;
+	}
+
+	public Gender getGender() {
+		return gender;
 	}
 
 	public Beign getBiologicalFather() {
@@ -59,6 +57,14 @@ public class Beign extends Thing {
 			this.biologicalMother = biologicalMother;
 		}
 		
-	}	
-		
+	}
+
+	public List<Action> getActions() {
+		return actions;
+	}
+
+	public void setActions(List<Action> actions) {
+		this.actions = actions;
+	}
+	
 }

@@ -1,11 +1,16 @@
 package com.medievalperson.knowledge;
 
 import com.medievalperson.beign.Beign;
-import com.medievalperson.beign.Feeling;
+import com.medievalperson.knowledge.action.ActionParser;
+import com.medievalperson.knowledge.feeling.FeelingParser;
 
 public class SimpleParser implements Parser{
 		
+	private FeelingParser feelingParser = new SimpleFeelingParser();
+	
 	private FamilyTreeParser familyTreeParser = new FamilyTreeParser();
+	
+	private ActionParser actionParser = new SimpleActionParser();
 	
 	public SimpleParser() {
 		super();
@@ -16,41 +21,26 @@ public class SimpleParser implements Parser{
 		
 		String[] parts = query.replaceAll("\\?", "").split(" ");
 		
-		if("How".equalsIgnoreCase(parts[0])&&query.contains("You")){
-			return "I am "+translateFeelingToString(beign.getFeeling());
+		String response = null;
+		
+		if("How".equalsIgnoreCase(parts[0])){
+			
+			response = feelingParser.parse(query, beign);
+			
 		}else if("Who".equalsIgnoreCase(parts[0])){
+						
+			response = familyTreeParser.parse(query, beign);
 			
-			String relationship = parts[parts.length-1];
-			
-			return familyTreeParser.parse(relationship, beign);
+		}else if("Did".equalsIgnoreCase(parts[0])){
+						
+			response = actionParser.parse(query, beign);
 		}
 		
-		return "...";
-	}
-
-	private int fineInterval = 90;
-	
-	private int goodInterval = 75;
-	
-	private int badInterval = 50;
-	
-	public String translateFeelingToString(Feeling feeling){
-		
-		int health = feeling.getHealth();
-		
-		String state = "";
-		
-		if(health>=fineInterval){
-			state = "Fine";
-		}else if(health>=goodInterval){
-			state = "Good";
-		}else if(health<badInterval){
-			state = "Bad";
+		if(response==null){
+			response = "I do not know";
 		}
 		
-		return state;
-		
-	}
-	
+		return response;
+	}	
 	
 }

@@ -5,7 +5,11 @@ import com.medievalperson.beign.Beign;
 public class FamilyTreeParser implements Parser {
 
 	@Override
-	public String parse(String relationship, Beign beign) {
+	public String parse(String query, Beign beign) {
+		
+		String[] parts = query.replaceAll("\\?", "").split(" ");
+		
+		String relationship = parts[parts.length-1];
 		
 		String name = "";
 		

@@ -11,16 +11,62 @@ public class Action {
 	
 	private Place place;
 	
-	//Actor
-	//Who
-	//Place
-	//Action
-	//WhereAction
-	//When
+	private String action;
 	
-	//Ex: I Saw Him Jumpping - The Bridge at Midnight 
-	// I Him The Bridge Jumping - Midnight -
-	//Ex2: I Punch his face in the brigde at Midnight
-	//I Him The Bridge Punch Face Mignight -
+	private String whereAction;
 	
+	private String when;
+
+	public Action() {
+		super();
+	}
+
+	public Beign getActor() {
+		return actor;
+	}
+
+	public void setActor(Beign actor) {
+		this.actor = actor;
+	}
+
+	public Beign getWho() {
+		return who;
+	}
+
+	public void setWho(Beign who) {
+		this.who = who;
+	}
+
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public String getWhereAction() {
+		return whereAction;
+	}
+
+	public void setWhereAction(String whereAction) {
+		this.whereAction = whereAction;
+	}
+
+	public String getWhen() {
+		return when;
+	}
+
+	public void setWhen(String when) {
+		this.when = when;
+	}
+		
 }
