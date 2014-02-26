@@ -2,9 +2,9 @@ package com.medievalperson.knowledge;
 
 import java.util.List;
 
-import com.medievalperson.action.Action;
 import com.medievalperson.beign.Beign;
 import com.medievalperson.knowledge.action.ActionParser;
+import com.medievalperson.memory.Memory;
 
 public class SimpleActionParser implements ActionParser {
 
@@ -28,9 +28,9 @@ public class SimpleActionParser implements ActionParser {
 
 		if(!querySubject.isEmpty()){
 
-			List<Action> actions = beign.getActions();
+			List<Memory> actions = beign.getMemories();
 
-			Action action = null;
+			Memory action = null;
 			
 			if(!Character.isUpperCase(querySubject.charAt(0))){
 				action = findActionByName(querySubject, actions);
@@ -47,9 +47,9 @@ public class SimpleActionParser implements ActionParser {
 		return "No.";
 	}
 
-	private Action findActionByActorsName(String actorName, List<Action> actions){
+	private Memory findActionByActorsName(String actorName, List<Memory> actions){
 
-		for(Action action: actions){
+		for(Memory action: actions){
 
 			if(actorName.equalsIgnoreCase(action.getActor().getName())||actorName.equalsIgnoreCase(action.getWho().getName())){
 				return action;
@@ -61,9 +61,9 @@ public class SimpleActionParser implements ActionParser {
 
 	}
 
-	private Action findActionByName(String actionName, List<Action> actions){
+	private Memory findActionByName(String actionName, List<Memory> actions){
 
-		for(Action action: actions){
+		for(Memory action: actions){
 
 			if(actionName.equalsIgnoreCase(action.getAction())){
 				return action;
@@ -74,7 +74,7 @@ public class SimpleActionParser implements ActionParser {
 		return null;
 	}
 
-	public String describeAction(Action action){
+	public String describeAction(Memory action){
 
 		StringBuilder builder = new StringBuilder();
 

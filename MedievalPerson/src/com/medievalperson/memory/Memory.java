@@ -1,9 +1,17 @@
-package com.medievalperson.action;
+package com.medievalperson.memory;
 
 import com.medievalperson.beign.Beign;
 import com.medievalperson.place.Place;
 
-public class Action {
+/**
+ * 
+ * Memory is a model to represent actions from the beign perspective
+ * 
+ * the same fact(action) can be achieve in a different way from observers and/or actors
+ *
+ */
+
+public class Memory {
 
 	private Beign actor;
 	
@@ -17,7 +25,7 @@ public class Action {
 	
 	private String when;
 
-	public Action() {
+	public Memory() {
 		super();
 	}
 

@@ -3,11 +3,11 @@ package com.medievalperson.beign;
 import java.util.List;
 
 import com.medievalperson.Thing;
-import com.medievalperson.action.Action;
+import com.medievalperson.memory.Memory;
 
 public class Beign extends Thing {
 	
-	private List<Action> actions;
+	private List<Memory> memories;
 
 	private Beign biologicalFather = null;
 	
@@ -59,12 +59,12 @@ public class Beign extends Thing {
 		
 	}
 
-	public List<Action> getActions() {
-		return actions;
+	public List<Memory> getMemories() {
+		return memories;
 	}
 
-	public void setActions(List<Action> actions) {
-		this.actions = actions;
+	public void setMemories(List<Memory> memories) {
+		this.memories = memories;
 	}
 	
 }
