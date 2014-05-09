@@ -1,9 +1,10 @@
 package com.medievalperson;
 
+
 public class Thing {
 
 	protected String name;
-
+	
 	public Thing(String name) {
 		super();
 		this.name = name;
@@ -16,5 +17,5 @@ public class Thing {
 	public void setName(String name) {
 		this.name = name;
 	}
-		
+
 }

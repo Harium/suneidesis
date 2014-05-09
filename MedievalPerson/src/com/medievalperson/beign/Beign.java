@@ -1,8 +1,11 @@
 package com.medievalperson.beign;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.medievalperson.Thing;
+import com.medievalperson.adjectives.Adjective;
 import com.medievalperson.memory.Memory;
 
 public class Beign extends Thing {
@@ -17,6 +20,8 @@ public class Beign extends Thing {
 	
 	protected Gender gender = Gender.UNKNOWN;
 		
+	protected Set<Adjective> adjectives;
+	
 	public Beign(String name) {
 		super(name);
 	}
@@ -65,6 +70,21 @@ public class Beign extends Thing {
 
 	public void setMemories(List<Memory> memories) {
 		this.memories = memories;
+	}
+	
+	public Set<Adjective> getAdjectives() {
+		return adjectives;
+	}
+	
+	public void addAdjective(Adjective adjective) {
+		
+		if(adjectives == null) {
+			
+			adjectives = new HashSet<Adjective>();
+			
+		}
+		
+		adjectives.add(adjective);
 	}
 	
 }
