@@ -5,6 +5,7 @@ import java.util.List;
 import com.medievalperson.beign.Being;
 import com.medievalperson.knowledge.action.ActionParser;
 import com.medievalperson.memory.Fact;
+import com.medievalperson.place.Place;
 
 public class SimpleActionParser implements ActionParser {
 
@@ -92,11 +93,26 @@ public class SimpleActionParser implements ActionParser {
 		}
 
 		builder.append(" ");
-		builder.append(action.getPlace().getName());
+		builder.append(getPlace(action.getPlace()));
 		builder.append(" ");
 		builder.append(action.getWhen());
 
 		return builder.toString();
+	}
+	
+	private String getPlace(Place place) {
+		
+		String placeSentence = place.getName();
+		
+		if(place.getPlace() != null) {
+			
+			placeSentence += " ";
+			
+			placeSentence += getPlace(place.getPlace()); 
+		}
+		
+		return placeSentence;
+		
 	}
 
 }

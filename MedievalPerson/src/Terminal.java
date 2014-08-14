@@ -42,7 +42,7 @@ public class Terminal {
 		
 		killTroll.setActor(beign); //Who did the action
 		killTroll.setWho(new Being("a Troll")); //Who suffered the action (target) 
-		killTroll.setPlace(new Place("at the top of Silvertine")); //Where the action happens
+		killTroll.setPlace(new Place("at the top of").at(new Place("Silvertine"))); //Where the action happens
 		killTroll.setAction("Cut"); //Action's name
 		killTroll.setWhereAction("throat"); // Where in the target the action happened
 		killTroll.setWhen("last week"); //When action happens
@@ -53,12 +53,15 @@ public class Terminal {
 		
 		createRing.setActor(new Being("Sauron")); //Who did the action
 		createRing.setWho(new Being("a ring")); //Who suffered the action 
-		createRing.setPlace(new Place("somewhere in Middle-Earth")); //Where the action happens
+		createRing.setPlace(new Place("somewhere in").at(new Place("Middle-Earth"))); //Where the action happens
 		createRing.setAction("Create"); //Action's name
 		createRing.setWhereAction(""); // 
 		createRing.setWhen("many years ago"); //When action happens
 		
 		actions.add(createRing);
+		
+		//Fact summerRain = new Fact();
+		//summerRain.setPlace(place);
 		
 		return actions;
 		
