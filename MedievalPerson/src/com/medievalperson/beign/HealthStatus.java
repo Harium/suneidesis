@@ -1,10 +1,10 @@
 package com.medievalperson.beign;
 
-public class Feeling {
+public class HealthStatus {
 
 	private int health = 100;
 	
-	public Feeling(){
+	public HealthStatus() {
 		super();
 	}
 	

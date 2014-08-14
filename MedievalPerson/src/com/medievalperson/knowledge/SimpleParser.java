@@ -1,6 +1,6 @@
 package com.medievalperson.knowledge;
 
-import com.medievalperson.beign.Beign;
+import com.medievalperson.beign.Being;
 import com.medievalperson.knowledge.action.ActionParser;
 import com.medievalperson.knowledge.adjective.AdjectiveParser;
 import com.medievalperson.knowledge.feeling.FeelingParser;
@@ -20,7 +20,7 @@ public class SimpleParser implements Parser {
 	}
 
 	@Override
-	public String parse(String query, Beign beign) {
+	public String parse(String query, Being beign) {
 
 		String[] parts = query.replaceAll("\\?", "").split(" ");
 

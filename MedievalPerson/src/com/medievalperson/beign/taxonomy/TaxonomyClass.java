@@ -1,8 +1,8 @@
 package com.medievalperson.beign.taxonomy;
 
-import com.medievalperson.Thing;
+import com.medievalperson.Concept;
 
-public class TaxonomyClass extends Thing{
+public class TaxonomyClass extends Concept{
 
 	private Phylum phylum;
 	

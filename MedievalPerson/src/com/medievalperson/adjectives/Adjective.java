@@ -1,12 +1,12 @@
 package com.medievalperson.adjectives;
 
-import com.medievalperson.Thing;
+import com.medievalperson.Concept;
+import com.medievalperson.concept.ConceptType;
 
-public class Adjective extends Thing {
+public class Adjective extends Concept {
 
 	public Adjective(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+		super(name, ConceptType.ADJECTIVE);
 	}
-	
+		
 }

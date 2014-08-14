@@ -1,8 +1,8 @@
 package com.medievalperson.material;
 
-import com.medievalperson.Thing;
+import com.medievalperson.Concept;
 
-public class Atom extends Thing {
+public class Atom extends Concept {
 
 	private int atomicNumber;
 	

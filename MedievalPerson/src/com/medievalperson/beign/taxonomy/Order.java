@@ -1,8 +1,8 @@
 package com.medievalperson.beign.taxonomy;
 
-import com.medievalperson.Thing;
+import com.medievalperson.Concept;
 
-public class Order extends Thing {
+public class Order extends Concept {
 
 	private TaxonomyClass taxonomyClass;
 

@@ -1,7 +1,7 @@
 package com.medievalperson.knowledge;
 
-import com.medievalperson.beign.Beign;
-import com.medievalperson.beign.Feeling;
+import com.medievalperson.beign.Being;
+import com.medievalperson.beign.HealthStatus;
 import com.medievalperson.knowledge.feeling.FeelingParser;
 
 public class SimpleFeelingParser implements FeelingParser {
@@ -13,17 +13,17 @@ public class SimpleFeelingParser implements FeelingParser {
 	private int badInterval = 50;
 	
 	@Override
-	public String parse(String query, Beign beign) {
+	public String parse(String query, Being beign) {
 
 		if(query.contains("You")){
-			return "I am "+translateFeelingToString(beign.getFeeling())+".";
+			return "I am "+translateFeelingToString(beign.getHealthStatus())+".";
 		}
 		
 		return null;
 		
 	}
 		
-	public String translateFeelingToString(Feeling feeling){
+	public String translateFeelingToString(HealthStatus feeling){
 		
 		int health = feeling.getHealth();
 		

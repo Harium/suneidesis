@@ -1,9 +1,9 @@
 package com.medievalperson.knowledge;
 
-import com.medievalperson.beign.Beign;
+import com.medievalperson.beign.Being;
 
 public interface Parser {
 
-	public String parse(String query, Beign beign);
+	public String parse(String query, Being beign);
 	
 }

@@ -1,11 +1,11 @@
 package com.medievalperson.knowledge;
 
-import com.medievalperson.beign.Beign;
+import com.medievalperson.beign.Being;
 
 public class FamilyTreeParser implements Parser {
 
 	@Override
-	public String parse(String query, Beign beign) {
+	public String parse(String query, Being beign) {
 		
 		String[] parts = query.replaceAll("\\?", "").split(" ");
 		
@@ -27,9 +27,9 @@ public class FamilyTreeParser implements Parser {
 		return name;
 	}
 	
-	private String findFather(Beign beign){
+	private String findFather(Being beign){
 		
-		Beign father = beign.getBiologicalFather(); 
+		Being father = beign.getBiologicalFather(); 
 		
 		if(father!=null){
 			return father.getName(); 
@@ -38,9 +38,9 @@ public class FamilyTreeParser implements Parser {
 		return "";		
 	}
 	
-	private String findMother(Beign beign){
+	private String findMother(Being beign){
 		
-		Beign mother = beign.getBiologicalMother(); 
+		Being mother = beign.getBiologicalMother(); 
 		
 		if(mother!=null){
 			return mother.getName(); 

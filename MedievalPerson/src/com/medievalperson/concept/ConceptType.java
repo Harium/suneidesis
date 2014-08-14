@@ -1,0 +1,7 @@
+package com.medievalperson.concept;
+
+public enum ConceptType {
+
+	UNKNOWN, ADJECTIVE, ACTION, ARTIFACT, CREATURE, CREATURE_PART, CREATURE_FEELING, PLACE, AMOUNT_OF_TIME, MATERIAL, PHENOMENA, THEORY;
+	
+}

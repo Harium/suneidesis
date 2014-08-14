@@ -1,12 +1,12 @@
 package com.medievalperson.place;
 
-import com.medievalperson.Thing;
+import com.medievalperson.Concept;
+import com.medievalperson.concept.ConceptType;
 
-public class Place extends Thing {
+public class Place extends Concept {
 
 	public Place(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+		super(name, ConceptType.PLACE);
 	}
 
 	

@@ -3,7 +3,7 @@ package com.medievalperson.beign;
 import com.medievalperson.knowledge.Parser;
 import com.medievalperson.knowledge.SimpleParser;
 
-public class RationalBeign extends Beign {
+public class RationalBeign extends Being {
 
 	private Parser parser = new SimpleParser();
 	

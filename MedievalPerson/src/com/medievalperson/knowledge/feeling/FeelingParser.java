@@ -1,10 +1,10 @@
 package com.medievalperson.knowledge.feeling;
 
-import com.medievalperson.beign.Feeling;
+import com.medievalperson.beign.HealthStatus;
 import com.medievalperson.knowledge.Parser;
 
 public interface FeelingParser extends Parser {
 
-	public String translateFeelingToString(Feeling feeling);
+	public String translateFeelingToString(HealthStatus feeling);
 	
 }

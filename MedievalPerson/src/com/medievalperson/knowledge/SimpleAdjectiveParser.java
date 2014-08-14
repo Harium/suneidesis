@@ -1,13 +1,13 @@
 package com.medievalperson.knowledge;
 
 import com.medievalperson.adjectives.Adjective;
-import com.medievalperson.beign.Beign;
+import com.medievalperson.beign.Being;
 import com.medievalperson.knowledge.adjective.AdjectiveParser;
 
 public class SimpleAdjectiveParser implements AdjectiveParser {
 
 	@Override
-	public String parse(String query, Beign beign) {
+	public String parse(String query, Being beign) {
 		
 		String[] parts = query.replaceAll("\\?", "").split(" ");
 		

@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import com.medievalperson.beign.Beign;
+import com.medievalperson.beign.Being;
 import com.medievalperson.beign.Gender;
 import com.medievalperson.beign.RationalBeign;
-import com.medievalperson.memory.Memory;
+import com.medievalperson.memory.Fact;
 import com.medievalperson.place.Place;
 
 
@@ -34,14 +34,14 @@ public class Terminal {
 				
 	}
 	
-	private static List<Memory> createMemories(RationalBeign beign) {
+	private static List<Fact> createMemories(RationalBeign beign) {
 
-		List<Memory> actions = new ArrayList<Memory>();
+		List<Fact> actions = new ArrayList<Fact>();
 		
-		Memory killTroll = new Memory();
+		Fact killTroll = new Fact();
 		
 		killTroll.setActor(beign); //Who did the action
-		killTroll.setWho(new Beign("a Troll")); //Who suffered the action (target) 
+		killTroll.setWho(new Being("a Troll")); //Who suffered the action (target) 
 		killTroll.setPlace(new Place("at the top of Silvertine")); //Where the action happens
 		killTroll.setAction("Cut"); //Action's name
 		killTroll.setWhereAction("throat"); // Where in the target the action happened
@@ -49,10 +49,10 @@ public class Terminal {
 		
 		actions.add(killTroll);
 		
-		Memory createRing = new Memory();
+		Fact createRing = new Fact();
 		
-		createRing.setActor(new Beign("Sauron")); //Who did the action
-		createRing.setWho(new Beign("a ring")); //Who suffered the action 
+		createRing.setActor(new Being("Sauron")); //Who did the action
+		createRing.setWho(new Being("a ring")); //Who suffered the action 
 		createRing.setPlace(new Place("somewhere in Middle-Earth")); //Where the action happens
 		createRing.setAction("Create"); //Action's name
 		createRing.setWhereAction(""); // 

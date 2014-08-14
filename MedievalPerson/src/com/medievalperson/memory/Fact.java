@@ -1,21 +1,21 @@
 package com.medievalperson.memory;
 
-import com.medievalperson.beign.Beign;
+import com.medievalperson.beign.Being;
 import com.medievalperson.place.Place;
 
 /**
  * 
- * Memory is a model to represent actions from the beign perspective
+ * Memory is a model to represent actions from the being perspective
  * 
  * the same fact(action) can be achieve in a different way from observers and/or actors
  *
  */
 
-public class Memory {
+public class Fact {
 
-	private Beign actor;
+	private Being actor;
 	
-	private Beign who;
+	private Being who;
 	
 	private Place place;
 	
@@ -25,23 +25,23 @@ public class Memory {
 	
 	private String when;
 
-	public Memory() {
+	public Fact() {
 		super();
 	}
 
-	public Beign getActor() {
+	public Being getActor() {
 		return actor;
 	}
 
-	public void setActor(Beign actor) {
+	public void setActor(Being actor) {
 		this.actor = actor;
 	}
 
-	public Beign getWho() {
+	public Being getWho() {
 		return who;
 	}
 
-	public void setWho(Beign who) {
+	public void setWho(Being who) {
 		this.who = who;
 	}
 
