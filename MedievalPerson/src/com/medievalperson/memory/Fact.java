@@ -1,5 +1,7 @@
 package com.medievalperson.memory;
 
+import java.util.List;
+
 import com.medievalperson.Concept;
 import com.medievalperson.beign.Being;
 import com.medievalperson.place.Place;
@@ -25,6 +27,8 @@ public class Fact {
 	private Concept whereInTarget;
 	
 	private Concept when;
+	
+	protected List<Fact> conclusions;
 
 	public Fact() {
 		super();
@@ -76,6 +80,25 @@ public class Fact {
 
 	public void setWhen(Concept when) {
 		this.when = when;
+	}
+
+	public List<Fact> getConclusions() {
+		return conclusions;
+	}
+
+	public void setConclusions(List<Fact> conclusions) {
+		this.conclusions = conclusions;
+	}
+	
+	public void copy(Fact fact) {
+		
+		this.actor = fact.actor;
+		this.target = fact.target;
+		this.place = fact.place;
+		this.action = fact.action;
+		this.whereInTarget= fact.whereInTarget;
+		this.when = fact.when;
+		this.conclusions = fact.conclusions;
 	}
 		
 }
