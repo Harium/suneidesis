@@ -1,7 +1,7 @@
 package com.medievalperson.beign;
 
-import com.medievalperson.knowledge.Parser;
-import com.medievalperson.knowledge.SimpleParser;
+import com.medievalperson.answer.Parser;
+import com.medievalperson.answer.SimpleParser;
 
 public class RationalBeign extends Being {
 

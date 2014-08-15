@@ -1,7 +1,7 @@
-package com.medievalperson.knowledge.feeling;
+package com.medievalperson.answer.feeling;
 
+import com.medievalperson.answer.Parser;
 import com.medievalperson.beign.HealthStatus;
-import com.medievalperson.knowledge.Parser;
 
 public interface FeelingParser extends Parser {
 

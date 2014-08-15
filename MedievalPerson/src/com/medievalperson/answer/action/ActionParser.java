@@ -1,6 +1,6 @@
-package com.medievalperson.knowledge.action;
+package com.medievalperson.answer.action;
 
-import com.medievalperson.knowledge.Parser;
+import com.medievalperson.answer.Parser;
 import com.medievalperson.memory.Fact;
 
 public interface ActionParser extends Parser {

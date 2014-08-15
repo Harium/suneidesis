@@ -1,9 +1,8 @@
-package com.medievalperson.knowledge;
+package com.medievalperson.answer.action;
 
 import java.util.List;
 
 import com.medievalperson.beign.Being;
-import com.medievalperson.knowledge.action.ActionParser;
 import com.medievalperson.memory.Fact;
 import com.medievalperson.place.Place;
 
@@ -50,11 +49,18 @@ public class SimpleActionParser implements ActionParser {
 
 	private Fact findActionByActorsName(String actorName, List<Fact> actions) {
 
+		String name = actorName.toLowerCase();
+		
 		for(Fact action: actions) {
 
-			if(actorName.equalsIgnoreCase(action.getActor().getName())||actorName.equalsIgnoreCase(action.getTarget().getName())) {
-				return action;
-			}
+			boolean hasActor = action.getActor().getName().toLowerCase().contains(name);
+			
+			boolean hasTarget = action.getTarget().getName().toLowerCase().contains(name);
+			
+			if(hasActor || hasTarget)
+			
+			return action;
+			
 
 		}
 

@@ -1,9 +1,11 @@
-package com.medievalperson.knowledge;
+package com.medievalperson.answer;
 
+import com.medievalperson.answer.action.ActionParser;
+import com.medievalperson.answer.action.SimpleActionParser;
+import com.medievalperson.answer.adjective.AdjectiveParser;
+import com.medievalperson.answer.feeling.FeelingParser;
+import com.medievalperson.answer.feeling.SimpleFeelingParser;
 import com.medievalperson.beign.Being;
-import com.medievalperson.knowledge.action.ActionParser;
-import com.medievalperson.knowledge.adjective.AdjectiveParser;
-import com.medievalperson.knowledge.feeling.FeelingParser;
 
 public class SimpleParser implements Parser {
 

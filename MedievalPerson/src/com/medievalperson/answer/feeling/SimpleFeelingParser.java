@@ -1,8 +1,7 @@
-package com.medievalperson.knowledge;
+package com.medievalperson.answer.feeling;
 
 import com.medievalperson.beign.Being;
 import com.medievalperson.beign.HealthStatus;
-import com.medievalperson.knowledge.feeling.FeelingParser;
 
 public class SimpleFeelingParser implements FeelingParser {
 

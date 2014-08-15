@@ -1,8 +1,8 @@
-package com.medievalperson.knowledge;
+package com.medievalperson.answer;
 
 import com.medievalperson.adjectives.Adjective;
+import com.medievalperson.answer.adjective.AdjectiveParser;
 import com.medievalperson.beign.Being;
-import com.medievalperson.knowledge.adjective.AdjectiveParser;
 
 public class SimpleAdjectiveParser implements AdjectiveParser {
 

@@ -1,4 +1,4 @@
-package com.medievalperson.knowledge;
+package com.medievalperson.answer;
 
 import com.medievalperson.beign.Being;
 
