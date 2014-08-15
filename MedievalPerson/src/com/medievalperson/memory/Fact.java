@@ -1,5 +1,6 @@
 package com.medievalperson.memory;
 
+import com.medievalperson.Concept;
 import com.medievalperson.beign.Being;
 import com.medievalperson.place.Place;
 
@@ -15,15 +16,15 @@ public class Fact {
 
 	private Being actor;
 	
-	private Being who;
+	private Being target;
 	
 	private Place place;
 	
-	private String action;
+	private Concept action;
 	
-	private String whereAction;
+	private Concept whereInTarget;
 	
-	private String when;
+	private Concept when;
 
 	public Fact() {
 		super();
@@ -37,12 +38,12 @@ public class Fact {
 		this.actor = actor;
 	}
 
-	public Being getWho() {
-		return who;
+	public Being getTarget() {
+		return target;
 	}
 
-	public void setWho(Being who) {
-		this.who = who;
+	public void setTarget(Being target) {
+		this.target = target;
 	}
 
 	public Place getPlace() {
@@ -53,27 +54,27 @@ public class Fact {
 		this.place = place;
 	}
 
-	public String getAction() {
+	public Concept getAction() {
 		return action;
 	}
 
-	public void setAction(String action) {
+	public void setAction(Concept action) {
 		this.action = action;
 	}
 
-	public String getWhereAction() {
-		return whereAction;
+	public Concept getWhereInTarget() {
+		return whereInTarget;
 	}
 
-	public void setWhereAction(String whereAction) {
-		this.whereAction = whereAction;
+	public void setWhereInTarget(Concept whereAction) {
+		this.whereInTarget = whereAction;
 	}
 
-	public String getWhen() {
+	public Concept getWhen() {
 		return when;
 	}
 
-	public void setWhen(String when) {
+	public void setWhen(Concept when) {
 		this.when = when;
 	}
 		

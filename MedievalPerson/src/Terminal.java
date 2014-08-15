@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import com.medievalperson.Concept;
 import com.medievalperson.beign.Being;
 import com.medievalperson.beign.Gender;
 import com.medievalperson.beign.RationalBeign;
@@ -41,22 +42,22 @@ public class Terminal {
 		Fact killTroll = new Fact();
 		
 		killTroll.setActor(beign); //Who did the action
-		killTroll.setWho(new Being("a Troll")); //Who suffered the action (target) 
+		killTroll.setTarget(new Being("a Troll")); //Who suffered the action (target) 
 		killTroll.setPlace(new Place("at the top of").at(new Place("Silvertine"))); //Where the action happens
-		killTroll.setAction("Cut"); //Action's name
-		killTroll.setWhereAction("throat"); // Where in the target the action happened
-		killTroll.setWhen("last week"); //When action happens
+		killTroll.setAction(new Concept("Cut")); //Action's name
+		killTroll.setWhereInTarget(new Concept("throat")); // Where in the target the action happened
+		killTroll.setWhen(new Concept("last week")); //When action happens
 		
 		actions.add(killTroll);
 		
 		Fact createRing = new Fact();
 		
 		createRing.setActor(new Being("Sauron")); //Who did the action
-		createRing.setWho(new Being("a ring")); //Who suffered the action 
+		createRing.setTarget(new Being("a ring")); //Who suffered the action 
 		createRing.setPlace(new Place("somewhere in").at(new Place("Middle-Earth"))); //Where the action happens
-		createRing.setAction("Create"); //Action's name
-		createRing.setWhereAction(""); // 
-		createRing.setWhen("many years ago"); //When action happens
+		createRing.setAction(new Concept("Create")); //Action's name
+		createRing.setWhereInTarget(null); // 
+		createRing.setWhen(new Concept("many years ago")); //When action happens
 		
 		actions.add(createRing);
 		

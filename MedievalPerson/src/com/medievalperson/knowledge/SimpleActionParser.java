@@ -16,9 +16,9 @@ public class SimpleActionParser implements ActionParser {
 
 		String querySubject = "";
 
-		for(int i=0;i<parts.length;i++){
+		for(int i=0;i<parts.length;i++) {
 
-			if(parts[i].equalsIgnoreCase("about")){
+			if(parts[i].equalsIgnoreCase("about")) {
 
 				querySubject = parts[i+1];
 				break;
@@ -27,32 +27,32 @@ public class SimpleActionParser implements ActionParser {
 
 		}
 
-		if(!querySubject.isEmpty()){
+		if(!querySubject.isEmpty()) {
 
 			List<Fact> actions = beign.getMemories();
 
 			Fact action = null;
-			
-			if(!Character.isUpperCase(querySubject.charAt(0))){
+
+			if(!Character.isUpperCase(querySubject.charAt(0))) {
 				action = findActionByName(querySubject, actions);
 			}else{
 				action = findActionByActorsName(querySubject, actions);
 			}		
 
-			if(action!=null){
+			if(action!=null) {
 				return describeAction(action);
 			}
-			
+
 		}
 
 		return "No.";
 	}
 
-	private Fact findActionByActorsName(String actorName, List<Fact> actions){
+	private Fact findActionByActorsName(String actorName, List<Fact> actions) {
 
-		for(Fact action: actions){
+		for(Fact action: actions) {
 
-			if(actorName.equalsIgnoreCase(action.getActor().getName())||actorName.equalsIgnoreCase(action.getWho().getName())){
+			if(actorName.equalsIgnoreCase(action.getActor().getName())||actorName.equalsIgnoreCase(action.getTarget().getName())) {
 				return action;
 			}
 
@@ -62,11 +62,11 @@ public class SimpleActionParser implements ActionParser {
 
 	}
 
-	private Fact findActionByName(String actionName, List<Fact> actions){
+	private Fact findActionByName(String actionName, List<Fact> actions) {
 
-		for(Fact action: actions){
+		for(Fact action: actions) {
 
-			if(actionName.equalsIgnoreCase(action.getAction())){
+			if(actionName.equalsIgnoreCase(action.getAction().getName())) {
 				return action;
 			}
 
@@ -75,7 +75,7 @@ public class SimpleActionParser implements ActionParser {
 		return null;
 	}
 
-	public String describeAction(Fact action){
+	public String describeAction(Fact action) {
 
 		StringBuilder builder = new StringBuilder();
 
@@ -83,36 +83,39 @@ public class SimpleActionParser implements ActionParser {
 		builder.append(" ");
 		builder.append(action.getActor().getName());
 		builder.append(" ");
-		builder.append(action.getAction().toLowerCase());
+		builder.append(action.getAction().getName().toLowerCase());
 		builder.append("s ");
-		builder.append(action.getWho().getName());
+		builder.append(action.getTarget().getName());
 
-		if(!action.getWhereAction().isEmpty()){
-			builder.append("'s ");
-			builder.append(action.getWhereAction());			
+		if(action.getWhereInTarget() != null) {
+			
+			if(!action.getWhereInTarget().getName().isEmpty()) {
+				builder.append("'s ");
+				builder.append(action.getWhereInTarget().getName());			
+			}
 		}
 
 		builder.append(" ");
 		builder.append(getPlace(action.getPlace()));
-		builder.append(" ");
-		builder.append(action.getWhen());
+		builder.append(", ");
+		builder.append(action.getWhen().getName());
 
 		return builder.toString();
 	}
-	
+
 	private String getPlace(Place place) {
-		
+
 		String placeSentence = place.getName();
-		
+
 		if(place.getPlace() != null) {
-			
+
 			placeSentence += " ";
-			
+
 			placeSentence += getPlace(place.getPlace()); 
 		}
-		
+
 		return placeSentence;
-		
+
 	}
 
 }
