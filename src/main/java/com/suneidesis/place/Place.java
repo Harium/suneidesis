@@ -1,6 +1,6 @@
 package com.suneidesis.place;
 
-import com.suneidesis.Concept;
+import com.suneidesis.concept.Concept;
 import com.suneidesis.concept.ConceptType;
 
 public class Place extends Concept {

@@ -1,6 +1,6 @@
 package com.suneidesis.material;
 
-import com.suneidesis.Concept;
+import com.suneidesis.concept.Concept;
 
 public class Atom extends Concept {
 

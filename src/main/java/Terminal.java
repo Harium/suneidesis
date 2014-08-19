@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import com.suneidesis.Concept;
 import com.suneidesis.beign.Being;
 import com.suneidesis.beign.Gender;
 import com.suneidesis.beign.RationalBeign;
+import com.suneidesis.concept.Concept;
 import com.suneidesis.memory.Fact;
 import com.suneidesis.place.Place;
 
@@ -47,6 +47,15 @@ public class Terminal {
 		killTroll.setAction(new Concept("Cut")); //Action's name
 		killTroll.setWhereInTarget(new Concept("throat")); // Where in the target the action happened
 		killTroll.setWhen(new Concept("last week")); //When action happens
+		
+		List<Fact> conclusions = new ArrayList<Fact>();
+		Fact beingKilledTroll = new Fact();
+		beingKilledTroll.setActor(beign);
+		beingKilledTroll.setAction(new Concept("Kill"));
+		beingKilledTroll.setTarget(new Being("a Troll"));
+		
+		conclusions.add(beingKilledTroll);
+		killTroll.setConclusions(conclusions);
 		
 		actions.add(killTroll);
 		

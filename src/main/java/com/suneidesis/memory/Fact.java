@@ -2,8 +2,8 @@ package com.suneidesis.memory;
 
 import java.util.List;
 
-import com.suneidesis.Concept;
 import com.suneidesis.beign.Being;
+import com.suneidesis.concept.Concept;
 import com.suneidesis.place.Place;
 
 /**

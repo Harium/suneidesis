@@ -1,6 +1,6 @@
 package com.suneidesis.beign.taxonomy;
 
-import com.suneidesis.Concept;
+import com.suneidesis.concept.Concept;
 
 public class Classification extends Concept {
 	

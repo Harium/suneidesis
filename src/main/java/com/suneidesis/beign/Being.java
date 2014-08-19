@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.suneidesis.Concept;
 import com.suneidesis.adjectives.Adjective;
+import com.suneidesis.concept.Concept;
 import com.suneidesis.concept.ConceptType;
 import com.suneidesis.memory.Fact;
 import com.suneidesis.memory.Mind;

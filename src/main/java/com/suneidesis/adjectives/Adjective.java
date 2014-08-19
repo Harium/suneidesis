@@ -1,6 +1,6 @@
 package com.suneidesis.adjectives;
 
-import com.suneidesis.Concept;
+import com.suneidesis.concept.Concept;
 import com.suneidesis.concept.ConceptType;
 
 public class Adjective extends Concept {

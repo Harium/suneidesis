@@ -1,6 +1,6 @@
-package com.suneidesis;
+package com.suneidesis.concept;
 
-import com.suneidesis.concept.ConceptType;
+import com.suneidesis.Thing;
 
 
 public class Concept extends Thing {
