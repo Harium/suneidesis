@@ -1,4 +1,4 @@
-Medieval Person
-===============
+Suneidesis
+==========
 
-Medieval Person is an experiment to represent simple ontologies.
+Suneidesis is an experiment to represent ontologies.
