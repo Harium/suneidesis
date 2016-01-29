@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.suneidesis.beign.Being;
 import com.suneidesis.concept.Concept;
+import com.suneidesis.concept.ConceptType;
 import com.suneidesis.place.Place;
 
 /**
@@ -14,24 +15,27 @@ import com.suneidesis.place.Place;
  *
  */
 
-public class Fact {
-
-	private Being actor;
+public class Fact extends Concept {
 	
+	private Being actor;
 	private Being target;
 	
 	private Place place;
 	
 	private Concept action;
-	
 	private Concept whereInTarget;
-	
 	private Concept when;
 	
 	protected List<Fact> conclusions;
+	
+	private FactSource source;
 
+	public Fact(String name) {
+		super(name, ConceptType.THEORY);
+	}
+	
 	public Fact() {
-		super();
+		super("", ConceptType.THEORY);
 	}
 
 	public Being getActor() {
@@ -89,9 +93,16 @@ public class Fact {
 	public void setConclusions(List<Fact> conclusions) {
 		this.conclusions = conclusions;
 	}
-	
-	public void copy(Fact fact) {
 		
+	public FactSource getSource() {
+		return source;
+	}
+
+	public void setSource(FactSource source) {
+		this.source = source;
+	}
+
+	public void copy(Fact fact) {
 		this.actor = fact.actor;
 		this.target = fact.target;
 		this.place = fact.place;
@@ -99,6 +110,7 @@ public class Fact {
 		this.whereInTarget= fact.whereInTarget;
 		this.when = fact.when;
 		this.conclusions = fact.conclusions;
+		this.source = fact.source;
 	}
 		
 }

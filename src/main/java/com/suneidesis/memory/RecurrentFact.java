@@ -5,13 +5,12 @@ public class RecurrentFact extends Fact {
 
 	private int repeatCount = 1;
 
-	public RecurrentFact() {
-		super();
+	public RecurrentFact(String name) {
+		super(name);
 	}
 	
 	public RecurrentFact(Fact fact) {
-		super();
-		
+		super(fact.getName());
 		copy(fact);
 	}
 	
