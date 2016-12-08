@@ -1,7 +1,7 @@
-package com.suneidesis.answer.feeling;
+package com.suneidesis.linguistic.feeling;
 
-import com.suneidesis.answer.Parser;
 import com.suneidesis.beign.HealthStatus;
+import com.suneidesis.linguistic.Parser;
 
 public interface FeelingParser extends Parser {
 

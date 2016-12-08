@@ -1,6 +1,6 @@
-package com.suneidesis.answer.action;
+package com.suneidesis.linguistic.action;
 
-import com.suneidesis.answer.Parser;
+import com.suneidesis.linguistic.Parser;
 import com.suneidesis.memory.Fact;
 
 public interface ActionParser extends Parser {

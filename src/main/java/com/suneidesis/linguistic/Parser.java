@@ -1,4 +1,4 @@
-package com.suneidesis.answer;
+package com.suneidesis.linguistic;
 
 import com.suneidesis.beign.Being;
 

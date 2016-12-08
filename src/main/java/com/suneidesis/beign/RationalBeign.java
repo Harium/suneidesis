@@ -1,7 +1,7 @@
 package com.suneidesis.beign;
 
-import com.suneidesis.answer.Parser;
-import com.suneidesis.answer.SimpleParser;
+import com.suneidesis.linguistic.Parser;
+import com.suneidesis.linguistic.SimpleParser;
 
 public class RationalBeign extends Being {
 

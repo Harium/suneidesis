@@ -1,4 +1,4 @@
-package com.suneidesis.answer.feeling;
+package com.suneidesis.linguistic.feeling;
 
 import com.suneidesis.beign.Being;
 import com.suneidesis.beign.HealthStatus;

@@ -1,4 +1,4 @@
-package com.suneidesis.answer.action;
+package com.suneidesis.linguistic.action;
 
 import java.util.List;
 
@@ -32,16 +32,20 @@ public class SimpleActionParser implements ActionParser {
 
 			Fact action = null;
 
-			if(!Character.isUpperCase(querySubject.charAt(0))) {
+			if (!Character.isUpperCase(querySubject.charAt(0))) {
 				action = findActionByName(querySubject, actions);
-			}else{
+			} else {
 				action = findActionByActorsName(querySubject, actions);
-			}		
-
-			if(action!=null) {
-				return describeAction(action);
 			}
 
+			if (action != null) {
+				return describeAction(action);
+			} else if (querySubject.endsWith("s")) {
+				action = findActionByActorsName(querySubject.substring(0, querySubject.length()-1), actions);
+				if (action != null) {
+					return describeAction(action);
+				}
+			}
 		}
 
 		return "No.";
@@ -55,9 +59,9 @@ public class SimpleActionParser implements ActionParser {
 
 			boolean hasActor = action.getActor().getName().toLowerCase().contains(name);
 			
-			boolean hasTarget = action.getTarget().getName().toLowerCase().contains(name);
+			boolean hasTarget = action.getTarget() != null && action.getTarget().getName().toLowerCase().contains(name);
 			
-			if(hasActor || hasTarget)
+			if (hasActor || hasTarget)
 			
 			return action;
 			
@@ -89,22 +93,35 @@ public class SimpleActionParser implements ActionParser {
 		builder.append(" ");
 		builder.append(action.getActor().getName());
 		builder.append(" ");
-		builder.append(action.getAction().getName().toLowerCase());
-		builder.append("s ");
-		builder.append(action.getTarget().getName());
-
-		if(action.getWhereInTarget() != null) {
+		
+		String actionAsText = action.getAction().getName().toLowerCase();
+		builder.append(actionAsText);
+		if (!actionAsText.endsWith("s")) {
+			builder.append("s");
+		}
+				
+		if (action.getTarget() != null) {
+			builder.append(" ");
+			builder.append(action.getTarget().getName());
 			
-			if(!action.getWhereInTarget().getName().isEmpty()) {
-				builder.append("'s ");
-				builder.append(action.getWhereInTarget().getName());			
+			if(action.getWhereInTarget() != null) {
+				
+				if(!action.getWhereInTarget().getName().isEmpty()) {
+					builder.append("'s ");
+					builder.append(action.getWhereInTarget().getName());			
+				}
 			}
 		}
 
-		builder.append(" ");
-		builder.append(getPlace(action.getPlace()));
-		builder.append(", ");
-		builder.append(action.getWhen().getName());
+		if (action.getPlace() != null) {
+			builder.append(" ");
+			builder.append(getPlace(action.getPlace()));	
+		}
+		
+		if (action.getWhen() != null) {
+			builder.append(", ");
+			builder.append(action.getWhen().getName());	
+		}
 
 		return builder.toString();
 	}
@@ -121,7 +138,6 @@ public class SimpleActionParser implements ActionParser {
 		}
 
 		return placeSentence;
-
 	}
 
 }

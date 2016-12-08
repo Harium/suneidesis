@@ -6,6 +6,7 @@ import com.suneidesis.beign.Being;
 import com.suneidesis.concept.Concept;
 import com.suneidesis.concept.ConceptType;
 import com.suneidesis.place.Place;
+import com.suneidesis.time.TemporalConcept;
 
 /**
  * 
@@ -18,13 +19,14 @@ import com.suneidesis.place.Place;
 public class Fact extends Concept {
 	
 	private Being actor;
-	private Being target;
+	private Concept target;
 	
 	private Place place;
 	
 	private Concept action;
 	private Concept whereInTarget;
-	private Concept when;
+
+	private TemporalConcept when;
 	
 	protected List<Fact> conclusions;
 	
@@ -46,11 +48,11 @@ public class Fact extends Concept {
 		this.actor = actor;
 	}
 
-	public Being getTarget() {
+	public Concept getTarget() {
 		return target;
 	}
 
-	public void setTarget(Being target) {
+	public void setTarget(Concept target) {
 		this.target = target;
 	}
 
@@ -78,11 +80,11 @@ public class Fact extends Concept {
 		this.whereInTarget = whereAction;
 	}
 
-	public Concept getWhen() {
+	public TemporalConcept getWhen() {
 		return when;
 	}
 
-	public void setWhen(Concept when) {
+	public void setWhen(TemporalConcept when) {
 		this.when = when;
 	}
 

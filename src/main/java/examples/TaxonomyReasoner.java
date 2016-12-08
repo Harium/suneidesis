@@ -1,3 +1,5 @@
+package examples;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +12,9 @@ import com.suneidesis.place.Place;
 import com.suneidesis.time.TemporalConcept;
 import com.suneidesis.time.Time;
 
+public class TaxonomyReasoner {
 
-public class Terminal {
-
-	public static void main(String[] args) {
+public static void main(String[] args) {
 		
 		RationalBeign thrain = new RationalBeign("Thrain", Gender.MALE);
 				
@@ -35,10 +36,13 @@ public class Terminal {
 		
 		ask("Did you heard something about Sauron?", thrain);
 		
+		ask("Did you heard something about bats?", thrain);
+		ask("Did you heard something about cows?", thrain);
+		
 	}
 	
 	private static List<Fact> createMemories(RationalBeign beign) {
-
+		
 		List<Fact> actions = new ArrayList<Fact>();
 		
 		Fact killTroll = new Fact();
@@ -48,7 +52,7 @@ public class Terminal {
 		killTroll.setPlace(new Place("at the top of").at(new Place("Silvertine"))); //Where the action happens
 		killTroll.setAction(new Concept("Cut")); //Action's name
 		killTroll.setWhereInTarget(new Concept("throat")); // Where in the target the action happened
-		killTroll.setWhen(new TemporalConcept("last week", Time.PAST)); //When action happened
+		killTroll.setWhen(new TemporalConcept("last week", Time.PAST)); //When action happens
 		
 		List<Fact> conclusions = new ArrayList<Fact>();
 		Fact beingKilledTroll = new Fact();
@@ -75,16 +79,25 @@ public class Terminal {
 		//Fact summerRain = new Fact();
 		//summerRain.setPlace(place);
 		
-		return actions;
+		Fact batExists = new Fact();
+		batExists.setActor(new Being("bats"));
+		batExists.setAction(new Concept("Exist"));
 		
+		actions.add(batExists);
+		
+		Fact cowIsMammal = new Fact();
+		cowIsMammal.setActor(new Being("cow"));
+		cowIsMammal.setAction(new Concept("is"));
+		cowIsMammal.setTarget(new Concept("mammal"));
+		
+		actions.add(cowIsMammal);
+		
+		return actions;
 	}
 	
 	private static void ask(String query, RationalBeign beign) {
-		
 		System.out.println(query.replace("?", ", "+beign.getName()+"?"));
-		
 		System.out.println(beign.listen(query));
-		
 	}
 	
 }

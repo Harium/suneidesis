@@ -1,11 +1,13 @@
-package com.suneidesis.answer;
+package com.suneidesis.linguistic;
 
 import com.suneidesis.adjectives.Adjective;
-import com.suneidesis.answer.adjective.AdjectiveParser;
 import com.suneidesis.beign.Being;
+import com.suneidesis.linguistic.adjective.AdjectiveParser;
 
 public class SimpleAdjectiveParser implements AdjectiveParser {
 
+	private static final String YOU = "you"; 
+	
 	@Override
 	public String parse(String query, Being beign) {
 		
@@ -13,12 +15,11 @@ public class SimpleAdjectiveParser implements AdjectiveParser {
 		
 		String adjectiveQuery = parts[2];
 		
-		if(query.contains("you")) {
+		if(query.contains(YOU)) {
 						
 			for(Adjective adjective: beign.getAdjectives()) {
 				
 				if(adjective.getName().equalsIgnoreCase(adjectiveQuery)) {
-			
 					return "Yes, I am "+adjectiveQuery+".";
 					
 				}
