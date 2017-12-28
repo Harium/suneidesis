@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import com.suneidesis.beign.Being;
-import com.suneidesis.beign.Gender;
-import com.suneidesis.beign.RationalBeign;
-import com.suneidesis.concept.Concept;
-import com.suneidesis.memory.Fact;
-import com.suneidesis.place.Place;
-import com.suneidesis.time.TemporalConcept;
-import com.suneidesis.time.Time;
+import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.beign.Gender;
+import com.harium.suneidesis.beign.RationalBeign;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.memory.Fact;
+import com.harium.suneidesis.place.Place;
+import com.harium.suneidesis.time.TemporalConcept;
+import com.harium.suneidesis.time.Time;
 
 
 public class Terminal {
