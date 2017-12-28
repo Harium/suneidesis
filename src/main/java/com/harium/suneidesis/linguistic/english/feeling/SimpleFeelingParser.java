@@ -1,7 +1,8 @@
-package com.harium.suneidesis.linguistic.feeling;
+package com.harium.suneidesis.linguistic.english.feeling;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.HealthStatus;
+import com.harium.suneidesis.linguistic.core.feeling.FeelingParser;
 
 public class SimpleFeelingParser implements FeelingParser {
 

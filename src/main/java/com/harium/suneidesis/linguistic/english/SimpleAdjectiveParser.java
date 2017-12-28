@@ -1,4 +1,4 @@
-package com.harium.suneidesis.linguistic;
+package com.harium.suneidesis.linguistic.english;
 
 import com.harium.suneidesis.adjectives.Adjective;
 import com.harium.suneidesis.beign.Being;

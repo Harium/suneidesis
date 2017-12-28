@@ -1,6 +1,7 @@
-package com.harium.suneidesis.linguistic;
+package com.harium.suneidesis.linguistic.english;
 
 import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.linguistic.core.Parser;
 
 public class FamilyTreeParser implements Parser {
 

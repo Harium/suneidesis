@@ -1,8 +1,9 @@
-package com.harium.suneidesis.linguistic.action;
+package com.harium.suneidesis.linguistic.english.action;
 
 import java.util.List;
 
 import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.memory.Fact;
 import com.harium.suneidesis.place.Place;
 

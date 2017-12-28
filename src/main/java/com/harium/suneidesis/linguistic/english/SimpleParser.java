@@ -1,11 +1,12 @@
-package com.harium.suneidesis.linguistic;
+package com.harium.suneidesis.linguistic.english;
 
 import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.linguistic.action.SimpleActionParser;
+import com.harium.suneidesis.linguistic.core.Parser;
+import com.harium.suneidesis.linguistic.english.action.SimpleActionParser;
 import com.harium.suneidesis.linguistic.adjective.AdjectiveParser;
-import com.harium.suneidesis.linguistic.feeling.FeelingParser;
-import com.harium.suneidesis.linguistic.action.ActionParser;
-import com.harium.suneidesis.linguistic.feeling.SimpleFeelingParser;
+import com.harium.suneidesis.linguistic.core.feeling.FeelingParser;
+import com.harium.suneidesis.linguistic.core.action.ActionParser;
+import com.harium.suneidesis.linguistic.english.feeling.SimpleFeelingParser;
 
 public class SimpleParser implements Parser {
 
