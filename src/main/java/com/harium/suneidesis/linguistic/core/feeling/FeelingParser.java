@@ -1,7 +1,7 @@
-package com.harium.suneidesis.linguistic.feeling;
+package com.harium.suneidesis.linguistic.core.feeling;
 
 import com.harium.suneidesis.beign.HealthStatus;
-import com.harium.suneidesis.linguistic.Parser;
+import com.harium.suneidesis.linguistic.core.Parser;
 
 public interface FeelingParser extends Parser {
 

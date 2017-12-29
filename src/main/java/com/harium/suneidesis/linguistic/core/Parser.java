@@ -1,4 +1,4 @@
-package com.harium.suneidesis.linguistic;
+package com.harium.suneidesis.linguistic.core;
 
 import com.harium.suneidesis.beign.Being;
 

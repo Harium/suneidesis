@@ -1,7 +1,7 @@
 package com.harium.suneidesis.beign;
 
-import com.harium.suneidesis.linguistic.Parser;
-import com.harium.suneidesis.linguistic.SimpleParser;
+import com.harium.suneidesis.linguistic.core.Parser;
+import com.harium.suneidesis.linguistic.english.SimpleParser;
 
 public class RationalBeign extends Being {
 
