@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.beign.Gender;
-import com.harium.suneidesis.beign.RationalBeign;
-import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.memory.Fact;
-import com.harium.suneidesis.place.Place;
-import com.harium.suneidesis.time.TemporalConcept;
-import com.harium.suneidesis.time.Time;
+import com.harium.suneidesis.knowledge.beign.Being;
+import com.harium.suneidesis.knowledge.beign.Gender;
+import com.harium.suneidesis.knowledge.beign.RationalBeign;
+import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.knowledge.memory.Fact;
+import com.harium.suneidesis.knowledge.concept.Place;
+import com.harium.suneidesis.knowledge.time.TemporalConcept;
+import com.harium.suneidesis.knowledge.time.Time;
 
 
 public class Terminal {
@@ -19,7 +19,7 @@ public class Terminal {
 				
 		RationalBeign thror = new RationalBeign("Thror", Gender.MALE);
 		
-		thrain.setBiologicalFather(thror);
+		thrain.setBiologicalAncestor(thror);
 				
 		thrain.setMemories(createMemories(thror));
 		
