@@ -1,87 +1,74 @@
 package com.harium.suneidesis.knowledge.beign;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import com.harium.suneidesis.knowledge.beign.ancestry.Ancestry;
 import com.harium.suneidesis.knowledge.concept.Adjective;
 import com.harium.suneidesis.knowledge.memory.Fact;
 import com.harium.suneidesis.knowledge.memory.Mind;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class Being extends Creature {
-	
-	private Being biologicalAncestor = null;
-	private Being biologicalMother = null;
-		
-	protected Gender gender = Gender.UNKNOWN;
 
-	protected HealthStatus healthStatus = new HealthStatus();
-	
-	private Mind mind = new Mind();
-	
-	protected Set<Adjective> adjectives;
-	
-	public Being(String name) {
-		super(name);
-	}
-	
-	public Being(String name, Gender gender) {
-		this(name);
-		this.gender = gender;
-	}
-	
-	public HealthStatus getHealthStatus() {
-		return healthStatus;
-	}
+    private Ancestry ancestry = null;
 
-	public Gender getGender() {
-		return gender;
-	}
+    protected Gender gender = Gender.UNKNOWN;
 
-	public Being getBiologicalAncestor() {
-		return biologicalAncestor;
-	}
+    protected HealthStatus healthStatus = new HealthStatus();
 
-	public void setBiologicalAncestor(Being biologicalAncestor) {
-		
-		if(biologicalAncestor.gender == Gender.MALE) {
-			this.biologicalAncestor = biologicalAncestor;
-		}
-		
-	}
+    private Mind mind = new Mind();
 
-	public Being getBiologicalMother() {
-		return biologicalMother;
-	}
+    protected Set<Adjective> adjectives;
 
-	public void setBiologicalMother(Being biologicalMother) {
-		
-		if(biologicalAncestor.gender == Gender.FEMALE) {
-			this.biologicalMother = biologicalMother;
-		}
-		
-	}
+    public Being(String name) {
+        super(name);
+    }
 
-	public List<Fact> getMemories() {
-		return mind.getMemories();
-	}
+    public Being(String name, Gender gender) {
+        this(name);
+        this.gender = gender;
+    }
 
-	public void setMemories(List<Fact> memories) {
-		this.mind.setMemories(memories);
-	}
-	
-	public Set<Adjective> getAdjectives() {
-		return adjectives;
-	}
-	
-	public void addAdjective(Adjective adjective) {
-		
-		if(adjectives == null) {
-			
-			adjectives = new HashSet<Adjective>();
-		}
-		
-		adjectives.add(adjective);
-	}
-	
+    public HealthStatus getHealthStatus() {
+        return healthStatus;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Ancestry getAncestry() {
+        return ancestry;
+    }
+
+    public void setAncestry(Ancestry ancestry) {
+        this.ancestry = ancestry;
+    }
+
+    public List<Fact> getMemories() {
+        return mind.getMemories();
+    }
+
+    public void setMemories(List<Fact> memories) {
+        this.mind.setMemories(memories);
+    }
+
+    public Set<Adjective> getAdjectives() {
+        return adjectives;
+    }
+
+    public void addAdjective(Adjective adjective) {
+
+        if (adjectives == null) {
+
+            adjectives = new HashSet<Adjective>();
+        }
+
+        adjectives.add(adjective);
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
 }

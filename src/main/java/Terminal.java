@@ -4,6 +4,8 @@ import java.util.List;
 import com.harium.suneidesis.knowledge.beign.Being;
 import com.harium.suneidesis.knowledge.beign.Gender;
 import com.harium.suneidesis.knowledge.beign.RationalBeign;
+import com.harium.suneidesis.knowledge.beign.ancestry.Ancestry;
+import com.harium.suneidesis.knowledge.beign.ancestry.HeteroSexualCouple;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.memory.Fact;
 import com.harium.suneidesis.knowledge.concept.Place;
@@ -18,8 +20,9 @@ public class Terminal {
 		RationalBeign thrain = new RationalBeign("Thrain", Gender.MALE);
 				
 		RationalBeign thror = new RationalBeign("Thror", Gender.MALE);
-		
-		thrain.setBiologicalAncestor(thror);
+
+		HeteroSexualCouple thrainsParents = new HeteroSexualCouple(thror, new Being("?"));
+		thrain.setAncestry(thrainsParents);
 				
 		thrain.setMemories(createMemories(thror));
 		
@@ -34,7 +37,6 @@ public class Terminal {
 		ask("Did you heard something about cut?", thrain);
 		
 		ask("Did you heard something about Sauron?", thrain);
-		
 	}
 	
 	private static List<Fact> createMemories(RationalBeign beign) {

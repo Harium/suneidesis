@@ -1,4 +1,4 @@
-package com.harium.suneidesis.knowledge.beign;
+package com.harium.suneidesis.knowledge.beign.ancestry;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 

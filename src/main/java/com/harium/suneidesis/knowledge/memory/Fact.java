@@ -10,9 +10,8 @@ import com.harium.suneidesis.knowledge.time.TemporalConcept;
 
 /**
  * 
- * Memory is a model to represent actions from the being perspective
- * 
- * the same fact(action) can be achieve in a different way from observers and/or actors
+ * Fact is a model to represent actions from being's perspective
+ * The same fact(action) can be perceived differently by observers and/or actors
  *
  */
 
