@@ -15,11 +15,13 @@ public class Being extends Creature {
 
     protected Gender gender = Gender.UNKNOWN;
 
-    protected HealthStatus healthStatus = new HealthStatus();
+    protected Status status = new Status();
 
     private Mind mind = new Mind();
 
     protected Set<Adjective> adjectives;
+
+    private static final String ATTR_HEALTH = "health";
 
     public Being(String name) {
         super(name);
@@ -28,10 +30,11 @@ public class Being extends Creature {
     public Being(String name, Gender gender) {
         this(name);
         this.gender = gender;
+        status.add(ATTR_HEALTH, Status.MAX);
     }
 
-    public HealthStatus getHealthStatus() {
-        return healthStatus;
+    public Status getStatus() {
+        return status;
     }
 
     public Gender getGender() {
@@ -59,9 +62,7 @@ public class Being extends Creature {
     }
 
     public void addAdjective(Adjective adjective) {
-
         if (adjectives == null) {
-
             adjectives = new HashSet<Adjective>();
         }
 
