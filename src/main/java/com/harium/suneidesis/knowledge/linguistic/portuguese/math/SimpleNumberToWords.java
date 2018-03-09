@@ -63,7 +63,7 @@ public class SimpleNumberToWords implements NumberToWords {
         return number;
     }
 
-    public String convert(int number) {
+    private String convert(int number) {
         StringBuilder sb = new StringBuilder();
 
         if (number > 0) {
