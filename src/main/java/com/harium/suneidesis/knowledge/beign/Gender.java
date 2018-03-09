@@ -2,6 +2,6 @@ package com.harium.suneidesis.knowledge.beign;
 
 public enum Gender {
 
-	MALE, FEMALE, UNKNOWN;
+	MALE, FEMALE, GENDERLESS, UNKNOWN;
 	
 }
