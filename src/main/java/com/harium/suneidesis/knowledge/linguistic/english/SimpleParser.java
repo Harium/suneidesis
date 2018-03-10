@@ -32,20 +32,20 @@ public class SimpleParser implements Parser {
     }
 
     @Override
-    public String parse(String query, Being beign) {
+    public String parse(String query, Being being) {
 
         String[] parts = query.replaceAll("\\?", "").split(" ");
 
         String response = null;
 
         if (BaseParser.checkAction(parts[0], HOW)) {
-            response = feelingParser.parse(query, beign);
+            response = feelingParser.parse(query, being);
         } else if (BaseParser.checkAction(parts[0], WHO)) {
-            response = familyTreeParser.parse(query, beign);
+            response = familyTreeParser.parse(query, being);
         } else if (BaseParser.checkAction(parts[0], DID)) {
-            response = actionParser.parse(query, beign);
+            response = actionParser.parse(query, being);
         } else if (BaseParser.checkAction(parts[0], TO_BE)) {
-            response = adjectiveParser.parse(query, beign);
+            response = adjectiveParser.parse(query, being);
         }
 
         if (response == null) {

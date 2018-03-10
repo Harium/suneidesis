@@ -1,144 +1,144 @@
 package com.harium.suneidesis.knowledge.linguistic.english.action;
 
-import java.util.List;
-
 import com.harium.suneidesis.knowledge.beign.Being;
+import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.knowledge.memory.Fact;
-import com.harium.suneidesis.knowledge.concept.Place;
+
+import java.util.List;
 
 public class SimpleActionParser implements ActionParser {
 
-	@Override
-	public String parse(String query, Being beign) {
+    @Override
+    public String parse(String query, Being beign) {
 
-		String[] parts = query.replaceAll("\\?", "").split(" ");
+        String[] parts = query.replaceAll("\\?", "").split(" ");
 
-		String querySubject = "";
+        String querySubject = "";
 
-		for(int i=0;i<parts.length;i++) {
+        for (int i = 0; i < parts.length; i++) {
 
-			if(parts[i].equalsIgnoreCase("about")) {
+            if (parts[i].equalsIgnoreCase("about")) {
 
-				querySubject = parts[i+1];
-				break;
+                querySubject = parts[i + 1];
+                break;
 
-			}
+            }
 
-		}
+        }
 
-		if(!querySubject.isEmpty()) {
+        if (!querySubject.isEmpty()) {
 
-			List<Fact> actions = beign.getMemories();
+            List<Fact> actions = beign.getMemories();
 
-			Fact action = null;
+            Fact action = null;
 
-			if (!Character.isUpperCase(querySubject.charAt(0))) {
-				action = findActionByName(querySubject, actions);
-			} else {
-				action = findActionByActorsName(querySubject, actions);
-			}
+            if (!Character.isUpperCase(querySubject.charAt(0))) {
+                action = findActionByName(querySubject, actions);
+            } else {
+                action = findActionByActorsName(querySubject, actions);
+            }
 
-			if (action != null) {
-				return describeAction(action);
-			} else if (querySubject.endsWith("s")) {
-				action = findActionByActorsName(querySubject.substring(0, querySubject.length()-1), actions);
-				if (action != null) {
-					return describeAction(action);
-				}
-			}
-		}
+            if (action != null) {
+                return describeAction(action);
+            } else if (querySubject.endsWith("s")) {
+                action = findActionByActorsName(querySubject.substring(0, querySubject.length() - 1), actions);
+                if (action != null) {
+                    return describeAction(action);
+                }
+            }
+        }
 
-		return "No.";
-	}
+        return "No.";
+    }
 
-	private Fact findActionByActorsName(String actorName, List<Fact> actions) {
+    private Fact findActionByActorsName(String actorName, List<Fact> actions) {
 
-		String name = actorName.toLowerCase();
-		
-		for(Fact action: actions) {
+        String name = actorName.toLowerCase();
 
-			boolean hasActor = action.getActor().getName().toLowerCase().contains(name);
-			
-			boolean hasTarget = action.getTarget() != null && action.getTarget().getName().toLowerCase().contains(name);
-			
-			if (hasActor || hasTarget)
-			
-			return action;
-			
+        for (Fact action : actions) {
 
-		}
+            boolean hasActor = action.getActor().getName().toLowerCase().contains(name);
 
-		return null;
+            boolean hasTarget = action.getTarget() != null && action.getTarget().getName().toLowerCase().contains(name);
 
-	}
+            if (hasActor || hasTarget)
 
-	private Fact findActionByName(String actionName, List<Fact> actions) {
+                return action;
 
-		for(Fact action: actions) {
 
-			if(actionName.equalsIgnoreCase(action.getAction().getName())) {
-				return action;
-			}
+        }
 
-		}
+        return null;
+    }
 
-		return null;
-	}
+    private Fact findActionByName(String actionName, List<Fact> actions) {
 
-	public String describeAction(Fact action) {
+        for (Fact action : actions) {
+            if (action.getAction() == null) {
+                continue;
+            }
+            if (actionName.equalsIgnoreCase(action.getAction().getName())) {
+                return action;
+            }
+        }
 
-		StringBuilder builder = new StringBuilder();
+        return null;
+    }
 
-		builder.append("I heard that");
-		builder.append(" ");
-		builder.append(action.getActor().getName());
-		builder.append(" ");
-		
-		String actionAsText = action.getAction().getName().toLowerCase();
-		builder.append(actionAsText);
-		if (!actionAsText.endsWith("s")) {
-			builder.append("s");
-		}
-				
-		if (action.getTarget() != null) {
-			builder.append(" ");
-			builder.append(action.getTarget().getName());
-			
-			if(action.getWhereInTarget() != null) {
-				
-				if(!action.getWhereInTarget().getName().isEmpty()) {
-					builder.append("'s ");
-					builder.append(action.getWhereInTarget().getName());			
-				}
-			}
-		}
+    public String describeAction(Fact action) {
 
-		if (action.getPlace() != null) {
-			builder.append(" ");
-			builder.append(getPlace(action.getPlace()));	
-		}
-		
-		if (action.getWhen() != null) {
-			builder.append(", ");
-			builder.append(action.getWhen().getName());	
-		}
+        StringBuilder builder = new StringBuilder();
 
-		return builder.toString();
-	}
+        builder.append("I heard that");
+        builder.append(" ");
+        builder.append(action.getActor().getName());
+        builder.append(" ");
 
-	private String getPlace(Place place) {
+        String actionAsText = action.getAction().getName().toLowerCase();
+        builder.append(actionAsText);
+        if (!actionAsText.endsWith("s")) {
+            builder.append("s");
+        }
 
-		String placeSentence = place.getName();
+        if (action.getTarget() != null) {
+            builder.append(" ");
+            builder.append(action.getTarget().getName());
 
-		if(place.getPlace() != null) {
+            if (action.getWhereInTarget() != null) {
 
-			placeSentence += " ";
+                if (!action.getWhereInTarget().getName().isEmpty()) {
+                    builder.append("'s ");
+                    builder.append(action.getWhereInTarget().getName());
+                }
+            }
+        }
 
-			placeSentence += getPlace(place.getPlace()); 
-		}
+        if (action.getPlace() != null) {
+            builder.append(" ");
+            builder.append(getPlace(action.getPlace()));
+        }
 
-		return placeSentence;
-	}
+        if (action.getWhen() != null) {
+            builder.append(", ");
+            builder.append(action.getWhen().getName());
+        }
+
+        return builder.toString();
+    }
+
+    private String getPlace(Place place) {
+
+        String placeSentence = place.getName();
+
+        if (place.getPlace() != null) {
+
+            placeSentence += " ";
+
+            placeSentence += getPlace(place.getPlace());
+        }
+
+        return placeSentence;
+    }
 
 }

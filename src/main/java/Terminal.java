@@ -18,9 +18,9 @@ public class Terminal {
 
     public static void main(String[] args) {
 
-        RationalBeign thrain = new RationalBeign("Thráin II", Gender.MALE);
+        RationalBeign thrain = new RationalBeign("Thrain", Gender.MALE);
 
-        RationalBeign thror = new RationalBeign("Thrór", Gender.MALE);
+        RationalBeign thror = new RationalBeign("Thror", Gender.MALE);
 
         HeteroSexualCouple thrainsParents = new HeteroSexualCouple(thror, new Being("?"));
         thrain.setAncestry(thrainsParents);
