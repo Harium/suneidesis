@@ -5,18 +5,55 @@ import com.harium.suneidesis.knowledge.concept.ConceptType;
 
 public class TemporalConcept extends Concept {
 
-	private Time when;
-	
-	public TemporalConcept(String name, Time when) {
-		super(name, ConceptType.TIME_UNIT);
-		this.when = when;
-	}
+    private Time start;
+    private Time end;
 
-	public Time getWhen() {
-		return when;
-	}
+    public TemporalConcept(Time when) {
+        super(ConceptType.TIME_UNIT);
+        this.start = when;
+        this.end = when;
+    }
 
-	public void setWhen(Time when) {
-		this.when = when;
-	}
+    public TemporalConcept(String name, Time when) {
+        super(name, ConceptType.TIME_UNIT);
+        this.start = when;
+        this.end = when;
+    }
+
+    public TemporalConcept(String name, Time start, Time end) {
+        super(name, ConceptType.TIME_UNIT);
+        this.start = start;
+        this.end = end;
+    }
+
+    public Time getWhen() {
+        return end;
+    }
+
+    public void setWhen(Time when) {
+        this.start = when;
+        this.end = when;
+    }
+
+    public Time getStart() {
+        return start;
+    }
+
+    public void setStart(Time start) {
+        this.start = start;
+    }
+
+    public Time getEnd() {
+        return end;
+    }
+
+    public void setEnd(Time end) {
+        this.end = end;
+    }
+
+    public TemporalConcept set(Time start, Time end) {
+        this.start = start;
+        this.end = end;
+        return this;
+    }
 }

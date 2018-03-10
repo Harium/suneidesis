@@ -2,63 +2,57 @@ package com.harium.suneidesis.knowledge.linguistic.english;
 
 import com.harium.suneidesis.knowledge.beign.Being;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
-import com.harium.suneidesis.knowledge.linguistic.english.action.SimpleActionParser;
+import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.knowledge.linguistic.core.adjective.AdjectiveParser;
 import com.harium.suneidesis.knowledge.linguistic.core.feeling.FeelingParser;
-import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
+import com.harium.suneidesis.knowledge.linguistic.english.action.SimpleActionParser;
 import com.harium.suneidesis.knowledge.linguistic.english.feeling.SimpleFeelingParser;
 
 public class SimpleParser implements Parser {
 
-	private static final String ARE = "Are";
+    public static final String[] TO_BE = {"is", "are"};
 
-	private static final String DID = "Did";
+    public static final String DID = "did";
 
-	private static final String WHO = "Who";
+    public static final String WHO = "who";
 
-	private static final String HOW = "How";
+    public static final String HOW = "how";
+    public static final String YOU = "you";
 
-	private FeelingParser feelingParser = new SimpleFeelingParser();
+    private FeelingParser feelingParser = new SimpleFeelingParser();
 
-	private FamilyTreeParser familyTreeParser = new FamilyTreeParser();
+    private FamilyTreeParser familyTreeParser = new FamilyTreeParser();
 
-	private ActionParser actionParser = new SimpleActionParser();
-	
-	private AdjectiveParser adjectiveParser = new SimpleAdjectiveParser();
+    private ActionParser actionParser = new SimpleActionParser();
 
-	public SimpleParser() {
-		super();
-	}
+    private AdjectiveParser adjectiveParser = new SimpleAdjectiveParser();
 
-	@Override
-	public String parse(String query, Being beign) {
+    public SimpleParser() {
+        super();
+    }
 
-		String[] parts = query.replaceAll("\\?", "").split(" ");
+    @Override
+    public String parse(String query, Being beign) {
 
-		String response = null;
+        String[] parts = query.replaceAll("\\?", "").split(" ");
 
-		if(HOW.equalsIgnoreCase(parts[0])) {
+        String response = null;
 
-			response = feelingParser.parse(query, beign);
+        if (BaseParser.checkAction(parts[0], HOW)) {
+            response = feelingParser.parse(query, beign);
+        } else if (BaseParser.checkAction(parts[0], WHO)) {
+            response = familyTreeParser.parse(query, beign);
+        } else if (BaseParser.checkAction(parts[0], DID)) {
+            response = actionParser.parse(query, beign);
+        } else if (BaseParser.checkAction(parts[0], TO_BE)) {
+            response = adjectiveParser.parse(query, beign);
+        }
 
-		}else if(WHO.equalsIgnoreCase(parts[0])) {
+        if (response == null) {
+            response = BaseParser.I_DON_T_KNOW;
+        }
 
-			response = familyTreeParser.parse(query, beign);
-
-		}else if(DID.equalsIgnoreCase(parts[0])) {
-
-			response = actionParser.parse(query, beign);
-
-		}else if(ARE.equalsIgnoreCase(parts[0])) {
-
-			response = adjectiveParser.parse(query, beign);
-		}
-
-		if(response==null) {
-			response = "I do not know.";
-		}
-
-		return response;
-	}	
+        return response;
+    }
 
 }

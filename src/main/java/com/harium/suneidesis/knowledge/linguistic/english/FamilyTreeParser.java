@@ -25,7 +25,7 @@ public class FamilyTreeParser implements Parser {
         }
 
         if (name.isEmpty()) {
-            name = "I don't know";
+            name = BaseParser.I_DON_T_KNOW;
         }
         return name;
     }

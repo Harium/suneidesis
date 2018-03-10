@@ -5,9 +5,7 @@ import com.harium.suneidesis.knowledge.concept.Adjective;
 import com.harium.suneidesis.knowledge.memory.Fact;
 import com.harium.suneidesis.knowledge.memory.Mind;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Being extends Creature {
 
@@ -19,9 +17,7 @@ public class Being extends Creature {
 
     private Mind mind = new Mind();
 
-    protected Set<Adjective> adjectives;
-
-    private static final String ATTR_HEALTH = "health";
+    public static final String ATTR_HEALTH = "health";
 
     public Being(String name) {
         super(name);
@@ -30,7 +26,7 @@ public class Being extends Creature {
     public Being(String name, Gender gender) {
         this(name);
         this.gender = gender;
-        status.add(ATTR_HEALTH, Status.MAX);
+        status.add(ATTR_HEALTH, Status.MAX, Status.NEUTRAL);
     }
 
     public Status getStatus() {
@@ -57,16 +53,8 @@ public class Being extends Creature {
         this.mind.setMemories(memories);
     }
 
-    public Set<Adjective> getAdjectives() {
-        return adjectives;
-    }
-
     public void addAdjective(Adjective adjective) {
-        if (adjectives == null) {
-            adjectives = new HashSet<Adjective>();
-        }
-
-        adjectives.add(adjective);
+        status.add(adjective.getName());
     }
 
     public void setGender(Gender gender) {

@@ -6,11 +6,14 @@ import com.harium.suneidesis.knowledge.linguistic.core.feeling.FeelingParser;
 
 public class SimpleFeelingParser implements FeelingParser {
 
-    private float fineInterval = 0.90f;
+    private static final float interval = Status.MAX / 5;
+    private static final float INTERVAL_HIGH = interval * 4; // 80%
+    private static final float INTERVAL_GOOD = interval * 3; // 60%
+    private static final float INTERVAL_BAD = Status.NEUTRAL; // 50%
 
-    private float goodInterval = 0.75f;
-
-    private float badInterval = 0.50f;
+    private static final String LABEL_FINE = "fine";
+    private static final String LABEL_GOOD = "good";
+    private static final String LABEL_BAD = "bad";
 
     @Override
     public String parse(String query, Being beign) {
@@ -22,20 +25,23 @@ public class SimpleFeelingParser implements FeelingParser {
     }
 
     public String translateFeelingToString(Status feeling) {
-        float health = getHealth(feeling);
+        return attributeToString(feeling, Being.ATTR_HEALTH);
+    }
+
+    private static String attributeToString(Status feeling, String attributes) {
+        float health = feeling.get(attributes);
 
         String state = "";
 
-        if (health >= fineInterval) {
-            state = "Fine";
-        } else if (health >= goodInterval) {
-            state = "Good";
-        } else if (health < badInterval) {
-            state = "Bad";
+        if (health >= INTERVAL_HIGH) {
+            state = LABEL_FINE;
+        } else if (health >= INTERVAL_GOOD) {
+            state = LABEL_GOOD;
+        } else if (health < INTERVAL_BAD) {
+            state = LABEL_BAD;
         }
 
         return state;
-
     }
 
     private float getHealth(Status feeling) {
