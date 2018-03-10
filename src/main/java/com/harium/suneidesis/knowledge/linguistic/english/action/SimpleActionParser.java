@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.english.action;
 
-import com.harium.suneidesis.knowledge.beign.Being;
+import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.knowledge.memory.Fact;

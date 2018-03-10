@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.memory;
 
-import com.harium.suneidesis.knowledge.beign.Being;
+import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.ConceptType;
 import com.harium.suneidesis.knowledge.concept.Place;

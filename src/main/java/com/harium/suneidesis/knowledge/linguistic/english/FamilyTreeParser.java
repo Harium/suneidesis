@@ -1,8 +1,8 @@
 package com.harium.suneidesis.knowledge.linguistic.english;
 
-import com.harium.suneidesis.knowledge.beign.Being;
-import com.harium.suneidesis.knowledge.beign.ancestry.Ancestry;
-import com.harium.suneidesis.knowledge.beign.ancestry.HeteroSexualCouple;
+import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.beign.ancestry.Ancestry;
+import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
 
 public class FamilyTreeParser implements Parser {

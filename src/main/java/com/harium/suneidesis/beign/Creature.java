@@ -1,4 +1,4 @@
-package com.harium.suneidesis.knowledge.beign;
+package com.harium.suneidesis.beign;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.ConceptType;

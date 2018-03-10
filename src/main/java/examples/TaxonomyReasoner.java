@@ -1,9 +1,9 @@
 package examples;
 
-import com.harium.suneidesis.knowledge.beign.Being;
-import com.harium.suneidesis.knowledge.beign.Gender;
-import com.harium.suneidesis.knowledge.beign.RationalBeign;
-import com.harium.suneidesis.knowledge.beign.ancestry.HeteroSexualCouple;
+import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.beign.Gender;
+import com.harium.suneidesis.beign.RationalBeign;
+import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.memory.Fact;

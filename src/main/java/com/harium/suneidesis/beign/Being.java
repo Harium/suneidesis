@@ -1,6 +1,8 @@
-package com.harium.suneidesis.knowledge.beign;
+package com.harium.suneidesis.beign;
 
-import com.harium.suneidesis.knowledge.beign.ancestry.Ancestry;
+import com.harium.suneidesis.behavior.BaseBehavior;
+import com.harium.suneidesis.behavior.Behavior;
+import com.harium.suneidesis.beign.ancestry.Ancestry;
 import com.harium.suneidesis.knowledge.concept.Adjective;
 import com.harium.suneidesis.knowledge.memory.Fact;
 import com.harium.suneidesis.knowledge.memory.Mind;
@@ -8,6 +10,8 @@ import com.harium.suneidesis.knowledge.memory.Mind;
 import java.util.*;
 
 public class Being extends Creature {
+
+    public static final String ATTR_HEALTH = "health";
 
     private Ancestry ancestry = null;
 
@@ -17,7 +21,7 @@ public class Being extends Creature {
 
     private Mind mind = new Mind();
 
-    public static final String ATTR_HEALTH = "health";
+    private Behavior behavior = new BaseBehavior();
 
     public Being(String name) {
         super(name);

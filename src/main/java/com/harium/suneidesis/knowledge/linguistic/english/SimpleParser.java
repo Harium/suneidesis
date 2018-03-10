@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.english;
 
-import com.harium.suneidesis.knowledge.beign.Being;
+import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
 import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.knowledge.linguistic.core.adjective.AdjectiveParser;

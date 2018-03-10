@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.core;
 
-import com.harium.suneidesis.knowledge.beign.Being;
+import com.harium.suneidesis.beign.Being;
 
 public interface Parser {
 

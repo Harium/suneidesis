@@ -1,17 +1,8 @@
-import com.harium.suneidesis.knowledge.beign.Being;
-import com.harium.suneidesis.knowledge.beign.Gender;
-import com.harium.suneidesis.knowledge.beign.RationalBeign;
-import com.harium.suneidesis.knowledge.beign.ancestry.HeteroSexualCouple;
-import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.concept.Place;
-import com.harium.suneidesis.knowledge.memory.Fact;
-import com.harium.suneidesis.knowledge.time.TemporalConcept;
-import com.harium.suneidesis.knowledge.time.Time;
-import com.harium.suneidesis.knowledge.weather.Weather;
+import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.beign.Gender;
+import com.harium.suneidesis.beign.RationalBeign;
+import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
 import examples.TaxonomyReasoner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Terminal {

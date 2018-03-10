@@ -1,4 +1,4 @@
-package com.harium.suneidesis.knowledge.beign.taxonomy;
+package com.harium.suneidesis.knowledge.taxonomy;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 

@@ -1,6 +1,6 @@
 package com.harium.suneidesis.ontology;
 
-import com.harium.suneidesis.knowledge.beign.Being;
+import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.knowledge.concept.Action;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.ConceptType;
