@@ -5,6 +5,8 @@ import com.harium.suneidesis.knowledge.concept.ConceptType;
 
 public class TemporalConcept extends Concept {
 
+    public static final TemporalConcept NOW = new TemporalConcept("now", Time.PRESENT);
+
     private Time start;
     private Time end;
 
@@ -56,4 +58,5 @@ public class TemporalConcept extends Concept {
         this.end = end;
         return this;
     }
+
 }

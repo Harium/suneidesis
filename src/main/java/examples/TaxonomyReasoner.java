@@ -9,6 +9,7 @@ import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.memory.Fact;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 import com.harium.suneidesis.knowledge.time.Time;
+import com.harium.suneidesis.knowledge.weather.Weather;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +44,14 @@ public class TaxonomyReasoner {
 
     }
 
-    private static List<Fact> createMemories(RationalBeign beign) {
+    public static List<Fact> createMemories(RationalBeign beign) {
 
-        List<Fact> actions = new ArrayList<Fact>();
+        List<Fact> memmories = new ArrayList<Fact>();
+
+        Fact born = new Fact();
+        born.setActor(beign);
+        born.setWhen(new TemporalConcept("TA 2644", Time.PAST));
+        memmories.add(born);
 
         Fact killTroll = new Fact();
 
@@ -65,7 +71,7 @@ public class TaxonomyReasoner {
         conclusions.add(beingKilledTroll);
         killTroll.setConclusions(conclusions);
 
-        actions.add(killTroll);
+        memmories.add(killTroll);
 
         Fact createRing = new Fact();
 
@@ -76,7 +82,7 @@ public class TaxonomyReasoner {
         createRing.setWhereInTarget(null); //
         createRing.setWhen(new TemporalConcept("many years ago", Time.PAST)); //When action happened
 
-        actions.add(createRing);
+        memmories.add(createRing);
 
         //Fact summerRain = new Fact();
         //summerRain.setPlace(place);
@@ -85,16 +91,21 @@ public class TaxonomyReasoner {
         batExists.setActor(new Being("bats"));
         batExists.setAction(new Concept("Exist"));
 
-        actions.add(batExists);
+        memmories.add(batExists);
 
         Fact cowIsMammal = new Fact();
         cowIsMammal.setActor(new Being("cow"));
         cowIsMammal.setAction(new Concept("is"));
         cowIsMammal.setTarget(new Concept("mammal"));
 
-        actions.add(cowIsMammal);
+        memmories.add(cowIsMammal);
 
-        return actions;
+        Fact summerRain = new Fact();
+        summerRain.setPlace(new Place("here"));
+        summerRain.setWhen(TemporalConcept.NOW);
+        summerRain.setWeather(Weather.RAINY);
+
+        return memmories;
     }
 
     private static void ask(String query, RationalBeign beign) {
