@@ -51,4 +51,11 @@ public class Status {
         return attributes.keySet();
     }
 
+    public void increment(String attribute, float increment) {
+        if (!attributes.containsKey(attribute)) {
+            return;
+        }
+        float value = attributes.get(attribute) + increment;
+        attributes.put(attribute, value);
+    }
 }

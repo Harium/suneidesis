@@ -33,6 +33,10 @@ public class Being extends Creature {
         status.add(ATTR_HEALTH, Status.MAX, Status.NEUTRAL);
     }
 
+    public void behave() {
+        behavior.behave();
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -57,11 +61,28 @@ public class Being extends Creature {
         this.mind.setMemories(memories);
     }
 
+    public void addStatus(String attribute, float threshold) {
+        status.addThreshold(attribute, threshold);
+    }
+
+    public void addStatus(String attribute, float value, float threshold) {
+        status.add(attribute, value, threshold);
+    }
+
     public void addAdjective(Adjective adjective) {
         status.add(adjective.getName());
     }
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Behavior getBehavior() {
+        return behavior;
+    }
+
+    public void setBehavior(Behavior behavior) {
+        this.behavior = behavior;
+        behavior.setBeing(this);
     }
 }
