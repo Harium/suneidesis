@@ -4,12 +4,28 @@ import com.harium.suneidesis.knowledge.concept.Concept;
 
 public class Atom extends Concept {
 
+	/**
+	 * Also called Z
+	 */
 	private int atomicNumber;
 
-	private double massNumber;
+	/**
+	 * Total of Protons + Neutrons
+	 */
+	private int massNumber;
 	
 	public Atom(String name){
 		super(name);
+	}
+
+	public Atom(int atomicNumber, int massNumber) {
+		super();
+		this.atomicNumber = atomicNumber;
+		this.massNumber = massNumber;
+	}
+
+	public Atom(String name, int atomicNumber, int massNumber) {
+
 	}
 
 	public int getAtomicNumber() {
@@ -20,11 +36,11 @@ public class Atom extends Concept {
 		this.atomicNumber = atomicNumber;
 	}
 
-	public double getMassNumber() {
+	public int getMassNumber() {
 		return massNumber;
 	}
 
-	public void setMassNumber(double massNumber) {
+	public void setMassNumber(int massNumber) {
 		this.massNumber = massNumber;
 	}
 	

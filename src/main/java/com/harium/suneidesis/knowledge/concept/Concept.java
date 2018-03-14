@@ -12,6 +12,10 @@ public class Concept extends Thing {
 		super(name);
 	}
 
+	public Concept() {
+		super("");
+	}
+
 	public Concept(ConceptType type) {
 		super(type.name());
 		this.type = type;
