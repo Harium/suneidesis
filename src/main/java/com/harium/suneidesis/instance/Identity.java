@@ -9,6 +9,14 @@ public class Identity {
 
     protected Map<String, String> information = new HashMap<String, String>();
 
+    public Identity() {
+
+    }
+
+    public Identity(String name) {
+        setName(name);
+    }
+
     public void put(String key, String value) {
         information.put(key, value);
     }
@@ -27,5 +35,9 @@ public class Identity {
 
     public String getName() {
         return get(NAME);
+    }
+
+    public void setName(String name) {
+        put(NAME, name);
     }
 }

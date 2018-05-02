@@ -1,7 +1,7 @@
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
-import com.harium.suneidesis.beign.RationalBeign;
 import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
+import com.harium.suneidesis.instance.Instance;
 import examples.TaxonomyReasoner;
 
 
@@ -9,9 +9,9 @@ public class Terminal {
 
     public static void main(String[] args) {
 
-        RationalBeign thrain = new RationalBeign("Thrain", Gender.MALE);
+        Instance thrain = new Instance("Thrain", Gender.MALE);
 
-        RationalBeign thror = new RationalBeign("Thror", Gender.MALE);
+        Instance thror = new Instance("Thror", Gender.MALE);
 
         HeteroSexualCouple thrainsParents = new HeteroSexualCouple(thror, new Being("?"));
         thrain.setAncestry(thrainsParents);
@@ -31,11 +31,11 @@ public class Terminal {
         ask("Did you heard something about Sauron?", thrain);
     }
 
-    private static void ask(String query, RationalBeign beign) {
+    private static void ask(String query, Instance beign) {
 
         System.out.println(query.replace("?", ", " + beign.getName() + "?"));
 
-        System.out.println(beign.listen(query));
+        System.out.println(beign.input(query));
     }
 
 }

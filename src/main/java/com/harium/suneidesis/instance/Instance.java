@@ -26,6 +26,16 @@ public class Instance extends Being {
         this.identity = identity;
 	}
 
+    public Instance(String name) {
+        super(name);
+        this.identity = new Identity(name);
+    }
+
+    public Instance(String name, Gender gender) {
+        super(name, gender);
+        this.identity = new Identity(name);
+    }
+
 	public String input(String sentence) {
 		return parser.parse(sentence, this);
 	}
