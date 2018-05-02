@@ -1,6 +1,6 @@
 package examples;
 
-import com.harium.suneidesis.Instance;
+import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
 import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;

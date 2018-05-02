@@ -1,4 +1,4 @@
-package com.harium.suneidesis;
+package com.harium.suneidesis.instance;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
@@ -9,16 +9,21 @@ import com.harium.suneidesis.output.TextOutput;
 
 public class Instance extends Being {
 
+    private Identity identity;
+    //private Context context;
+
     private Output output;
 	private Parser parser = new SimpleParser();
 	
-	public Instance(String name) {
-		super(name);
+	public Instance(Identity identity) {
+		super(identity.getName());
+		this.identity = identity;
 		output = new TextOutput();
 	}
 	
-	public Instance(String name, Gender gender) {
-		super(name, gender);
+	public Instance(Identity identity, Gender gender) {
+		super(identity.getName(), gender);
+        this.identity = identity;
 	}
 
 	public String input(String sentence) {
