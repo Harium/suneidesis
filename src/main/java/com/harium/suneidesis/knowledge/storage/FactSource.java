@@ -1,4 +1,4 @@
-package com.harium.suneidesis.knowledge.memory;
+package com.harium.suneidesis.knowledge.storage;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 

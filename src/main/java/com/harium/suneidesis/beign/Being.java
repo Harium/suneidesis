@@ -4,8 +4,8 @@ import com.harium.suneidesis.behavior.BaseBehavior;
 import com.harium.suneidesis.behavior.Behavior;
 import com.harium.suneidesis.beign.ancestry.Ancestry;
 import com.harium.suneidesis.knowledge.concept.Adjective;
-import com.harium.suneidesis.knowledge.memory.Fact;
-import com.harium.suneidesis.knowledge.memory.Mind;
+import com.harium.suneidesis.knowledge.storage.Fact;
+import com.harium.suneidesis.knowledge.storage.Storage;
 
 import java.util.*;
 
@@ -19,7 +19,7 @@ public class Being extends Creature {
 
     protected Status status = new Status();
 
-    private Mind mind = new Mind();
+    private Storage storage = new Storage();
 
     private Behavior behavior = new BaseBehavior();
 
@@ -54,11 +54,11 @@ public class Being extends Creature {
     }
 
     public List<Fact> getMemories() {
-        return mind.getMemories();
+        return storage.getFacts();
     }
 
     public void setMemories(List<Fact> memories) {
-        this.mind.setMemories(memories);
+        this.storage.setFacts(memories);
     }
 
     public void addStatus(String attribute, float threshold) {

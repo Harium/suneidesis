@@ -6,7 +6,8 @@ import com.harium.suneidesis.beign.Gender;
 import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.Place;
-import com.harium.suneidesis.knowledge.memory.Fact;
+import com.harium.suneidesis.knowledge.storage.Fact;
+import com.harium.suneidesis.knowledge.storage.frame.FullFrame;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 import com.harium.suneidesis.knowledge.time.Time;
 import com.harium.suneidesis.knowledge.weather.Weather;
@@ -46,14 +47,14 @@ public class TaxonomyReasoner {
 
     public static List<Fact> createMemories(Instance beign) {
 
-        List<Fact> memmories = new ArrayList<Fact>();
+        List<Fact> memories = new ArrayList<Fact>();
 
-        Fact born = new Fact();
+        FullFrame born = new FullFrame();
         born.setActor(beign);
         born.setWhen(new TemporalConcept("TA 2644", Time.PAST));
-        memmories.add(born);
+        memories.add(born);
 
-        Fact killTroll = new Fact();
+        FullFrame killTroll = new FullFrame();
 
         killTroll.setActor(beign); //Who did the action
         killTroll.setTarget(new Being("a Troll")); //Who suffered the action (target)
@@ -63,7 +64,7 @@ public class TaxonomyReasoner {
         killTroll.setWhen(new TemporalConcept("last week", Time.PAST)); //When action happens
 
         List<Fact> conclusions = new ArrayList<Fact>();
-        Fact beingKilledTroll = new Fact();
+        FullFrame beingKilledTroll = new FullFrame();
         beingKilledTroll.setActor(beign);
         beingKilledTroll.setAction(new Concept("Kill"));
         beingKilledTroll.setTarget(new Being("a Troll"));
@@ -71,9 +72,9 @@ public class TaxonomyReasoner {
         conclusions.add(beingKilledTroll);
         killTroll.setConclusions(conclusions);
 
-        memmories.add(killTroll);
+        memories.add(killTroll);
 
-        Fact createRing = new Fact();
+        FullFrame createRing = new FullFrame();
 
         createRing.setActor(new Being("Sauron")); //Who did the action
         createRing.setTarget(new Being("a ring")); //Who suffered the action
@@ -82,30 +83,30 @@ public class TaxonomyReasoner {
         createRing.setWhereInTarget(null); //
         createRing.setWhen(new TemporalConcept("many years ago", Time.PAST)); //When action happened
 
-        memmories.add(createRing);
+        memories.add(createRing);
 
         //Fact summerRain = new Fact();
         //summerRain.setPlace(place);
 
-        Fact batExists = new Fact();
+        FullFrame batExists = new FullFrame();
         batExists.setActor(new Being("bats"));
         batExists.setAction(new Concept("Exist"));
 
-        memmories.add(batExists);
+        memories.add(batExists);
 
-        Fact cowIsMammal = new Fact();
+        FullFrame cowIsMammal = new FullFrame();
         cowIsMammal.setActor(new Being("cow"));
         cowIsMammal.setAction(new Concept("is"));
         cowIsMammal.setTarget(new Concept("mammal"));
 
-        memmories.add(cowIsMammal);
+        memories.add(cowIsMammal);
 
-        Fact summerRain = new Fact();
+        FullFrame summerRain = new FullFrame();
         summerRain.setPlace(new Place("here"));
         summerRain.setWhen(TemporalConcept.NOW);
         summerRain.setWeather(Weather.RAINY);
 
-        return memmories;
+        return memories;
     }
 
     private static void ask(String query, Instance beign) {

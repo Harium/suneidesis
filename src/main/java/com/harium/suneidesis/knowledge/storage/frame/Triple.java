@@ -1,8 +1,9 @@
-package com.harium.suneidesis.ontology;
+package com.harium.suneidesis.knowledge.storage.frame;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.knowledge.storage.Fact;
 
-public class Triple extends Concept {
+public class Triple extends Fact {
 
     protected Concept subject;
     protected Concept predicate;
@@ -10,10 +11,12 @@ public class Triple extends Concept {
 
     public Triple() {
         super("");
+        frameType = FrameType.TRIPLE;
     }
 
     public Triple(String name) {
         super(name);
+        frameType = FrameType.TRIPLE;
     }
 
     public Triple(Concept subject, Concept predicate, Concept object) {

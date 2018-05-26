@@ -3,7 +3,9 @@ package com.harium.suneidesis.knowledge.linguistic.english.action;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
-import com.harium.suneidesis.knowledge.memory.Fact;
+import com.harium.suneidesis.knowledge.storage.Fact;
+import com.harium.suneidesis.knowledge.storage.frame.FrameType;
+import com.harium.suneidesis.knowledge.storage.frame.FullFrame;
 
 import java.util.List;
 
@@ -57,10 +59,15 @@ public class SimpleActionParser implements ActionParser {
         String name = actorName.toLowerCase();
 
         for (Fact action : actions) {
+            if (action.getFrameType() != FrameType.FULL_FRAME) {
+                continue;
+            }
 
-            boolean hasActor = action.getActor().getName().toLowerCase().contains(name);
+            FullFrame frame = (FullFrame) action;
 
-            boolean hasTarget = action.getTarget() != null && action.getTarget().getName().toLowerCase().contains(name);
+            boolean hasActor = frame.getActor().getName().toLowerCase().contains(name);
+
+            boolean hasTarget = frame.getTarget() != null && frame.getTarget().getName().toLowerCase().contains(name);
 
             if (hasActor || hasTarget)
 
@@ -75,10 +82,15 @@ public class SimpleActionParser implements ActionParser {
     private Fact findActionByName(String actionName, List<Fact> actions) {
 
         for (Fact action : actions) {
-            if (action.getAction() == null) {
+            if (action.getFrameType() != FrameType.FULL_FRAME) {
                 continue;
             }
-            if (actionName.equalsIgnoreCase(action.getAction().getName())) {
+
+            FullFrame frame = (FullFrame) action;
+            if (frame.getAction() == null) {
+                continue;
+            }
+            if (actionName.equalsIgnoreCase(frame.getAction().getName())) {
                 return action;
             }
         }
@@ -87,41 +99,51 @@ public class SimpleActionParser implements ActionParser {
     }
 
     public String describeAction(Fact action) {
-
         StringBuilder builder = new StringBuilder();
 
-        builder.append("I heard that");
-        builder.append(" ");
-        builder.append(action.getActor().getName());
-        builder.append(" ");
+        switch (action.getFrameType()) {
+            case FULL_FRAME:
+                FullFrame frame = (FullFrame) action;
 
-        String actionAsText = action.getAction().getName().toLowerCase();
-        builder.append(actionAsText);
-        if (!actionAsText.endsWith("s")) {
-            builder.append("s");
-        }
+                // Change Based on source
+                builder.append("I heard that");
 
-        if (action.getTarget() != null) {
-            builder.append(" ");
-            builder.append(action.getTarget().getName());
+                builder.append(" ");
+                builder.append(frame.getActor().getName());
+                builder.append(" ");
 
-            if (action.getWhereInTarget() != null) {
-
-                if (!action.getWhereInTarget().getName().isEmpty()) {
-                    builder.append("'s ");
-                    builder.append(action.getWhereInTarget().getName());
+                String actionAsText = frame.getAction().getName().toLowerCase();
+                builder.append(actionAsText);
+                if (!actionAsText.endsWith("s")) {
+                    builder.append("s");
                 }
-            }
-        }
 
-        if (action.getPlace() != null) {
-            builder.append(" ");
-            builder.append(getPlace(action.getPlace()));
-        }
+                if (frame.getTarget() != null) {
+                    builder.append(" ");
+                    builder.append(frame.getTarget().getName());
 
-        if (action.getWhen() != null) {
-            builder.append(", ");
-            builder.append(action.getWhen().getName());
+                    if (frame.getWhereInTarget() != null) {
+
+                        if (!frame.getWhereInTarget().getName().isEmpty()) {
+                            builder.append("'s ");
+                            builder.append(frame.getWhereInTarget().getName());
+                        }
+                    }
+                }
+
+                if (frame.getPlace() != null) {
+                    builder.append(" ");
+                    builder.append(getPlace(frame.getPlace()));
+                }
+
+                if (frame.getWhen() != null) {
+                    builder.append(", ");
+                    builder.append(frame.getWhen().getName());
+                }
+                break;
+            default:
+                break;
+
         }
 
         return builder.toString();

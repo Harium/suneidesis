@@ -1,20 +1,16 @@
-package com.harium.suneidesis.knowledge.memory;
+package com.harium.suneidesis.knowledge.storage.frame;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.concept.ConceptType;
 import com.harium.suneidesis.knowledge.concept.Place;
+import com.harium.suneidesis.knowledge.storage.Fact;
+import com.harium.suneidesis.knowledge.storage.FactSource;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 import com.harium.suneidesis.knowledge.weather.Weather;
 
 import java.util.List;
 
-/**
- * Fact is a model to represent actions from being's perspective
- * The same fact(action) can be perceived differently by observers and/or actors
- */
-
-public class Fact extends Concept {
+public class FullFrame extends Fact {
 
     private Being actor;
     private Concept target;
@@ -31,12 +27,14 @@ public class Fact extends Concept {
     private FactSource source;
     private Weather weather;
 
-    public Fact(String name) {
-        super(name, ConceptType.THEORY);
+    public FullFrame() {
+        super("");
+        frameType = FrameType.FULL_FRAME;
     }
 
-    public Fact() {
-        super("", ConceptType.THEORY);
+    public FullFrame(String name) {
+        super(name);
+        frameType = FrameType.FULL_FRAME;
     }
 
     public Being getActor() {
@@ -111,7 +109,7 @@ public class Fact extends Concept {
         this.weather = weather;
     }
 
-    public void copy(Fact fact) {
+    public void copy(FullFrame fact) {
         this.actor = fact.actor;
         this.target = fact.target;
         this.place = fact.place;
@@ -122,4 +120,5 @@ public class Fact extends Concept {
         this.source = fact.source;
         this.weather = fact.weather;
     }
+
 }
