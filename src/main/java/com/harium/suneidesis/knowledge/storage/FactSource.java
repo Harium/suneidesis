@@ -1,12 +1,14 @@
 package com.harium.suneidesis.knowledge.storage;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.knowledge.context.ConversationContext;
 
 public class FactSource extends Concept {
 	
 	private Concept source;
 	private AcquisitionMethod method = AcquisitionMethod.EXPERIENCED;
 	private AcquisitionMethod sourceMethod = AcquisitionMethod.EXPERIENCED;
+	private ConversationContext context;
 	
 	public FactSource(String name) {
 		super(name);
@@ -45,6 +47,14 @@ public class FactSource extends Concept {
 
 	public void setSourceMethod(AcquisitionMethod sourceMethod) {
 		this.sourceMethod = sourceMethod;
+	}
+
+	public ConversationContext getContext() {
+		return context;
+	}
+
+	public void setContext(ConversationContext context) {
+		this.context = context;
 	}
 
 	public enum AcquisitionMethod {
