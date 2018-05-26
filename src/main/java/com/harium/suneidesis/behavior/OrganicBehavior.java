@@ -11,7 +11,7 @@ public class OrganicBehavior extends BaseBehavior {
     private static final float FACTOR_THIRSTY = 0.001f;
     private static final float FACTOR_HUNGRY = 0.001f;
 
-    private static final float METABOLISM = 1.0f;
+    private static final float METABOLISM_RATE = 1.0f;
 
     public OrganicBehavior() {
         super();
@@ -23,8 +23,8 @@ public class OrganicBehavior extends BaseBehavior {
 
     @Override
     public void behave() {
-        being.getStatus().increment(ATTR_THIRSTY, -FACTOR_THIRSTY * METABOLISM);
-        being.getStatus().increment(ATTR_HUNGRY, -FACTOR_HUNGRY * METABOLISM);
+        being.getStatus().increment(ATTR_THIRSTY, -FACTOR_THIRSTY * METABOLISM_RATE);
+        being.getStatus().increment(ATTR_HUNGRY, -FACTOR_HUNGRY * METABOLISM_RATE);
     }
 
     @Override
