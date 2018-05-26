@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ConversationContext extends Context {
 
+    private Concept subject;
     private List<Concept> participants;
 
     public ConversationContext(TemporalConcept when) {
@@ -22,4 +23,19 @@ public class ConversationContext extends Context {
         this.participants = participants;
     }
 
+    public Concept getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Concept subject) {
+        this.subject = subject;
+    }
+
+    public List<Concept> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Concept> participants) {
+        this.participants = participants;
+    }
 }
