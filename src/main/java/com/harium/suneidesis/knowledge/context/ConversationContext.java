@@ -4,12 +4,13 @@ import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.space.SpaceConcept;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConversationContext extends Context {
 
-    private Concept subject;
-    private List<Concept> participants;
+    private Concept subject = Concept.UNKNOWN;
+    private List<Concept> participants = new ArrayList<Concept>();
 
     public ConversationContext(TemporalConcept when) {
         super(when);
