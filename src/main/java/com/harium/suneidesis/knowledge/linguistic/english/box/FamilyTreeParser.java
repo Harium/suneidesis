@@ -1,32 +1,45 @@
-package com.harium.suneidesis.knowledge.linguistic.english;
+package com.harium.suneidesis.knowledge.linguistic.english.box;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.ancestry.Ancestry;
 import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
+import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
 
 public class FamilyTreeParser implements Parser {
 
-    @Override
-    public String parse(String query, Being beign) {
+    public static final String FAMILY_FATHER = "father";
+    public static final String FAMILY_MOTHER = "mother";
 
-        String[] parts = query.replaceAll("\\?", "").split(" ");
+    public static final String WHO = "who";
+
+    @Override
+    public boolean matches(String query) {
+        String[] parts = query.split(" ");
+        return BaseEnglishBox.checkAction(parts[0], WHO);
+    }
+
+    @Override
+    public String parse(String query, Instance beign) {
+
+        String[] parts = query.split(" ");
 
         String relationship = parts[parts.length - 1];
 
         String name = "";
 
-        if ("father".equalsIgnoreCase(relationship)) {
+        if (FAMILY_FATHER.equalsIgnoreCase(relationship)) {
             name = findFather(beign);
         }
 
-        if ("mother".equalsIgnoreCase(relationship)) {
+        if (FAMILY_MOTHER.equalsIgnoreCase(relationship)) {
             name = findMother(beign);
         }
 
         if (name.isEmpty()) {
-            name = BaseParser.I_DON_T_KNOW;
+            name = "";
         }
+
         return name;
     }
 

@@ -1,10 +1,13 @@
-package com.harium.suneidesis.knowledge.linguistic.english.feeling;
+package com.harium.suneidesis.knowledge.linguistic.english.box;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Status;
+import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.feeling.FeelingParser;
 
 public class SimpleFeelingParser implements FeelingParser {
+
+    public static final String HOW = "how";
 
     private static final float interval = Status.MAX / 5;
     private static final float INTERVAL_HIGH = interval * 4; // 80%
@@ -16,12 +19,20 @@ public class SimpleFeelingParser implements FeelingParser {
     private static final String LABEL_BAD = "bad";
 
     @Override
-    public String parse(String query, Being beign) {
-        if (query.contains("You")) {
-            return "I am " + translateFeelingToString(beign.getStatus()) + ".";
+    public boolean matches(String query) {
+        String[] parts = query.split(" ");
+        return BaseEnglishBox.checkAction(parts[0], HOW);
+    }
+
+    @Override
+    public String parse(String query, Instance beign) {
+        Being target;
+        if (query.contains("You")||query.contains("you")) {
+            target = beign;
+            return "I am " + translateFeelingToString(target.getStatus()) + ".";
         }
 
-        return null;
+        return "";
     }
 
     public String translateFeelingToString(Status feeling) {

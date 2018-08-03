@@ -1,9 +1,11 @@
 package com.harium.suneidesis.knowledge.linguistic.core;
 
-import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.instance.Instance;
 
 public interface Parser {
 
-	public String parse(String query, Being beign);
-	
+    boolean matches(String query);
+
+    String parse(String query, Instance instance);
+
 }
