@@ -1,4 +1,4 @@
-package com.harium.suneidesis.knowledge.linguistic.english.frame;
+package com.harium.suneidesis.knowledge.linguistic.core.nlp;
 
 import com.harium.suneidesis.knowledge.linguistic.core.frame.AdjectiveFrame;
 import com.harium.suneidesis.knowledge.linguistic.core.frame.BaseFrame;

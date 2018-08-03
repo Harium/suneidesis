@@ -1,6 +1,6 @@
-package com.harium.suneidesis.knowledge.linguistic.english.action;
+package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.knowledge.storage.Fact;
@@ -11,10 +11,18 @@ import java.util.List;
 
 public class SimpleActionParser implements ActionParser {
 
-    @Override
-    public String parse(String query, Being beign) {
+    public static final String DID = "did";
 
-        String[] parts = query.replaceAll("\\?", "").split(" ");
+    @Override
+    public boolean matches(String query) {
+        String[] parts = query.split(" ");
+        return BaseEnglishBox.checkAction(parts[0], DID);
+    }
+
+    @Override
+    public String parse(String query, Instance beign) {
+
+        String[] parts = query.split(" ");
 
         String querySubject = "";
 
@@ -24,9 +32,7 @@ public class SimpleActionParser implements ActionParser {
 
                 querySubject = parts[i + 1];
                 break;
-
             }
-
         }
 
         if (!querySubject.isEmpty()) {

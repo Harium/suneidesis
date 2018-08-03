@@ -1,13 +1,12 @@
 package examples;
 
-import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
-import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
+import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.Place;
+import com.harium.suneidesis.knowledge.linguistic.core.box.EchoBox;
 import com.harium.suneidesis.knowledge.linguistic.core.box.LanguageBox;
-import com.harium.suneidesis.knowledge.linguistic.english.box.BaseEnglishBox;
 import com.harium.suneidesis.knowledge.storage.Fact;
 import com.harium.suneidesis.knowledge.storage.frame.FullFrame;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
@@ -17,38 +16,21 @@ import com.harium.suneidesis.knowledge.weather.Weather;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaxonomyReasoner {
+public class ParrotReasoner {
 
     public static void main(String[] args) {
+        LanguageBox echo = new EchoBox();
 
-        LanguageBox language = new BaseEnglishBox();
+        Instance parrot = new Instance("Parrot", Gender.MALE);
+        parrot.setLanguageBox(echo);
 
-        Instance thrain = new Instance("Thrain", Gender.MALE);
-        thrain.setLanguageBox(language);
+        createMemories(parrot);
 
-        Instance thror = new Instance("Thror", Gender.MALE);
-        thror.setLanguageBox(language);
-
-        HeteroSexualCouple thrainsParents = new HeteroSexualCouple(thror, new Being("?"));
-        thrain.setAncestry(thrainsParents);
-
-        thrain.setMemories(createMemories(thror));
-
-        ask("How are you?", thrain);
-
-        ask("Who is your father?", thrain);
-
-        ask("Who is your father?", thror);
-
-        ask("Did you cut something else?", thrain);
-
-        ask("Did you heard something about cut?", thrain);
-
-        ask("Did you heard something about Sauron?", thrain);
-
-        ask("Did you heard something about bats?", thrain);
-        ask("Did you heard something about cows?", thrain);
-
+        ask("How are you?", parrot);
+        ask("Who is your father?", parrot);
+        ask("Did you cut something else?", parrot);
+        ask("Did you heard something about cut?", parrot);
+        ask("Did you heard something about Sauron?", parrot);
     }
 
     public static List<Fact> createMemories(Instance beign) {

@@ -2,8 +2,8 @@ package com.harium.suneidesis.instance;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
-import com.harium.suneidesis.knowledge.linguistic.core.Parser;
-import com.harium.suneidesis.knowledge.linguistic.english.SimpleParser;
+import com.harium.suneidesis.knowledge.linguistic.core.box.DummyBox;
+import com.harium.suneidesis.knowledge.linguistic.core.box.LanguageBox;
 import com.harium.suneidesis.output.Output;
 import com.harium.suneidesis.output.TextOutput;
 
@@ -12,13 +12,12 @@ public class Instance extends Being {
     private Identity identity;
     //private Context context;
 
-    private Output output;
-	private Parser parser = new SimpleParser();
-	
+    private Output output = new TextOutput();
+    private LanguageBox languageBox = new DummyBox();
+
 	public Instance(Identity identity) {
 		super(identity.getName());
 		this.identity = identity;
-		output = new TextOutput();
 	}
 	
 	public Instance(Identity identity, Gender gender) {
@@ -37,11 +36,18 @@ public class Instance extends Being {
     }
 
 	public String input(String sentence) {
-		return parser.parse(sentence, this);
+        return languageBox.input(sentence, this);
 	}
 
 	public void output(String sentence) {
         output.print(sentence);
     }
-	
+
+    public LanguageBox getLanguageBox() {
+        return languageBox;
+    }
+
+    public void setLanguageBox(LanguageBox languageBox) {
+        this.languageBox = languageBox;
+    }
 }
