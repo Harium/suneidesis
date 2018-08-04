@@ -1,4 +1,4 @@
-package examples.earth;
+package com.harium.suneidesis.earth.instance;
 
 import com.harium.suneidesis.instance.Identity;
 

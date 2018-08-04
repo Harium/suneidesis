@@ -1,5 +1,20 @@
 package com.harium.suneidesis.knowledge.weather;
 
-public enum Weather {
-	SUNNY, CLOUDY, RAINY, WINDY, SNOWY;
+import com.harium.suneidesis.knowledge.concept.Concept;
+
+public class Weather extends Concept {
+
+    private WeatherType type;
+
+    public Weather(WeatherType type) {
+        this.type = type;
+    }
+
+    public WeatherType getWeather() {
+        return type;
+    }
+
+    public void setWeather(WeatherType type) {
+        this.type = type;
+    }
 }

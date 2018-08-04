@@ -1,6 +1,7 @@
-package com.harium.suneidesis.behavior;
+package com.harium.suneidesis.earth;
 
 import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.earth.behavior.OrganicBehavior;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

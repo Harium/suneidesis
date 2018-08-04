@@ -1,9 +1,9 @@
 package examples;
 
-import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
 import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
+import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.linguistic.core.box.LanguageBox;
@@ -16,6 +16,8 @@ import com.harium.suneidesis.knowledge.weather.Weather;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.harium.suneidesis.knowledge.weather.WeatherType.RAINY;
 
 public class TaxonomyReasoner {
 
@@ -110,7 +112,7 @@ public class TaxonomyReasoner {
         FullFrame summerRain = new FullFrame();
         summerRain.setPlace(new Place("here"));
         summerRain.setWhen(TemporalConcept.NOW);
-        summerRain.setWeather(Weather.RAINY);
+        summerRain.setWeather(new Weather(RAINY));
 
         return memories;
     }

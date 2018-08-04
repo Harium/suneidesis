@@ -1,5 +1,6 @@
-package com.harium.suneidesis.behavior;
+package com.harium.suneidesis.earth.behavior;
 
+import com.harium.suneidesis.behavior.BaseBehavior;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Status;
 
