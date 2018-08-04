@@ -3,6 +3,10 @@ package com.harium.suneidesis.beign.ancestry;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
 
+/**
+ * Class to represent hetero sexual couples
+ * Man + Woman as Father + Mother
+ */
 public class HeteroSexualCouple extends Ancestry {
 
     private static final String NAME = "couple";

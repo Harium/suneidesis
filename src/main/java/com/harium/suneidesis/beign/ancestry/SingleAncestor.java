@@ -3,6 +3,10 @@ package com.harium.suneidesis.beign.ancestry;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
 
+/**
+ * Class to represent a single ancestor
+ * Useful to express clones' source
+ */
 public class SingleAncestor extends Ancestry {
 
     private static final String NAME = "source";

@@ -24,7 +24,7 @@ public class Molecule extends Concept {
 
     private void init() {
         if (bonds == null) {
-            bonds = new LinkedHashMap<Atom, Set<Atom>>();
+            bonds = new LinkedHashMap<>();
         }
     }
 
@@ -36,10 +36,12 @@ public class Molecule extends Concept {
 
     public void bond(Atom atom, Atom otherAtom) {
         init();
-        if (!this.bonds.containsKey(atom) || !this.bonds.containsKey(otherAtom)) {
-            System.err.println("Atoms Missing!");
-            return;
+        if (!this.bonds.containsKey(atom)) {
+            throw new RuntimeException("Atom is Missing: " + atom);
+        } else if (!this.bonds.containsKey(otherAtom)) {
+            throw new RuntimeException("Atom is Missing: " + otherAtom);
         }
+
         Set<Atom> originBonds = this.bonds(atom);
         originBonds.add(otherAtom);
 

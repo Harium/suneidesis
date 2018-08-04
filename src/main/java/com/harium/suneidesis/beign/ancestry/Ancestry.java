@@ -3,7 +3,7 @@ package com.harium.suneidesis.beign.ancestry;
 import com.harium.suneidesis.knowledge.concept.Concept;
 
 /**
- * A single or a group of beings that could generate other beings
+ * Single or group of beings that generated other being(s)
  */
 public class Ancestry extends Concept {
 
