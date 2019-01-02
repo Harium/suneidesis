@@ -19,8 +19,6 @@ public class Being extends Creature {
 
     protected Status status = new Status();
 
-    private Storage storage = new Storage();
-
     private Behavior behavior = new BaseBehavior();
 
     public Being(String name) {
@@ -51,14 +49,6 @@ public class Being extends Creature {
 
     public void setAncestry(Ancestry ancestry) {
         this.ancestry = ancestry;
-    }
-
-    public List<Fact> getMemories() {
-        return storage.getFacts();
-    }
-
-    public void setMemories(List<Fact> memories) {
-        this.storage.setFacts(memories);
     }
 
     public void addStatus(String attribute, float threshold) {

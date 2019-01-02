@@ -1,6 +1,5 @@
 package com.harium.suneidesis.knowledge.storage.frame;
 
-import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.storage.Fact;
@@ -12,7 +11,7 @@ import java.util.List;
 
 public class FullFrame extends Fact {
 
-    private Being actor;
+    private Concept actor;
     private Concept target;
 
     private Place place;
@@ -37,11 +36,11 @@ public class FullFrame extends Fact {
         frameType = FrameType.FULL_FRAME;
     }
 
-    public Being getActor() {
+    public Concept getActor() {
         return actor;
     }
 
-    public void setActor(Being actor) {
+    public void setActor(Concept actor) {
         this.actor = actor;
     }
 

@@ -14,7 +14,8 @@ public enum ConceptType {
 	TIME_UNIT, 
 	SOUND, 
 	MATERIAL, 
-	PHENOMENA, 
+	PHENOMENA,
+	SIMULATION,
 	THEORY;
 	
 }
