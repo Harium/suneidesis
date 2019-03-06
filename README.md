@@ -8,6 +8,10 @@ Suneidesis is a project to represent knowledge.
 <dependency>
     <groupId>com.harium.suneidesis</groupId>
     <artifactId>core</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
+
+## Example
+
+See examples at [suneidesis-examples](https://github.com/Harium/suneidesis-examples/)
