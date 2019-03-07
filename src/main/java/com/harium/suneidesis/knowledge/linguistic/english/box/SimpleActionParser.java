@@ -6,6 +6,7 @@ import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.knowledge.storage.Fact;
 import com.harium.suneidesis.knowledge.storage.frame.FrameType;
 import com.harium.suneidesis.knowledge.storage.frame.FullFrame;
+import com.harium.suneidesis.output.Output;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class SimpleActionParser implements ActionParser {
     }
 
     @Override
-    public String parse(String query, Instance beign) {
+    public void parse(String query, Instance beign, Output output) {
 
         String[] parts = query.split(" ");
 
@@ -48,16 +49,16 @@ public class SimpleActionParser implements ActionParser {
             }
 
             if (action != null) {
-                return describeAction(action);
+                output.print(describeAction(action));
             } else if (querySubject.endsWith("s")) {
                 action = findActionByActorsName(querySubject.substring(0, querySubject.length() - 1), actions);
                 if (action != null) {
-                    return describeAction(action);
+                    output.print(describeAction(action));
                 }
             }
         }
 
-        return "No.";
+        output.print("No.");
     }
 
     private Fact findActionByActorsName(String actorName, List<Fact> actions) {

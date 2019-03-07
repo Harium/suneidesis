@@ -2,6 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.box.BaseLanguageBox;
+import com.harium.suneidesis.output.Output;
 
 public class BaseEnglishBox extends BaseLanguageBox {
 
@@ -27,14 +28,8 @@ public class BaseEnglishBox extends BaseLanguageBox {
     }
 
     @Override
-    public String input(String sentence, Instance instance) {
-        String response = super.input(sentence, instance);
-
-        if (response.isEmpty()) {
-            response = I_DON_T_KNOW;
-        }
-
-        return response;
+    public void input(String sentence, Instance instance, Output output) {
+        super.input(sentence, instance, output);
     }
 
     public static boolean checkAction(String action, String ... verbs) {

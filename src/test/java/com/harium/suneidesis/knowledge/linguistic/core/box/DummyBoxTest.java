@@ -1,6 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.core.box;
 
 import com.harium.suneidesis.instance.Instance;
+import com.harium.suneidesis.output.Output;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +18,27 @@ public class DummyBoxTest {
     @Test
     public void testAnswers() {
         Instance instance = null;
-        Assert.assertEquals("", box.input("How are you?", instance));
-        Assert.assertEquals("", box.input("What's your name?", instance));
-        Assert.assertEquals("", box.input("Tell me more about the Theory of Relativity", instance));
-        Assert.assertEquals("", box.input("Thank you for listen to me", instance));
+
+        Out output = new Out();
+
+        box.input("How are you?", instance, output);
+        Assert.assertEquals("", output.answer);
+
+        box.input("What's your name?", instance, output);
+        Assert.assertEquals("", output.answer);
+
+        box.input("Tell me more about the Theory of Relativity", instance, output);
+        Assert.assertEquals("", output.answer);
+
+        box.input("Thank you for listen to me", instance, output);
+        Assert.assertEquals("", output.answer);
     }
 
+    class Out implements Output {
+        public String answer = "";
+        @Override
+        public void print(String sentence) {
+            this.answer = sentence;
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.adjective.AdjectiveParser;
+import com.harium.suneidesis.output.Output;
 
 public class SimpleAdjectiveParser implements AdjectiveParser {
 
@@ -15,28 +16,28 @@ public class SimpleAdjectiveParser implements AdjectiveParser {
     }
 
     @Override
-    public String parse(String query, Instance beign) {
+    public void parse(String query, Instance beign, Output output) {
         String[] parts = query.split(" ");
 
         String action = parts[1];
         String adjectiveQuery = parts[2];
 
         if (!BaseEnglishBox.checkAction(action, TO_BE)) {
-            return "";
+            output.print("");
         }
 
         if (query.contains(YOU)) {
             for (String adjective : beign.getStatus().all()) {
                 if (adjective.equalsIgnoreCase(adjectiveQuery)) {
-                    return "Yes, I am " + adjectiveQuery + ".";
+                    output.print("Yes, I am " + adjectiveQuery + ".");
                 }
             }
 
-            return "No, I am not " + adjectiveQuery + ".";
+            output.print("No, I am not " + adjectiveQuery + ".");
 
         }
 
-        return null;
+        output.print("");
     }
 
 }

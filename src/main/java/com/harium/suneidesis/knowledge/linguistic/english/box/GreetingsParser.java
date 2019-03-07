@@ -3,9 +3,9 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Any;
-import com.harium.suneidesis.knowledge.linguistic.core.tokenization.BaseTokenizer;
 import com.harium.suneidesis.knowledge.linguistic.core.tokenization.LowerCaseTokenizer;
 import com.harium.suneidesis.knowledge.linguistic.core.tokenization.Tokenizer;
+import com.harium.suneidesis.output.Output;
 
 public class GreetingsParser implements Parser {
 
@@ -24,8 +24,8 @@ public class GreetingsParser implements Parser {
     }
 
     @Override
-    public String parse(String query, Instance beign) {
-        return query;
+    public void parse(String query, Instance beign, Output output) {
+        output.print(query);
     }
 
 }

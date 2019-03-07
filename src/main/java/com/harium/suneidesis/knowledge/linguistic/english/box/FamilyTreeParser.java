@@ -5,6 +5,7 @@ import com.harium.suneidesis.beign.ancestry.Ancestry;
 import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
+import com.harium.suneidesis.output.Output;
 
 public class FamilyTreeParser implements Parser {
 
@@ -20,7 +21,7 @@ public class FamilyTreeParser implements Parser {
     }
 
     @Override
-    public String parse(String query, Instance beign) {
+    public void parse(String query, Instance beign, Output output) {
 
         String[] parts = query.split(" ");
 
@@ -40,7 +41,7 @@ public class FamilyTreeParser implements Parser {
             name = "";
         }
 
-        return name;
+        output.print(name);
     }
 
     private String findFather(Being beign) {

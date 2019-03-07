@@ -4,6 +4,7 @@ import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Status;
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.feeling.FeelingParser;
+import com.harium.suneidesis.output.Output;
 
 public class SimpleFeelingParser implements FeelingParser {
 
@@ -25,14 +26,14 @@ public class SimpleFeelingParser implements FeelingParser {
     }
 
     @Override
-    public String parse(String query, Instance beign) {
+    public void parse(String query, Instance beign, Output output) {
         Being target;
-        if (query.contains("You")||query.contains("you")) {
+        if (query.contains("You") || query.contains("you")) {
             target = beign;
-            return "I am " + translateFeelingToString(target.getStatus()) + ".";
+            output.print("I am " + translateFeelingToString(target.getStatus()) + ".");
         }
 
-        return "";
+        output.print("");
     }
 
     public String translateFeelingToString(Status feeling) {
