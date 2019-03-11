@@ -2,16 +2,16 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
-import com.harium.suneidesis.knowledge.linguistic.core.matcher.Any;
+import com.harium.suneidesis.knowledge.linguistic.core.matcher.Eq;
+import com.harium.suneidesis.knowledge.linguistic.core.matcher.Or;
 import com.harium.suneidesis.knowledge.linguistic.core.tokenization.LowerCaseTokenizer;
 import com.harium.suneidesis.knowledge.linguistic.core.tokenization.Tokenizer;
 import com.harium.suneidesis.output.Output;
 
 public class GreetingsParser implements Parser {
 
-    public static final String[] GREETINGS = new String[]{"hi", "hello"};
     private Tokenizer tokenizer;
-    private Any greetingsMatcher = new Any(GREETINGS);
+    private Or greetingsMatcher = new Or(new Eq("hi"), new Eq("hello"));
 
     public GreetingsParser() {
         tokenizer = new LowerCaseTokenizer();
