@@ -6,4 +6,6 @@ public interface Chatbox {
 
     void addInstance(Instance instance);
 
+    void sendMessage(String channel, String message);
+
 }
