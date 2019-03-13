@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Sequence implements Matcher {
+public class Ends implements Matcher {
 
     protected List<String> keywords = new ArrayList<>();
 
-    public Sequence(List<String> keywords) {
+    public Ends(List<String> keywords) {
         this.keywords.addAll(keywords);
     }
 
-    public Sequence(String... keywords) {
+    public Ends(String... keywords) {
         this.keywords.addAll(Arrays.asList(keywords));
     }
 
@@ -22,15 +22,20 @@ public class Sequence implements Matcher {
             return true;
         }
 
-        int cursor = 0;
+        int t = 0;
+        int cursor = tokens.length-keywords.size();
         String keyword = keywords.get(0);
-        for (String token : tokens) {
+        while (cursor<tokens.length) {
+            String token = tokens[cursor];
             if (keyword.equals(token)) {
-                if (cursor + 1 == keywords.size()) {
+                cursor++;
+                if (cursor > keywords.size()) {
                     return true;
                 }
-                cursor++;
-                keyword = keywords.get(cursor);
+                t++;
+                keyword = keywords.get(t);
+            } else {
+                return false;
             }
         }
 

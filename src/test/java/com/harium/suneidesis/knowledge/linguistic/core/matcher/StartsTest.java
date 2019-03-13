@@ -4,19 +4,19 @@ package com.harium.suneidesis.knowledge.linguistic.core.matcher;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class SequenceTest {
+public class StartsTest {
 
     @Test
     public void testEmpty() {
-        Sequence sequence = new Sequence();
+        Starts sequence = new Starts();
         Assert.assertTrue(sequence.matches(new String[]{"Hello", "my", "friend."}));
     }
 
     @Test
     public void testAll() {
-        Sequence sequence = new Sequence("Hello", "my");
+        Starts sequence = new Starts("Hello", "my");
         Assert.assertTrue(sequence.matches(new String[]{"Hello", "my", "friend."}));
-        Assert.assertTrue(sequence.matches(new String[]{"Hello", "friend.", "my"}));
+        Assert.assertFalse(sequence.matches(new String[]{"Hello", "friend.", "my"}));
         Assert.assertFalse(sequence.matches(new String[]{"friend.", "my", "Hello"}));
     }
 }
