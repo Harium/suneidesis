@@ -1,17 +1,17 @@
 package com.harium.suneidesis.knowledge.linguistic.english.math;
 
-import com.harium.suneidesis.knowledge.linguistic.core.math.NumberToWords;
+import com.harium.suneidesis.knowledge.linguistic.core.math.NumberToWord;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class NumberToWordTest {
 
-    private NumberToWords converter;
+    private NumberToWord converter;
 
     @Before
     public void setUp() {
-        converter = new SimpleNumberToWords();
+        converter = new SimpleNumberToWord();
     }
 
     @Test

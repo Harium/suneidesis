@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.english.math;
 
-import com.harium.suneidesis.knowledge.linguistic.core.math.NumberToWords;
+import com.harium.suneidesis.knowledge.linguistic.core.math.NumberToWord;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import java.util.Map;
  * Class that turn numbers into words
  * Based on: https://www.programcreek.com/2014/05/leetcode-integer-to-english-words-java/
  */
-public class SimpleNumberToWords implements NumberToWords {
+public class SimpleNumberToWord implements NumberToWord {
 
     private static final int BILLION = 1000000000;
     private static final int MILLION = 1000000;
