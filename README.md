@@ -8,7 +8,7 @@ Suneidesis is a project to represent knowledge.
 <dependency>
     <groupId>com.harium.suneidesis</groupId>
     <artifactId>core</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
 </dependency>
 ```
 
