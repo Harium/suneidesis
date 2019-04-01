@@ -2,6 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.math;
 
 import com.harium.suneidesis.knowledge.linguistic.core.math.NumberToWord;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -140,5 +141,10 @@ public class SimpleNumberToWord implements NumberToWord {
     @Override
     public String toWord(double number) {
         return toWord((int) number);
+    }
+
+    @Override
+    public String toWord(BigDecimal number) {
+        return toWord(number.longValue());
     }
 }
