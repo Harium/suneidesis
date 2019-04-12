@@ -29,9 +29,10 @@ public class SimpleNumberToWord implements NumberToWord {
     private static final String NINE_HUNDRED = "novecentos";
 
     static Map<Integer, String> numbers = new HashMap<Integer, String>();
+    static Map<Integer, String> plurals = new HashMap<Integer, String>();
 
     {
-        fillMap();
+        fillMaps();
     }
 
     @Override
@@ -58,8 +59,19 @@ public class SimpleNumberToWord implements NumberToWord {
     private int check(int number, StringBuilder sb, int toCheck) {
         if (number >= toCheck) {
             int extra = number / toCheck;
-            sb.append(convert(extra) + " " + numbers.get(toCheck));
+            if (extra == 1) {
+                sb.append(convert(extra) + " " + numbers.get(toCheck));
+            } else {
+                if (plurals.containsKey(toCheck)) {
+                    sb.append(convert(extra) + " " + plurals.get(toCheck));
+                } else {
+                    sb.append(convert(extra) + " " + numbers.get(toCheck));
+                }
+            }
             number = number % toCheck;
+            if (number > 0) {
+                sb.append(" e");
+            }
         }
         return number;
     }
@@ -95,7 +107,7 @@ public class SimpleNumberToWord implements NumberToWord {
         return sb.toString();
     }
 
-    public void fillMap() {
+    public void fillMaps() {
         numbers.put(0, "zero");
         numbers.put(1, "um");
         numbers.put(2, "dois");
@@ -136,6 +148,9 @@ public class SimpleNumberToWord implements NumberToWord {
         numbers.put(THOUSAND, "mil");
         numbers.put(MILLION, "milhão");
         numbers.put(BILLION, "bilhão");
+
+        plurals.put(MILLION, "milhões");
+        plurals.put(BILLION, "bilhões");
     }
 
     @Override

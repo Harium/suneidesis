@@ -64,4 +64,12 @@ public class NumberToWordTest {
         Assert.assertEquals("quatrocentos e oitenta e seis", converter.toWord(486));
     }
 
+    @Test
+    public void testGreaterThanOneMillion() {
+        Assert.assertEquals("cinco mil e três", converter.toWord(5003));
+        Assert.assertEquals("um milhão e um", converter.toWord(1000001));
+        Assert.assertEquals("dois milhões", converter.toWord(2000000));
+        Assert.assertEquals("um bilhão e um", converter.toWord(1000000001));
+    }
+
 }
