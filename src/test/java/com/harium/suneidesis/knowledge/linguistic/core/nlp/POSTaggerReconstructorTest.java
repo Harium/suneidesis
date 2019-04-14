@@ -20,7 +20,7 @@ public class POSTaggerReconstructorTest {
     @Test
     public void testNounReconstruction() {
         String sentence = "the cat";
-        String taggedSentence = "the/DET cat/NOUN";
+        String taggedSentence = "the/DT cat/NN";
 
         NounFrame subject = new NounFrame(sentence.split(" ")[1]);
         subject.setDeterminer("the");
@@ -35,7 +35,7 @@ public class POSTaggerReconstructorTest {
     @Test
     public void testNounWithAdjectiveReconstruction() {
         String sentence = "the big cat";
-        String taggedSentence = "the/DET big/ADJ cat/NOUN";
+        String taggedSentence = "the/DT big/JJ cat/NN";
 
         NounFrame subject = new NounFrame(sentence.split(" ")[2]);
         subject.setDeterminer("the");
@@ -51,7 +51,7 @@ public class POSTaggerReconstructorTest {
     @Test
     public void testNounWithAdjectiveAndAdverbReconstruction() {
         String sentence = "the very big cat";
-        String taggedSentence = "the/DET very/ADV big/ADJ cat/NOUN";
+        String taggedSentence = "the/DT very/RB big/JJ cat/NN";
 
         NounFrame subject = new NounFrame(sentence.split(" ")[3]);
         subject.setDeterminer("the");
