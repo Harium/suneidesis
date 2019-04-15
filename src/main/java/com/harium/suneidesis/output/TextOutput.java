@@ -5,4 +5,9 @@ public class TextOutput implements Output {
     public void print(String sentence) {
         System.out.println(sentence);
     }
+
+    @Override
+    public void produceFile(String path) {
+        System.out.println(path);
+    }
 }

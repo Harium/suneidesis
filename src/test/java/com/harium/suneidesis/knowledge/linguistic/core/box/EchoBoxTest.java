@@ -40,5 +40,10 @@ public class EchoBoxTest {
         public void print(String sentence) {
             this.answer = sentence;
         }
+
+        @Override
+        public void produceFile(String path) {
+            this.answer = path;
+        }
     }
 }

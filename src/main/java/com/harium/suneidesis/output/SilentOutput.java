@@ -5,4 +5,9 @@ public class SilentOutput implements Output {
     public void print(String sentence) {
 
     }
+
+    @Override
+    public void produceFile(String path) {
+
+    }
 }
