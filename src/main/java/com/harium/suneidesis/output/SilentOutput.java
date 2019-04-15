@@ -7,7 +7,8 @@ public class SilentOutput implements Output {
     }
 
     @Override
-    public void produceFile(String path) {
+    public void produceFile(String path, String description) {
 
     }
+
 }

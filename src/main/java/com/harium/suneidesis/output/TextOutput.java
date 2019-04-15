@@ -7,7 +7,7 @@ public class TextOutput implements Output {
     }
 
     @Override
-    public void produceFile(String path) {
-        System.out.println(path);
+    public void produceFile(String path, String description) {
+        System.out.println(description + ":" + path);
     }
 }

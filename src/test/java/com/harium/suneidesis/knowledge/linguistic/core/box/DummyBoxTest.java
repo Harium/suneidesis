@@ -42,7 +42,7 @@ public class DummyBoxTest {
         }
 
         @Override
-        public void produceFile(String path) {
+        public void produceFile(String path, String description) {
             this.answer = path;
         }
     }
