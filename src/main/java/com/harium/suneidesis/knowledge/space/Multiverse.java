@@ -1,18 +1,17 @@
 package com.harium.suneidesis.knowledge.space;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.knowledge.storage.Storage;
 
-import java.util.Map;
+public class Multiverse extends Concept {
 
-public class Universe extends Concept {
+    private Storage<Universe> universes;
 
-    private Map<String, Galaxy> galaxies;
-
-    public Map<String, Galaxy> getGalaxies() {
-        return galaxies;
+    public Storage<Universe> getUniverses() {
+        return universes;
     }
 
-    public void setGalaxies(Map<String, Galaxy> galaxies) {
-        this.galaxies = galaxies;
+    public void setUniverses(Storage<Universe> universes) {
+        this.universes = universes;
     }
 }
