@@ -1,6 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.core.frame;
 
 import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.context.ConversationContext;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 import org.junit.Assert;
@@ -21,7 +22,8 @@ public class FrameIntegrationTest {
         String adjective = sentence.split(" ")[2];
         AdjectiveFrame adjectiveFrame = new AdjectiveFrame(adjective);
 
-        Being i = new Being(context.getParticipants().get(0).getName());
+        Concept firstParticipant = context.getParticipantsAsList().iterator().next();
+        Being i = new Being(firstParticipant.getName());
 
         NounFrame noun = new NounFrame(i, adjectiveFrame);
 

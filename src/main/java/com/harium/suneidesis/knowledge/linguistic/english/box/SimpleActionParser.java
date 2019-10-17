@@ -3,11 +3,13 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
-import com.harium.suneidesis.knowledge.storage.Fact;
-import com.harium.suneidesis.knowledge.storage.frame.FrameType;
-import com.harium.suneidesis.knowledge.storage.frame.FullFrame;
+import com.harium.suneidesis.knowledge.fact.Fact;
+import com.harium.suneidesis.knowledge.fact.frame.FrameType;
+import com.harium.suneidesis.knowledge.fact.frame.FullFrame;
 import com.harium.suneidesis.output.Output;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class SimpleActionParser implements ActionParser {
@@ -38,7 +40,7 @@ public class SimpleActionParser implements ActionParser {
 
         if (!querySubject.isEmpty()) {
 
-            List<Fact> actions = beign.getMemories();
+            Collection<Fact> actions = beign.getMemories().getAll();
 
             Fact action = null;
 
@@ -61,7 +63,7 @@ public class SimpleActionParser implements ActionParser {
         output.print("No.");
     }
 
-    private Fact findActionByActorsName(String actorName, List<Fact> actions) {
+    private Fact findActionByActorsName(String actorName, Collection<Fact> actions) {
 
         String name = actorName.toLowerCase();
 
@@ -86,7 +88,7 @@ public class SimpleActionParser implements ActionParser {
         return null;
     }
 
-    private Fact findActionByName(String actionName, List<Fact> actions) {
+    private Fact findActionByName(String actionName, Collection<Fact> actions) {
 
         for (Fact action : actions) {
             if (action.getFrameType() != FrameType.FULL_FRAME) {

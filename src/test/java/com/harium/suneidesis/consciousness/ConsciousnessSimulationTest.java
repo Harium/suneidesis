@@ -1,9 +1,11 @@
 package com.harium.suneidesis.consciousness;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.storage.Fact;
-import com.harium.suneidesis.knowledge.storage.frame.FrameType;
-import com.harium.suneidesis.knowledge.storage.frame.FullFrame;
+import com.harium.suneidesis.knowledge.fact.Fact;
+import com.harium.suneidesis.knowledge.fact.frame.FrameType;
+import com.harium.suneidesis.knowledge.fact.frame.FullFrame;
+import com.harium.suneidesis.knowledge.storage.MemoryStorage;
+import com.harium.suneidesis.knowledge.storage.Storage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,8 +27,8 @@ public class ConsciousnessSimulationTest {
         siri.setMemories(buildSelf(siri));
     }
 
-    private List<Fact> buildSelf(Consciousness consciousness) {
-        List<Fact> facts = new ArrayList<>();
+    private Storage<Fact> buildSelf(Consciousness consciousness) {
+        Storage<Fact> facts = new MemoryStorage<>();
 
         FullFrame think = new FullFrame();
         think.setActor(consciousness);
@@ -49,7 +51,7 @@ public class ConsciousnessSimulationTest {
 
     @Test
     public void testStorage() {
-        for (Fact fact : alexa.getMemories()) {
+        for (Fact fact : alexa.getMemories().getAll()) {
             if (FrameType.FULL_FRAME == fact.getFrameType()) {
                 FullFrame frame = (FullFrame) fact;
                 if ("is".equals(frame.getAction())) {

@@ -4,10 +4,6 @@ import com.harium.suneidesis.behavior.BaseBehavior;
 import com.harium.suneidesis.behavior.Behavior;
 import com.harium.suneidesis.beign.ancestry.Ancestry;
 import com.harium.suneidesis.knowledge.concept.Adjective;
-import com.harium.suneidesis.knowledge.storage.Fact;
-import com.harium.suneidesis.knowledge.storage.Storage;
-
-import java.util.*;
 
 public class Being extends Creature {
 

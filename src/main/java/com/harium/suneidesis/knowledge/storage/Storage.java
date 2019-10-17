@@ -1,22 +1,13 @@
 package com.harium.suneidesis.knowledge.storage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
-public class Storage {
+public interface Storage<T> {
 
-	protected List<Fact> facts = new ArrayList<Fact>();
-	
-	public Storage() {
-		super();
-	}
+    Collection<T> getAll();
 
-	public List<Fact> getFacts() {
-		return facts;
-	}
+    void add(T t);
 
-	public void setFacts(List<Fact> facts) {
-		this.facts = facts;
-	}	
-	
+    void get(String id);
+
 }

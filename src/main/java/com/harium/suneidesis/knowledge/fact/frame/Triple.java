@@ -1,7 +1,7 @@
-package com.harium.suneidesis.knowledge.storage.frame;
+package com.harium.suneidesis.knowledge.fact.frame;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.storage.Fact;
+import com.harium.suneidesis.knowledge.fact.Fact;
 
 public class Triple extends Fact {
 

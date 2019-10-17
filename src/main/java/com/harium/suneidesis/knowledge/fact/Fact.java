@@ -1,8 +1,8 @@
-package com.harium.suneidesis.knowledge.storage;
+package com.harium.suneidesis.knowledge.fact;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.ConceptType;
-import com.harium.suneidesis.knowledge.storage.frame.FrameType;
+import com.harium.suneidesis.knowledge.fact.frame.FrameType;
 
 /**
  * Fact is a model to represent actions from being's perspective

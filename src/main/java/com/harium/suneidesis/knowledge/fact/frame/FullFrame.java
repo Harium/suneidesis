@@ -1,9 +1,9 @@
-package com.harium.suneidesis.knowledge.storage.frame;
+package com.harium.suneidesis.knowledge.fact.frame;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.Place;
-import com.harium.suneidesis.knowledge.storage.Fact;
-import com.harium.suneidesis.knowledge.storage.FactSource;
+import com.harium.suneidesis.knowledge.fact.Fact;
+import com.harium.suneidesis.knowledge.fact.FactSource;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 import com.harium.suneidesis.knowledge.weather.Weather;
 
