@@ -1,5 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
+import com.harium.suneidesis.input.InputContext;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,13 +16,15 @@ public class GreetingsParserTest {
 
     @Test
     public void testMatches() {
-        Assert.assertTrue(parser.matches("hi"));
-        Assert.assertTrue(parser.matches("hi!"));
-        Assert.assertTrue(parser.matches("Hello"));
-        Assert.assertTrue(parser.matches("Hello!!"));
+        InputContext context = new InputContext();
 
-        Assert.assertFalse(parser.matches("Hola!"));
-        Assert.assertFalse(parser.matches("Aloha!"));
+        Assert.assertTrue(parser.matches(new InputContext("hi")));
+        Assert.assertTrue(parser.matches(new InputContext("hi!")));
+        Assert.assertTrue(parser.matches(new InputContext("Hello")));
+        Assert.assertTrue(parser.matches(new InputContext("Hello!!")));
+
+        Assert.assertFalse(parser.matches(new InputContext("Hola!")));
+        Assert.assertFalse(parser.matches(new InputContext("Aloha!")));
     }
 
 }

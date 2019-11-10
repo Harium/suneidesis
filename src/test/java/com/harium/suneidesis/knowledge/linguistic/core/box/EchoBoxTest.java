@@ -2,6 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.core.box;
 
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.output.Output;
+import com.harium.suneidesis.output.OutputContext;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +37,9 @@ public class EchoBoxTest {
 
     class Out implements Output {
         public String answer;
+
         @Override
-        public void print(String sentence) {
+        public void print(String sentence, OutputContext context) {
             this.answer = sentence;
         }
 

@@ -1,12 +1,11 @@
 package com.harium.suneidesis.knowledge.linguistic.core;
 
-import com.harium.suneidesis.instance.Instance;
-import com.harium.suneidesis.output.Output;
+import com.harium.suneidesis.input.InputContext;
 
 public interface Parser {
 
-    boolean matches(String query);
+    boolean matches(InputContext context);
 
-    void parse(String query, Instance instance, Output output);
+    void parse(InputContext context);
 
 }

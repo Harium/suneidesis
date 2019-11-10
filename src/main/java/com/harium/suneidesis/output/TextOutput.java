@@ -1,8 +1,9 @@
 package com.harium.suneidesis.output;
 
-public class TextOutput implements Output {
+public class TextOutput extends BaseOutput {
+
     @Override
-    public void print(String sentence) {
+    public void print(String sentence, OutputContext context) {
         System.out.println(sentence);
     }
 

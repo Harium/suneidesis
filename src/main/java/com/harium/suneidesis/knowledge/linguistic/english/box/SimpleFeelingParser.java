@@ -2,6 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Status;
+import com.harium.suneidesis.input.InputContext;
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.feeling.FeelingParser;
 import com.harium.suneidesis.output.Output;
@@ -20,16 +21,21 @@ public class SimpleFeelingParser implements FeelingParser {
     private static final String LABEL_BAD = "bad";
 
     @Override
-    public boolean matches(String query) {
+    public boolean matches(InputContext context) {
+        String query = context.getSentence();
         String[] parts = query.split(" ");
         return BaseEnglishBox.checkAction(parts[0], HOW);
     }
 
     @Override
-    public void parse(String query, Instance beign, Output output) {
+    public void parse(InputContext context) {
+        String query = context.getSentence();
+        Instance being = context.getInstance();
+        Output output = context.getOutput();
+
         Being target;
         if (query.contains("You") || query.contains("you")) {
-            target = beign;
+            target = being;
             output.print("I am " + translateFeelingToString(target.getStatus()) + ".");
         }
 

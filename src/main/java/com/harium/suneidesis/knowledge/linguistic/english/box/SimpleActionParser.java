@@ -1,29 +1,32 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
+import com.harium.suneidesis.input.InputContext;
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.concept.Place;
-import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.knowledge.fact.Fact;
 import com.harium.suneidesis.knowledge.fact.frame.FrameType;
 import com.harium.suneidesis.knowledge.fact.frame.FullFrame;
+import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
 import com.harium.suneidesis.output.Output;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class SimpleActionParser implements ActionParser {
 
     public static final String DID = "did";
 
     @Override
-    public boolean matches(String query) {
+    public boolean matches(InputContext context) {
+        String query = context.getSentence();
         String[] parts = query.split(" ");
         return BaseEnglishBox.checkAction(parts[0], DID);
     }
 
     @Override
-    public void parse(String query, Instance beign, Output output) {
+    public void parse(InputContext context) {
+        String query = context.getSentence();
+        Instance being = context.getInstance();
+        Output output = context.getOutput();
 
         String[] parts = query.split(" ");
 
@@ -40,7 +43,7 @@ public class SimpleActionParser implements ActionParser {
 
         if (!querySubject.isEmpty()) {
 
-            Collection<Fact> actions = beign.getMemories().getAll();
+            Collection<Fact> actions = being.getMemories().getAll();
 
             Fact action = null;
 
