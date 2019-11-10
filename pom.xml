@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.harium.suneidesis</groupId>
     <artifactId>core</artifactId>
-    <version>1.1.5</version>
+    <version>1.2.0</version>
     <name>Suneidesis</name>
     <description>Project to represent knowledge</description>
     <url>http://github.com/Harium/suneidesis</url>
     <scm>
-        <connection>scm:git:git://github.com/harium/etyl.git</connection>
-        <developerConnection>scm:git:ssh://github.com:harium/etyl.git</developerConnection>
-        <url>http://github.com/harium/etyl/tree/master</url>
+        <connection>scm:git:git://github.com/harium/suneidesis.git</connection>
+        <developerConnection>scm:git:ssh://github.com:harium/suneidesis.git</developerConnection>
+        <url>http://github.com/harium/suneidesis/tree/master</url>
     </scm>
     <developers>
         <developer>
