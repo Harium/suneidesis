@@ -1,4 +1,4 @@
-Suneidesis (συνείδησις) [![Build Status](https://travis-ci.org/Harium/suneidesis.svg?branch=master)](https://travis-ci.org/Harium/suneidesis)
+Suneidesis (συνείδησις) [![CircleCI](https://circleci.com/gh/Harium/suneidesis.svg?style=svg)](https://circleci.com/gh/Harium/suneidesis)
 =======================
 
 Suneidesis is a project to represent knowledge. It can also be used as a chat bot.
