@@ -1,14 +1,14 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp;
 
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.POSTagger;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.POSTaggerReconstructor;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTagger;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTaggerReconstructor;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static com.harium.suneidesis.knowledge.linguistic.core.nlp.POSTaggerReconstructor.*;
+import static com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTaggerReconstructor.*;
 
 /**
  * Simple POSTagger with few words

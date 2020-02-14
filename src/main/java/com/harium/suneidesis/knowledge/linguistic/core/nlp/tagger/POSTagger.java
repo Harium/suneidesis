@@ -1,4 +1,4 @@
-package com.harium.suneidesis.knowledge.linguistic.core.nlp;
+package com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger;
 
 public interface POSTagger {
 

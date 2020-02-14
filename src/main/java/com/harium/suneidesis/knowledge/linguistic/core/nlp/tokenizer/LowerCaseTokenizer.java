@@ -1,6 +1,6 @@
-package com.harium.suneidesis.knowledge.linguistic.core.tokenization;
+package com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer;
 
-import static com.harium.suneidesis.knowledge.linguistic.core.tokenization.BaseTokenizer.clearPonctuation;
+import static com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.BaseTokenizer.clearPonctuation;
 
 public class LowerCaseTokenizer implements Tokenizer {
 

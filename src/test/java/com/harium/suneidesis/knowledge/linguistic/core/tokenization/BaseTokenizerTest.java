@@ -1,5 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.core.tokenization;
 
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.BaseTokenizer;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.Tokenizer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

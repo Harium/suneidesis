@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.harium.suneidesis.knowledge.linguistic.core.nlp.POSTaggerReconstructor.*;
+import static com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTaggerReconstructor.*;
 
 public class RuleBasedPOSTaggerTest {
 

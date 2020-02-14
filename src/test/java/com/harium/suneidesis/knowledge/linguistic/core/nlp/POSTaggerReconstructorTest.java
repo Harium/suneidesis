@@ -4,6 +4,7 @@ import com.harium.suneidesis.knowledge.linguistic.core.frame.AdjectiveFrame;
 import com.harium.suneidesis.knowledge.linguistic.core.frame.BaseFrame;
 import com.harium.suneidesis.knowledge.linguistic.core.frame.NounFrame;
 import com.harium.suneidesis.knowledge.linguistic.core.frame.Reconstructor;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTaggerReconstructor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
