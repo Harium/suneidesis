@@ -4,8 +4,8 @@ import com.harium.suneidesis.input.InputContext;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Eq;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Or;
-import com.harium.suneidesis.knowledge.linguistic.core.tokenization.LowerCaseTokenizer;
-import com.harium.suneidesis.knowledge.linguistic.core.tokenization.Tokenizer;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.LowerCaseTokenizer;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.Tokenizer;
 
 public class GreetingsParser implements Parser {
 
