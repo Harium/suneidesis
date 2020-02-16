@@ -43,6 +43,12 @@ public class RuleBasedTokenizer implements Tokenizer {
         } else if (part.endsWith(".")) {
             tokens.add(".");
             return part.substring(0, part.length() - 1);
+        } else if (part.endsWith(";")) {
+            tokens.add(";");
+            return part.substring(0, part.length() - 1);
+        } else if (part.endsWith(":")) {
+            tokens.add(":");
+            return part.substring(0, part.length() - 1);
         } else if (part.endsWith("!")) {
             tokens.add("!");
             return part.substring(0, part.length() - 1);

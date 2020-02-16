@@ -39,6 +39,7 @@ public class POSTaggerReconstructor implements Reconstructor {
     public static final String WH_PRONOUN = "WP";
     public static final String WH_POSSESSIVE_PRONOUN = "WP$";
     public static final String WH_ADVERB = "WRB";
+    public static final String PUNCTUATION = "PUNC";
 
     @Override
     public String reconstruct(BaseFrame frame) {

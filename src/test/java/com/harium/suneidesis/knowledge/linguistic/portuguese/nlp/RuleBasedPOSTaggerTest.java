@@ -84,17 +84,32 @@ public class RuleBasedPOSTaggerTest {
     }
 
     @Test
+    public void testRegularVerbs() {
+        String[] answer = tagger.posTag(new String[]{"quem", "com", "ferro", "fere", "com", "ferro", "será", "ferido"});
+        Assert.assertEquals(WH_PRONOUN, answer[0]);
+        Assert.assertEquals(PREPOSITION, answer[1]);
+        Assert.assertEquals(NOUN, answer[2]);
+        Assert.assertEquals(VERB, answer[3]);
+        Assert.assertEquals(PREPOSITION, answer[4]);
+        Assert.assertEquals(NOUN, answer[5]);
+        Assert.assertEquals(VERB, answer[6]);
+        Assert.assertEquals(VERB, answer[7]);
+    }
+
+    @Test
     public void testNouns() {
-        String[] answer = tagger.posTag(new String[]{"o", "farol", "do", "Fusca", "produz", "uma", "luz", "muito", "forte"});
+        // Tokenized sentence
+        String[] answer = tagger.posTag(new String[]{"o", "farol", "de", "o", "Fusca", "produz", "uma", "luz", "muito", "forte"});
         Assert.assertEquals(DETERMINER, answer[0]);
         Assert.assertEquals(NOUN, answer[1]);
         Assert.assertEquals(PREPOSITION, answer[2]);
-        Assert.assertEquals(NOUN, answer[3]);
-        Assert.assertEquals(VERB, answer[4]);
-        Assert.assertEquals(DETERMINER, answer[5]);
-        Assert.assertEquals(NOUN, answer[6]);
-        Assert.assertEquals(ADVERB, answer[7]);
-        Assert.assertEquals(ADJECTIVE, answer[8]);
+        Assert.assertEquals(DETERMINER, answer[3]);
+        Assert.assertEquals(NOUN, answer[4]);
+        Assert.assertEquals(VERB, answer[5]);
+        Assert.assertEquals(DETERMINER, answer[6]);
+        Assert.assertEquals(NOUN, answer[7]);
+        Assert.assertEquals(ADVERB, answer[8]);
+        Assert.assertEquals(ADJECTIVE, answer[9]);
     }
 
 }
