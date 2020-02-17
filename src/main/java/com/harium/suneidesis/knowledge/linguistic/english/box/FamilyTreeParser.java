@@ -2,7 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.ancestry.Ancestry;
-import com.harium.suneidesis.beign.ancestry.HeteroSexualCouple;
+import com.harium.suneidesis.beign.ancestry.BeingCouple;
 import com.harium.suneidesis.input.InputContext;
 import com.harium.suneidesis.instance.Instance;
 import com.harium.suneidesis.knowledge.linguistic.core.Parser;
@@ -51,8 +51,8 @@ public class FamilyTreeParser implements Parser {
 
     private String findFather(Being beign) {
         Ancestry ancestry = beign.getAncestry();
-        if (ancestry instanceof HeteroSexualCouple) {
-            Being father = ((HeteroSexualCouple) ancestry).getFather();
+        if (ancestry instanceof BeingCouple) {
+            Being father = ((BeingCouple) ancestry).getFather();
 
             if (father != null) {
                 return father.getName();
@@ -64,8 +64,8 @@ public class FamilyTreeParser implements Parser {
 
     private String findMother(Being beign) {
         Ancestry ancestry = beign.getAncestry();
-        if (ancestry instanceof HeteroSexualCouple) {
-            Being mother = ((HeteroSexualCouple) ancestry).getMother();
+        if (ancestry instanceof BeingCouple) {
+            Being mother = ((BeingCouple) ancestry).getMother();
 
             if (mother != null) {
                 return mother.getName();

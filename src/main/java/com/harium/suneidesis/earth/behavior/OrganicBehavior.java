@@ -4,6 +4,7 @@ import com.harium.suneidesis.behavior.BaseBehavior;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Status;
 
+// TODO MOVE TO SOMAH
 public class OrganicBehavior extends BaseBehavior {
 
     public static final String ATTR_THIRSTY = "thirstiness";

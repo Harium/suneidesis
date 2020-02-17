@@ -4,17 +4,18 @@ import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
 
 /**
- * Class to represent hetero sexual couples
- * Man + Woman as Father + Mother
+ * Class to represent being couples (specifically constituted by a female and a male being)
+ *
+ * This class was created to deal with genealogical trees
  */
-public class HeteroSexualCouple extends Ancestry {
+public class BeingCouple extends Ancestry {
 
     private static final String NAME = "couple";
 
     private Being father;
     private Being mother;
 
-    public HeteroSexualCouple(String fathersName, String mothersName) {
+    public BeingCouple(String fathersName, String mothersName) {
         super(NAME);
         this.father = new Being(fathersName);
         this.father.setGender(Gender.MALE);
@@ -23,7 +24,7 @@ public class HeteroSexualCouple extends Ancestry {
         this.mother.setGender(Gender.FEMALE);
     }
 
-    public HeteroSexualCouple(Being father, Being mother) {
+    public BeingCouple(Being father, Being mother) {
         super(NAME);
         this.father = father;
         this.mother = mother;

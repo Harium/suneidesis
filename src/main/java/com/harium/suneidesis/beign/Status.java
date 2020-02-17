@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO MOVE TO SOMAH
 public class Status {
 
     public static final float MAX = 1.0f;

@@ -7,6 +7,7 @@ import com.harium.suneidesis.knowledge.concept.Adjective;
 
 public class Being extends Creature {
 
+    // TODO MOVE TO SOMAH
     public static final String ATTR_HEALTH = "health";
 
     private Ancestry ancestry = null;

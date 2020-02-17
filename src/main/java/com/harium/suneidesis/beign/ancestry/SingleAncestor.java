@@ -4,8 +4,8 @@ import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
 
 /**
- * Class to represent a single ancestor
- * Useful to express clones' source
+ * Class to represent individuals created from a single genetic sources
+ * Useful to express clones
  */
 public class SingleAncestor extends Ancestry {
 
