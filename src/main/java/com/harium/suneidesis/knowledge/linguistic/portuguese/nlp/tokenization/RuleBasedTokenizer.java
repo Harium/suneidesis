@@ -4,7 +4,6 @@ import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class RuleBasedTokenizer implements Tokenizer {
@@ -21,7 +20,10 @@ public class RuleBasedTokenizer implements Tokenizer {
             part = handlePonctuation(part, postAdd);
             if (splitContractions(part, tokens)) {
                 continue;
+            } else if (endingContractions(part, tokens)) {
+                continue;
             }
+
 
             tokens.add(part);
 
@@ -29,7 +31,6 @@ public class RuleBasedTokenizer implements Tokenizer {
                 tokens.addAll(postAdd);
                 postAdd.clear();
             }
-
         }
 
         String[] tokensArray = new String[tokens.size()];
@@ -54,6 +55,12 @@ public class RuleBasedTokenizer implements Tokenizer {
             return part.substring(0, part.length() - 1);
         } else if (part.endsWith("?")) {
             tokens.add("?");
+            return part.substring(0, part.length() - 1);
+        } else if (part.endsWith("\"")) {
+            tokens.add("\"");
+            return part.substring(0, part.length() - 1);
+        } else if (part.startsWith("\"")) {
+            tokens.add("\"");
             return part.substring(0, part.length() - 1);
         }
 
@@ -214,6 +221,32 @@ public class RuleBasedTokenizer implements Tokenizer {
             return true;
         }
 
+        return false;
+    }
+
+    boolean endingContractions(String part, List<String> tokens) {
+        if (part.endsWith("á-lo")) {
+            String lemma = part.substring(0, part.length() - 4);
+            lemma += "ar";
+
+            tokens.add(lemma);
+            tokens.add("-lo");
+            return true;
+        } else if (part.endsWith("ê-lo")) {
+            String lemma = part.substring(0, part.length() - 4);
+            lemma += "er";
+
+            tokens.add(lemma);
+            tokens.add("-lo");
+            return true;
+        } else if (part.endsWith("í-lo")) {
+            String lemma = part.substring(0, part.length() - 4);
+            lemma += "ir";
+
+            tokens.add(lemma);
+            tokens.add("-lo");
+            return true;
+        }
         return false;
     }
 

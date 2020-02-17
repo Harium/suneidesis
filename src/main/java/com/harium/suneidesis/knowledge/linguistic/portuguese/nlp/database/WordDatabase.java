@@ -6,4 +6,6 @@ public interface WordDatabase {
 
     List<String> getTags(String word);
 
+    Verb getVerb(String verb);
+
 }

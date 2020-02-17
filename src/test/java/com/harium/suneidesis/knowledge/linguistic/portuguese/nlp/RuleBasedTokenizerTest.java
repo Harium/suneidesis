@@ -32,4 +32,12 @@ public class RuleBasedTokenizerTest {
         Assert.assertArrayEquals(new String[]{"por", "a", "janela", "de", "o", "carro", "em", "aquela", "estrada"}, answer);
     }
 
+    @Test
+    public void testEndingContractions() {
+        // Example from Mac Morpho (http://nilc.icmc.usp.br/macmorpho/)
+        Assert.assertArrayEquals(new String[]{"acompanhar", "-lo"}, tokenizer.tokenize("acompanhá-lo"));
+        Assert.assertArrayEquals(new String[]{"defender", "-lo"}, tokenizer.tokenize("defendê-lo"));
+        Assert.assertArrayEquals(new String[]{"dissuadir", "-lo"}, tokenizer.tokenize("dissuadí-lo"));
+    }
+
 }

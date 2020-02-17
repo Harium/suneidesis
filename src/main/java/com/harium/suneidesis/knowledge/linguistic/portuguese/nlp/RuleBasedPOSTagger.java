@@ -3,6 +3,7 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTagger;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTaggerReconstructor;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryDatabase;
+import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.Verb;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.WordDatabase;
 
 import java.util.List;
@@ -16,14 +17,14 @@ import static com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTagg
  */
 public class RuleBasedPOSTagger implements POSTagger {
 
+    public static final String VERB_TO_BE = "ser";
     WordDatabase database = new MemoryDatabase();
 
     @Override
     public String[] posTag(String[] tokens) {
         String[] output = new String[tokens.length];
 
-        boolean afterToBe = false;
-        String lastToken = "NOUN";
+        String lastToken = NOUN;
         for (int i = 0; i < tokens.length; i++) {
             String word = tokens[i];
             List<String> tags = database.getTags(word);
@@ -34,31 +35,35 @@ public class RuleBasedPOSTagger implements POSTagger {
                 }
                 lastToken = tags.get(0);
                 output[i] = lastToken;
-                /*if (VERB.equals(lastToken)) {
-                    if (toBe.contains(word)) {
-                        afterToBe = true;
-                    } else {
-                        afterToBe = false;
-                    }
-                }*/
             } else {
                 if (Character.isUpperCase(word.charAt(0))) {
                     // Name
                     output[i] = POSTaggerReconstructor.NOUN;
-                } else if (lastToken.equals(VERB)) {
-                    // Preposition?
-                    output[i] = ADJECTIVE;
                 } else if (lastToken.equals(ADVERB)) {
                     output[i] = ADJECTIVE;
-                } else if (lastToken.equals(COORDINATING_CONJUCTION) && i>2 && "e".equals(tokens[i - 1])) {
-                    // Copy tag
-                    output[i] = output[i - 2];
                 } else if (guessVerb(word)) {
                     output[i] = VERB;
                 } else {
                     output[i] = POSTaggerReconstructor.NOUN;
+
+                    if (lastToken.equals(VERB)) {
+                        Verb verb = database.getVerb(tokens[i - 1]);
+                        if (VERB_TO_BE.equals(verb.getLemma())) {
+                            output[i] = ADJECTIVE;
+                        }
+                    }
+                    if (output.length > 2) {
+                        if (lastToken.equals(COORDINATING_CONJUCTION)) {
+                            // Copy tag
+                            output[i] = output[i - 2];
+                        }
+                        if (lastToken.equals(NOUN) && DETERMINER.equals(output[i - 2])) {
+                            output[i - 1] = ADJECTIVE;
+                        }
+                    }
                 }
             }
+            lastToken = output[i];
         }
 
         return output;

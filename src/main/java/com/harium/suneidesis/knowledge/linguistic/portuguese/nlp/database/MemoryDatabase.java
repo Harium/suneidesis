@@ -12,6 +12,7 @@ import static com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTagg
 public class MemoryDatabase implements WordDatabase {
 
     Map<String, List<String>> words = new HashMap<>();
+    Map<String, Verb> verbs = new HashMap<>();
 
     public MemoryDatabase() {
         addPunctuation();
@@ -26,6 +27,11 @@ public class MemoryDatabase implements WordDatabase {
     @Override
     public List<String> getTags(String word) {
         return words.get(word);
+    }
+
+    @Override
+    public Verb getVerb(String verb) {
+        return verbs.get(verb);
     }
 
     private void addPunctuation() {
@@ -156,12 +162,12 @@ public class MemoryDatabase implements WordDatabase {
     private void addVerbs() {
         // To be
         add("estou", VERB);
-        add("é", VERB);
-        add("és", VERB);
-        add("somos", VERB);
-        add("sou", VERB);
-        add("são", VERB);
-        add("será", VERB);
+        addVerb("é", "ser", VERB);
+        addVerb("és", "ser", VERB);
+        addVerb("somos", "ser", VERB);
+        addVerb("sou", "ser", VERB);
+        addVerb("são", "ser", VERB);
+        addVerb("será", "ser", VERB);
 
         add("quero", VERB);
         add("queria", VERB);
@@ -198,282 +204,293 @@ public class MemoryDatabase implements WordDatabase {
 
     /**
      * https://www.conjugacao.com.br/verbos-da-primeira-conjugacao-terminados-em-ar/
+     *
      * @param verb
      */
     private void addFirstConjugation(String verb) {
         String radical = verb.substring(0, verb.length() - 2);
         // Nominal forms
-        add(radical + "ar", VERB);
-        add(radical + "ado", VERB);
-        add(radical + "ando", VERB);
+        addVerb(radical + "ar", verb, VERB);
+        addVerb(radical + "ado", verb, VERB);
+        addVerb(radical + "ando", verb, VERB);
 
         // Present
-        add(radical + "o", VERB);
-        add(radical + "as", VERB);
-        add(radical + "a", VERB);
-        add(radical + "amos", VERB);
-        add(radical + "ais", VERB);
-        add(radical + "am", VERB);
+        addVerb(radical + "o", verb, VERB);
+        addVerb(radical + "as", verb, VERB);
+        addVerb(radical + "a", verb, VERB);
+        addVerb(radical + "amos", verb, VERB);
+        addVerb(radical + "ais", verb, VERB);
+        addVerb(radical + "am", verb, VERB);
         // Past Perfect
-        add(radical + "ei", VERB);
-        add(radical + "aste", VERB);
-        add(radical + "ou", VERB);
-        //add(radical + "amos", VERB);
-        add(radical + "astes", VERB);
-        add(radical + "aram", VERB);
+        addVerb(radical + "ei", verb, VERB);
+        addVerb(radical + "aste", verb, VERB);
+        addVerb(radical + "ou", verb, VERB);
+        //addVerb(radical + "amos", verb, VERB);
+        addVerb(radical + "astes", verb, VERB);
+        addVerb(radical + "aram", verb, VERB);
         // Past Imperfect
-        add(radical + "ava", VERB);
-        add(radical + "avas", VERB);
-        //add(radical + "ava", VERB);
-        add(radical + "ávamos", VERB);
-        add(radical + "áveis", VERB);
-        add(radical + "avam", VERB);
+        addVerb(radical + "ava", verb, VERB);
+        addVerb(radical + "avas", verb, VERB);
+        //addVerb(radical + "ava", verb, VERB);
+        addVerb(radical + "ávamos", verb, VERB);
+        addVerb(radical + "áveis", verb, VERB);
+        addVerb(radical + "avam", verb, VERB);
         // Past more than perfect
-        add(radical + "ara", VERB);
-        add(radical + "aras", VERB);
-        //add(radical + "ara", VERB);
-        add(radical + "áramos", VERB);
-        add(radical + "áreis", VERB);
-        add(radical + "aram", VERB);
+        addVerb(radical + "ara", verb, VERB);
+        addVerb(radical + "aras", verb, VERB);
+        //addVerb(radical + "ara", verb, VERB);
+        addVerb(radical + "áramos", verb, VERB);
+        addVerb(radical + "áreis", verb, VERB);
+        addVerb(radical + "aram", verb, VERB);
         // Present Future
-        add(radical + "arei", VERB);
-        add(radical + "arás", VERB);
-        add(radical + "ará", VERB);
-        add(radical + "aremos", VERB);
-        add(radical + "areis", VERB);
-        add(radical + "arão", VERB);
+        addVerb(radical + "arei", verb, VERB);
+        addVerb(radical + "arás", verb, VERB);
+        addVerb(radical + "ará", verb, VERB);
+        addVerb(radical + "aremos", verb, VERB);
+        addVerb(radical + "areis", verb, VERB);
+        addVerb(radical + "arão", verb, VERB);
         // Past Future
-        add(radical + "aria", VERB);
-        add(radical + "arias", VERB);
-        //add(radical + "aria", VERB);
-        add(radical + "aríamos", VERB);
-        add(radical + "aríeis", VERB);
-        add(radical + "ariam", VERB);
+        addVerb(radical + "aria", verb, VERB);
+        addVerb(radical + "arias", verb, VERB);
+        //addVerb(radical + "aria", verb, VERB);
+        addVerb(radical + "aríamos", verb, VERB);
+        addVerb(radical + "aríeis", verb, VERB);
+        addVerb(radical + "ariam", verb, VERB);
         // Subjunctive Mood
         // Present
-        add(radical + "e", VERB);
-        add(radical + "es", VERB);
-        add(radical + "e", VERB);
-        add(radical + "emos", VERB);
-        add(radical + "eis", VERB);
-        add(radical + "em", VERB);
+        addVerb(radical + "e", verb, VERB);
+        addVerb(radical + "es", verb, VERB);
+        addVerb(radical + "e", verb, VERB);
+        addVerb(radical + "emos", verb, VERB);
+        addVerb(radical + "eis", verb, VERB);
+        addVerb(radical + "em", verb, VERB);
         // Past Imperfect
-        add(radical + "asse", VERB);
-        add(radical + "asses", VERB);
-        //add(radical + "asse", VERB);
-        add(radical + "ássemos", VERB);
-        add(radical + "ásseis", VERB);
-        add(radical + "assem", VERB);
+        addVerb(radical + "asse", verb, VERB);
+        addVerb(radical + "asses", verb, VERB);
+        //addVerb(radical + "asse", verb, VERB);
+        addVerb(radical + "ássemos", verb, VERB);
+        addVerb(radical + "ásseis", verb, VERB);
+        addVerb(radical + "assem", verb, VERB);
         // Future
-        //add(radical + "ar", VERB);
-        add(radical + "ares", VERB);
-        //add(radical + "ar", VERB);
-        add(radical + "armos", VERB);
-        add(radical + "ardes", VERB);
-        add(radical + "arem", VERB);
+        //addVerb(radical + "ar", verb, VERB);
+        addVerb(radical + "ares", verb, VERB);
+        //addVerb(radical + "ar", verb, VERB);
+        addVerb(radical + "armos", verb, VERB);
+        addVerb(radical + "ardes", verb, VERB);
+        addVerb(radical + "arem", verb, VERB);
         // Imperative
         // Affirmative
-        //add(radical + "--", VERB);
-        //add(radical + "a", VERB);
-        //add(radical + "e", VERB);
-        //add(radical + "emos", VERB);
-        add(radical + "ai", VERB);
-        //add(radical + "em", VERB);
+        //addVerb(radical + "--", verb, VERB);
+        //addVerb(radical + "a", verb, VERB);
+        //addVerb(radical + "e", verb, VERB);
+        //addVerb(radical + "emos", verb, VERB);
+        addVerb(radical + "ai", verb, VERB);
+        //addVerb(radical + "em", verb, VERB);
         // Negative
-        //add(radical + "--", VERB);
-        //add(radical + "es", VERB);
-        //add(radical + "e", VERB);
-        //add(radical + "emos", VERB);
-        //add(radical + "eis", VERB);
-        //add(radical + "em", VERB);
+        //addVerb(radical + "--", verb, VERB);
+        //addVerb(radical + "es", verb, VERB);
+        //addVerb(radical + "e", verb, VERB);
+        //addVerb(radical + "emos", verb, VERB);
+        //addVerb(radical + "eis", verb, VERB);
+        //addVerb(radical + "em", verb, VERB);
     }
 
     /**
      * https://www.conjugacao.com.br/verbos-da-segunda-conjugacao-terminados-em-er/
+     *
      * @param verb
      */
     private void addSecondConjugation(String verb) {
         String radical = verb.substring(0, verb.length() - 2);
         // Nominal forms
-        add(radical + "er", VERB);
-        add(radical + "ido", VERB);
-        add(radical + "endo", VERB);
+        addVerb(radical + "er", verb, VERB);
+        addVerb(radical + "ido", verb, VERB);
+        addVerb(radical + "endo", verb, VERB);
 
         // Present
-        add(radical + "o", VERB);
-        add(radical + "es", VERB);
-        add(radical + "e", VERB);
-        add(radical + "emos", VERB);
-        add(radical + "eis", VERB);
-        add(radical + "em", VERB);
+        addVerb(radical + "o", verb, VERB);
+        addVerb(radical + "es", verb, VERB);
+        addVerb(radical + "e", verb, VERB);
+        addVerb(radical + "emos", verb, VERB);
+        addVerb(radical + "eis", verb, VERB);
+        addVerb(radical + "em", verb, VERB);
         // Past Perfect
-        add(radical + "i", VERB);
-        add(radical + "este", VERB);
-        add(radical + "eu", VERB);
-        //add(radical + "emos", VERB);
-        add(radical + "estes", VERB);
-        add(radical + "eram", VERB);
+        addVerb(radical + "i", verb, VERB);
+        addVerb(radical + "este", verb, VERB);
+        addVerb(radical + "eu", verb, VERB);
+        //addVerb(radical + "emos", verb, VERB);
+        addVerb(radical + "estes", verb, VERB);
+        addVerb(radical + "eram", verb, VERB);
         // Past Imperfect
-        add(radical + "ia", VERB);
-        add(radical + "ias", VERB);
-        //add(radical + "ia", VERB);
-        add(radical + "íamos", VERB);
-        add(radical + "íeis", VERB);
-        add(radical + "iam", VERB);
+        addVerb(radical + "ia", verb, VERB);
+        addVerb(radical + "ias", verb, VERB);
+        //addVerb(radical + "ia", verb, VERB);
+        addVerb(radical + "íamos", verb, VERB);
+        addVerb(radical + "íeis", verb, VERB);
+        addVerb(radical + "iam", verb, VERB);
         // Past more than perfect
-        add(radical + "era", VERB);
-        add(radical + "eras", VERB);
-        //add(radical + "era", VERB);
-        add(radical + "éramos", VERB);
-        add(radical + "êreis", VERB);
-        add(radical + "eram", VERB);
+        addVerb(radical + "era", verb, VERB);
+        addVerb(radical + "eras", verb, VERB);
+        //addVerb(radical + "era", verb, VERB);
+        addVerb(radical + "éramos", verb, VERB);
+        addVerb(radical + "êreis", verb, VERB);
+        addVerb(radical + "eram", verb, VERB);
         // Present Future
-        add(radical + "erei", VERB);
-        add(radical + "erás", VERB);
-        add(radical + "erá", VERB);
-        add(radical + "eremos", VERB);
-        add(radical + "ereis", VERB);
-        add(radical + "erão", VERB);
+        addVerb(radical + "erei", verb, VERB);
+        addVerb(radical + "erás", verb, VERB);
+        addVerb(radical + "erá", verb, VERB);
+        addVerb(radical + "eremos", verb, VERB);
+        addVerb(radical + "ereis", verb, VERB);
+        addVerb(radical + "erão", verb, VERB);
         // Past Future
-        add(radical + "eria", VERB);
-        add(radical + "erias", VERB);
-        //add(radical + "eria", VERB);
-        add(radical + "eríamos", VERB);
-        add(radical + "eríeis", VERB);
-        add(radical + "eriam", VERB);
+        addVerb(radical + "eria", verb, VERB);
+        addVerb(radical + "erias", verb, VERB);
+        //addVerb(radical + "eria", verb, VERB);
+        addVerb(radical + "eríamos", verb, VERB);
+        addVerb(radical + "eríeis", verb, VERB);
+        addVerb(radical + "eriam", verb, VERB);
         // Subjunctive Mood
         // Present
-        add(radical + "a", VERB);
-        add(radical + "as", VERB);
-        add(radical + "a", VERB);
-        add(radical + "amos", VERB);
-        add(radical + "ais", VERB);
-        add(radical + "am", VERB);
+        addVerb(radical + "a", verb, VERB);
+        addVerb(radical + "as", verb, VERB);
+        addVerb(radical + "a", verb, VERB);
+        addVerb(radical + "amos", verb, VERB);
+        addVerb(radical + "ais", verb, VERB);
+        addVerb(radical + "am", verb, VERB);
         // Past Imperfect
-        add(radical + "esse", VERB);
-        add(radical + "esses", VERB);
-        //add(radical + "esse", VERB);
-        add(radical + "êssemos", VERB);
-        add(radical + "êsseis", VERB);
-        add(radical + "essem", VERB);
+        addVerb(radical + "esse", verb, VERB);
+        addVerb(radical + "esses", verb, VERB);
+        //addVerb(radical + "esse", verb, VERB);
+        addVerb(radical + "êssemos", verb, VERB);
+        addVerb(radical + "êsseis", verb, VERB);
+        addVerb(radical + "essem", verb, VERB);
         // Future
-        //add(radical + "er", VERB);
-        add(radical + "eres", VERB);
-        //add(radical + "er", VERB);
-        add(radical + "ermos", VERB);
-        add(radical + "erdes", VERB);
-        add(radical + "erem", VERB);
+        //addVerb(radical + "er", verb, VERB);
+        addVerb(radical + "eres", verb, VERB);
+        //addVerb(radical + "er", verb, VERB);
+        addVerb(radical + "ermos", verb, VERB);
+        addVerb(radical + "erdes", verb, VERB);
+        addVerb(radical + "erem", verb, VERB);
         // Imperative
         // Affirmative
-        //add(radical + "--", VERB);
-        //add(radical + "e", VERB);
-        //add(radical + "a", VERB);
-        //add(radical + "amos", VERB);
-        add(radical + "ei", VERB);
-        //add(radical + "am", VERB);
+        //addVerb(radical + "--", verb, VERB);
+        //addVerb(radical + "e", verb, VERB);
+        //addVerb(radical + "a", verb, VERB);
+        //addVerb(radical + "amos", verb, VERB);
+        addVerb(radical + "ei", verb, VERB);
+        //addVerb(radical + "am", verb, VERB);
         // Negative
-        //add(radical + "--", VERB);
-        //add(radical + "as", VERB);
-        //add(radical + "a", VERB);
-        //add(radical + "amos", VERB);
-        //add(radical + "ais", VERB);
-        //add(radical + "am", VERB);
+        //addVerb(radical + "--", verb, VERB);
+        //addVerb(radical + "as", verb, VERB);
+        //addVerb(radical + "a", verb, VERB);
+        //addVerb(radical + "amos", verb, VERB);
+        //addVerb(radical + "ais", verb, VERB);
+        //addVerb(radical + "am", verb, VERB);
     }
 
     /**
      * https://www.conjugacao.com.br/verbos-da-terceira-conjugacao-terminados-em-ir/
+     *
      * @param verb
      */
     private void addThirdConjugation(String verb) {
         String radical = verb.substring(0, verb.length() - 2);
         // Nominal forms
-        add(radical + "ir", VERB);
-        add(radical + "ido", VERB);
-        add(radical + "indo", VERB);
+        addVerb(radical + "ir", verb, VERB);
+        addVerb(radical + "ido", verb, VERB);
+        addVerb(radical + "indo", verb, VERB);
 
         // Present
-        add(radical + "o", VERB);
-        add(radical + "es", VERB);
-        add(radical + "e", VERB);
-        add(radical + "imos", VERB);
-        add(radical + "is", VERB);
-        add(radical + "em", VERB);
+        addVerb(radical + "o", verb, VERB);
+        addVerb(radical + "es", verb, VERB);
+        addVerb(radical + "e", verb, VERB);
+        addVerb(radical + "imos", verb, VERB);
+        addVerb(radical + "is", verb, VERB);
+        addVerb(radical + "em", verb, VERB);
         // Past Perfect
-        add(radical + "i", VERB);
-        add(radical + "iste", VERB);
-        add(radical + "iu", VERB);
-        //add(radical + "imos", VERB);
-        add(radical + "istes", VERB);
-        add(radical + "iram", VERB);
+        addVerb(radical + "i", verb, VERB);
+        addVerb(radical + "iste", verb, VERB);
+        addVerb(radical + "iu", verb, VERB);
+        //addVerb(radical + "imos", verb, VERB);
+        addVerb(radical + "istes", verb, VERB);
+        addVerb(radical + "iram", verb, VERB);
         // Past Imperfect
-        add(radical + "ia", VERB);
-        add(radical + "ias", VERB);
-        //add(radical + "ia", VERB);
-        add(radical + "íamos", VERB);
-        add(radical + "íeis", VERB);
-        add(radical + "iam", VERB);
+        addVerb(radical + "ia", verb, VERB);
+        addVerb(radical + "ias", verb, VERB);
+        //addVerb(radical + "ia", verb, VERB);
+        addVerb(radical + "íamos", verb, VERB);
+        addVerb(radical + "íeis", verb, VERB);
+        addVerb(radical + "iam", verb, VERB);
         // Past more than perfect
-        add(radical + "ira", VERB);
-        add(radical + "iras", VERB);
-        //add(radical + "ira", VERB);
-        add(radical + "íramos", VERB);
-        add(radical + "íreis", VERB);
-        add(radical + "iram", VERB);
+        addVerb(radical + "ira", verb, VERB);
+        addVerb(radical + "iras", verb, VERB);
+        //addVerb(radical + "ira", verb, VERB);
+        addVerb(radical + "íramos", verb, VERB);
+        addVerb(radical + "íreis", verb, VERB);
+        addVerb(radical + "iram", verb, VERB);
         // Present Future
-        add(radical + "irei", VERB);
-        add(radical + "irás", VERB);
-        add(radical + "irá", VERB);
-        add(radical + "iremos", VERB);
-        add(radical + "ireis", VERB);
-        add(radical + "irão", VERB);
+        addVerb(radical + "irei", verb, VERB);
+        addVerb(radical + "irás", verb, VERB);
+        addVerb(radical + "irá", verb, VERB);
+        addVerb(radical + "iremos", verb, VERB);
+        addVerb(radical + "ireis", verb, VERB);
+        addVerb(radical + "irão", verb, VERB);
         // Past Future
-        add(radical + "iria", VERB);
-        add(radical + "irias", VERB);
-        //add(radical + "iria", VERB);
-        add(radical + "iríamos", VERB);
-        add(radical + "iríeis", VERB);
-        add(radical + "iriam", VERB);
+        addVerb(radical + "iria", verb, VERB);
+        addVerb(radical + "irias", verb, VERB);
+        //addVerb(radical + "iria", verb, VERB);
+        addVerb(radical + "iríamos", verb, VERB);
+        addVerb(radical + "iríeis", verb, VERB);
+        addVerb(radical + "iriam", verb, VERB);
         // Subjunctive Mood
         // Present
-        add(radical + "a", VERB);
-        add(radical + "as", VERB);
-        add(radical + "a", VERB);
-        add(radical + "amos", VERB);
-        add(radical + "ais", VERB);
-        add(radical + "am", VERB);
+        addVerb(radical + "a", verb, VERB);
+        addVerb(radical + "as", verb, VERB);
+        addVerb(radical + "a", verb, VERB);
+        addVerb(radical + "amos", verb, VERB);
+        addVerb(radical + "ais", verb, VERB);
+        addVerb(radical + "am", verb, VERB);
         // Past Imperfect
-        add(radical + "isse", VERB);
-        add(radical + "isses", VERB);
-        //add(radical + "isse", VERB);
-        add(radical + "íssemos", VERB);
-        add(radical + "ísseis", VERB);
-        add(radical + "issem", VERB);
+        addVerb(radical + "isse", verb, VERB);
+        addVerb(radical + "isses", verb, VERB);
+        //addVerb(radical + "isse", verb, VERB);
+        addVerb(radical + "íssemos", verb, VERB);
+        addVerb(radical + "ísseis", verb, VERB);
+        addVerb(radical + "issem", verb, VERB);
         // Future
-        //add(radical + "ir", VERB);
-        add(radical + "ires", VERB);
-        //add(radical + "ir", VERB);
-        add(radical + "irmos", VERB);
-        add(radical + "irdes", VERB);
-        add(radical + "irem", VERB);
+        //addVerb(radical + "ir", verb, VERB);
+        addVerb(radical + "ires", verb, VERB);
+        //addVerb(radical + "ir", verb, VERB);
+        addVerb(radical + "irmos", verb, VERB);
+        addVerb(radical + "irdes", verb, VERB);
+        addVerb(radical + "irem", verb, VERB);
         // Imperative
         // Affirmative
-        //add(radical + "--", VERB);
-        //add(radical + "e", VERB);
-        //add(radical + "a", VERB);
-        //add(radical + "amos", VERB);
-        add(radical + "i", VERB);
-        //add(radical + "am", VERB);
+        //addVerb(radical + "--", verb, VERB);
+        //addVerb(radical + "e", verb, VERB);
+        //addVerb(radical + "a", verb, VERB);
+        //addVerb(radical + "amos", verb, VERB);
+        addVerb(radical + "i", verb, VERB);
+        //addVerb(radical + "am", verb, VERB);
         // Negative
-        //add(radical + "--", VERB);
-        //add(radical + "as", VERB);
-        //add(radical + "a", VERB);
-        //add(radical + "amos", VERB);
-        //add(radical + "ais", VERB);
-        //add(radical + "am", VERB);
+        //addVerb(radical + "--", verb, VERB);
+        //addVerb(radical + "as", verb, VERB);
+        //addVerb(radical + "a", verb, VERB);
+        //addVerb(radical + "amos", verb, VERB);
+        //addVerb(radical + "ais", verb, VERB);
+        //addVerb(radical + "am", verb, VERB);
     }
 
     private void addConjuctions() {
         add("e", COORDINATING_CONJUCTION);
+    }
+
+    private void addVerb(String word, String lemma, String tag) {
+        List<String> tags = words.computeIfAbsent(word, k -> new ArrayList<>());
+        tags.add(tag);
+
+        Verb v = new Verb(lemma);
+        verbs.put(word, v);
     }
 
     private void add(String word, String tag) {

@@ -29,6 +29,14 @@ public class RuleBasedPOSTaggerTest {
     }
 
     @Test
+    public void testTagAdjectiveInBetween() {
+        String[] answer = tagger.posTag(new String[]{"a", "grande", "casa"});
+        Assert.assertEquals(DETERMINER, answer[0]);
+        Assert.assertEquals(ADJECTIVE, answer[1]);
+        Assert.assertEquals(NOUN, answer[2]);
+    }
+
+    @Test
     public void testTagPrepositions() {
         String[] answer = tagger.posTag(new String[]{"a", "casa", "de", "papel"});
         Assert.assertEquals(DETERMINER, answer[0]);
