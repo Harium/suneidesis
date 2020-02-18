@@ -15,7 +15,7 @@ public class BaseEnglishBox extends BaseLanguageBox {
         parsers.add(new GreetingsParser());
 
         // How
-        parsers.add(new SimpleFeelingParser());
+        //parsers.add(new SimpleFeelingParser());
 
         // Who
         parsers.add(new FamilyTreeParser());
@@ -24,7 +24,7 @@ public class BaseEnglishBox extends BaseLanguageBox {
         parsers.add(new SimpleActionParser());
 
         // To be
-        parsers.add(new SimpleAdjectiveParser());
+        //parsers.add(new SimpleAdjectiveParser());
     }
 
     @Override

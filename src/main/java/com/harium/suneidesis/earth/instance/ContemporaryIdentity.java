@@ -3,6 +3,8 @@ package com.harium.suneidesis.earth.instance;
 import com.harium.suneidesis.instance.Identity;
 
 /**
+ * Class to represent identity following current Earth's standards
+ *
  * Reference:
  * https://en.wikipedia.org/wiki/National_identification_number
  */
