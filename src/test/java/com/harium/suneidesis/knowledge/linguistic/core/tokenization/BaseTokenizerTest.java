@@ -23,4 +23,23 @@ public class BaseTokenizerTest {
         Assert.assertEquals("Hi", tokens[0]);
     }
 
+    @Test
+    public void testEmptyToken() {
+        String[] tokens = tokenizer.tokenize("Hello  World");
+
+        Assert.assertEquals(2, tokens.length);
+        Assert.assertEquals("Hello", tokens[0]);
+        Assert.assertEquals("World", tokens[1]);
+    }
+
+    @Test
+    public void testPunctuation() {
+        String[] tokens = tokenizer.tokenize("Hello  World!");
+
+        Assert.assertEquals(3, tokens.length);
+        Assert.assertEquals("Hello", tokens[0]);
+        Assert.assertEquals("World", tokens[1]);
+        Assert.assertEquals("!", tokens[2]);
+    }
+
 }

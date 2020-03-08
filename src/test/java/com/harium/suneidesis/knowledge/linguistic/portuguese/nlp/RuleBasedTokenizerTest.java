@@ -38,6 +38,7 @@ public class RuleBasedTokenizerTest {
         Assert.assertArrayEquals(new String[]{"acompanhar", "-lo"}, tokenizer.tokenize("acompanhá-lo"));
         Assert.assertArrayEquals(new String[]{"defender", "-lo"}, tokenizer.tokenize("defendê-lo"));
         Assert.assertArrayEquals(new String[]{"dissuadir", "-lo"}, tokenizer.tokenize("dissuadí-lo"));
+        Assert.assertArrayEquals(new String[]{"fazer", "-lhe"}, tokenizer.tokenize("fazer-lhe"));
     }
 
 }

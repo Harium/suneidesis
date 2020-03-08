@@ -1,14 +1,13 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp;
 
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTagger;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTaggerReconstructor;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.POSTagger;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryDatabase;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.Verb;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.WordDatabase;
 
 import java.util.List;
-
-import static com.harium.suneidesis.knowledge.linguistic.core.nlp.tagger.POSTaggerReconstructor.*;
 
 /**
  * Simple POSTagger with few words
@@ -21,49 +20,50 @@ public class RuleBasedPOSTagger implements POSTagger {
     WordDatabase database = new MemoryDatabase();
 
     @Override
-    public String[] posTag(String[] tokens) {
-        String[] output = new String[tokens.length];
+    public TagPair[] posTag(String[] tokens) {
+        TagPair[] output = new TagPair[tokens.length];
 
-        String lastToken = NOUN;
+        Tag lastTag = Tag.NOUN;
         for (int i = 0; i < tokens.length; i++) {
             String word = tokens[i];
-            List<String> tags = database.getTags(word);
+            output[i] = new TagPair(word, Tag.UNKNOWN);
+            List<Tag> tags = database.getTags(word);
 
             if (tags != null && !tags.isEmpty()) {
                 if (tags.size() > 1) {
                     // TODO Disambiguation
                 }
-                lastToken = tags.get(0);
-                output[i] = lastToken;
+                lastTag = tags.get(0);
+                output[i].setTag(lastTag);
             } else {
                 if (Character.isUpperCase(word.charAt(0))) {
                     // Name
-                    output[i] = POSTaggerReconstructor.NOUN;
-                } else if (lastToken.equals(ADVERB)) {
-                    output[i] = ADJECTIVE;
+                    output[i].setTag(Tag.NOUN);
+                } else if (lastTag.equals(Tag.ADVERB)) {
+                    output[i].setTag(Tag.ADJECTIVE);
                 } else if (guessVerb(word)) {
-                    output[i] = VERB;
+                    output[i].setTag(Tag.VERB);
                 } else {
-                    output[i] = POSTaggerReconstructor.NOUN;
+                    output[i].setTag(Tag.NOUN);
 
-                    if (lastToken.equals(VERB)) {
+                    if (lastTag.equals(Tag.VERB)) {
                         Verb verb = database.getVerb(tokens[i - 1]);
                         if (VERB_TO_BE.equals(verb.getLemma())) {
-                            output[i] = ADJECTIVE;
+                            output[i].setTag(Tag.ADJECTIVE);
                         }
                     }
                     if (output.length > 2) {
-                        if (lastToken.equals(COORDINATING_CONJUCTION)) {
+                        if (lastTag.equals(Tag.COORDINATING_CONJUCTION)) {
                             // Copy tag
                             output[i] = output[i - 2];
                         }
-                        if (lastToken.equals(NOUN) && DETERMINER.equals(output[i - 2])) {
-                            output[i - 1] = ADJECTIVE;
+                        if (lastTag.equals(Tag.NOUN) && Tag.DETERMINER.equals(output[i - 2].getTag())) {
+                            output[i - 1].setTag(Tag.ADJECTIVE);
                         }
                     }
                 }
             }
-            lastToken = output[i];
+            lastTag = output[i].getTag();
         }
 
         return output;

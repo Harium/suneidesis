@@ -12,59 +12,33 @@ public class RuleBasedTokenizer implements Tokenizer {
     public String[] tokenize(String sentence) {
 
         List<String> tokens = new ArrayList<>();
-        List<String> postAdd = new ArrayList<>();
 
-        String[] parts = sentence.split(" ");
+        // Ignore whitespaces
+        sentence = handlePonctuation(sentence);
+        String[] parts = sentence.split("\\s+");
 
         for (String part : parts) {
-            part = handlePonctuation(part, postAdd);
             if (splitContractions(part, tokens)) {
                 continue;
             } else if (endingContractions(part, tokens)) {
                 continue;
             }
 
-
             tokens.add(part);
-
-            if (!postAdd.isEmpty()) {
-                tokens.addAll(postAdd);
-                postAdd.clear();
-            }
         }
 
         String[] tokensArray = new String[tokens.size()];
         return tokens.toArray(tokensArray);
     }
 
-    private String handlePonctuation(String part, List<String> tokens) {
-        if (part.endsWith(",")) {
-            tokens.add(",");
-            return part.substring(0, part.length() - 1);
-        } else if (part.endsWith(".")) {
-            tokens.add(".");
-            return part.substring(0, part.length() - 1);
-        } else if (part.endsWith(";")) {
-            tokens.add(";");
-            return part.substring(0, part.length() - 1);
-        } else if (part.endsWith(":")) {
-            tokens.add(":");
-            return part.substring(0, part.length() - 1);
-        } else if (part.endsWith("!")) {
-            tokens.add("!");
-            return part.substring(0, part.length() - 1);
-        } else if (part.endsWith("?")) {
-            tokens.add("?");
-            return part.substring(0, part.length() - 1);
-        } else if (part.endsWith("\"")) {
-            tokens.add("\"");
-            return part.substring(0, part.length() - 1);
-        } else if (part.startsWith("\"")) {
-            tokens.add("\"");
-            return part.substring(0, part.length() - 1);
-        }
-
-        return part;
+    private String handlePonctuation(String text) {
+        return text.replaceAll(",", " , ")
+                .replaceAll("\\.", " . ")
+                .replaceAll(";", " ; ")
+                .replaceAll(":", " : ")
+                .replaceAll("!", " ! ")
+                .replaceAll("\\?", " ? ")
+                .replaceAll("\"", " \" ");
     }
 
     private boolean splitContractions(String part, List<String> tokens) {
@@ -245,6 +219,12 @@ public class RuleBasedTokenizer implements Tokenizer {
 
             tokens.add(lemma);
             tokens.add("-lo");
+            return true;
+        } else if (part.endsWith("-lhe")) {
+            String lemma = part.substring(0, part.length() - 4);
+
+            tokens.add(lemma);
+            tokens.add("-lhe");
             return true;
         }
         return false;
