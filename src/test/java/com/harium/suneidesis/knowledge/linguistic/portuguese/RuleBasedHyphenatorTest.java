@@ -7,13 +7,13 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-public class SimpleHyphenatorTest {
+public class RuleBasedHyphenatorTest {
 
-    private SimpleHyphenator hyphenizer;
+    private RuleBasedHyphenator hyphenizer;
 
     @Before
     public void setUp() {
-        hyphenizer = new SimpleHyphenator();
+        hyphenizer = new RuleBasedHyphenator();
     }
 
     @Test

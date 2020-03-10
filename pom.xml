@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.harium.suneidesis</groupId>
     <artifactId>core</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <name>Suneidesis</name>
     <description>Project to represent knowledge</description>
     <url>http://github.com/Harium/suneidesis</url>
@@ -64,6 +64,10 @@
                     <source>8</source>
                     <target>8</target>
                     <optimize>true</optimize>
+                    <compilerArgument>-parameters</compilerArgument>
+                    <excludes>
+                        <exclude>**/examples/*</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>

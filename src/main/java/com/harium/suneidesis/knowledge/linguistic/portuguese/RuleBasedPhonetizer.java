@@ -6,12 +6,12 @@ import com.harium.suneidesis.knowledge.linguistic.core.hyphenization.Phonetizer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimplePhonetizer implements Phonetizer {
+public class RuleBasedPhonetizer implements Phonetizer {
 
-    Hyphenator hyphenator;
+    private Hyphenator hyphenator;
 
-    public SimplePhonetizer() {
-        hyphenator = new SimpleHyphenator();
+    public RuleBasedPhonetizer() {
+        hyphenator = new RuleBasedHyphenator();
     }
 
     @Override

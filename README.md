@@ -1,7 +1,11 @@
-Suneidesis (συνείδησις) [![CircleCI](https://circleci.com/gh/Harium/suneidesis.svg?style=svg)](https://circleci.com/gh/Harium/suneidesis)
+Suneidesis (συνείδησις)
 =======================
 
 Suneidesis is a project to represent knowledge. It can also be used as a chat bot.
+
+[![CircleCI](https://circleci.com/gh/Harium/suneidesis.svg?style=svg)](https://circleci.com/gh/Harium/suneidesis)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.harium.database/sqlite/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.harium.database/sqlite/)
+
 
 ## Maven
 ```

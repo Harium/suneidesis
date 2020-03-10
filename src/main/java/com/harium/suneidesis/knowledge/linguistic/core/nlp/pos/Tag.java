@@ -1,5 +1,8 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos;
 
+/**
+ * Tags borrowed from nltk
+ */
 public enum Tag {
     COORDINATING_CONJUCTION,
     CARDINAL_DIGIT,

@@ -1,7 +1,9 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos;
 
 public class TagPair {
+
     String word;
+
     Tag tag;
 
     public TagPair() {

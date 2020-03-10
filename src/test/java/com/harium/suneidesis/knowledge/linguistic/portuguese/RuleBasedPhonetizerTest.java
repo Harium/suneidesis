@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * Reference: http://www.portaldalinguaportuguesa.org/index.php%3Faction%3Dfonetica%26act%3Dlist%26region%3Dlbx
  */
-public class SimplePhonetizerTest {
+public class RuleBasedPhonetizerTest {
 
-    private SimplePhonetizer phonetizer;
+    private RuleBasedPhonetizer phonetizer;
 
     @Before
     public void setUp() {
-        phonetizer = new SimplePhonetizer();
+        phonetizer = new RuleBasedPhonetizer();
     }
 
     @Test

@@ -32,4 +32,12 @@ public class Preposition {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getUse() {
+        return use;
+    }
+
+    public void setUse(String use) {
+        this.use = use;
+    }
 }

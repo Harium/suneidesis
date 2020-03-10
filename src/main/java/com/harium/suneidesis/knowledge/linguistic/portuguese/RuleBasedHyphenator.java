@@ -5,7 +5,7 @@ import com.harium.suneidesis.knowledge.linguistic.core.hyphenization.Hyphenator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleHyphenator implements Hyphenator {
+public class RuleBasedHyphenator implements Hyphenator {
 
     @Override
     public List<String> hyphenate(String word) {
