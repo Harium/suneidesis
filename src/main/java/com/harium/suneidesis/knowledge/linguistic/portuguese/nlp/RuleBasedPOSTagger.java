@@ -3,8 +3,8 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.POSTagger;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryDatabase;
-import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.Verb;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.WordDatabase;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public class RuleBasedPOSTagger implements POSTagger {
 
                     if (lastTag.equals(Tag.VERB)) {
                         Verb verb = database.getVerb(tokens[i - 1]);
-                        if (VERB_TO_BE.equals(verb.getLemma())) {
+                        if (VERB_TO_BE.equals(verb.getWord())) {
                             output[i].setTag(Tag.ADJECTIVE);
                         }
                     }
@@ -72,10 +72,6 @@ public class RuleBasedPOSTagger implements POSTagger {
     private boolean guessVerb(String word) {
         if (word.endsWith("ar") || word.endsWith("er") || word.endsWith("ir")) {
             return true;
-        }
-
-        if (!word.endsWith("rão")) {
-
         }
 
         // Regular verbs

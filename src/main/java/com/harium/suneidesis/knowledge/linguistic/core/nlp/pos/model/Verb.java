@@ -7,6 +7,8 @@ public class Verb {
     // The same verb may have none or more than one
     private String preposition;
 
+    private String transitivity;
+
     public Verb() {
     }
 
@@ -28,5 +30,13 @@ public class Verb {
 
     public void setPreposition(String preposition) {
         this.preposition = preposition;
+    }
+
+    public String getTransitivity() {
+        return transitivity;
+    }
+
+    public void setTransitivity(String transitivity) {
+        this.transitivity = transitivity;
     }
 }
