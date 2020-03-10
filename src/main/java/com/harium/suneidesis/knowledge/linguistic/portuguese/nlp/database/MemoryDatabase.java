@@ -1,6 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
 
 import java.util.ArrayList;
 import java.util.HashMap;
