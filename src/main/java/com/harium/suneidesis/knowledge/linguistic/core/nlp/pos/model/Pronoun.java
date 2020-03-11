@@ -2,23 +2,23 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class Pronoun {
 
-    private String word;
+    private long wordId;
 
     private String type;
 
     public Pronoun() {
     }
 
-    public Pronoun(String word) {
-        this.word = word;
+    public Pronoun(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
     }
 
     public String getType() {

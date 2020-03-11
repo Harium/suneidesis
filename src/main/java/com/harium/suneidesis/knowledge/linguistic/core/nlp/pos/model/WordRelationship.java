@@ -5,35 +5,35 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
  */
 public class WordRelationship {
 
-    private String word;
+    private long wordId;
 
-    private String target;
+    private long targetId;
 
     private String relationship;
 
     public WordRelationship() {
     }
 
-    public WordRelationship(String word, String target, String relationship) {
-        this.word = word;
-        this.target = target;
+    public WordRelationship(long wordId, long targetId, String relationship) {
+        this.wordId = wordId;
+        this.targetId = targetId;
         this.relationship = relationship;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getTarget() {
-        return target;
+    public long getTargetId() {
+        return targetId;
     }
 
-    public void setTarget(String target) {
-        this.target = target;
+    public void setTargetId(long targetId) {
+        this.targetId = targetId;
     }
 
     public String getRelationship() {

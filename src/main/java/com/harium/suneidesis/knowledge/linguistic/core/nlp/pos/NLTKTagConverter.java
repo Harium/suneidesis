@@ -53,6 +53,7 @@ public class NLTKTagConverter implements TagConverter {
                 return EXISTENTIAL_THERE;
             case FOREIGN_WORD:
                 return FOREIGN_WORD;
+            case SUBORDINATING_CONJUCTION:
             case PREPOSITION:
                 return PREPOSITION;
             case ADJECTIVE:

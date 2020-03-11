@@ -2,7 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class Adjective {
 
-	private String word;
+	private long wordId;
 
 	private String gender;
 
@@ -11,16 +11,16 @@ public class Adjective {
 	public Adjective() {
 	}
 
-	public Adjective(String word) {
-		this.word = word;
+	public Adjective(long wordId) {
+		this.wordId = wordId;
 	}
 
-	public String getWord() {
-		return word;
+	public long getWord() {
+		return wordId;
 	}
 
-	public void setWord(String word) {
-		this.word = word;
+	public void setWord(long word) {
+		this.wordId = word;
 	}
 
 	public String getGender() {

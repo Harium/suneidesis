@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class RuleBasedPOSTagger implements POSTagger {
 
-    public static final String VERB_TO_BE = "ser";
     WordDatabase database = new MemoryDatabase();
+    public static String VERB_TO_BE = "ser";
 
     @Override
     public TagPair[] posTag(String[] tokens) {
@@ -48,7 +48,7 @@ public class RuleBasedPOSTagger implements POSTagger {
 
                     if (lastTag.equals(Tag.VERB)) {
                         Verb verb = database.getVerb(tokens[i - 1]);
-                        if (VERB_TO_BE.equals(verb.getWord())) {
+                        if (database.getId(VERB_TO_BE) == verb.getWordId()) {
                             output[i].setTag(Tag.ADJECTIVE);
                         }
                     }

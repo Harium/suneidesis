@@ -2,24 +2,24 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class Adverb {
 
-    private String word;
+    private long wordId;
 
     private String type;
 
     public Adverb() {
     }
 
-    public Adverb(String word, String type) {
-        this.word = word;
+    public Adverb(long wordId, String type) {
+        this.wordId = wordId;
         this.type = type;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
     }
 
     public String getType() {

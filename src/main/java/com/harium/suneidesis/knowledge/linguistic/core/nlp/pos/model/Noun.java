@@ -2,23 +2,33 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class Noun {
 
-    private String word;
+    private long wordId;
+
+    private String gender;
 
     private String type;
 
     public Noun() {
     }
 
-    public Noun(String word) {
-        this.word = word;
+    public Noun(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getType() {

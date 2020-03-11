@@ -11,6 +11,7 @@ import java.util.Map;
 public class MemoryDatabase implements WordDatabase {
 
     Map<String, List<Tag>> words = new HashMap<>();
+    Map<String, Integer> wordIds = new HashMap<>();
     Map<String, Verb> verbs = new HashMap<>();
 
     public MemoryDatabase() {
@@ -21,6 +22,11 @@ public class MemoryDatabase implements WordDatabase {
         addAdverbs();
         addVerbs();
         addConjuctions();
+    }
+
+    @Override
+    public long getId(String word) {
+        return wordIds.get(word);
     }
 
     @Override
@@ -488,13 +494,17 @@ public class MemoryDatabase implements WordDatabase {
         List<Tag> tags = words.computeIfAbsent(word, k -> new ArrayList<>());
         tags.add(tag);
 
-        Verb v = new Verb(lemma);
+        if (!wordIds.containsKey(lemma)) {
+           add(lemma, Tag.VERB);
+        }
+        Verb v = new Verb(wordIds.get(lemma));
         verbs.put(word, v);
     }
 
     private void add(String word, Tag tag) {
         List<Tag> tags = words.computeIfAbsent(word, k -> new ArrayList<>());
         tags.add(tag);
+        wordIds.put(word, wordIds.size());
     }
 
 }

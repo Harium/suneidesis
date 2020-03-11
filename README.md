@@ -4,7 +4,7 @@ Suneidesis (συνείδησις)
 Suneidesis is a project to represent knowledge. It can also be used as a chat bot.
 
 [![CircleCI](https://circleci.com/gh/Harium/suneidesis.svg?style=svg)](https://circleci.com/gh/Harium/suneidesis)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.harium.database/sqlite/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.harium.database/sqlite/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.harium.suneidesis/core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.harium.suneidesis/core/)
 
 
 ## Maven
@@ -12,7 +12,7 @@ Suneidesis is a project to represent knowledge. It can also be used as a chat bo
 <dependency>
     <groupId>com.harium.suneidesis</groupId>
     <artifactId>core</artifactId>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
 </dependency>
 ```
 

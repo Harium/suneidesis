@@ -2,23 +2,23 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class Interjection {
 
-    private String word;
+    private long wordId;
 
     private String type;
 
     public Interjection() {
     }
 
-    public Interjection(String word) {
-        this.word = word;
+    public Interjection(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
     }
 
     public String getType() {

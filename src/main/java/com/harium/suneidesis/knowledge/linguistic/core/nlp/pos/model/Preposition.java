@@ -2,7 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class Preposition {
 
-    private String word;
+    private long wordId;
 
     // Simple, double, compound
     private String type;
@@ -13,16 +13,16 @@ public class Preposition {
     public Preposition() {
     }
 
-    public Preposition(String word) {
-        this.word = word;
+    public Preposition(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
     }
 
     public String getType() {

@@ -2,7 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class Verb {
 
-    private String word;
+    private long wordId;
 
     // The same verb may have none or more than one
     private String preposition;
@@ -12,16 +12,16 @@ public class Verb {
     public Verb() {
     }
 
-    public Verb(String word) {
-        this.word = word;
+    public Verb(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
     }
 
     public String getPreposition() {

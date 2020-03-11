@@ -2,9 +2,9 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class VerbConjugation {
 
-    private String word;
+    private long wordId;
 
-    private String verb; // Infinitive form
+    private long verbId; // Infinitive form
 
     private String person;
 
@@ -13,24 +13,24 @@ public class VerbConjugation {
     public VerbConjugation() {
     }
 
-    public VerbConjugation(String word) {
-        this.word = word;
+    public VerbConjugation(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getVerb() {
-        return verb;
+    public long getVerb() {
+        return verbId;
     }
 
-    public void setVerb(String verb) {
-        this.verb = verb;
+    public void setVerb(long verbId) {
+        this.verbId = verbId;
     }
 
     public String getPerson() {

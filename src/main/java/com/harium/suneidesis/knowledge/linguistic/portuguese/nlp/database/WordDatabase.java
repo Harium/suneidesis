@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface WordDatabase {
 
+    long getId(String word);
+
     List<Tag> getTags(String word);
 
     Verb getVerb(String verb);
-
 }

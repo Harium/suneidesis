@@ -1,17 +1,17 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Numeral {
+public class Punctuation {
 
     private long wordId;
 
+    // Interrogation, exclamation
     private String type;
 
-    public Numeral() {
+    public Punctuation() {
     }
 
-    public Numeral(long wordId, String type) {
+    public Punctuation(long wordId) {
         this.wordId = wordId;
-        this.type = type;
     }
 
     public long getWordId() {
@@ -29,4 +29,5 @@ public class Numeral {
     public void setType(String type) {
         this.type = type;
     }
+
 }

@@ -2,7 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class Determiner {
 
-    private String word;
+    private long wordId;
 
     private String gender;
 
@@ -11,16 +11,16 @@ public class Determiner {
     public Determiner() {
     }
 
-    public Determiner(String word) {
-        this.word = word;
+    public Determiner(long wordId) {
+        this.wordId = wordId;
     }
 
-    public String getWord() {
-        return word;
+    public long getWordId() {
+        return wordId;
     }
 
-    public void setWord(String word) {
-        this.word = word;
+    public void setWordId(long wordId) {
+        this.wordId = wordId;
     }
 
     public String getGender() {
@@ -29,5 +29,13 @@ public class Determiner {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
