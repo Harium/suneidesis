@@ -5,7 +5,8 @@ public class Verb {
     private long wordId;
 
     // The same verb may have none or more than one
-    private String preposition;
+    // E.g: a|de|em|X <--- None
+    private String prepositions;
 
     private String transitivity;
 
@@ -24,12 +25,12 @@ public class Verb {
         this.wordId = wordId;
     }
 
-    public String getPreposition() {
-        return preposition;
+    public String getPrepositions() {
+        return prepositions;
     }
 
-    public void setPreposition(String preposition) {
-        this.preposition = preposition;
+    public void setPrepositions(String prepositions) {
+        this.prepositions = prepositions;
     }
 
     public String getTransitivity() {

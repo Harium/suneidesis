@@ -1,10 +1,8 @@
-package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp;
+package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.POSTagger;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
-import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryDatabase;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.WordDatabase;
 
 import java.util.List;
@@ -14,10 +12,17 @@ import java.util.List;
  * <p>
  * Good source: http://lxcenter.di.fc.ul.pt/tools/en/LXTaggerEN.html
  */
-public class RuleBasedPOSTagger implements POSTagger {
+public class RuleBasedPOSTagger extends DatabasePOSTagger {
 
-    WordDatabase database = new MemoryDatabase();
     public static String VERB_TO_BE = "ser";
+
+    public RuleBasedPOSTagger() {
+        super();
+    }
+
+    public RuleBasedPOSTagger(WordDatabase database) {
+        super(database);
+    }
 
     @Override
     public TagPair[] posTag(String[] tokens) {

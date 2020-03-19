@@ -1,4 +1,4 @@
-package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp;
+package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.tokenization;
 
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.tokenization.RuleBasedTokenizer;
 import org.junit.Assert;

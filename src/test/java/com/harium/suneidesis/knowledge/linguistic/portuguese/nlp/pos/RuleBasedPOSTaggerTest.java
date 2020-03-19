@@ -1,7 +1,8 @@
-package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp;
+package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
+import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos.RuleBasedPOSTagger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
