@@ -24,4 +24,16 @@ Suneidesis is a project to represent knowledge. It can also be used as a chat bo
 
 ## Examples
 
-See examples at [suneidesis-examples](https://github.com/Harium/suneidesis-examples/)
+```
+// A simple parrot bot (console)
+public static void main(String[] args) {
+  LanguageBox box = new EchoBox();
+  Instance bot = new Instance("Parrot Bot");
+  bot.setLanguageBox(box);
+
+  Terminal terminal = new Terminal();
+  terminal.addInstance(bot);
+}
+```
+
+See more examples at [suneidesis-examples](https://github.com/Harium/suneidesis-examples/)
