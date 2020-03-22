@@ -1,23 +1,25 @@
 package com.harium.suneidesis.chat.box;
 
-import com.harium.suneidesis.chat.input.InputContext;
-import com.harium.suneidesis.chat.instance.Instance;
 import com.harium.suneidesis.chat.Parser;
+import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 
-public class BaseLanguageBox extends LanguageBox {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BaseChatBox implements ChatBox {
 
     protected Parser currentParser = null;
+    protected List<Parser> parsers = new ArrayList<>();
 
-    public void input(String sentence, Instance instance, Output output) {
+    @Override
+    public void input(InputContext input, Output output) {
         InputContext context = new InputContext();
-        context.setInstance(instance);
         context.setOutput(output);
-        context.setOriginalSentence(sentence);
         context.setCurrentParser(currentParser);
 
         // Remove Question Mark
-        String clean = clearSentence(sentence);
+        String clean = clearSentence(context.getSentence());
         context.setSentence(clean);
 
         queryParsers(context);

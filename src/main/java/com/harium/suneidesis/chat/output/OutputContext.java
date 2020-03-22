@@ -1,6 +1,6 @@
 package com.harium.suneidesis.chat.output;
 
-import com.harium.suneidesis.chat.instance.Instance;
+import com.harium.suneidesis.chat.instance.LanguageBox;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
 public class OutputContext {
 
     private String sentence;
-    private Instance instance;
+    private LanguageBox instance;
 
     private Map<String, Object> properties = new HashMap<>();
 
@@ -29,11 +29,11 @@ public class OutputContext {
         this.sentence = sentence;
     }
 
-    public Instance getInstance() {
+    public LanguageBox getInstance() {
         return instance;
     }
 
-    public void setInstance(Instance instance) {
+    public void setInstance(LanguageBox instance) {
         this.instance = instance;
     }
 

@@ -1,11 +1,13 @@
 package com.harium.suneidesis.chat.box;
 
-import com.harium.suneidesis.chat.instance.Instance;
+import com.harium.suneidesis.chat.instance.LanguageBox;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.chat.output.OutputContext;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static com.harium.suneidesis.chat.box.BoxTextUtils.context;
 
 public class DummyBoxTest {
 
@@ -18,25 +20,26 @@ public class DummyBoxTest {
 
     @Test
     public void testAnswers() {
-        Instance instance = null;
+        LanguageBox instance = null;
 
         Out output = new Out();
 
-        box.input("How are you?", instance, output);
+        box.input(context("How are you?"), output);
         Assert.assertEquals("", output.answer);
 
-        box.input("What's your name?", instance, output);
+        box.input(context("What's your name?"), output);
         Assert.assertEquals("", output.answer);
 
-        box.input("Tell me more about the Theory of Relativity", instance, output);
+        box.input(context("Tell me more about the Theory of Relativity"), output);
         Assert.assertEquals("", output.answer);
 
-        box.input("Thank you for listen to me", instance, output);
+        box.input(context("Thank you for listen to me"), output);
         Assert.assertEquals("", output.answer);
     }
 
     class Out implements Output {
         public String answer = "";
+
         @Override
         public void print(String sentence, OutputContext context) {
             this.answer = sentence;

@@ -1,10 +1,10 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.chat.instance.Instance;
-import com.harium.suneidesis.chat.box.BaseLanguageBox;
+import com.harium.suneidesis.chat.box.BaseChatBox;
+import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 
-public class BaseEnglishBox extends BaseLanguageBox {
+public class BaseEnglishBox extends BaseChatBox {
 
     public static final String I_DON_T_KNOW = "I don't know.";
 
@@ -28,11 +28,11 @@ public class BaseEnglishBox extends BaseLanguageBox {
     }
 
     @Override
-    public void input(String sentence, Instance instance, Output output) {
-        super.input(sentence, instance, output);
+    public void input(InputContext input, Output output) {
+        super.input(input, output);
     }
 
-    public static boolean checkAction(String action, String ... verbs) {
+    public static boolean checkAction(String action, String... verbs) {
         for (String verb : verbs) {
             if (action.equalsIgnoreCase(verb)) {
                 return true;

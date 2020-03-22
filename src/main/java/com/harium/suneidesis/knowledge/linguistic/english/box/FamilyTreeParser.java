@@ -3,12 +3,15 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.ancestry.Ancestry;
 import com.harium.suneidesis.beign.ancestry.BeingCouple;
+import com.harium.suneidesis.beign.chat.LanguageBoxBeing;
 import com.harium.suneidesis.chat.input.InputContext;
-import com.harium.suneidesis.chat.instance.Instance;
+import com.harium.suneidesis.chat.instance.LanguageBox;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.output.Output;
 
-public class FamilyTreeParser implements Parser {
+import static com.harium.suneidesis.beign.chat.LanguageBoxBeing.PARAM_BEING;
+
+public class FamilyTreeParser extends BeingParser implements Parser {
 
     public static final String FAMILY_FATHER = "father";
     public static final String FAMILY_MOTHER = "mother";
@@ -24,10 +27,13 @@ public class FamilyTreeParser implements Parser {
 
     @Override
     public void parse(InputContext context) {
-        String query = context.getSentence();
-        Instance being = context.getInstance();
         Output output = context.getOutput();
+        Being being = getBeing(context);
+        if (being != null) {
+            output.print("Being undefined!");
+        }
 
+        String query = context.getSentence();
         String[] parts = query.split(" ");
 
         String relationship = parts[parts.length - 1];

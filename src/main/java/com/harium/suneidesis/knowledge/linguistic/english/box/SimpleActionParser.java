@@ -1,7 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
+import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.chat.input.InputContext;
-import com.harium.suneidesis.chat.instance.Instance;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.fact.Fact;
@@ -10,7 +10,7 @@ import com.harium.suneidesis.knowledge.fact.frame.FullFrame;
 
 import java.util.Collection;
 
-public class SimpleActionParser implements ActionParser {
+public class SimpleActionParser extends BeingParser implements ActionParser {
 
     public static final String DID = "did";
 
@@ -23,10 +23,13 @@ public class SimpleActionParser implements ActionParser {
 
     @Override
     public void parse(InputContext context) {
-        String query = context.getSentence();
-        Instance being = context.getInstance();
         Output output = context.getOutput();
+        Being being = getBeing(context);
+        if (being != null) {
+            output.print("Being undefined!");
+        }
 
+        String query = context.getSentence();
         String[] parts = query.split(" ");
 
         String querySubject = "";
