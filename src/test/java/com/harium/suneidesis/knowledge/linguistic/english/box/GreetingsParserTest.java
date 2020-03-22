@@ -1,9 +1,12 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.chat.input.InputContext;
+import com.harium.suneidesis.chat.output.Output;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import static com.harium.suneidesis.chat.box.BoxTextUtils.context;
+import static org.mockito.Mockito.mock;
 
 public class GreetingsParserTest {
 
@@ -16,15 +19,15 @@ public class GreetingsParserTest {
 
     @Test
     public void testMatches() {
-        InputContext context = new InputContext();
+        Output output = mock(Output.class);
 
-        Assert.assertTrue(parser.matches(new InputContext("hi")));
-        Assert.assertTrue(parser.matches(new InputContext("hi!")));
-        Assert.assertTrue(parser.matches(new InputContext("Hello")));
-        Assert.assertTrue(parser.matches(new InputContext("Hello!!")));
+        Assert.assertTrue(parser.parse(context("hi"), output));
+        Assert.assertTrue(parser.parse(context("hi!"), output));
+        Assert.assertTrue(parser.parse(context("Hello"), output));
+        Assert.assertTrue(parser.parse(context("Hello!!"), output));
 
-        Assert.assertFalse(parser.matches(new InputContext("Hola!")));
-        Assert.assertFalse(parser.matches(new InputContext("Aloha!")));
+        Assert.assertFalse(parser.parse(context("Hola!"), output));
+        Assert.assertFalse(parser.parse(context("Aloha!"), output));
     }
 
 }

@@ -29,17 +29,15 @@ public class BaseChatBox implements ChatBox {
 
     private void queryParsers(InputContext context, Output output) {
         if (currentParser != null) {
-            if (currentParser.matches(context)) {
-                currentParser.parse(context, output);
+            if (currentParser.parse(context, output)) {
                 return;
             }
         }
 
         for (Parser parser : parsers) {
             if (parser != currentParser) {
-                if (parser.matches(context)) {
+                if (parser.parse(context, output)) {
                     currentParser = parser;
-                    parser.parse(context, output);
                     break;
                 }
             }

@@ -1,7 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.Parser;
+import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Eq;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Or;
@@ -18,15 +18,11 @@ public class GreetingsParser implements Parser {
     }
 
     @Override
-    public boolean matches(InputContext context) {
+    public boolean parse(InputContext context, Output output) {
         String query = context.getSentence();
         String[] tokens = tokenizer.tokenize(query);
+        output.print(query);
         return greetingsMatcher.matches(tokens);
-    }
-
-    @Override
-    public void parse(InputContext context, Output output) {
-        output.print(context.getSentence());
     }
 
 }

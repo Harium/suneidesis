@@ -15,14 +15,7 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
     public static final String DID = "did";
 
     @Override
-    public boolean matches(InputContext context) {
-        String query = context.getSentence();
-        String[] parts = query.split(" ");
-        return BaseEnglishBox.checkAction(parts[0], DID);
-    }
-
-    @Override
-    public void parse(InputContext context, Output output) {
+    public boolean parse(InputContext context, Output output) {
         Being being = getBeing(context);
         if (being != null) {
             output.print("Being undefined!");
@@ -65,6 +58,7 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
         }
 
         output.print("No.");
+        return BaseEnglishBox.checkAction(parts[0], DID);
     }
 
     private Fact findActionByActorsName(String actorName, Collection<Fact> actions) {

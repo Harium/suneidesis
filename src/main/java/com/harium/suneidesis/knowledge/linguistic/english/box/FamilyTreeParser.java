@@ -15,14 +15,7 @@ public class FamilyTreeParser extends BeingParser implements Parser {
     public static final String WHO = "who";
 
     @Override
-    public boolean matches(InputContext context) {
-        String query = context.getSentence();
-        String[] parts = query.split(" ");
-        return BaseEnglishBox.checkAction(parts[0], WHO);
-    }
-
-    @Override
-    public void parse(InputContext context, Output output) {
+    public boolean parse(InputContext context, Output output) {
         Being being = getBeing(context);
         if (being != null) {
             output.print("Being undefined!");
@@ -48,6 +41,7 @@ public class FamilyTreeParser extends BeingParser implements Parser {
         }
 
         output.print(name);
+        return BaseEnglishBox.checkAction(parts[0], WHO);
     }
 
     private String findFather(Being beign) {
