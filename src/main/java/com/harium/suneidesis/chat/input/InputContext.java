@@ -1,8 +1,6 @@
 package com.harium.suneidesis.chat.input;
 
-import com.harium.suneidesis.chat.instance.LanguageBox;
 import com.harium.suneidesis.chat.Parser;
-import com.harium.suneidesis.chat.output.Output;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +17,6 @@ public class InputContext {
     private String sentence;
     private String originalSentence;
     private Parser currentParser;
-    private LanguageBox instance;
 
     private Map<String, Object> properties = new HashMap<>();
 
@@ -55,14 +52,6 @@ public class InputContext {
 
     public void setCurrentParser(Parser currentParser) {
         this.currentParser = currentParser;
-    }
-
-    public LanguageBox getInstance() {
-        return instance;
-    }
-
-    public void setInstance(LanguageBox instance) {
-        this.instance = instance;
     }
 
     public Map<String, Object> getProperties() {

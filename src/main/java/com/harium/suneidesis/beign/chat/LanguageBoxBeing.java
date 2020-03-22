@@ -12,6 +12,7 @@ import com.harium.suneidesis.chat.output.TextOutput;
 public class LanguageBoxBeing extends Being implements LanguageBox {
 
     public static final String PARAM_BEING = "beign";
+    public static final String PARAM_INSTANCE = "instance";
 
     private Identity identity;
 
@@ -38,7 +39,7 @@ public class LanguageBoxBeing extends Being implements LanguageBox {
     }
 
     public void input(InputContext context, Output output) {
-        context.setInstance(this);
+        context.getProperties().put(PARAM_INSTANCE, this);
         chatBox.input(context, output);
     }
 

@@ -14,14 +14,13 @@ public class BaseChatBox implements ChatBox {
 
     @Override
     public void input(InputContext input, Output output) {
-        InputContext context = new InputContext();
-        context.setCurrentParser(currentParser);
+        input.setCurrentParser(currentParser);
 
         // Remove Question Mark
-        String clean = clearSentence(context.getSentence());
-        context.setSentence(clean);
+        String clean = clearSentence(input.getSentence());
+        input.setSentence(clean);
 
-        queryParsers(context, output);
+        queryParsers(input, output);
     }
 
     protected String clearSentence(String sentence) {
@@ -45,6 +44,10 @@ public class BaseChatBox implements ChatBox {
                 }
             }
         }
+    }
+
+    public void addParser(Parser parser) {
+        parsers.add(parser);
     }
 
 }
