@@ -30,11 +30,11 @@ public class Terminal implements BoxHandler {
 
                         InputContext context = new InputContext();
                         context.setSentence(sentence);
+
                         // Custom Properties
                         context.getProperties().put(InputContext.USER_ID, "id");
                         context.getProperties().put(InputContext.USER_NAME, "Full Name");
                         context.getProperties().put(InputContext.USER_USERNAME, "user");
-
                         context.getProperties().put(InputContext.CHANNEL_ID, "cid");
                         context.getProperties().put(InputContext.CHANNEL_NAME, "console");
 

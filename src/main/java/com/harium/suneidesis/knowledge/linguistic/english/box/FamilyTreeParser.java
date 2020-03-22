@@ -3,13 +3,9 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.ancestry.Ancestry;
 import com.harium.suneidesis.beign.ancestry.BeingCouple;
-import com.harium.suneidesis.beign.chat.LanguageBoxBeing;
 import com.harium.suneidesis.chat.input.InputContext;
-import com.harium.suneidesis.chat.instance.LanguageBox;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.output.Output;
-
-import static com.harium.suneidesis.beign.chat.LanguageBoxBeing.PARAM_BEING;
 
 public class FamilyTreeParser extends BeingParser implements Parser {
 
@@ -26,8 +22,7 @@ public class FamilyTreeParser extends BeingParser implements Parser {
     }
 
     @Override
-    public void parse(InputContext context) {
-        Output output = context.getOutput();
+    public void parse(InputContext context, Output output) {
         Being being = getBeing(context);
         if (being != null) {
             output.print("Being undefined!");

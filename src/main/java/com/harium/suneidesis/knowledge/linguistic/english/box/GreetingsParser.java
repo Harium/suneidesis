@@ -2,6 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.Parser;
+import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Eq;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Or;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.LowerCaseTokenizer;
@@ -24,8 +25,8 @@ public class GreetingsParser implements Parser {
     }
 
     @Override
-    public void parse(InputContext context) {
-        context.print(context.getSentence());
+    public void parse(InputContext context, Output output) {
+        output.print(context.getSentence());
     }
 
 }

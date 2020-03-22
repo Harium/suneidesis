@@ -20,7 +20,6 @@ public class InputContext {
     private String originalSentence;
     private Parser currentParser;
     private LanguageBox instance;
-    private Output output;
 
     private Map<String, Object> properties = new HashMap<>();
 
@@ -66,14 +65,6 @@ public class InputContext {
         this.instance = instance;
     }
 
-    public Output getOutput() {
-        return output;
-    }
-
-    public void setOutput(Output output) {
-        this.output = output;
-    }
-
     public Map<String, Object> getProperties() {
         return properties;
     }
@@ -82,7 +73,4 @@ public class InputContext {
         this.properties = properties;
     }
 
-    public void print(String sentence) {
-        output.print(sentence);
-    }
 }

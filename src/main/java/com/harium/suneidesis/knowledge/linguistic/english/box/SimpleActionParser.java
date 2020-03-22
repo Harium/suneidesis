@@ -22,8 +22,7 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
     }
 
     @Override
-    public void parse(InputContext context) {
-        Output output = context.getOutput();
+    public void parse(InputContext context, Output output) {
         Being being = getBeing(context);
         if (being != null) {
             output.print("Being undefined!");

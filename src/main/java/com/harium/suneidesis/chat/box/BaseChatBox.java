@@ -15,24 +15,23 @@ public class BaseChatBox implements ChatBox {
     @Override
     public void input(InputContext input, Output output) {
         InputContext context = new InputContext();
-        context.setOutput(output);
         context.setCurrentParser(currentParser);
 
         // Remove Question Mark
         String clean = clearSentence(context.getSentence());
         context.setSentence(clean);
 
-        queryParsers(context);
+        queryParsers(context, output);
     }
 
     protected String clearSentence(String sentence) {
         return sentence.replaceAll("\\?", "").trim();
     }
 
-    private void queryParsers(InputContext context) {
+    private void queryParsers(InputContext context, Output output) {
         if (currentParser != null) {
             if (currentParser.matches(context)) {
-                currentParser.parse(context);
+                currentParser.parse(context, output);
                 return;
             }
         }
@@ -41,7 +40,7 @@ public class BaseChatBox implements ChatBox {
             if (parser != currentParser) {
                 if (parser.matches(context)) {
                     currentParser = parser;
-                    parser.parse(context);
+                    parser.parse(context, output);
                     break;
                 }
             }
