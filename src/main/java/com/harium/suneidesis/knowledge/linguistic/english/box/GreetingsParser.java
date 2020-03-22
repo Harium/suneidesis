@@ -1,7 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.input.InputContext;
-import com.harium.suneidesis.knowledge.linguistic.core.Parser;
+import com.harium.suneidesis.chat.input.InputContext;
+import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Eq;
 import com.harium.suneidesis.knowledge.linguistic.core.matcher.Or;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.LowerCaseTokenizer;

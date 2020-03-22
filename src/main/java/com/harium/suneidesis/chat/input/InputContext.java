@@ -1,8 +1,8 @@
-package com.harium.suneidesis.input;
+package com.harium.suneidesis.chat.input;
 
-import com.harium.suneidesis.instance.Instance;
-import com.harium.suneidesis.knowledge.linguistic.core.Parser;
-import com.harium.suneidesis.output.Output;
+import com.harium.suneidesis.chat.instance.Instance;
+import com.harium.suneidesis.chat.Parser;
+import com.harium.suneidesis.chat.output.Output;
 
 import java.util.HashMap;
 import java.util.Map;

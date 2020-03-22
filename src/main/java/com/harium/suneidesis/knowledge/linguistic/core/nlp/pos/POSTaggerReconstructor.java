@@ -1,6 +1,8 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos;
 
 import com.harium.suneidesis.knowledge.linguistic.core.frame.*;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.converter.PennTreebankTagConverter;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.converter.TagConverter;
 
 import static com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag.*;
 
@@ -9,7 +11,7 @@ public class POSTaggerReconstructor implements Reconstructor {
     private TagConverter tagger;
 
     public POSTaggerReconstructor() {
-        this(new NLTKTagConverter());
+        this(new PennTreebankTagConverter());
     }
 
     public POSTaggerReconstructor(TagConverter tagger) {

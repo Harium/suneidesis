@@ -3,10 +3,10 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.ancestry.Ancestry;
 import com.harium.suneidesis.beign.ancestry.BeingCouple;
-import com.harium.suneidesis.input.InputContext;
-import com.harium.suneidesis.instance.Instance;
-import com.harium.suneidesis.knowledge.linguistic.core.Parser;
-import com.harium.suneidesis.output.Output;
+import com.harium.suneidesis.chat.input.InputContext;
+import com.harium.suneidesis.chat.instance.Instance;
+import com.harium.suneidesis.chat.Parser;
+import com.harium.suneidesis.chat.output.Output;
 
 public class FamilyTreeParser implements Parser {
 

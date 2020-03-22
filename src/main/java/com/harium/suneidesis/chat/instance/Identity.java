@@ -1,4 +1,4 @@
-package com.harium.suneidesis.instance;
+package com.harium.suneidesis.chat.instance;
 
 import java.util.HashMap;
 import java.util.Map;

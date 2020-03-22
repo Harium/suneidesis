@@ -1,6 +1,6 @@
-package com.harium.suneidesis.knowledge.linguistic.core;
+package com.harium.suneidesis.chat;
 
-import com.harium.suneidesis.input.InputContext;
+import com.harium.suneidesis.chat.input.InputContext;
 
 public interface Parser {
 

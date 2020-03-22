@@ -1,6 +1,6 @@
-package com.harium.suneidesis.knowledge.linguistic.core.box;
+package com.harium.suneidesis.chat.box;
 
-import com.harium.suneidesis.instance.Instance;
+import com.harium.suneidesis.chat.instance.Instance;
 
 public interface Chatbox {
 

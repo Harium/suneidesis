@@ -1,10 +1,10 @@
-package com.harium.suneidesis.instance;
+package com.harium.suneidesis.chat.instance;
 
 import com.harium.suneidesis.beign.Being;
 import com.harium.suneidesis.beign.Gender;
-import com.harium.suneidesis.knowledge.linguistic.core.box.DummyBox;
-import com.harium.suneidesis.knowledge.linguistic.core.box.LanguageBox;
-import com.harium.suneidesis.output.Output;
+import com.harium.suneidesis.chat.box.DummyBox;
+import com.harium.suneidesis.chat.box.LanguageBox;
+import com.harium.suneidesis.chat.output.Output;
 
 public class Instance extends Being {
 

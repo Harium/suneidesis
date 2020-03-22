@@ -1,4 +1,4 @@
-package com.harium.suneidesis.output;
+package com.harium.suneidesis.chat.output;
 
 public interface Output {
     default void print(String sentence) {

@@ -1,13 +1,12 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.input.InputContext;
-import com.harium.suneidesis.instance.Instance;
+import com.harium.suneidesis.chat.input.InputContext;
+import com.harium.suneidesis.chat.instance.Instance;
+import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.knowledge.concept.Place;
 import com.harium.suneidesis.knowledge.fact.Fact;
 import com.harium.suneidesis.knowledge.fact.frame.FrameType;
 import com.harium.suneidesis.knowledge.fact.frame.FullFrame;
-import com.harium.suneidesis.knowledge.linguistic.core.action.ActionParser;
-import com.harium.suneidesis.output.Output;
 
 import java.util.Collection;
 

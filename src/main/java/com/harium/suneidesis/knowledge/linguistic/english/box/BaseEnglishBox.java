@@ -1,8 +1,8 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.instance.Instance;
-import com.harium.suneidesis.knowledge.linguistic.core.box.BaseLanguageBox;
-import com.harium.suneidesis.output.Output;
+import com.harium.suneidesis.chat.instance.Instance;
+import com.harium.suneidesis.chat.box.BaseLanguageBox;
+import com.harium.suneidesis.chat.output.Output;
 
 public class BaseEnglishBox extends BaseLanguageBox {
 

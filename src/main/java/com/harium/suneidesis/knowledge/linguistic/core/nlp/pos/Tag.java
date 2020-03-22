@@ -1,11 +1,10 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos;
 
 /**
- * Tags borrowed from nltk
+ * Tags borrowed from Penn Treebank/Nltk
  */
 public enum Tag {
     COORDINATING_CONJUCTION,
-    CARDINAL_DIGIT,
     DETERMINER,
     EXISTENTIAL_THERE,
     FOREIGN_WORD,
@@ -19,6 +18,7 @@ public enum Tag {
     NOUN_PLURAL,
     NOUN_PROPER,
     NOUN_PROPER_PLURAL,
+    NUMERAL,// Cardinal Digit
     PREDETERMINER,
     POSSESSIVE,
     PERSONAL_PRONOUN,
@@ -27,6 +27,8 @@ public enum Tag {
     ADVERB_COMPARATIVE,
     ADVERB_SUPERLATIVE,
     PARTICLE,
+    SYMBOL,
+    CURRENCY,// Financial Symbol
     SUBORDINATING_CONJUCTION,
     TO,
     INTERJECTION,

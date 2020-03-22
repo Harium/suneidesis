@@ -1,4 +1,4 @@
-package com.harium.suneidesis.output;
+package com.harium.suneidesis.chat.output;
 
 public abstract class BaseOutput implements Output {
 

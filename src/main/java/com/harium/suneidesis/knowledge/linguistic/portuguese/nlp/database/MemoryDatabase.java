@@ -22,6 +22,7 @@ public class MemoryDatabase implements WordDatabase {
         addAdverbs();
         addVerbs();
         addConjuctions();
+        addNumerals();
     }
 
     @Override
@@ -488,6 +489,24 @@ public class MemoryDatabase implements WordDatabase {
 
     private void addConjuctions() {
         add("e", Tag.COORDINATING_CONJUCTION);
+    }
+
+    private void addNumerals() {
+        add("0", Tag.NUMERAL);
+        add("1", Tag.NUMERAL);
+        add("2", Tag.NUMERAL);
+        add("3", Tag.NUMERAL);
+        add("4", Tag.NUMERAL);
+        add("5", Tag.NUMERAL);
+        add("6", Tag.NUMERAL);
+        add("7", Tag.NUMERAL);
+        add("8", Tag.NUMERAL);
+        add("9", Tag.NUMERAL);
+
+        // Roman
+        add("I", Tag.NUMERAL);
+        add("II", Tag.NUMERAL);
+        add("III", Tag.NUMERAL);
     }
 
     private void addVerb(String word, String lemma, Tag tag) {

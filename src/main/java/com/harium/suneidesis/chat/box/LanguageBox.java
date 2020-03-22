@@ -1,8 +1,8 @@
-package com.harium.suneidesis.knowledge.linguistic.core.box;
+package com.harium.suneidesis.chat.box;
 
-import com.harium.suneidesis.instance.Instance;
-import com.harium.suneidesis.knowledge.linguistic.core.Parser;
-import com.harium.suneidesis.output.Output;
+import com.harium.suneidesis.chat.instance.Instance;
+import com.harium.suneidesis.chat.Parser;
+import com.harium.suneidesis.chat.output.Output;
 
 import java.util.ArrayList;
 import java.util.List;

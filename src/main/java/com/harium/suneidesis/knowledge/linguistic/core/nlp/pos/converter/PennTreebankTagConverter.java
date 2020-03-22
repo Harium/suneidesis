@@ -1,9 +1,17 @@
-package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos;
+package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.converter;
 
-public class NLTKTagConverter implements TagConverter {
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
+
+/**
+ * Penn Treebank converter
+ * Those tags are also used by NLTK
+ * https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html
+ */
+public class PennTreebankTagConverter implements TagConverter {
 
     private static final String COORDINATING_CONJUCTION = "CC";
     private static final String CARDINAL_DIGIT = "CD";
+    private static final String CURRENCY = "CUR";
     private static final String DETERMINER = "DT";
     private static final String EXISTENTIAL_THERE = "EX";
     private static final String FOREIGN_WORD = "FW";
@@ -25,6 +33,7 @@ public class NLTKTagConverter implements TagConverter {
     private static final String ADVERB_COMPARATIVE = "RBR";
     private static final String ADVERB_SUPERLATIVE = "RBS";
     private static final String PARTICLE = "RP";
+    private static final String SYMBOL = "SYM";
     private static final String TO = "TO";
     private static final String INTERJECTION = "UH";
     private static final String VERB = "VB";
@@ -38,14 +47,14 @@ public class NLTKTagConverter implements TagConverter {
     private static final String WH_POSSESSIVE_PRONOUN = "WP$";
     private static final String WH_ADVERB = "WRB";
     private static final String PUNCTUATION = "PUNC";
-    private static final String UNKNOWN = "?";
+    private static final String UNKNOWN = "X";
 
     @Override
     public String convert(Tag tag) {
         switch (tag) {
             case COORDINATING_CONJUCTION:
                 return COORDINATING_CONJUCTION;
-            case CARDINAL_DIGIT:
+            case NUMERAL:
                 return CARDINAL_DIGIT;
             case DETERMINER:
                 return DETERMINER;
@@ -90,6 +99,10 @@ public class NLTKTagConverter implements TagConverter {
                 return ADVERB_SUPERLATIVE;
             case PARTICLE:
                 return PARTICLE;
+            case SYMBOL:
+                return SYMBOL;
+            case CURRENCY:
+                return CURRENCY;
             case TO:
                 return TO;
             case INTERJECTION:
