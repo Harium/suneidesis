@@ -16,7 +16,8 @@ public class TextOutput extends BaseOutput {
 
     @Override
     public void print(String sentence, OutputContext context) {
-        out.print(sentence);
+        // It should add a new line
+        out.println(sentence);
         out.flush();
     }
 
