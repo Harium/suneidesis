@@ -57,4 +57,12 @@ public class Terminal implements BoxHandler {
     public void sendMessage(String channel, String message) {
         output.print(message);
     }
+
+    public TextOutput getOutput() {
+        return output;
+    }
+
+    public void setOutput(TextOutput output) {
+        this.output = output;
+    }
 }
