@@ -9,24 +9,24 @@ import com.harium.suneidesis.planning.Task;
 
 public class FindTask extends Task {
 
+    private Concept target;
     public static final Concept SEARCH = new Concept();
 
-    public FindTask(Concept object, Storage fridge) {
-        instruction.setSubject(fridge);
-        instruction.setObject(object);
-        instruction.setPredicate(SEARCH);
+    public FindTask(Concept target) {
+        this.target = target;
     }
 
     @Override
     public boolean execute(Consciousness subject, Environment environment) {
         boolean found = false;
         for (Thing concept : environment.getAll()) {
-            if (instruction.getSubject() == concept) {
+            if (concept instanceof Storage) {
                 Storage storage = (Storage) concept;
                 canAccess(subject, storage);
                 for (Thing item : storage.getAll()) {
-                    if (instruction.getObject() == item) {
+                    if (target == item) {
                         found = true;
+                        break;
                     }
                 }
             }
@@ -39,9 +39,8 @@ public class FindTask extends Task {
         return super.execute(subject, environment);
     }
 
-    // Private property
     private boolean canAccess(Consciousness subject, Storage storage) {
-        return subject == storage.getOwner();
+        return storage.canAccess(subject);
     }
 
 }

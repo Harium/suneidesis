@@ -24,7 +24,7 @@ public class TaskTest {
         environment.add(fridge);
 
         Task chopGarlic = new Task();
-        chopGarlic.addTask(new FindTask(garlic, fridge));
+        chopGarlic.addTask(new FindTask(garlic));
         boolean executed = chopGarlic.execute(myself, environment);
         assertTrue(executed);
     }
@@ -42,7 +42,7 @@ public class TaskTest {
         environment.add(fridge);
 
         Task chopGarlic = new Task();
-        chopGarlic.addTask(new FindTask(garlic, fridge));
+        chopGarlic.addTask(new FindTask(garlic));
         boolean executed = chopGarlic.execute(myself, environment);
         assertFalse(executed);
     }

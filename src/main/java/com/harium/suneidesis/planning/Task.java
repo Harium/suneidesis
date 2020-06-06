@@ -12,24 +12,14 @@ import java.util.List;
  */
 public class Task extends Concept {
 
-    protected Instruction instruction = new Instruction();
     private List<Task> subTasks = new ArrayList<>();
 
     public boolean execute(Consciousness subject, Environment environment) {
-        //execute(subject, environment);
         boolean success = true;
         for (Task task : subTasks) {
             success &= task.execute(subject, environment);
         }
         return success;
-    }
-
-    public Instruction getInstruction() {
-        return instruction;
-    }
-
-    public void setInstruction(Instruction instruction) {
-        this.instruction = instruction;
     }
 
     public void addTask(Task task) {
