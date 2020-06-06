@@ -2,8 +2,8 @@ package com.harium.suneidesis.knowledge.context;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.space.SpaceConcept;
-import com.harium.suneidesis.knowledge.storage.MemoryStorage;
-import com.harium.suneidesis.knowledge.storage.Storage;
+import com.harium.suneidesis.storage.MemoryRepository;
+import com.harium.suneidesis.storage.Repository;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.Collection;
 public class ConversationContext extends Context {
 
     private Concept subject = Concept.UNKNOWN;
-    private Storage<Concept> participants = new MemoryStorage<>();
+    private Repository<Concept> participants = new MemoryRepository<>();
 
     public ConversationContext(TemporalConcept when) {
         super(when);
@@ -21,7 +21,7 @@ public class ConversationContext extends Context {
         super(when, where);
     }
 
-    public ConversationContext(Storage<Concept> participants) {
+    public ConversationContext(Repository<Concept> participants) {
         this.participants = participants;
     }
 
@@ -37,11 +37,11 @@ public class ConversationContext extends Context {
         return participants.getAll();
     }
 
-    public Storage<Concept> getParticipants() {
+    public Repository<Concept> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Storage<Concept> participants) {
+    public void setParticipants(Repository<Concept> participants) {
         this.participants = participants;
     }
 }

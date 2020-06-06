@@ -1,7 +1,7 @@
 package com.harium.suneidesis.knowledge.space;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.storage.Storage;
+import com.harium.suneidesis.storage.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +10,7 @@ public class StarSystem extends Concept {
 
     private Galaxy galaxy;
 
-    private Storage<CelestialBody> bodies;
+    private Repository<CelestialBody> bodies;
 
     public Galaxy getGalaxy() {
         return galaxy;
@@ -33,11 +33,11 @@ public class StarSystem extends Concept {
                 .filter(p -> type.equals(p.getCelestialBodyType())).collect(Collectors.toList());
     }
 
-    public Storage<CelestialBody> getBodies() {
+    public Repository<CelestialBody> getBodies() {
         return bodies;
     }
 
-    public void setBodies(Storage<CelestialBody> bodies) {
+    public void setBodies(Repository<CelestialBody> bodies) {
         this.bodies = bodies;
     }
 }

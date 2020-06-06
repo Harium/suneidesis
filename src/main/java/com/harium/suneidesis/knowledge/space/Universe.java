@@ -1,17 +1,17 @@
 package com.harium.suneidesis.knowledge.space;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.storage.Storage;
+import com.harium.suneidesis.storage.Repository;
 
 public class Universe extends Concept {
 
-    private Storage<GalaxyGroup> galaxyGroups;
+    private Repository<GalaxyGroup> galaxyGroups;
 
-    public Storage<GalaxyGroup> getGalaxyGroups() {
+    public Repository<GalaxyGroup> getGalaxyGroups() {
         return galaxyGroups;
     }
 
-    public void setGalaxyGroups(Storage<GalaxyGroup> galaxyGroups) {
+    public void setGalaxyGroups(Repository<GalaxyGroup> galaxyGroups) {
         this.galaxyGroups = galaxyGroups;
     }
 }

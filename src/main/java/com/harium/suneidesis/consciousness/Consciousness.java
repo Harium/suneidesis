@@ -3,25 +3,23 @@ package com.harium.suneidesis.consciousness;
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.concept.ConceptType;
 import com.harium.suneidesis.knowledge.fact.Fact;
-import com.harium.suneidesis.knowledge.storage.MemoryStorage;
-import com.harium.suneidesis.knowledge.storage.Storage;
-
-import java.util.List;
+import com.harium.suneidesis.storage.MemoryRepository;
+import com.harium.suneidesis.storage.Repository;
 
 public class Consciousness extends Concept {
 
-    protected Storage storage = new MemoryStorage();
+    protected Repository repository = new MemoryRepository();
 
     public Consciousness(String name, ConceptType type) {
         super(name, type);
     }
 
-    public Storage<Fact> getMemories() {
-        return storage;
+    public Repository<Fact> getMemories() {
+        return repository;
     }
 
-    public void setMemories(Storage<Fact> memories) {
-        this.storage = memories;
+    public void setMemories(Repository<Fact> memories) {
+        this.repository = memories;
     }
 
 }

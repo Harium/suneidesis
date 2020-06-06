@@ -1,17 +1,17 @@
 package com.harium.suneidesis.knowledge.space;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.storage.Storage;
+import com.harium.suneidesis.storage.Repository;
 
 public class Multiverse extends Concept {
 
-    private Storage<Universe> universes;
+    private Repository<Universe> universes;
 
-    public Storage<Universe> getUniverses() {
+    public Repository<Universe> getUniverses() {
         return universes;
     }
 
-    public void setUniverses(Storage<Universe> universes) {
+    public void setUniverses(Repository<Universe> universes) {
         this.universes = universes;
     }
 }

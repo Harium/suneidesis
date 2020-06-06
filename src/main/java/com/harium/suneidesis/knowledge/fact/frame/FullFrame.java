@@ -11,20 +11,17 @@ import java.util.List;
 
 public class FullFrame extends Fact {
 
-    private Concept actor;
-    private Concept target;
+    private Concept subject;
+    private Concept predicate;
+    private Concept object;
+    private Concept whereInObject;
 
+    // Instance attributes
     private Place place;
-
-    private Concept action;
-    private Concept whereInTarget;
-
     private TemporalConcept when;
+    private Weather weather;
 
     protected List<Fact> conclusions;
-
-    private FactSource source;
-    private Weather weather;
 
     public FullFrame() {
         super("");
@@ -36,20 +33,20 @@ public class FullFrame extends Fact {
         frameType = FrameType.FULL_FRAME;
     }
 
-    public Concept getActor() {
-        return actor;
+    public Concept getSubject() {
+        return subject;
     }
 
-    public void setActor(Concept actor) {
-        this.actor = actor;
+    public void setSubject(Concept subject) {
+        this.subject = subject;
     }
 
-    public Concept getTarget() {
-        return target;
+    public Concept getObject() {
+        return object;
     }
 
-    public void setTarget(Concept target) {
-        this.target = target;
+    public void setObject(Concept object) {
+        this.object = object;
     }
 
     public Place getPlace() {
@@ -60,20 +57,20 @@ public class FullFrame extends Fact {
         this.place = place;
     }
 
-    public Concept getAction() {
-        return action;
+    public Concept getPredicate() {
+        return predicate;
     }
 
-    public void setAction(Concept action) {
-        this.action = action;
+    public void setPredicate(Concept predicate) {
+        this.predicate = predicate;
     }
 
-    public Concept getWhereInTarget() {
-        return whereInTarget;
+    public Concept getWhereInObject() {
+        return whereInObject;
     }
 
-    public void setWhereInTarget(Concept whereAction) {
-        this.whereInTarget = whereAction;
+    public void setWhereInObject(Concept whereAction) {
+        this.whereInObject = whereAction;
     }
 
     public TemporalConcept getWhen() {
@@ -109,11 +106,11 @@ public class FullFrame extends Fact {
     }
 
     public void copy(FullFrame fact) {
-        this.actor = fact.actor;
-        this.target = fact.target;
+        this.subject = fact.subject;
+        this.object = fact.object;
         this.place = fact.place;
-        this.action = fact.action;
-        this.whereInTarget = fact.whereInTarget;
+        this.predicate = fact.predicate;
+        this.whereInObject = fact.whereInObject;
         this.when = fact.when;
         this.conclusions = fact.conclusions;
         this.source = fact.source;

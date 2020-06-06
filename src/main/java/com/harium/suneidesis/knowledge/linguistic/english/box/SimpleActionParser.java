@@ -72,9 +72,9 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
 
             FullFrame frame = (FullFrame) action;
 
-            boolean hasActor = frame.getActor().getName().toLowerCase().contains(name);
+            boolean hasActor = frame.getSubject().getName().toLowerCase().contains(name);
 
-            boolean hasTarget = frame.getTarget() != null && frame.getTarget().getName().toLowerCase().contains(name);
+            boolean hasTarget = frame.getObject() != null && frame.getObject().getName().toLowerCase().contains(name);
 
             if (hasActor || hasTarget)
 
@@ -94,10 +94,10 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
             }
 
             FullFrame frame = (FullFrame) action;
-            if (frame.getAction() == null) {
+            if (frame.getPredicate() == null) {
                 continue;
             }
-            if (actionName.equalsIgnoreCase(frame.getAction().getName())) {
+            if (actionName.equalsIgnoreCase(frame.getPredicate().getName())) {
                 return action;
             }
         }
@@ -116,24 +116,24 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
                 builder.append("I heard that");
 
                 builder.append(" ");
-                builder.append(frame.getActor().getName());
+                builder.append(frame.getSubject().getName());
                 builder.append(" ");
 
-                String actionAsText = frame.getAction().getName().toLowerCase();
+                String actionAsText = frame.getPredicate().getName().toLowerCase();
                 builder.append(actionAsText);
                 if (!actionAsText.endsWith("s")) {
                     builder.append("s");
                 }
 
-                if (frame.getTarget() != null) {
+                if (frame.getObject() != null) {
                     builder.append(" ");
-                    builder.append(frame.getTarget().getName());
+                    builder.append(frame.getObject().getName());
 
-                    if (frame.getWhereInTarget() != null) {
+                    if (frame.getWhereInObject() != null) {
 
-                        if (!frame.getWhereInTarget().getName().isEmpty()) {
+                        if (!frame.getWhereInObject().getName().isEmpty()) {
                             builder.append("'s ");
-                            builder.append(frame.getWhereInTarget().getName());
+                            builder.append(frame.getWhereInObject().getName());
                         }
                     }
                 }

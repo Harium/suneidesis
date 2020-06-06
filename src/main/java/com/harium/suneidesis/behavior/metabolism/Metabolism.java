@@ -1,12 +1,12 @@
 package com.harium.suneidesis.behavior.metabolism;
 
-import com.harium.suneidesis.behavior.Environment;
+import com.harium.suneidesis.behavior.Biome;
 import com.harium.suneidesis.knowledge.material.Molecule;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Metabolism extends Environment {
+public class Metabolism extends Biome {
 
     float energy;
     float rate;
