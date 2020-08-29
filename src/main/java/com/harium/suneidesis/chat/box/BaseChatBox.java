@@ -24,6 +24,9 @@ public class BaseChatBox implements ChatBox {
     }
 
     protected String clearSentence(String sentence) {
+        if (sentence == null) {
+            return sentence;
+        }
         return sentence.replaceAll("\\?", "").trim();
     }
 
