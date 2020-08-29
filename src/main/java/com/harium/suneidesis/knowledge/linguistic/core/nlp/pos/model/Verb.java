@@ -1,11 +1,9 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Verb {
-
-    private long wordId;
+public class Verb extends WordModel {
 
     // The same verb may have none or more than one
-    // E.g: a|de|em|X <--- None
+    // E.g: to|from|of|X <- None
     private String prepositions;
 
     private String transitivity;
@@ -13,16 +11,8 @@ public class Verb {
     public Verb() {
     }
 
-    public Verb(long wordId) {
-        this.wordId = wordId;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
+    public Verb(String wordId) {
+        super(wordId);
     }
 
     public String getPrepositions() {

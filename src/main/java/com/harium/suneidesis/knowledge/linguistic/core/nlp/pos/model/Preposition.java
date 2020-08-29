@@ -1,8 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Preposition {
-
-    private long wordId;
+public class Preposition extends WordModel {
 
     // Simple, double, compound
     private String type;
@@ -13,16 +11,8 @@ public class Preposition {
     public Preposition() {
     }
 
-    public Preposition(long wordId) {
-        this.wordId = wordId;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
+    public Preposition(String wordId) {
+        super(wordId);
     }
 
     public String getType() {

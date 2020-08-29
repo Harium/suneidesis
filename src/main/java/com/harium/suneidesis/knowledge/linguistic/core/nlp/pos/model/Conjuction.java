@@ -1,24 +1,14 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Conjuction {
-
-    private long wordId;
+public class Conjuction extends WordModel {
 
     private String type;
 
     public Conjuction() {
     }
 
-    public Conjuction(long wordId) {
-        this.wordId = wordId;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
+    public Conjuction(String wordId) {
+        super(wordId);
     }
 
     public String getType() {

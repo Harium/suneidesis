@@ -2,21 +2,18 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.Tokenizer;
-import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.WordDatabase;
+import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryDatabase;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.tokenization.RuleBasedTokenizer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 public class MultipassPOSTaggerTest {
+
+    private static final String FIRST_PERSON_SINGULAR = "eu";
+    private static final String THIRD_PERSON_SINGULAR = "ele";
 
     Tokenizer tokenizer;
     MultipassPOSTagger tagger;
@@ -24,22 +21,20 @@ public class MultipassPOSTaggerTest {
 
     @Before
     public void setUp() {
-        database = mock(WordDatabase.class);
+        database = buildDatabase();
         tagger = new MultipassPOSTagger(database);
         tokenizer = new RuleBasedTokenizer();
-
-        setUpVerbs();
     }
 
-    private void setUpVerbs() {
-        when(database.getTags("ir")).thenReturn(Collections.singletonList(Tag.VERB));
-        when(database.getTags("fui")).thenReturn(Collections.singletonList(Tag.VERB_PAST_TENSE));
-        when(database.getTags("foi")).thenReturn(Collections.singletonList(Tag.VERB_PAST_TENSE));
+    private WordDatabase buildDatabase() {
+        MemoryDatabase database = new MemoryDatabase();
 
-        Verb go = new Verb();
-        go.setPrepositions("a|de|X");
-        when(database.getVerb("fui")).thenReturn(go);
-        when(database.getVerb("foi")).thenReturn(go);
+        String goId = database.addVerb("ir", "a|de|X", "");
+
+        database.addVerbConjugation("fui", goId, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), FIRST_PERSON_SINGULAR);
+        database.addVerbConjugation("foi", goId, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), THIRD_PERSON_SINGULAR);
+
+        return database;
     }
 
     @Test
@@ -50,8 +45,6 @@ public class MultipassPOSTaggerTest {
 
     @Test
     public void testVerbPreposition() {
-        when(database.getTags("de")).thenReturn(Arrays.asList(Tag.PREPOSITION));
-
         TagPair[] answer = tagger.posTag(tokenize("foi de carro"));
         Assert.assertEquals(Tag.VERB, answer[0].getTag());
         Assert.assertEquals(Tag.PREPOSITION, answer[1].getTag());
@@ -60,8 +53,6 @@ public class MultipassPOSTaggerTest {
 
     @Test
     public void testVerbPrepositionAndArticle() {
-        when(database.getTags("a")).thenReturn(Arrays.asList(Tag.DETERMINER, Tag.PREPOSITION));
-
         TagPair[] answer = tagger.posTag(tokenize("foi à casa"));
         Assert.assertEquals(Tag.VERB, answer[0].getTag());
         Assert.assertEquals(Tag.PREPOSITION, answer[1].getTag());
