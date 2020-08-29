@@ -1,8 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Word {
-
-    private long id;
+public class Word extends WordModel {
 
     private String word;
 
@@ -14,14 +12,6 @@ public class Word {
     public Word(String word, String tag) {
         this.word = word;
         this.tag = tag;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getWord() {

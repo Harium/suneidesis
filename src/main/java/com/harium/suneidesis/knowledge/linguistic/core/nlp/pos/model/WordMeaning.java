@@ -1,25 +1,15 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class WordMeaning {
-
-    private long wordId;
+public class WordMeaning extends WordModel {
 
     private String meaning;
 
     public WordMeaning() {
     }
 
-    public WordMeaning(long wordId, String meaning) {
-        this.wordId = wordId;
+    public WordMeaning(String wordId, String meaning) {
+        super(wordId);
         this.meaning = meaning;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
     }
 
     public String getMeaning() {

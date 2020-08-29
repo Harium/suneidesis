@@ -1,8 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Determiner {
-
-    private long wordId;
+public class Determiner extends WordModel {
 
     private String gender;
 
@@ -11,16 +9,8 @@ public class Determiner {
     public Determiner() {
     }
 
-    public Determiner(long wordId) {
-        this.wordId = wordId;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
+    public Determiner(String wordId) {
+        super(wordId);
     }
 
     public String getGender() {

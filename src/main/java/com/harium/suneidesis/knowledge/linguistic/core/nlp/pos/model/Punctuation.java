@@ -1,8 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Punctuation {
-
-    private long wordId;
+public class Punctuation extends WordModel {
 
     // Interrogation, exclamation
     private String type;
@@ -10,16 +8,8 @@ public class Punctuation {
     public Punctuation() {
     }
 
-    public Punctuation(long wordId) {
-        this.wordId = wordId;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
+    public Punctuation(String wordId) {
+        super(wordId);
     }
 
     public String getType() {

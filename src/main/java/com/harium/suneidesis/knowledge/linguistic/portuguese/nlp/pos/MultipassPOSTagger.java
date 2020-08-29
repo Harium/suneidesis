@@ -1,9 +1,10 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
-import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.WordDatabase;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.VerbConjugation;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -50,9 +51,12 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
             if (tagPair.getTag() != UNKNOWN) {
                 continue;
             }
-            List<Tag> tags = database.getTags(tagPair.getWord());
+            List<Word> words = database.findAllWords(tagPair.getWord());
+            if (words == null) {
+                continue;
+            }
 
-            if (tags.contains(DETERMINER)) {
+            if (words.stream().anyMatch(word -> DETERMINER.name().equals(word.getTag()))) {
                 tagPair.setTag(DETERMINER);
                 // Verify next words (they could be adjective, numerals and so on)
                 if (output.length > i + 1) {
@@ -67,29 +71,47 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
         for (int i = 0; i < output.length; i++) {
             TagPair tagPair = output[i];
             if (VERB == tagPair.getTag()) {
-                Verb verb = database.getVerb(tagPair.getWord());
+                List<Word> words = database.findAllWords(tagPair.getWord());
 
-                String[] prepositionsList = verb.getPrepositions().split("\\|");
-                Set<String> prepositions = new HashSet<>(Arrays.asList(prepositionsList));
+                Verb verb;
+                for(Word w: words) {
+                    if (isVerb(w.getTag())) {
+                        VerbConjugation verbConjugation = database.findVerbConjugationByWordId(w.getWordId());
+                        verb = database.findVerbByWordId(verbConjugation.getVerbWordId());
 
-                if (output.length > i + 1 && prepositions.contains(output[i + 1].getWord())) {
-                    output[i + 1].setTag(PREPOSITION);
-                }
-                if (i > 0 && PASSIVE_VOICE_PARTICLE.equals(output[i - 1].getWord())) {
-                    //Passive voice
+                        String[] prepositionsList = verb.getPrepositions().split("\\|");
+                        Set<String> prepositions = new HashSet<>(Arrays.asList(prepositionsList));
+
+                        if (output.length > i + 1 && prepositions.contains(output[i + 1].getWord())) {
+                            output[i + 1].setTag(PREPOSITION);
+                        }
+                        if (i > 0 && PASSIVE_VOICE_PARTICLE.equals(output[i - 1].getWord())) {
+                            //Passive voice
+                        }
+                        return;
+                    }
                 }
             }
         }
     }
 
+    private boolean isVerb(String tag) {
+        if (tag == null) {
+            return false;
+        }
+        return tag.startsWith("VERB");
+    }
+
     private void handleFixedTags(TagPair[] output) {
         for (int i = 0; i < output.length; i++) {
             String word = output[i].getWord();
-            List<Tag> tags = database.getTags(word);
-
-            if (tags.contains(PUNCTUATION)) {
+            List<Word> words = database.findAllWords(word);
+            if (words == null) {
+                continue;
+            }
+            if (words.stream().anyMatch(w -> PUNCTUATION.name().equals(w.getTag()))) {
                 output[i].setTag(PUNCTUATION);
-            } else if (tags.contains(VERB) || tags.contains(VERB_PAST_TENSE)) {
+            } else if (words.stream().anyMatch(w -> VERB.name().equals(w.getTag())||VERB_PAST_TENSE.name().equals(w.getTag()))) {
                 output[i].setTag(VERB);
             }
         }

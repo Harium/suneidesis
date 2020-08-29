@@ -1,25 +1,15 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Numeral {
-
-    private long wordId;
+public class Numeral extends WordModel {
 
     private String type;
 
     public Numeral() {
     }
 
-    public Numeral(long wordId, String type) {
-        this.wordId = wordId;
+    public Numeral(String wordId, String type) {
+        super(wordId);
         this.type = type;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
     }
 
     public String getType() {

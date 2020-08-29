@@ -1,24 +1,14 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Pronoun {
-
-    private long wordId;
+public class Pronoun extends WordModel {
 
     private String type;
 
     public Pronoun() {
     }
 
-    public Pronoun(long wordId) {
-        this.wordId = wordId;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
+    public Pronoun(String wordId) {
+        super(wordId);
     }
 
     public String getType() {

@@ -1,25 +1,15 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Adverb {
-
-    private long wordId;
+public class Adverb extends WordModel {
 
     private String type;
 
     public Adverb() {
     }
 
-    public Adverb(long wordId, String type) {
-        this.wordId = wordId;
+    public Adverb(String wordId, String type) {
+        super(wordId);
         this.type = type;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
     }
 
     public String getType() {

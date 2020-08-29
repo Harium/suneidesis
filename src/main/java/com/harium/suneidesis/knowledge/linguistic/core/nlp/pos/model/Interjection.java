@@ -1,24 +1,14 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Interjection {
-
-    private long wordId;
+public class Interjection extends WordModel {
 
     private String type;
 
     public Interjection() {
     }
 
-    public Interjection(long wordId) {
-        this.wordId = wordId;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
+    public Interjection(String wordId) {
+        super(wordId);
     }
 
     public String getType() {

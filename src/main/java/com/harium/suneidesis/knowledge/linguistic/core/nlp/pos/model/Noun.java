@@ -1,8 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
-public class Noun {
-
-    private long wordId;
+public class Noun extends WordModel {
 
     private String gender;
 
@@ -11,16 +9,8 @@ public class Noun {
     public Noun() {
     }
 
-    public Noun(long wordId) {
-        this.wordId = wordId;
-    }
-
-    public long getWordId() {
-        return wordId;
-    }
-
-    public void setWordId(long wordId) {
-        this.wordId = wordId;
+    public Noun(String wordId) {
+        super(wordId);
     }
 
     public String getGender() {

@@ -2,8 +2,10 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
-import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.WordDatabase;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.VerbConjugation;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
 
 import java.util.List;
 
@@ -32,13 +34,13 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
         for (int i = 0; i < tokens.length; i++) {
             String word = tokens[i];
             output[i] = new TagPair(word, Tag.UNKNOWN);
-            List<Tag> tags = database.getTags(word);
+            List<Word> words = database.findAllWords(word);
 
-            if (tags != null && !tags.isEmpty()) {
-                if (tags.size() > 1) {
+            if (words != null && !words.isEmpty()) {
+                if (words.size() > 1) {
                     // TODO Disambiguation
                 }
-                lastTag = tags.get(0);
+                lastTag = Tag.valueOf(words.get(0).getTag());
                 output[i].setTag(lastTag);
             } else {
                 if (Character.isUpperCase(word.charAt(0))) {
@@ -52,9 +54,16 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                     output[i].setTag(Tag.NOUN);
 
                     if (lastTag.equals(Tag.VERB)) {
-                        Verb verb = database.getVerb(tokens[i - 1]);
-                        if (database.getId(VERB_TO_BE) == verb.getWordId()) {
-                            output[i].setTag(Tag.ADJECTIVE);
+                        List<Word> ws = database.findAllWords(tokens[i - 1]);
+                        for (Word wv : ws) {
+                            if (isVerb(wv.getTag())) {
+                                VerbConjugation verb = database.findVerbConjugationByWordId(wv.getWordId());
+
+                                String toBeVerbId = verbId(VERB_TO_BE);
+                                if (toBeVerbId != null && toBeVerbId.equals(verb.getVerbWordId())) {
+                                    output[i].setTag(Tag.ADJECTIVE);
+                                }
+                            }
                         }
                     }
                     if (output.length > 2) {
@@ -72,6 +81,21 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
         }
 
         return output;
+    }
+
+    private String verbId(String verbWord) {
+        List<Word> words = database.findAllWords(verbWord);
+        if (words == null || words.isEmpty()) {
+            return null;
+        }
+        return words.get(0).getWordId();
+    }
+
+    private boolean isVerb(String tag) {
+        if (tag == null) {
+            return false;
+        }
+        return tag.startsWith("VERB");
     }
 
     private boolean guessVerb(String word) {

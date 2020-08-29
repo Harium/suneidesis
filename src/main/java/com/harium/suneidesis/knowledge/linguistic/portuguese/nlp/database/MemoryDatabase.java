@@ -1,20 +1,21 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.VerbConjugation;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
+import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.WordModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MemoryDatabase implements WordDatabase {
-
-    Map<String, List<Tag>> words = new HashMap<>();
-    Map<String, Integer> wordIds = new HashMap<>();
-    Map<String, Verb> verbs = new HashMap<>();
+public class MemoryDatabase extends com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.MemoryDatabase {
 
     public MemoryDatabase() {
+        super();
         addPunctuation();
         addDeterminers();
         addPrepositions();
@@ -23,21 +24,6 @@ public class MemoryDatabase implements WordDatabase {
         addVerbs();
         addConjuctions();
         addNumerals();
-    }
-
-    @Override
-    public long getId(String word) {
-        return wordIds.get(word);
-    }
-
-    @Override
-    public List<Tag> getTags(String word) {
-        return words.get(word);
-    }
-
-    @Override
-    public Verb getVerb(String verb) {
-        return verbs.get(verb);
     }
 
     private void addPunctuation() {
@@ -168,6 +154,7 @@ public class MemoryDatabase implements WordDatabase {
     private void addVerbs() {
         // To be
         add("estou", Tag.VERB);
+        addVerb("ser", "ser", Tag.VERB);
         addVerb("é", "ser", Tag.VERB);
         addVerb("és", "ser", Tag.VERB);
         addVerb("somos", "ser", Tag.VERB);
@@ -508,22 +495,4 @@ public class MemoryDatabase implements WordDatabase {
         add("II", Tag.NUMERAL);
         add("III", Tag.NUMERAL);
     }
-
-    private void addVerb(String word, String lemma, Tag tag) {
-        List<Tag> tags = words.computeIfAbsent(word, k -> new ArrayList<>());
-        tags.add(tag);
-
-        if (!wordIds.containsKey(lemma)) {
-           add(lemma, Tag.VERB);
-        }
-        Verb v = new Verb(wordIds.get(lemma));
-        verbs.put(word, v);
-    }
-
-    private void add(String word, Tag tag) {
-        List<Tag> tags = words.computeIfAbsent(word, k -> new ArrayList<>());
-        tags.add(tag);
-        wordIds.put(word, wordIds.size());
-    }
-
 }
