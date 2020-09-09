@@ -3,7 +3,7 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 public class Verb extends WordModel {
 
     // The same verb may have none or more than one
-    // E.g: to|from|of|X <- None
+    // E.g: to,from,of,X <- None
     private String prepositions;
 
     private String transitivity;

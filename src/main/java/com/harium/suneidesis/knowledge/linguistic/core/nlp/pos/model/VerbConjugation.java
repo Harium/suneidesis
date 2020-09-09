@@ -2,8 +2,6 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
 
 public class VerbConjugation extends WordModel {
 
-    private String verbWordId; // Infinitive form
-
     private String person;
 
     private String tense;
@@ -13,14 +11,6 @@ public class VerbConjugation extends WordModel {
 
     public VerbConjugation(String wordId) {
         super(wordId);
-    }
-
-    public String getVerbWordId() {
-        return verbWordId;
-    }
-
-    public void setVerbWordId(String verbWordId) {
-        this.verbWordId = verbWordId;
     }
 
     public String getPerson() {

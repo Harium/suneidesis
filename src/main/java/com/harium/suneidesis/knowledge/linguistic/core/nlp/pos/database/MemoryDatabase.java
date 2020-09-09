@@ -136,7 +136,7 @@ public class MemoryDatabase implements WordDatabase {
         String wordId = save(w);
 
         VerbConjugation conjugation = new VerbConjugation();
-        conjugation.setVerbWordId(infinitiveWordId);
+        conjugation.setLemmaId(infinitiveWordId);
         conjugation.setWordId(wordId);
         conjugation.setTense(tense);
         conjugation.setPerson(person);

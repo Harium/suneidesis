@@ -4,6 +4,8 @@ public class WordModel {
 
     protected String wordId;
 
+    protected String lemmaId;
+
     public WordModel() {}
 
     public WordModel(String wordId) {
@@ -16,5 +18,13 @@ public class WordModel {
 
     public void setWordId(String wordId) {
         this.wordId = wordId;
+    }
+
+    public String getLemmaId() {
+        return lemmaId;
+    }
+
+    public void setLemmaId(String lemmaId) {
+        this.lemmaId = lemmaId;
     }
 }

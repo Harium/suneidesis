@@ -6,25 +6,25 @@ package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model;
  */
 public class WordRelationship extends WordModel {
 
-    private String targetId;
+    private String targetWordId;
 
     private String relationship;
 
     public WordRelationship() {
     }
 
-    public WordRelationship(String wordId, String targetId, String relationship) {
+    public WordRelationship(String wordId, String targetWordId, String relationship) {
         super(wordId);
-        this.targetId = targetId;
+        this.targetWordId = targetWordId;
         this.relationship = relationship;
     }
 
-    public String getTargetId() {
-        return targetId;
+    public String getTargetWordId() {
+        return targetWordId;
     }
 
-    public void setTargetId(String targetId) {
-        this.targetId = targetId;
+    public void setTargetWordId(String targetWordId) {
+        this.targetWordId = targetWordId;
     }
 
     public String getRelationship() {
