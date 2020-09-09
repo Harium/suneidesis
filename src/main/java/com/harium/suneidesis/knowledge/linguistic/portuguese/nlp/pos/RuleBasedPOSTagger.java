@@ -3,8 +3,6 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.VerbConjugation;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
 
 import java.util.List;
@@ -57,10 +55,8 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                         List<Word> ws = database.findAllWords(tokens[i - 1]);
                         for (Word wv : ws) {
                             if (isVerb(wv.getTag())) {
-                                VerbConjugation verb = database.findVerbConjugationByWordId(wv.getWordId());
-
-                                String toBeVerbId = verbId(VERB_TO_BE);
-                                if (toBeVerbId != null && toBeVerbId.equals(verb.getLemmaId())) {
+                                String toBeVerbId = verbWordId(VERB_TO_BE);
+                                if (toBeVerbId != null && toBeVerbId.equals(wv.getLemmaId())) {
                                     output[i].setTag(Tag.ADJECTIVE);
                                 }
                             }
@@ -83,7 +79,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
         return output;
     }
 
-    private String verbId(String verbWord) {
+    private String verbWordId(String verbWord) {
         List<Word> words = database.findAllWords(verbWord);
         if (words == null || words.isEmpty()) {
             return null;

@@ -76,8 +76,7 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
                 Verb verb;
                 for(Word w: words) {
                     if (isVerb(w.getTag())) {
-                        VerbConjugation verbConjugation = database.findVerbConjugationByWordId(w.getWordId());
-                        verb = database.findVerbByWordId(verbConjugation.getLemmaId());
+                        verb = database.findVerbByWordId(w.getLemmaId());
 
                         String[] prepositionsList = verb.getPrepositions().split("\\|");
                         Set<String> prepositions = new HashSet<>(Arrays.asList(prepositionsList));

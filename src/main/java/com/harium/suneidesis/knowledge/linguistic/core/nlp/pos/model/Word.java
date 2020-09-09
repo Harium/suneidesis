@@ -4,6 +4,8 @@ public class Word extends WordModel {
 
     private String word;
 
+    private String lemmaId;
+
     private String tag;
 
     public Word() {
@@ -20,6 +22,14 @@ public class Word extends WordModel {
 
     public void setWord(String word) {
         this.word = word;
+    }
+
+    public String getLemmaId() {
+        return lemmaId;
+    }
+
+    public void setLemmaId(String lemmaId) {
+        this.lemmaId = lemmaId;
     }
 
     public String getTag() {
