@@ -4,10 +4,10 @@ import com.harium.suneidesis.behavior.Environment;
 import com.harium.suneidesis.consciousness.Consciousness;
 import com.harium.suneidesis.knowledge.Thing;
 import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.planning.Storage;
-import com.harium.suneidesis.planning.Task;
+import com.harium.suneidesis.planning.Inventory;
+import com.harium.suneidesis.planning.BaseTask;
 
-public class FindTask extends Task {
+public class FindTask extends BaseTask {
 
     private Concept target;
     public static final Concept SEARCH = new Concept();
@@ -20,10 +20,10 @@ public class FindTask extends Task {
     public boolean execute(Consciousness subject, Environment environment) {
         boolean found = false;
         for (Thing concept : environment.getAll()) {
-            if (concept instanceof Storage) {
-                Storage storage = (Storage) concept;
-                canAccess(subject, storage);
-                for (Thing item : storage.getAll()) {
+            if (concept instanceof Inventory) {
+                Inventory inventory = (Inventory) concept;
+                canAccess(subject, inventory);
+                for (Thing item : inventory.getAll()) {
                     if (target == item) {
                         found = true;
                         break;
@@ -39,8 +39,8 @@ public class FindTask extends Task {
         return super.execute(subject, environment);
     }
 
-    private boolean canAccess(Consciousness subject, Storage storage) {
-        return storage.canAccess(subject);
+    private boolean canAccess(Consciousness subject, Inventory inventory) {
+        return inventory.canAccess(subject);
     }
 
 }

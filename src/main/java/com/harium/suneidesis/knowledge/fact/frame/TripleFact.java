@@ -2,7 +2,6 @@ package com.harium.suneidesis.knowledge.fact.frame;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 import com.harium.suneidesis.knowledge.fact.Fact;
-import com.harium.suneidesis.planning.Triple;
 
 public class TripleFact extends Fact {
 

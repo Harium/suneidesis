@@ -9,21 +9,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class TaskTest {
+public class BaseTaskTest {
 
     @Test
     public void testFindTask() {
         Being myself = new Being("Robot");
 
         Concept garlic = new Concept();
-        Storage fridge = new Storage();
+        Inventory fridge = new Inventory();
         fridge.setOwner(myself);
         fridge.add(garlic);
 
         Environment environment = new Environment();
         environment.add(fridge);
 
-        Task chopGarlic = new Task();
+        BaseTask chopGarlic = new BaseTask();
         chopGarlic.addTask(new FindTask(garlic));
         boolean executed = chopGarlic.execute(myself, environment);
         assertTrue(executed);
@@ -34,14 +34,14 @@ public class TaskTest {
         Being myself = new Being("Robot");
 
         Concept garlic = new Concept();
-        Storage fridge = new Storage();
+        Inventory fridge = new Inventory();
         fridge.setOwner(myself);
         //fridge.add(garlic);
 
         Environment environment = new Environment();
         environment.add(fridge);
 
-        Task chopGarlic = new Task();
+        BaseTask chopGarlic = new BaseTask();
         chopGarlic.addTask(new FindTask(garlic));
         boolean executed = chopGarlic.execute(myself, environment);
         assertFalse(executed);

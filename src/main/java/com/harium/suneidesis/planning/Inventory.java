@@ -8,7 +8,7 @@ import com.harium.suneidesis.storage.Repository;
 
 import java.util.Collection;
 
-public class Storage extends Concept {
+public class Inventory extends Concept {
 
     private Concept owner;
 

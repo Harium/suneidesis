@@ -1,28 +1,28 @@
 package com.harium.suneidesis.planning;
 
-import com.harium.suneidesis.behavior.Environment;
-import com.harium.suneidesis.consciousness.Consciousness;
-import com.harium.suneidesis.knowledge.concept.Concept;
+public interface Task {
 
-import java.util.ArrayList;
-import java.util.List;
+    /**
+     * Method to check if requirements for this task is met
+     * @return true if task can start
+     */
+    boolean canStart();
 
-/**
- * Class to represent high level instructions
- */
-public class Task extends Concept {
+    /**
+     * Method to execute the task
+     */
+    void start();
 
-    private List<Task> subTasks = new ArrayList<>();
+    /**
+     * Method to check if the task is currently happening
+     * @return if task is in progress
+     */
+    boolean inProgress();
 
-    public boolean execute(Consciousness subject, Environment environment) {
-        boolean success = true;
-        for (Task task : subTasks) {
-            success &= task.execute(subject, environment);
-        }
-        return success;
-    }
+    /**
+     * Method to check if the task finished to run
+     * @return if task is finished
+     */
+    boolean isDone();
 
-    public void addTask(Task task) {
-        subTasks.add(task);
-    }
 }

@@ -1,4 +1,4 @@
-package com.harium.suneidesis.planning;
+package com.harium.suneidesis.knowledge.fact.frame;
 
 import com.harium.suneidesis.knowledge.concept.Concept;
 
