@@ -2,8 +2,8 @@ package com.harium.suneidesis.planning.instruction;
 
 import com.harium.suneidesis.behavior.Environment;
 import com.harium.suneidesis.consciousness.Consciousness;
-import com.harium.suneidesis.knowledge.Thing;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Thing;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.planning.Inventory;
 import com.harium.suneidesis.planning.BaseTask;
 

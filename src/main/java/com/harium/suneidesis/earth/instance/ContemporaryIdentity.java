@@ -1,6 +1,6 @@
 package com.harium.suneidesis.earth.instance;
 
-import com.harium.suneidesis.beign.chat.Identity;
+import com.harium.suneidesis.chat.being.Identity;
 
 /**
  * Class to represent identity following current Earth's standards

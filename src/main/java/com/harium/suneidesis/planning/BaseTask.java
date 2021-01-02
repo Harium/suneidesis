@@ -2,7 +2,7 @@ package com.harium.suneidesis.planning;
 
 import com.harium.suneidesis.behavior.Environment;
 import com.harium.suneidesis.consciousness.Consciousness;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 
 import java.util.ArrayList;
 import java.util.List;

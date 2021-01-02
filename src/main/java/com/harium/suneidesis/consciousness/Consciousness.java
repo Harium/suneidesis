@@ -1,7 +1,7 @@
 package com.harium.suneidesis.consciousness;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.concept.ConceptType;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.knowledge.fact.Fact;
 import com.harium.suneidesis.storage.MemoryRepository;
 import com.harium.suneidesis.storage.Repository;

@@ -1,6 +1,4 @@
-package com.harium.suneidesis.knowledge.concept;
-
-import com.harium.suneidesis.knowledge.Thing;
+package com.harium.suneidesis.concept;
 
 
 public class Concept extends Thing {
@@ -13,7 +11,7 @@ public class Concept extends Thing {
 	}
 
 	public Concept() {
-		super("");
+		super();
 	}
 
 	public Concept(ConceptType type) {
@@ -30,4 +28,7 @@ public class Concept extends Thing {
 		return type;
 	}
 
+	public void setType(ConceptType type) {
+		this.type = type;
+	}
 }

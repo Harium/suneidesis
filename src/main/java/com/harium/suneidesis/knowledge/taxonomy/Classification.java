@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.taxonomy;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 
 public class Classification extends Concept {
 	

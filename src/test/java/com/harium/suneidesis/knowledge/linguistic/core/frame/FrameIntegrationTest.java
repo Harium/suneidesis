@@ -1,7 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.core.frame;
 
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Being;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.knowledge.context.ConversationContext;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 import org.junit.Assert;

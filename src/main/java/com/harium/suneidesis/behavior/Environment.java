@@ -1,7 +1,7 @@
 package com.harium.suneidesis.behavior;
 
-import com.harium.suneidesis.knowledge.Thing;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Thing;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.storage.MemoryRepository;
 import com.harium.suneidesis.storage.Repository;
 

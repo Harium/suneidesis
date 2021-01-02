@@ -1,8 +1,8 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.beign.ancestry.Ancestry;
-import com.harium.suneidesis.beign.ancestry.BeingCouple;
+import com.harium.suneidesis.concept.Being;
+import com.harium.suneidesis.concept.beign.ancestry.Ancestry;
+import com.harium.suneidesis.concept.beign.ancestry.BeingCouple;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.output.Output;

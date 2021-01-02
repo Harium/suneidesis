@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.core.frame;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package com.harium.suneidesis.beign.chat;
+package com.harium.suneidesis.chat.being;
 
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.beign.Gender;
+import com.harium.suneidesis.concept.Being;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.chat.box.ChatBox;
 import com.harium.suneidesis.chat.box.DummyBox;
 import com.harium.suneidesis.chat.input.InputContext;
@@ -23,7 +23,7 @@ public class LanguageBoxBeing extends Being implements LanguageBox {
         this.identity = identity;
     }
 
-    public LanguageBoxBeing(Identity identity, Gender gender) {
+    public LanguageBoxBeing(Identity identity, Concept gender) {
         super(identity.getName(), gender);
         this.identity = identity;
     }
@@ -33,7 +33,7 @@ public class LanguageBoxBeing extends Being implements LanguageBox {
         this.identity = new Identity(name);
     }
 
-    public LanguageBoxBeing(String name, Gender gender) {
+    public LanguageBoxBeing(String name, Concept gender) {
         super(name, gender);
         this.identity = new Identity(name);
     }

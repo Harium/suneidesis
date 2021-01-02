@@ -1,9 +1,9 @@
 package com.harium.suneidesis.knowledge.fact.frame;
 
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.knowledge.concept.Action;
-import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.concept.ConceptType;
+import com.harium.suneidesis.concept.Being;
+import com.harium.suneidesis.concept.Action;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package com.harium.suneidesis.behavior;
 
-import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.concept.Being;
 
 public interface Behavior {
 

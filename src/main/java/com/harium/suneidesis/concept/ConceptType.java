@@ -1,0 +1,23 @@
+package com.harium.suneidesis.concept;
+
+public enum ConceptType {
+
+	UNKNOWN,
+	ADJECTIVE,
+	ACTION,
+	ADVERB,
+	ARTIFACT,
+	CREATURE,
+	CREATURE_PART,
+	CREATURE_FEELING,
+	MATERIAL,
+	NAME,
+	NUMERAL,
+	PLACE,
+	PHENOMENA,
+	TIME_UNIT,
+	SOUND,
+	SIMULATION,
+	THEORY;
+	
+}

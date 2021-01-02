@@ -1,7 +1,7 @@
-package com.harium.suneidesis.beign.ancestry;
+package com.harium.suneidesis.concept.beign.ancestry;
 
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.beign.Creature;
+import com.harium.suneidesis.concept.Being;
+import com.harium.suneidesis.concept.beign.Creature;
 import org.junit.Assert;
 import org.junit.Test;
 

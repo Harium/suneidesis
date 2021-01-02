@@ -1,4 +1,4 @@
-package com.harium.suneidesis.knowledge.concept;
+package com.harium.suneidesis.concept;
 
 public class Action extends Concept {
 

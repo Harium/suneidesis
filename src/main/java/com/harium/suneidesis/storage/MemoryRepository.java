@@ -1,6 +1,6 @@
 package com.harium.suneidesis.storage;
 
-import com.harium.suneidesis.knowledge.Thing;
+import com.harium.suneidesis.concept.Thing;
 
 import java.util.Collection;
 import java.util.HashMap;

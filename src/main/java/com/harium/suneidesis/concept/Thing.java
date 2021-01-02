@@ -1,0 +1,56 @@
+package com.harium.suneidesis.concept;
+
+import com.harium.suneidesis.concept.attribute.Attributes;
+import com.harium.suneidesis.concept.numeral.Amount;
+
+public class Thing {
+
+	protected String id;
+
+	protected final Attributes attributes = new Attributes();
+
+	protected Thing() {
+		super();
+	}
+
+	public Thing(String name) {
+		super();
+		setName(name);
+	}
+
+	public Attributes getAttributes() {
+		return attributes;
+	}
+
+	public String getName() {
+		return attributes.getName();
+	}
+
+	public void setName(String name) {
+		attributes.setName(name);
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void can(Action action) {
+		this.attributes.can(action);
+	}
+
+	public void has(Concept part, Amount amount) {
+		this.attributes.has(part, amount);
+	}
+
+	public void isLocatedAt(Place place) {
+		this.attributes.isLocatedAt(place);
+	}
+
+	public void isLocatedAt(String placeName) {
+		this.attributes.isLocatedAt(new Place(placeName));
+	}
+}

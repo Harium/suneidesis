@@ -1,9 +1,9 @@
 package com.harium.suneidesis.knowledge.linguistic.english.box;
 
-import com.harium.suneidesis.beign.Being;
+import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
-import com.harium.suneidesis.knowledge.concept.Place;
+import com.harium.suneidesis.concept.Place;
 import com.harium.suneidesis.knowledge.fact.Fact;
 import com.harium.suneidesis.knowledge.fact.frame.FrameType;
 import com.harium.suneidesis.knowledge.fact.frame.FullFrame;

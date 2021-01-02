@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.weather;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 
 public class Weather extends Concept {
 
