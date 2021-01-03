@@ -10,11 +10,11 @@ import static com.harium.suneidesis.concept.numeral.Quantity.ZERO;
 
 public class Properties extends Concept {
 
-    private final Map<String, Concept> index = new HashMap<>();
+    private final Map<String, Concept> nameIndex = new HashMap<>();
     private final Map<Concept, Quantity> map = new HashMap<>();
 
     public void add(Concept property, Quantity quantity) {
-        index.put(property.getName(), property);
+        nameIndex.put(property.getName(), property);
         map.put(property, quantity);
     }
 
@@ -27,7 +27,7 @@ public class Properties extends Concept {
     }
 
     public Quantity query(String name) {
-        Concept key = index.get(name);
+        Concept key = nameIndex.get(name);
         if (key == null) {
            return ZERO;
         }
@@ -39,5 +39,19 @@ public class Properties extends Concept {
         for (Map.Entry<Concept, Quantity> entry : properties.map.entrySet()) {
             add(entry.getKey(), entry.getValue());
         }
+    }
+
+    public boolean equals(Properties properties) {
+        boolean equals = true;
+        for (Map.Entry<Concept, Quantity> entry : map.entrySet()) {
+            Concept key = entry.getKey();
+            Quantity q = entry.getValue();
+
+            Concept concept = properties.nameIndex.get(key.getName());
+            Quantity toCompare = properties.map.get(concept);
+
+            equals &= q.getExpression().equals(toCompare.getExpression());
+        }
+        return equals;
     }
 }

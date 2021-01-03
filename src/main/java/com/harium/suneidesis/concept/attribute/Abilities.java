@@ -25,4 +25,12 @@ public class Abilities extends Concept {
     public void merge(Abilities abilities) {
         map.putAll(abilities.map);
     }
+
+    public boolean equals(Abilities abilities) {
+        boolean equals = true;
+        for (Action action : map.values()) {
+            equals &= abilities.query(action.getName());
+        }
+        return equals;
+    }
 }

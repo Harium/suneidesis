@@ -110,7 +110,38 @@ public class Attributes implements Repository<Concept> {
     }
 
     public boolean equals(Attributes attributes) {
-        
-        return false;
+        boolean equals = true;
+        for (Map.Entry<String, Concept> entry: attributes.attributeMap.entrySet()) {
+            String key = entry.getKey();
+            if (ATTRIBUTE_NAME.equals(key)) {
+                //equals &= getName().equals(attributes.getName());
+                continue;
+            }
+            if (ATTRIBUTE_PROPERTIES.equals(key)) {
+                equals &= propertiesEquals(attributes);
+            } else if (ATTRIBUTE_ABILITIES.equals(key)) {
+                equals &= abilitiesEquals(attributes);
+            } else {
+                Concept value = entry.getValue();
+                Concept toCompare = attributes.get(key);
+                equals &= value.equals(toCompare);
+            }
+        }
+
+        return equals;
+    }
+
+    private boolean abilitiesEquals(Attributes attributes) {
+        if (attributes.abilities == null) {
+            return abilities == null;
+        }
+        return attributes.abilities.equals(abilities);
+    }
+
+    private boolean propertiesEquals(Attributes attributes) {
+        if (attributes.properties == null) {
+            return properties == null;
+        }
+        return attributes.properties.equals(properties);
     }
 }
