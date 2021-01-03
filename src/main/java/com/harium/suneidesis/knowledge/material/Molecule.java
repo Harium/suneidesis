@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.material;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;

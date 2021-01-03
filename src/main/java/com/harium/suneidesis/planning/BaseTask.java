@@ -1,8 +1,7 @@
 package com.harium.suneidesis.planning;
 
 import com.harium.suneidesis.behavior.Environment;
-import com.harium.suneidesis.consciousness.Consciousness;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ public class BaseTask extends Concept {
 
     private List<BaseTask> subTasks = new ArrayList<>();
 
-    public boolean execute(Consciousness subject, Environment environment) {
+    public boolean execute(Concept subject, Environment environment) {
         boolean success = true;
         for (BaseTask task : subTasks) {
             success &= task.execute(subject, environment);

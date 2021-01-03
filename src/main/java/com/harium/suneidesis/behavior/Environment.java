@@ -1,7 +1,7 @@
 package com.harium.suneidesis.behavior;
 
-import com.harium.suneidesis.knowledge.Thing;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Thing;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.storage.MemoryRepository;
 import com.harium.suneidesis.storage.Repository;
 
@@ -12,7 +12,9 @@ public class Environment {
     Repository<Thing> concepts = new MemoryRepository<>();
 
     public String add(Concept concept) {
-        return concepts.add(concept);
+        String id = concept.getId();
+        concepts.set(concept.getId(), concept);
+        return id;
     }
 
     public Collection<Thing> getAll() {

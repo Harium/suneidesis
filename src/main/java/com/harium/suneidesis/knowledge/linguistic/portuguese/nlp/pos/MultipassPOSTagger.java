@@ -1,10 +1,9 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
+import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.VerbConjugation;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
+import com.harium.suneidesis.concept.word.Word;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -56,7 +55,7 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
                 continue;
             }
 
-            if (words.stream().anyMatch(word -> DETERMINER.name().equals(word.getTag()))) {
+            if (words.stream().anyMatch(word -> DETERMINER.name().equals(word.getTag().getName()))) {
                 tagPair.setTag(DETERMINER);
                 // Verify next words (they could be adjective, numerals and so on)
                 if (output.length > i + 1) {
@@ -73,12 +72,12 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
             if (VERB == tagPair.getTag()) {
                 List<Word> words = database.findAllWords(tagPair.getWord());
 
-                Verb verb;
-                for(Word w: words) {
-                    if (isVerb(w.getTag())) {
-                        verb = database.findVerbByWordId(w.getLemmaId());
+                WordVerb verb;
+                for (Word w: words) {
+                    if (isVerb(w.getTagWord())) {
+                        verb = database.findVerbByWordId(w.getLemma().getId());
 
-                        String[] prepositionsList = verb.getPrepositions().split("\\|");
+                        String[] prepositionsList = verb.getPrepositionsWord().split("\\|");
                         Set<String> prepositions = new HashSet<>(Arrays.asList(prepositionsList));
 
                         if (output.length > i + 1 && prepositions.contains(output[i + 1].getWord())) {
@@ -108,9 +107,9 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
             if (words == null) {
                 continue;
             }
-            if (words.stream().anyMatch(w -> PUNCTUATION.name().equals(w.getTag()))) {
+            if (words.stream().anyMatch(w -> PUNCTUATION.name().equals(w.getTagWord()))) {
                 output[i].setTag(PUNCTUATION);
-            } else if (words.stream().anyMatch(w -> VERB.name().equals(w.getTag())||VERB_PAST_TENSE.name().equals(w.getTag()))) {
+            } else if (words.stream().anyMatch(w -> VERB.name().equals(w.getTagWord()) || VERB_PAST_TENSE.name().equals(w.getTagWord()))) {
                 output[i].setTag(VERB);
             }
         }

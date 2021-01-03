@@ -1,7 +1,7 @@
 package com.harium.suneidesis.knowledge.time;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.concept.ConceptType;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 
 public class TemporalConcept extends Concept {
 

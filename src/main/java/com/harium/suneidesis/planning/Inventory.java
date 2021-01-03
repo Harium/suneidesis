@@ -1,8 +1,7 @@
 package com.harium.suneidesis.planning;
 
-import com.harium.suneidesis.consciousness.Consciousness;
-import com.harium.suneidesis.knowledge.Thing;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Thing;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.storage.MemoryRepository;
 import com.harium.suneidesis.storage.Repository;
 
@@ -15,7 +14,7 @@ public class Inventory extends Concept {
     private Repository<Thing> items = new MemoryRepository<>();
 
     public void add(Concept concept) {
-        items.add(concept);
+        items.set(concept.getId(), concept);
     }
 
     public Collection<Thing> getAll() {
@@ -32,7 +31,7 @@ public class Inventory extends Concept {
 
     // Private property
     // TODO Relax rules in case of emergency?
-    public boolean canAccess(Consciousness subject) {
+    public boolean canAccess(Concept subject) {
         return owner == subject;
     }
 }

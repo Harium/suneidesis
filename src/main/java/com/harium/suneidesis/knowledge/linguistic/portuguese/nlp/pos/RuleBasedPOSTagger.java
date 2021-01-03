@@ -3,7 +3,7 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
+import com.harium.suneidesis.concept.word.Word;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                 if (words.size() > 1) {
                     // TODO Disambiguation
                 }
-                lastTag = Tag.valueOf(words.get(0).getTag());
+                lastTag = Tag.valueOf(words.get(0).getTagWord());
                 output[i].setTag(lastTag);
             } else {
                 if (Character.isUpperCase(word.charAt(0))) {
@@ -54,9 +54,9 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                     if (lastTag.equals(Tag.VERB)) {
                         List<Word> ws = database.findAllWords(tokens[i - 1]);
                         for (Word wv : ws) {
-                            if (isVerb(wv.getTag())) {
+                            if (isVerb(wv.getTagWord())) {
                                 String toBeVerbId = verbWordId(VERB_TO_BE);
-                                if (toBeVerbId != null && toBeVerbId.equals(wv.getLemmaId())) {
+                                if (toBeVerbId != null && toBeVerbId.equals(wv.getLemma().getId())) {
                                     output[i].setTag(Tag.ADJECTIVE);
                                 }
                             }
@@ -84,7 +84,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
         if (words == null || words.isEmpty()) {
             return null;
         }
-        return words.get(0).getWordId();
+        return words.get(0).getId();
     }
 
     private boolean isVerb(String tag) {

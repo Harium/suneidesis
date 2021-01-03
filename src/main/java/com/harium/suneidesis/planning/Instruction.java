@@ -1,6 +1,6 @@
 package com.harium.suneidesis.planning;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.knowledge.fact.frame.Triple;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 

@@ -1,9 +1,9 @@
 package com.harium.suneidesis.knowledge.fact.frame;
 
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.knowledge.concept.Action;
-import com.harium.suneidesis.knowledge.concept.Concept;
-import com.harium.suneidesis.knowledge.concept.ConceptType;
+import com.harium.suneidesis.concept.Being;
+import com.harium.suneidesis.concept.Action;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class TripleFactTest {
 
         TripleFact johnHasAName = new TripleFact(john, has, name);
 
-        Assert.assertEquals(ConceptType.CREATURE, johnHasAName.getSubject().getType());
+        Assert.assertEquals(ConceptType.BEING, johnHasAName.getSubject().getType());
         Assert.assertEquals(ConceptType.ACTION, johnHasAName.getPredicate().getType());
         Assert.assertNotNull(johnHasAName.getObject());
     }
@@ -33,7 +33,7 @@ public class TripleFactTest {
         Action thinks = new Action("think");
         TripleFact johnThinksHeHasAName = new TripleFact(john, thinks, johnHasAName);
 
-        Assert.assertEquals(ConceptType.CREATURE, johnThinksHeHasAName.getSubject().getType());
+        Assert.assertEquals(ConceptType.BEING, johnThinksHeHasAName.getSubject().getType());
         Assert.assertEquals(ConceptType.ACTION, johnThinksHeHasAName.getPredicate().getType());
         Assert.assertNotNull(johnThinksHeHasAName.getObject());
     }

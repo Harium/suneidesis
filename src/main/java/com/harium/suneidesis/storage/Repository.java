@@ -6,8 +6,8 @@ public interface Repository<T> {
 
     Collection<T> getAll();
 
-    String add(T t);
+    void set(String key, T t);
 
-    void get(String id);
+    T get(String id);
 
 }

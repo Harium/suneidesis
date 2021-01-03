@@ -1,7 +1,7 @@
 package com.harium.suneidesis.knowledge.linguistic.core.frame;
 
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Being;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.knowledge.context.ConversationContext;
 import com.harium.suneidesis.knowledge.time.TemporalConcept;
 import org.junit.Assert;
@@ -12,9 +12,10 @@ public class FrameIntegrationTest {
     @Test
     public void testNounStructureWithConversationContext() {
         Being speaker = new Being("Alice");
+        speaker.setId("alice");
 
         ConversationContext context = new ConversationContext(TemporalConcept.NOW);
-        context.getParticipants().add(speaker);
+        context.getParticipants().set(speaker.getId(), speaker);
 
         // A tuple
         String sentence = "I am happy";

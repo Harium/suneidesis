@@ -1,8 +1,8 @@
 package com.harium.suneidesis.planning;
 
 import com.harium.suneidesis.behavior.Environment;
-import com.harium.suneidesis.beign.Being;
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Being;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.planning.instruction.FindTask;
 import org.junit.Test;
 

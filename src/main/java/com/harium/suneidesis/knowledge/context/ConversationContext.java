@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.context;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.knowledge.space.SpaceConcept;
 import com.harium.suneidesis.storage.MemoryRepository;
 import com.harium.suneidesis.storage.Repository;

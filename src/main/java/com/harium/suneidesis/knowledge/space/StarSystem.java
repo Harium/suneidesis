@@ -1,6 +1,6 @@
 package com.harium.suneidesis.knowledge.space;
 
-import com.harium.suneidesis.knowledge.concept.Concept;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.storage.Repository;
 
 import java.util.List;
