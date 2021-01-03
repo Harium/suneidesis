@@ -3,18 +3,18 @@ package com.harium.suneidesis.concept.numeral;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 
-public class Numeral extends Concept {
+public class Quantity extends Concept {
 
     private static final String ATTRIBUTE_VALUE = "value";
-    public static final Numeral ZERO = new Numeral("Zero", "0");
+    public static final Quantity ZERO = new Quantity("Zero", "0");
 
-    public Numeral(String name) {
-        super(name, ConceptType.NUMERAL);
+    public Quantity(String name) {
+        super(name, ConceptType.QUANTITY);
         setExpression("0");
     }
 
-    public Numeral(String name, String expression) {
-        super(name, ConceptType.NUMERAL);
+    public Quantity(String name, String expression) {
+        super(name, ConceptType.QUANTITY);
         setExpression(expression);
     }
 

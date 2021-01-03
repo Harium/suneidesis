@@ -3,7 +3,7 @@ package com.harium.suneidesis.concept.attribute;
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Place;
-import com.harium.suneidesis.concept.numeral.Numeral;
+import com.harium.suneidesis.concept.numeral.Quantity;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.storage.Repository;
 
@@ -14,17 +14,16 @@ import java.util.Map;
 public class Attributes implements Repository<Concept> {
 
     public static final String ATTRIBUTE_ABILITIES = "abilities";
-    public static final String ATTRIBUTE_PARTS = "parts";
-
+    public static final String ATTRIBUTE_PROPERTIES = "props";
     public static final String ATTRIBUTE_LOCATION = "location";
     public static final String ATTRIBUTE_NAME = "name";
 
     private Abilities abilities;
     private Properties properties;
-    private Map<String, Concept> attributes = new HashMap<>();
+    private Map<String, Concept> attributeMap = new HashMap<>();
 
     public Concept get(String key) {
-        Concept concept = attributes.get(key);
+        Concept concept = attributeMap.get(key);
         if (concept == null) {
             return Concept.UNKNOWN;
         }
@@ -33,17 +32,17 @@ public class Attributes implements Repository<Concept> {
 
     @Override
     public Collection<Concept> getAll() {
-        return attributes.values();
+        return attributeMap.values();
     }
 
     public void set(String key, Concept concept) {
-        attributes.put(key, concept);
+        attributeMap.put(key, concept);
     }
 
     public Abilities getAbilities() {
         if (abilities == null) {
             abilities = new Abilities();
-            attributes.put(ATTRIBUTE_ABILITIES, abilities);
+            attributeMap.put(ATTRIBUTE_ABILITIES, abilities);
         }
         return abilities;
     }
@@ -51,7 +50,7 @@ public class Attributes implements Repository<Concept> {
     public Properties getProperties() {
         if (properties == null) {
             properties = new Properties();
-            attributes.put(ATTRIBUTE_PARTS, properties);
+            attributeMap.put(ATTRIBUTE_PROPERTIES, properties);
         }
         return properties;
     }
@@ -60,31 +59,58 @@ public class Attributes implements Repository<Concept> {
      * Helper Methods
      */
     public String getName() {
-        return attributes.get(ATTRIBUTE_NAME).getName();
+        return attributeMap.get(ATTRIBUTE_NAME).getName();
     }
 
     public void setName(String name) {
         Word nameWord = getOrCreateWord(name);
-        attributes.put(ATTRIBUTE_NAME, nameWord);
+        attributeMap.put(ATTRIBUTE_NAME, nameWord);
     }
 
     private Word getOrCreateWord(String name) {
         return new Word(name);
     }
 
+    public void is(Concept concept) {
+        merge(concept.getAttributes());
+    }
+
+    private void merge(Attributes attributes) {
+        for (Map.Entry<String, Concept> entry: attributes.attributeMap.entrySet()) {
+            String key = entry.getKey();
+            if (ATTRIBUTE_NAME.equals(key)) {
+                continue;
+            }
+            if (ATTRIBUTE_PROPERTIES.equals(key)) {
+                Properties properties = (Properties) entry.getValue();
+                getProperties().merge(properties);
+            } else if (ATTRIBUTE_ABILITIES.equals(key)) {
+                Abilities abilities = (Abilities) entry.getValue();
+                getAbilities().merge(abilities);
+            } else {
+                attributeMap.put(key, entry.getValue());
+            }
+        }
+    }
+
     public void can(Action concept) {
         getAbilities().add(concept);
     }
 
-    public void has(Concept part, Numeral numeral) {
-        getProperties().add(part, numeral);
+    public void has(Concept part, Quantity quantity) {
+        getProperties().add(part, quantity);
     }
 
     public void isLocatedAt(Place concept) {
-        attributes.put(ATTRIBUTE_LOCATION, concept);
+        attributeMap.put(ATTRIBUTE_LOCATION, concept);
     }
 
     public Concept getProperty(String key) {
         return getProperties().query(key);
+    }
+
+    public boolean equals(Attributes attributes) {
+        
+        return false;
     }
 }

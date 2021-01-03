@@ -2,13 +2,11 @@ package com.harium.suneidesis.concept.word;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
-import com.harium.suneidesis.concept.attribute.Attributes;
 
 public class Word extends Concept {
 
     public static final String ATTRIBUTE_TAG = "tag";
     public static final String ATTRIBUTE_LEMMA = "lemma";
-    private static final String ATTRIBUTE_VALUE = "value";
 
     public static final String TAG_ADJECTIVE = "adjective";
     public static final String TAG_ADVERB = "adverb";

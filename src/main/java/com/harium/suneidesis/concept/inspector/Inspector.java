@@ -4,7 +4,7 @@ import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.attribute.Attributes;
-import com.harium.suneidesis.concept.numeral.Numeral;
+import com.harium.suneidesis.concept.numeral.Quantity;
 
 public class Inspector {
 
@@ -18,6 +18,10 @@ public class Inspector {
         return new Inspector(concept);
     }
 
+    public boolean is(Concept concept) {
+        return this.concept.getAttributes().equals(concept.getAttributes());
+    }
+
     public boolean can(Action action) {
         return concept.getAttributes().getAbilities().query(action);
     }
@@ -28,11 +32,11 @@ public class Inspector {
 
     public boolean has(String key, Matcher matcher) {
         Concept toEval = this.concept.getAttributes().getProperty(key);
-        if (!ConceptType.NUMERAL.equals(toEval.getType())) {
+        if (!ConceptType.QUANTITY.equals(toEval.getType())) {
             return false;
         }
-        Numeral numeral = (Numeral) toEval;
-        return matcher.evaluate(numeral.getExpression());
+        Quantity quantity = (Quantity) toEval;
+        return matcher.evaluate(quantity.getExpression());
     }
 
     public boolean isAt(String name) {

@@ -9,7 +9,7 @@ public class WordVerb extends Word {
 	public static final String ATTRIBUTE_TRANSITIVITY = "transitivity";
 
 	public WordVerb(String name) {
-		super(name, Word.TAG_ADJECTIVE);
+		super(name, Word.TAG_VERB);
 	}
 	
 	public Word getPrepositions() {

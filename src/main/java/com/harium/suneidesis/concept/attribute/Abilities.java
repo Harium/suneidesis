@@ -21,4 +21,8 @@ public class Abilities extends Concept {
     public boolean query(String name) {
         return map.values().stream().anyMatch(concept -> name.equalsIgnoreCase(concept.getName()));
     }
+
+    public void merge(Abilities abilities) {
+        map.putAll(abilities.map);
+    }
 }

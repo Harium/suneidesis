@@ -11,10 +11,10 @@ public class ConceptType {
 	public static final Concept FEELING = new Concept("FEELING");
 	public static final Concept MATERIAL = new Concept("MATERIAL");
 	public static final Concept MEANING = new Concept("MEANING");
-	public static final Concept NUMERAL = new Concept("NUMERAL");
 	public static final Concept PART = new Concept("PART");
 	public static final Concept PLACE = new Concept("PLACE");
 	public static final Concept PHENOMENA = new Concept("PHENOMENA");
+	public static final Concept QUANTITY = new Concept("QUANTITY");
 	public static final Concept TIME_UNIT = new Concept("TIME UNIT");
 	public static final Concept SOUND = new Concept("SOUND");
 	public static final Concept SIMULATION = new Concept("SIMULATION");
