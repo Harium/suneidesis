@@ -2,33 +2,34 @@ package com.harium.suneidesis.concept;
 
 
 public class Concept extends Thing {
-	
-	public static final Concept UNKNOWN = new Concept("unknown", ConceptType.UNKNOWN);
-	protected ConceptType type = ConceptType.UNKNOWN;
-	
-	public Concept(String name) {
-		super(name);
-	}
+
+	public static final String ATTRIBUTE_TYPE = "type";
+
+	public static final Concept UNKNOWN = new Concept(ConceptType.UNKNOWN);
 
 	public Concept() {
 		super();
 	}
 
-	public Concept(ConceptType type) {
-		super(type.name());
-		this.type = type;
-	}
-
-	public Concept(String name, ConceptType type) {
+	public Concept(String name) {
 		super(name);
-		this.type = type;
 	}
 
-	public ConceptType getType() {
-		return type;
+	public Concept(Concept type) {
+		super();
+		setType(type);
 	}
 
-	public void setType(ConceptType type) {
-		this.type = type;
+	public Concept(String name, Concept type) {
+		super(name);
+		setType(type);
+	}
+
+	public Concept getType() {
+		return attributes.get(ATTRIBUTE_TYPE);
+	}
+
+	public void setType(Concept type) {
+		attributes.set(ATTRIBUTE_TYPE, type);
 	}
 }

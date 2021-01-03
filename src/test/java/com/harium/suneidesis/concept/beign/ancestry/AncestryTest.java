@@ -1,7 +1,7 @@
 package com.harium.suneidesis.concept.beign.ancestry;
 
 import com.harium.suneidesis.concept.Being;
-import com.harium.suneidesis.concept.beign.Creature;
+import com.harium.suneidesis.concept.Concept;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class AncestryTest {
     @Test
     public void testInterspeciesCoupleAncestry() {
         Being mother = new Being("Mary");
-        Creature father = new Creature("Spirit");
+        Concept father = new Concept("Spirit");
 
         GenericAncestry ancestry = new GenericAncestry(mother, father);
 

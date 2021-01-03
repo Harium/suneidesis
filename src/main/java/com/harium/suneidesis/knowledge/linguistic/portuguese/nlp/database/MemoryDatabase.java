@@ -1,16 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.VerbConjugation;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.WordModel;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MemoryDatabase extends com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.MemoryDatabase {
 

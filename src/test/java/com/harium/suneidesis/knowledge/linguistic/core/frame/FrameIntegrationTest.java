@@ -12,9 +12,10 @@ public class FrameIntegrationTest {
     @Test
     public void testNounStructureWithConversationContext() {
         Being speaker = new Being("Alice");
+        speaker.setId("alice");
 
         ConversationContext context = new ConversationContext(TemporalConcept.NOW);
-        context.getParticipants().add(speaker);
+        context.getParticipants().set(speaker.getId(), speaker);
 
         // A tuple
         String sentence = "I am happy";

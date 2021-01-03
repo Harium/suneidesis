@@ -6,7 +6,7 @@ import com.harium.suneidesis.concept.Place;
 import com.harium.suneidesis.concept.inspector.matchers.Equals;
 import com.harium.suneidesis.concept.inspector.matchers.GreaterThan;
 import com.harium.suneidesis.concept.inspector.matchers.LowerThan;
-import com.harium.suneidesis.concept.numeral.Amount;
+import com.harium.suneidesis.concept.numeral.Numeral;
 import org.junit.Test;
 
 import static com.harium.suneidesis.concept.inspector.Inspector.does;
@@ -18,7 +18,7 @@ public class AttributesTest {
     public void testSimple() {
         Concept bat = new Concept("bat");
         bat.can(new Action("fly"));
-        bat.has(new Concept("wing"), new Amount("two", "2"));
+        bat.has(new Concept("wing"), new Numeral("two", "2"));
         bat.isLocatedAt(new Place("cave"));
 
         assertTrue(does(bat).can("fly"));

@@ -1,10 +1,9 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.VerbConjugation;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.WordModel;
+import com.harium.suneidesis.concept.word.WordVerb;
+import com.harium.suneidesis.concept.word.WordVerbConjugation;
+import com.harium.suneidesis.concept.word.Word;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +16,8 @@ public class MemoryDatabase implements WordDatabase {
     Map<String, List<Word>> words = new HashMap<>();
     // Key is the id and value the word
     Map<String, Word> wordIds = new HashMap<>();
-    Map<String, Verb> verbs = new HashMap<>();
-    Map<String, VerbConjugation> verbConjugations = new HashMap<>();
+    Map<String, WordVerb> verbs = new HashMap<>();
+    Map<String, WordVerbConjugation> verbConjugations = new HashMap<>();
 
     private long id = 0;
 
@@ -34,16 +33,15 @@ public class MemoryDatabase implements WordDatabase {
         if (!words.containsKey(lemma)) {
             lemmaId = add(lemma, Tag.VERB);
         } else {
-            lemmaId = words.get(lemma).get(0).getWordId();
+            lemmaId = words.get(lemma).get(0).getId();
         }
 
-        Verb v = new Verb(lemmaId);
+        WordVerb v = new WordVerb(lemmaId);
         verbs.put(word, v);
     }
 
     protected String add(String word, Tag tag) {
-        Word w = new Word();
-        w.setWord(word);
+        Word w = new Word(word);
         w.setTag(tag.name());
 
         return save(w);
@@ -57,8 +55,8 @@ public class MemoryDatabase implements WordDatabase {
     @Override
     public String save(Word w) {
         String id = generateId();
-        w.setWordId(id);
-        List<Word> words = this.words.computeIfAbsent(w.getWord(), k -> new ArrayList<>());
+        w.setId(id);
+        List<Word> words = this.words.computeIfAbsent(w.getName(), k -> new ArrayList<>());
         words.add(w);
 
         wordIds.put(id, w);
@@ -66,15 +64,17 @@ public class MemoryDatabase implements WordDatabase {
     }
 
     @Override
-    public String save(Verb verb) {
-        verbs.put(verb.getWordId(), verb);
-        return verb.getWordId();
+    public String save(WordVerb verb) {
+        save((Word)verb);
+        verbs.put(verb.getId(), verb);
+        return verb.getId();
     }
 
     @Override
-    public String save(VerbConjugation verbConjugation) {
-        verbConjugations.put(verbConjugation.getWordId(), verbConjugation);
-        return verbConjugation.getWordId();
+    public String save(WordVerbConjugation verbConjugation) {
+        save((Word)verbConjugation);
+        verbConjugations.put(verbConjugation.getId(), verbConjugation);
+        return verbConjugation.getId();
     }
 
     @Override
@@ -88,58 +88,54 @@ public class MemoryDatabase implements WordDatabase {
     }
 
     @Override
-    public WordModel findModelByWordIdAndTag(String wordId, String tag) {
+    public Word findModelByWordIdAndTag(String wordId, String tag) {
         Word w = wordIds.get(wordId);
-        if (Tag.VERB.name().equals(w.getTag())) {
-            return verbs.get(w.getWord());
+        if (Tag.VERB.name().equals(w.getTagWord())) {
+            return verbs.get(w.getName());
         }
         return null;
     }
 
     @Override
-    public Verb findVerbByWordId(String wordId) {
+    public WordVerb findVerbByWordId(String wordId) {
         Word w = wordIds.get(wordId);
         if (w == null) {
             return null;
         }
-        return verbs.get(w.getWordId());
+        return verbs.get(w.getId());
     }
 
     @Override
-    public VerbConjugation findVerbConjugationByWordId(String wordId) {
+    public WordVerbConjugation findVerbConjugationByWordId(String wordId) {
         Word w = wordIds.get(wordId);
         if (w == null) {
             return null;
         }
-        return verbConjugations.get(w.getWordId());
+        return verbConjugations.get(w.getId());
     }
 
-    public String addVerb(String verbWord, String prepositions, String transitivity) {
-        // Save on the index database
-        Word word = new Word();
-        word.setTag(Tag.VERB.name());
-        word.setWord(verbWord);
-        String wordId = save(word);
+    public WordVerb addVerb(String verbWord, String prepositions, String transitivity) {
+        WordVerb verb = new WordVerb(verbWord);
+        verb.setLemma(verb);
+        verb.setPrepositions(new Word(prepositions));
+        verb.setTransitivity(new Word(transitivity));
+        save(verb);
 
-        Verb verb = new Verb();
-        verb.setWordId(wordId);
-        verb.setPrepositions(prepositions);
-        verb.setTransitivity(transitivity);
-
-        return save(verb);
+        return verb;
     }
 
-    public String addVerbConjugation(String verbWord, String infinitiveWordId, Tag tag, String tense, String person) {
-        Word w = new Word();
+    public String addVerbConjugation(String word, WordVerb verb, Tag tag, String tense, String person) {
+        Word infinitive = verb;
+        /*Word w = new Word(verbWord);
         w.setTag(tag.name());
-        w.setWord(verbWord);
-        w.setLemmaId(infinitiveWordId);
-        String wordId = save(w);
+        w.setLemma(new Word(infinitiveWordId));
+        String wordId = save(w);*/
 
-        VerbConjugation conjugation = new VerbConjugation();
-        conjugation.setWordId(wordId);
-        conjugation.setTense(tense);
-        conjugation.setPerson(person);
+        WordVerbConjugation conjugation = new WordVerbConjugation(word);
+        conjugation.setLemma(verb);
+        conjugation.setTag(tag.name());
+        conjugation.setTense(new Word(tense));
+        conjugation.setPerson(new Word(person));
 
         return save(conjugation);
     }

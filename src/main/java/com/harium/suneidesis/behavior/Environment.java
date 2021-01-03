@@ -12,7 +12,9 @@ public class Environment {
     Repository<Thing> concepts = new MemoryRepository<>();
 
     public String add(Concept concept) {
-        return concepts.add(concept);
+        String id = concept.getId();
+        concepts.set(concept.getId(), concept);
+        return id;
     }
 
     public Collection<Thing> getAll() {

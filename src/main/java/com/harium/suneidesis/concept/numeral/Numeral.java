@@ -3,17 +3,17 @@ package com.harium.suneidesis.concept.numeral;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 
-public class Amount extends Concept {
+public class Numeral extends Concept {
 
     private static final String ATTRIBUTE_VALUE = "value";
-    public static final Amount ZERO = new Amount("Zero", "0");
+    public static final Numeral ZERO = new Numeral("Zero", "0");
 
-    public Amount(String name) {
+    public Numeral(String name) {
         super(name, ConceptType.NUMERAL);
         setExpression("0");
     }
 
-    public Amount(String name, String expression) {
+    public Numeral(String name, String expression) {
         super(name, ConceptType.NUMERAL);
         setExpression(expression);
     }

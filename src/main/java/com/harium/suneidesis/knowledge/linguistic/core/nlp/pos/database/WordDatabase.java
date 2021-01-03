@@ -1,9 +1,8 @@
 package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database;
 
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Verb;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.VerbConjugation;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.Word;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.model.WordModel;
+import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.concept.word.WordVerb;
+import com.harium.suneidesis.concept.word.WordVerbConjugation;
 
 import java.util.List;
 
@@ -11,18 +10,18 @@ public interface WordDatabase {
 
     String save(Word word);
 
-    String save(Verb verb);
+    String save(WordVerb verb);
 
-    String save(VerbConjugation verbConjugation);
+    String save(WordVerbConjugation verbConjugation);
 
     List<Word> findAllWords(String word);
 
     Word findWordById(String wordId);
 
-    WordModel findModelByWordIdAndTag(String wordId, String tag);
+    Word findModelByWordIdAndTag(String wordId, String tag);
 
-    Verb findVerbByWordId(String wordId);
+    WordVerb findVerbByWordId(String wordId);
 
-    VerbConjugation findVerbConjugationByWordId(String wordId);
+    WordVerbConjugation findVerbConjugationByWordId(String wordId);
 
 }

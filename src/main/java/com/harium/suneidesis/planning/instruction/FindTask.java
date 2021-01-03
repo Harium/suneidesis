@@ -1,7 +1,6 @@
 package com.harium.suneidesis.planning.instruction;
 
 import com.harium.suneidesis.behavior.Environment;
-import com.harium.suneidesis.consciousness.Consciousness;
 import com.harium.suneidesis.concept.Thing;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.planning.Inventory;
@@ -17,7 +16,7 @@ public class FindTask extends BaseTask {
     }
 
     @Override
-    public boolean execute(Consciousness subject, Environment environment) {
+    public boolean execute(Concept subject, Environment environment) {
         boolean found = false;
         for (Thing concept : environment.getAll()) {
             if (concept instanceof Inventory) {
@@ -39,7 +38,7 @@ public class FindTask extends BaseTask {
         return super.execute(subject, environment);
     }
 
-    private boolean canAccess(Consciousness subject, Inventory inventory) {
+    private boolean canAccess(Concept subject, Inventory inventory) {
         return inventory.canAccess(subject);
     }
 

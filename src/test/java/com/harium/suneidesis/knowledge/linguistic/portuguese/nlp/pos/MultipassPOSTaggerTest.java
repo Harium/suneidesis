@@ -1,5 +1,6 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
+import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
@@ -29,10 +30,10 @@ public class MultipassPOSTaggerTest {
     private WordDatabase buildDatabase() {
         MemoryDatabase database = new MemoryDatabase();
 
-        String goId = database.addVerb("ir", "a|de|X", "");
+        WordVerb go = database.addVerb("ir", "a|de|X", "");
 
-        database.addVerbConjugation("fui", goId, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), FIRST_PERSON_SINGULAR);
-        database.addVerbConjugation("foi", goId, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), THIRD_PERSON_SINGULAR);
+        database.addVerbConjugation("fui", go, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), FIRST_PERSON_SINGULAR);
+        database.addVerbConjugation("foi", go, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), THIRD_PERSON_SINGULAR);
 
         return database;
     }

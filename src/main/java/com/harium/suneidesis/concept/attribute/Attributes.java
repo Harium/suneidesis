@@ -2,14 +2,16 @@ package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.Place;
-import com.harium.suneidesis.concept.numeral.Amount;
+import com.harium.suneidesis.concept.numeral.Numeral;
+import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.storage.Repository;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Attributes {
+public class Attributes implements Repository<Concept> {
 
     public static final String ATTRIBUTE_ABILITIES = "abilities";
     public static final String ATTRIBUTE_PARTS = "parts";
@@ -18,7 +20,7 @@ public class Attributes {
     public static final String ATTRIBUTE_NAME = "name";
 
     private Abilities abilities;
-    private Parts parts;
+    private Properties properties;
     private Map<String, Concept> attributes = new HashMap<>();
 
     public Concept get(String key) {
@@ -27,6 +29,11 @@ public class Attributes {
             return Concept.UNKNOWN;
         }
         return concept;
+    }
+
+    @Override
+    public Collection<Concept> getAll() {
+        return attributes.values();
     }
 
     public void set(String key, Concept concept) {
@@ -41,42 +48,43 @@ public class Attributes {
         return abilities;
     }
 
-    public Parts getParts() {
-        if (parts == null) {
-            parts = new Parts();
-            attributes.put(ATTRIBUTE_PARTS, parts);
+    public Properties getProperties() {
+        if (properties == null) {
+            properties = new Properties();
+            attributes.put(ATTRIBUTE_PARTS, properties);
         }
-        return parts;
+        return properties;
     }
 
     /**
      * Helper Methods
      */
     public String getName() {
-        return attributes.get(ATTRIBUTE_NAME).getId();
+        return attributes.get(ATTRIBUTE_NAME).getName();
     }
 
     public void setName(String name) {
-        Concept concept = new Concept();
-        // Hacky way to avoid buffer overflow
-        concept.setId(name);
-        concept.setType(ConceptType.NAME);
-        attributes.put(ATTRIBUTE_NAME, concept);
+        Word nameWord = getOrCreateWord(name);
+        attributes.put(ATTRIBUTE_NAME, nameWord);
+    }
+
+    private Word getOrCreateWord(String name) {
+        return new Word(name);
     }
 
     public void can(Action concept) {
         getAbilities().add(concept);
     }
 
-    public void has(Concept part, Amount amount) {
-        getParts().add(part, amount);
+    public void has(Concept part, Numeral numeral) {
+        getProperties().add(part, numeral);
     }
 
     public void isLocatedAt(Place concept) {
         attributes.put(ATTRIBUTE_LOCATION, concept);
     }
 
-    public Concept getPart(String key) {
-        return getParts().query(key);
+    public Concept getProperty(String key) {
+        return getProperties().query(key);
     }
 }

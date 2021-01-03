@@ -16,20 +16,25 @@ public class MemoryRepository<T extends Thing> implements Repository<T> {
         return getData().values();
     }
 
-    @Override
     public String add(T t) {
+        String id = t.getId();
+        set(t.getId(), t);
+        return id;
+    }
+
+    @Override
+    public void set(String key, T t) {
         String id = t.getId();
         if (id == null) {
             id = generateId();
             t.setId(id);
         }
         getData().put(id, t);
-        return id;
     }
 
     @Override
-    public void get(String id) {
-        getData().get(id);
+    public T get(String id) {
+        return getData().get(id);
     }
 
     public Map<String, T> getData() {

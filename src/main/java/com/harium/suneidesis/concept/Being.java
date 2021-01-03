@@ -1,18 +1,19 @@
 package com.harium.suneidesis.concept;
 
-import com.harium.suneidesis.concept.beign.Creature;
 import com.harium.suneidesis.concept.beign.ancestry.Ancestry;
+import com.harium.suneidesis.concept.numeral.Numeral;
 
 /**
  * Being here should be stateless
  */
-public class Being extends Creature {
+public class Being extends Concept {
 
     public static final String ATTRIBUTE_ANCESTRY = "ancestry";
     public static final String ATTRIBUTE_GENDER = "gender";
 
     public Being(String name) {
-        super(name);
+        super(name, ConceptType.BEING);
+        has(new Concept("life"), new Numeral("one", "1"));
     }
 
     public Being(String name, Concept gender) {

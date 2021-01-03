@@ -12,36 +12,36 @@ import org.junit.Test;
 
 public class ConsciousnessSimulationTest {
 
-    ConsciousnessSimulation alexa;
-    ConsciousnessSimulation siri;
+    /*Concept alexa;
+    Concept siri;
 
     @Before
     public void setUp() {
-        alexa = new ConsciousnessSimulation("Alexa");
+        alexa = new Concept("Alexa");
         alexa.setMemories(buildSelf(alexa));
 
-        siri = new ConsciousnessSimulation("Siri");
+        siri = new Concept("Siri");
         siri.setMemories(buildSelf(siri));
     }
 
-    private Repository<Fact> buildSelf(Consciousness consciousness) {
+    private Repository<Fact> buildSelf(Concept consciousness) {
         Repository<Fact> facts = new MemoryRepository<>();
 
         FullFrame think = new FullFrame();
         think.setSubject(consciousness);
         think.setPredicate(new Concept("think"));
-        facts.add(think);
+        facts.set(think);
 
         FullFrame exists = new FullFrame();
         exists.setSubject(consciousness);
         exists.setPredicate(new Concept("exist"));
-        facts.add(exists);
+        facts.set(exists);
 
         FullFrame self = new FullFrame();
         self.setSubject(consciousness);
         self.setPredicate(new Concept("is"));
         self.setObject(new Concept("software"));
-        facts.add(exists);
+        facts.set(exists);
 
         return facts;
     }
@@ -56,6 +56,6 @@ public class ConsciousnessSimulationTest {
                 }
             }
         }
-    }
+    }*/
 
 }

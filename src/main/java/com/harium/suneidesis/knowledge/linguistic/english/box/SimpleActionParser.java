@@ -37,7 +37,7 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
 
         if (!querySubject.isEmpty()) {
 
-            Collection<Fact> actions = being.getMemories().getAll();
+            /*Collection<Fact> actions = being.getMemories().getAll();
 
             Fact action = null;
 
@@ -54,7 +54,7 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
                 if (action != null) {
                     output.print(describeAction(action));
                 }
-            }
+            }*/
         }
 
         output.print("No.");

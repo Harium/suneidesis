@@ -17,7 +17,7 @@ public class TripleFactTest {
 
         TripleFact johnHasAName = new TripleFact(john, has, name);
 
-        Assert.assertEquals(ConceptType.CREATURE, johnHasAName.getSubject().getType());
+        Assert.assertEquals(ConceptType.BEING, johnHasAName.getSubject().getType());
         Assert.assertEquals(ConceptType.ACTION, johnHasAName.getPredicate().getType());
         Assert.assertNotNull(johnHasAName.getObject());
     }
@@ -33,7 +33,7 @@ public class TripleFactTest {
         Action thinks = new Action("think");
         TripleFact johnThinksHeHasAName = new TripleFact(john, thinks, johnHasAName);
 
-        Assert.assertEquals(ConceptType.CREATURE, johnThinksHeHasAName.getSubject().getType());
+        Assert.assertEquals(ConceptType.BEING, johnThinksHeHasAName.getSubject().getType());
         Assert.assertEquals(ConceptType.ACTION, johnThinksHeHasAName.getPredicate().getType());
         Assert.assertNotNull(johnThinksHeHasAName.getObject());
     }
