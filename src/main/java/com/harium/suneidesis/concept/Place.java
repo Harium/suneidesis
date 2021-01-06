@@ -1,31 +1,27 @@
 package com.harium.suneidesis.concept;
 
-import com.harium.suneidesis.knowledge.space.SpaceConcept;
-
 public class Place extends Concept {
 
-	// Where in the Universe and what Universe (usually Earth)
-	private SpaceConcept space;
+	private static final String ATTRIBUTE_AT = "place_at";
+	private static final String ATTRIBUTE_UNIVERSE = "place_universe";
+	private static final String ATTRIBUTE_GALAXY = "place_galaxy";
+	private static final String ATTRIBUTE_STAR_SYSTEM = "place_start_system";
+	private static final String ATTRIBUTE_PLANET = "place_planet";
 
-	// Place is recursive to represent place inside a place
-	private Place place = null;
+	private static final String ATTRIBUTE_LATITUDE = "place_latitude";
+	private static final String ATTRIBUTE_LONGITUDE = "place_longitude";
 
 	public Place(String name) {
 		super(name, ConceptType.PLACE);
 	}
 	
 	public Place at(Place place) {
-		this.place = place;
-		
+		set(ATTRIBUTE_AT, place);
 		return this;
 	}
-	
-	public void setPlace(Place place) {
-		this.place = place;
-	}
-	
+
 	public Place getPlace() {
-		return place;
+		return (Place) get(ATTRIBUTE_AT);
 	}
 	
 }

@@ -1,36 +1,19 @@
 package com.harium.suneidesis.planning;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.knowledge.fact.frame.Triple;
-import com.harium.suneidesis.knowledge.time.TemporalConcept;
+import com.harium.suneidesis.concept.Fact;
 
-public class Instruction extends Triple {
-
-    protected Concept whereInObject;
-    protected TemporalConcept when;
+public class Instruction extends Fact {
 
     public Instruction() {
         super();
     }
 
     public Instruction(Concept subject, Concept predicate, Concept object) {
-        super(subject, predicate, object);
-    }
-
-    public Concept getWhereInObject() {
-        return whereInObject;
-    }
-
-    public void setWhereInObject(Concept whereInObject) {
-        this.whereInObject = whereInObject;
-    }
-
-    public TemporalConcept getWhen() {
-        return when;
-    }
-
-    public void setWhen(TemporalConcept when) {
-        this.when = when;
+        super();
+        this.subject(subject);
+        this.predicate(predicate);
+        this.object(object);
     }
 
 }

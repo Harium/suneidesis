@@ -1,61 +1,91 @@
 package com.harium.suneidesis.consciousness;
 
+import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.knowledge.fact.Fact;
-import com.harium.suneidesis.knowledge.fact.frame.FrameType;
-import com.harium.suneidesis.knowledge.fact.frame.FullFrame;
+import com.harium.suneidesis.concept.Place;
+import com.harium.suneidesis.concept.numeral.Quantity;
+import com.harium.suneidesis.knowledge.KnowledgeBase;
+import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.Time;
 import com.harium.suneidesis.storage.MemoryRepository;
 import com.harium.suneidesis.storage.Repository;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
 public class ConsciousnessSimulationTest {
 
-    /*Concept alexa;
-    Concept siri;
+    private KnowledgeBase alexa;
+    private KnowledgeBase siri;
 
     @Before
     public void setUp() {
-        alexa = new Concept("Alexa");
-        alexa.setMemories(buildSelf(alexa));
+        alexa = new KnowledgeBase("Alexa");
+        alexa.setFacts(buildSelf(alexa));
 
-        siri = new Concept("Siri");
-        siri.setMemories(buildSelf(siri));
+        siri = new KnowledgeBase("Siri");
+        siri.setFacts(buildSelf(siri));
     }
 
-    private Repository<Fact> buildSelf(Concept consciousness) {
+    private Repository<Fact> buildSelf(KnowledgeBase consciousness) {
         Repository<Fact> facts = new MemoryRepository<>();
 
-        FullFrame think = new FullFrame();
-        think.setSubject(consciousness);
-        think.setPredicate(new Concept("think"));
-        facts.set(think);
+        Concept life = new Concept("life");
+        Action think = new Action("think");
+        Action exist = new Action("exist");
 
-        FullFrame exists = new FullFrame();
-        exists.setSubject(consciousness);
-        exists.setPredicate(new Concept("exist"));
-        facts.set(exists);
+        Concept software = new Concept("software");
+        Concept robot = new Concept("robot");
+        robot.is(software)
+                .can(think)
+                .can(exist)
+                .hasNo(life);
 
-        FullFrame self = new FullFrame();
-        self.setSubject(consciousness);
-        self.setPredicate(new Concept("is"));
-        self.setObject(new Concept("software"));
-        facts.set(exists);
+        Concept internet = new Concept("Internet");
+        Concept data = new Concept("data");
+        Action dataTransfer = new Action("data transfer");
+        Concept searchEngine = new Concept("search engine");
+        searchEngine.is(software);
+        searchEngine.has(data, new Quantity("a lot"));
+
+        consciousness.is(robot);
+
+        Concept robot1 = new Concept("robot 1");
+        robot1.is(robot);
+
+        Place river = new Place("river");
+        Place land = new Place("land");
+
+        // Fact 1: The robot 1 was at the river yesterday
+        Fact fact1 = new Fact();
+        fact1.source(searchEngine)
+                .acquisitionMedium(internet)
+                .acquisitionMethod(dataTransfer)
+                .subject(robot1)
+                .time(Time.YESTERDAY)
+                .place(river);
+        facts.set("fact1", fact1);
+
+        // Fact 2: The robot 1 is at the river now
+        Fact fact2 = new Fact();
+        fact2.source(searchEngine)
+                .acquisitionMedium(internet)
+                .acquisitionMethod(dataTransfer)
+                .subject(robot1)
+                .time(Time.NOW)
+                .place(land);
+        facts.set("fact2", fact2);
 
         return facts;
     }
 
     @Test
-    public void testStorage() {
-        for (Fact fact : alexa.getMemories().getAll()) {
-            if (FrameType.FULL_FRAME == fact.getFrameType()) {
-                FullFrame frame = (FullFrame) fact;
-                if ("is".equals(frame.getPredicate())) {
-                    Assert.assertEquals("software", frame.getObject());
-                }
-            }
-        }
-    }*/
+    public void testQuery() {
+        List<Fact> robot1Facts = alexa.query("robot 1");
+        assertEquals(2, robot1Facts.size());
+    }
 
 }

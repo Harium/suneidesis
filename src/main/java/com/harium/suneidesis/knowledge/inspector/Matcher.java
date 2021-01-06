@@ -1,4 +1,4 @@
-package com.harium.suneidesis.concept.inspector;
+package com.harium.suneidesis.knowledge.inspector;
 
 public interface Matcher {
 

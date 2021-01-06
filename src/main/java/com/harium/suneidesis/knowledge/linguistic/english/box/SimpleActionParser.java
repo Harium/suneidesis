@@ -3,12 +3,11 @@ package com.harium.suneidesis.knowledge.linguistic.english.box;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
-import com.harium.suneidesis.concept.Place;
-import com.harium.suneidesis.knowledge.fact.Fact;
-import com.harium.suneidesis.knowledge.fact.frame.FrameType;
-import com.harium.suneidesis.knowledge.fact.frame.FullFrame;
+import com.harium.suneidesis.concept.Fact;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class SimpleActionParser extends BeingParser implements ActionParser {
 
@@ -27,9 +26,7 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
         String querySubject = "";
 
         for (int i = 0; i < parts.length; i++) {
-
             if (parts[i].equalsIgnoreCase("about")) {
-
                 querySubject = parts[i + 1];
                 break;
             }
@@ -61,113 +58,73 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
         return BaseEnglishBox.checkAction(parts[0], DID);
     }
 
-    private Fact findActionByActorsName(String actorName, Collection<Fact> actions) {
-
+    private List<Fact> findActionByActorsName(String actorName, Collection<Fact> actions) {
+        List<Fact> facts = new ArrayList<>();
         String name = actorName.toLowerCase();
 
-        for (Fact action : actions) {
-            if (action.getFrameType() != FrameType.FULL_FRAME) {
-                continue;
-            }
-
-            FullFrame frame = (FullFrame) action;
-
-            boolean hasActor = frame.getSubject().getName().toLowerCase().contains(name);
-
+        for (Fact frame : actions) {
+            boolean hasActor = frame.getSubject() !=null && frame.getSubject().getName().toLowerCase().contains(name);
             boolean hasTarget = frame.getObject() != null && frame.getObject().getName().toLowerCase().contains(name);
 
-            if (hasActor || hasTarget)
-
-                return action;
-
-
-        }
-
-        return null;
-    }
-
-    private Fact findActionByName(String actionName, Collection<Fact> actions) {
-
-        for (Fact action : actions) {
-            if (action.getFrameType() != FrameType.FULL_FRAME) {
-                continue;
-            }
-
-            FullFrame frame = (FullFrame) action;
-            if (frame.getPredicate() == null) {
-                continue;
-            }
-            if (actionName.equalsIgnoreCase(frame.getPredicate().getName())) {
-                return action;
+            if (hasActor || hasTarget) {
+                facts.add(frame);
             }
         }
 
-        return null;
+        return facts;
     }
 
-    public String describeAction(Fact action) {
+    private List<Fact> findByActionName(String actionName, Collection<Fact> actions) {
+        List<Fact> facts = new ArrayList<>();
+        for (Fact fact : actions) {
+            if (fact.getPredicate() !=null && fact.getPredicate().getName().toLowerCase().contains(actionName)) {
+                facts.add(fact);
+            }
+        }
+
+        return facts;
+    }
+
+    public String describeAction(Fact frame) {
         StringBuilder builder = new StringBuilder();
 
-        switch (action.getFrameType()) {
-            case FULL_FRAME:
-                FullFrame frame = (FullFrame) action;
+        // Change Based on source
+        builder.append("I heard that");
 
-                // Change Based on source
-                builder.append("I heard that");
+        builder.append(" ");
+        builder.append(frame.getSubject().getName());
+        builder.append(" ");
 
-                builder.append(" ");
-                builder.append(frame.getSubject().getName());
-                builder.append(" ");
+        String actionAsText = frame.getPredicate().getName().toLowerCase();
+        builder.append(actionAsText);
+        if (!actionAsText.endsWith("s")) {
+            builder.append("s");
+        }
 
-                String actionAsText = frame.getPredicate().getName().toLowerCase();
-                builder.append(actionAsText);
-                if (!actionAsText.endsWith("s")) {
-                    builder.append("s");
+        if (frame.getObject() != null) {
+            builder.append(" ");
+            builder.append(frame.getObject().getName());
+
+            if (frame.getObjectPart() != null) {
+
+                if (!frame.getObjectPart().getName().isEmpty()) {
+                    builder.append("'s ");
+                    builder.append(frame.getObjectPart().getName());
                 }
+            }
+        }
 
-                if (frame.getObject() != null) {
-                    builder.append(" ");
-                    builder.append(frame.getObject().getName());
+        if (frame.getPlace() != null) {
+            builder.append(" ");
+            builder.append(frame.getPlace().getName());
+        }
 
-                    if (frame.getWhereInObject() != null) {
-
-                        if (!frame.getWhereInObject().getName().isEmpty()) {
-                            builder.append("'s ");
-                            builder.append(frame.getWhereInObject().getName());
-                        }
-                    }
-                }
-
-                if (frame.getPlace() != null) {
-                    builder.append(" ");
-                    builder.append(getPlace(frame.getPlace()));
-                }
-
-                if (frame.getWhen() != null) {
-                    builder.append(", ");
-                    builder.append(frame.getWhen().getName());
-                }
-                break;
-            default:
-                break;
-
+        if (frame.getTime() != null) {
+            builder.append(", ");
+            builder.append(frame.getTime().getName());
         }
 
         return builder.toString();
-    }
-
-    private String getPlace(Place place) {
-
-        String placeSentence = place.getName();
-
-        if (place.getPlace() != null) {
-
-            placeSentence += " ";
-
-            placeSentence += getPlace(place.getPlace());
-        }
-
-        return placeSentence;
     }
 
 }

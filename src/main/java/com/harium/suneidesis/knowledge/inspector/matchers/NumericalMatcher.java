@@ -1,6 +1,6 @@
-package com.harium.suneidesis.concept.inspector.matchers;
+package com.harium.suneidesis.knowledge.inspector.matchers;
 
-import com.harium.suneidesis.concept.inspector.Matcher;
+import com.harium.suneidesis.knowledge.inspector.Matcher;
 
 public abstract class NumericalMatcher implements Matcher {
 

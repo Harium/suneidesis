@@ -1,4 +1,4 @@
-package com.harium.suneidesis.concept.inspector;
+package com.harium.suneidesis.knowledge.inspector;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;

@@ -2,8 +2,12 @@ package com.harium.suneidesis.concept.word;
 
 public class WordNoun extends Word {
 
-	public static final String ATTRIBUTE_GENDER = "gender";
-	public static final String ATTRIBUTE_TYPE = "type";
+	private static final String ATTRIBUTE_GENDER = "gender";
+	private static final String ATTRIBUTE_TYPE = "type";
+
+	public static final Word GENDER_MASCULINE = new Word("masculine");
+	public static final Word GENDER_FEMININE = new Word("feminine");
+	public static final Word GENDER_NEUTRAL = new Word("neutral");
 
 	public WordNoun(String name) {
 		super(name, Word.TAG_NOUN);

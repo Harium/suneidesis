@@ -1,20 +1,19 @@
 package com.harium.suneidesis.knowledge.weather;
 
-import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.Phenomenon;
 
-public class Weather extends Concept {
+public class Weather {
 
-    private WeatherType type;
+    private static final Phenomenon SUNNY = weather("sunny");
+    private static final Phenomenon CLOUDY = weather("cloudy");
+    private static final Phenomenon RAINY = weather("rainy");
+    private static final Phenomenon SNOWY = weather("snowy");
+    private static final Phenomenon WINDY = weather("windy");
 
-    public Weather(WeatherType type) {
-        this.type = type;
+    private static Phenomenon weather(String name) {
+        Phenomenon phenomenon = new Phenomenon(name);
+        phenomenon.setPhenomenonType(Phenomenon.TYPE_WEATHER);
+        return phenomenon;
     }
 
-    public WeatherType getWeather() {
-        return type;
-    }
-
-    public void setWeather(WeatherType type) {
-        this.type = type;
-    }
 }

@@ -1,25 +1,27 @@
 package com.harium.suneidesis.knowledge.linguistic.english.frame;
 
-import com.harium.suneidesis.knowledge.linguistic.core.frame.*;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.knowledge.linguistic.core.fact.*;
 
 public class FrameReconstructor implements Reconstructor {
 
     @Override
-    public String reconstruct(BaseFrame frame) {
+    public String reconstruct(Fact frame) {
         StringBuilder builder = new StringBuilder();
 
-        if (frame.getNoun() != null) {
-            builder.append(reconstructNounFrame(frame.getNoun()));
+        /*if (frame.getSubject() != null) {
+            builder.append(reconstructNounFrame(frame.getSubject()));
         }
 
-        if (frame.getAction() != null) {
-            builder.append(reconstructActionFrame(frame.getAction()));
-        }
+        if (frame.getPredicate() != null) {
+            builder.append(reconstructActionFrame(frame.getPredicate()));
+        }*/
 
         return builder.toString();
     }
 
-    private String reconstructActionFrame(ActionFrame action) {
+    /*private String reconstructActionFrame(Concept action) {
         StringBuilder builder = new StringBuilder();
 
         // Should not be null
@@ -38,7 +40,7 @@ public class FrameReconstructor implements Reconstructor {
         return builder.toString();
     }
 
-    private String reconstructNounFrame(NounFrame nounFrame) {
+    private String reconstructNounFrame(Concept nounFrame) {
         StringBuilder builder = new StringBuilder();
 
         if (nounFrame.getDeterminer() != null) {
@@ -74,6 +76,6 @@ public class FrameReconstructor implements Reconstructor {
         }
 
         return builder.toString();
-    }
+    }*/
 
 }
