@@ -9,7 +9,6 @@ import com.harium.suneidesis.planning.BaseTask;
 public class FindTask extends BaseTask {
 
     private Concept target;
-    public static final Concept SEARCH = new Concept();
 
     public FindTask(Concept target) {
         this.target = target;
