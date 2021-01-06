@@ -1,25 +1,23 @@
 package com.harium.suneidesis.knowledge.space;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.Place;
 
-public class CelestialBody extends Concept {
+public class CelestialBody extends Place {
 
-    CelestialBodyType celestialBodyType = CelestialBodyType.UNKNOWN;
-    StarSystem starSystem;
+    private static final String ATTRIBUTE_TYPE = "celestial_body_type";
 
-    public CelestialBodyType getCelestialBodyType() {
-        return celestialBodyType;
+    public CelestialBody(String name) {
+        super(name);
     }
 
-    public void setCelestialBodyType(CelestialBodyType celestialBodyType) {
-        this.celestialBodyType = celestialBodyType;
+    public CelestialBody setCelestialBodyType(Concept type) {
+        set(ATTRIBUTE_TYPE, type);
+        return this;
     }
 
-    public StarSystem getStarSystem() {
-        return starSystem;
+    public Concept getCelestialBodyType() {
+        return get(ATTRIBUTE_TYPE);
     }
 
-    public void setStarSystem(StarSystem starSystem) {
-        this.starSystem = starSystem;
-    }
 }

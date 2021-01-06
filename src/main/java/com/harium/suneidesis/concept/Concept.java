@@ -60,6 +60,11 @@ public class Concept extends Thing {
 		this.attributes.set(key, property);
 	}
 
+	public Concept get(String key) {
+		this.attributes.get(key);
+		return this;
+	}
+
 	public Concept isLocatedAt(Place place) {
 		this.attributes.isLocatedAt(place);
 		return this;

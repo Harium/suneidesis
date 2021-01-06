@@ -102,8 +102,8 @@ public class Fact extends Concept {
         return attributes.get(ATTRIBUTE_WEATHER);
     }
 
-    public Fact weather(Weather weather) {
-        this.attributes.set(ATTRIBUTE_WEATHER, weather);
+    public Fact weather(Phenomenon phenomenon) {
+        this.attributes.set(ATTRIBUTE_WEATHER, phenomenon);
         return this;
     }
 
