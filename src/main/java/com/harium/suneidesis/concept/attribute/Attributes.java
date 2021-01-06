@@ -18,6 +18,8 @@ public class Attributes implements Repository<Concept> {
     public static final String ATTRIBUTE_LOCATION = "location";
     public static final String ATTRIBUTE_NAME = "name";
 
+    public static final Word UNKNOWN_WORD = new Word("");
+
     private Abilities abilities;
     private Properties properties;
     private Map<String, Concept> attributeMap = new HashMap<>();
@@ -58,13 +60,26 @@ public class Attributes implements Repository<Concept> {
     /**
      * Helper Methods
      */
-    public String getName() {
-        return attributeMap.get(ATTRIBUTE_NAME).getName();
+    public String getNameWord() {
+        return getName().getName();
+    }
+
+    public Word getName() {
+        Concept name = attributeMap.get(ATTRIBUTE_NAME);
+        if (name != null) {
+            return (Word) name;
+        }
+
+        return UNKNOWN_WORD;
     }
 
     public void setName(String name) {
         Word nameWord = getOrCreateWord(name);
-        attributeMap.put(ATTRIBUTE_NAME, nameWord);
+        setNameWord(nameWord);
+    }
+
+    public void setNameWord(Word name) {
+        attributeMap.put(ATTRIBUTE_NAME, name);
     }
 
     private Word getOrCreateWord(String name) {

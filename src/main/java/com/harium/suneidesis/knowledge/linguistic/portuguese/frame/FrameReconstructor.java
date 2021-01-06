@@ -1,25 +1,28 @@
 package com.harium.suneidesis.knowledge.linguistic.portuguese.frame;
 
-import com.harium.suneidesis.knowledge.linguistic.core.frame.*;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.knowledge.linguistic.core.fact.*;
 
 public class FrameReconstructor implements Reconstructor {
 
     @Override
-    public String reconstruct(BaseFrame frame) {
+    public String reconstruct(Fact frame) {
         StringBuilder builder = new StringBuilder();
 
-        if (frame.getNoun() != null) {
-            builder.append(reconstructNounFrame(frame.getNoun()));
+        /*if (frame.getSubject() != null) {
+            builder.append(reconstructNoun(frame.getSubject()));
         }
 
-        if (frame.getAction() != null) {
-            builder.append(reconstructActionFrame(frame.getAction()));
-        }
+        if (frame.getPredicate() != null) {
+            builder.append(reconstructAction(frame.getPredicate()));
+        }*/
 
         return builder.toString();
     }
 
-    private String reconstructActionFrame(ActionFrame action) {
+    /*private String reconstructAction(Concept action) {
         StringBuilder builder = new StringBuilder();
 
         // Should not be null
@@ -32,17 +35,18 @@ public class FrameReconstructor implements Reconstructor {
         }
 
         if (action.getTarget() != null) {
-            builder.append(reconstructNounFrame(action.getTarget()));
+            builder.append(reconstructNoun(action.getTarget()));
         }
 
         return builder.toString();
     }
 
-    private String reconstructNounFrame(NounFrame nounFrame) {
+    private String reconstructNoun(Concept subject) {
         StringBuilder builder = new StringBuilder();
 
-        if (nounFrame.getDeterminer() != null) {
-            builder.append(nounFrame.getDeterminer().getName());
+        if (subject.getNameConcept() != null) {
+            builder.append(getDeterminer(subject.getNameConcept()));
+            builder.append(subject.getName());
             builder.append(" ");
         }
 
@@ -69,6 +73,12 @@ public class FrameReconstructor implements Reconstructor {
         return builder.toString();
     }
 
+    private String getDeterminer(Word concept) {
+        if (concept.getGender()) {
+
+        }
+    }
+
     private String reconstructAdjectiveFrame(AdjectiveFrame adjective) {
         StringBuilder builder = new StringBuilder();
 
@@ -82,6 +92,6 @@ public class FrameReconstructor implements Reconstructor {
         }
 
         return builder.toString();
-    }
+    }*/
 
 }

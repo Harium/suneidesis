@@ -1,7 +1,7 @@
 package com.harium.suneidesis.concept;
 
 import com.harium.suneidesis.concept.attribute.Attributes;
-import com.harium.suneidesis.concept.numeral.Quantity;
+import com.harium.suneidesis.concept.word.Word;
 
 import java.util.Objects;
 
@@ -32,11 +32,19 @@ public class Thing {
 	}
 
 	public String getName() {
+		return attributes.getNameWord();
+	}
+
+	public Word getNameConcept() {
 		return attributes.getName();
 	}
 
 	public void setName(String name) {
 		attributes.setName(name);
+	}
+
+	public void setNameWord(Word name) {
+		attributes.setNameWord(name);
 	}
 
 	public String getId() {
@@ -45,30 +53,6 @@ public class Thing {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public void is(Concept concept) {
-		this.attributes.is(concept);
-	}
-
-	public void can(Action action) {
-		this.attributes.can(action);
-	}
-
-	public void has(Concept property, Quantity quantity) {
-		this.attributes.has(property, quantity);
-	}
-
-	public void set(String key, Concept property) {
-		this.attributes.set(key, property);
-	}
-
-	public void isLocatedAt(Place place) {
-		this.attributes.isLocatedAt(place);
-	}
-
-	public void isLocatedAt(String placeName) {
-		this.attributes.isLocatedAt(new Place(placeName));
 	}
 
 	@Override
