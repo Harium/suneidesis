@@ -33,7 +33,7 @@ public class Time extends Concept {
     }
 
     public Time start(String start) {
-        set(ATTRIBUTE_START, new Word(start));
+        has(ATTRIBUTE_START, new Word(start));
         return this;
     }
 
@@ -42,7 +42,7 @@ public class Time extends Concept {
     }
 
     public Time end(String end) {
-        set(ATTRIBUTE_END, new Word(end));
+        has(ATTRIBUTE_END, new Word(end));
         return this;
     }
 

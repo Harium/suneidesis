@@ -49,7 +49,7 @@ public class ConsciousnessSimulationTest {
         Action dataTransfer = new Action("data transfer");
         Concept searchEngine = new Concept("search engine");
         searchEngine.is(software);
-        searchEngine.has(data, new Quantity("a lot"));
+        searchEngine.hasPart(data, new Quantity("a lot"));
 
         consciousness.is(robot);
 

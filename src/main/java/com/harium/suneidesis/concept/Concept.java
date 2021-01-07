@@ -46,23 +46,23 @@ public class Concept extends Thing {
 		return this;
 	}
 
-	public Concept has(Concept property, Quantity quantity) {
-		this.attributes.has(property, quantity);
+	public Concept has(String key, Concept property) {
+		this.attributes.set(key, property);
+		return this;
+	}
+
+	public Concept hasPart(Concept property, Quantity quantity) {
+		this.attributes.hasPart(property, quantity);
 		return this;
 	}
 
 	public Concept hasNo(Concept property) {
-		this.attributes.has(property, Quantity.ZERO);
+		this.attributes.hasPart(property, Quantity.ZERO);
 		return this;
-	}
-
-	public void set(String key, Concept property) {
-		this.attributes.set(key, property);
 	}
 
 	public Concept get(String key) {
-		this.attributes.get(key);
-		return this;
+		return this.attributes.get(key);
 	}
 
 	public Concept isLocatedAt(Place place) {

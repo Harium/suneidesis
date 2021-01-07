@@ -16,7 +16,7 @@ public class Place extends Concept {
 	}
 	
 	public Place at(Place place) {
-		set(ATTRIBUTE_AT, place);
+		has(ATTRIBUTE_AT, place);
 		return this;
 	}
 

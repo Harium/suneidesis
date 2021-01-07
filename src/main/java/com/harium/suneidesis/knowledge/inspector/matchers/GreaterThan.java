@@ -2,16 +2,22 @@ package com.harium.suneidesis.knowledge.inspector.matchers;
 
 import com.harium.suneidesis.math.ExpressionParser;
 
+import java.math.BigDecimal;
+
 public class GreaterThan extends NumericalMatcher {
 
-    public GreaterThan(long reference) {
+    public GreaterThan(BigDecimal reference) {
+        super(reference);
+    }
+
+    public GreaterThan(String reference) {
         super(reference);
     }
 
     @Override
     public boolean evaluate(String expression) {
-        long value = ExpressionParser.parse(expression);
-        return value > reference;
+        BigDecimal value = ExpressionParser.parse(expression);
+        return value.compareTo(reference) > 0;
     }
 
 }

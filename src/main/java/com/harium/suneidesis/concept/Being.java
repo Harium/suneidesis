@@ -13,7 +13,7 @@ public class Being extends Concept {
 
     public Being(String name) {
         super(name, ConceptType.BEING);
-        has(new Concept("life"), new Quantity("one", "1"));
+        hasPart(new Concept("life"), new Quantity("one", "1"));
     }
 
     public Being(String name, Concept gender) {

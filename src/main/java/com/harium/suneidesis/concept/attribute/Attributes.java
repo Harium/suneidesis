@@ -112,7 +112,7 @@ public class Attributes implements Repository<Concept> {
         getAbilities().add(concept);
     }
 
-    public void has(Concept part, Quantity quantity) {
+    public void hasPart(Concept part, Quantity quantity) {
         getProperties().add(part, quantity);
     }
 

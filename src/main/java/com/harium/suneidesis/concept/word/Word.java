@@ -30,7 +30,7 @@ public class Word extends Concept {
 
     public Word(String name, String tag) {
         this(name);
-        set(ATTRIBUTE_TAG, new Word(tag));
+        has(ATTRIBUTE_TAG, new Word(tag));
     }
 
     @Override

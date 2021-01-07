@@ -12,7 +12,7 @@ public class CelestialBody extends Place {
     }
 
     public CelestialBody setCelestialBodyType(Concept type) {
-        set(ATTRIBUTE_TYPE, type);
+        has(ATTRIBUTE_TYPE, type);
         return this;
     }
 

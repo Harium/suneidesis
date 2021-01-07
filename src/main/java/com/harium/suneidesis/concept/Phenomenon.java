@@ -11,7 +11,7 @@ public class Phenomenon extends Concept {
     }
 
     public Phenomenon setPhenomenonType(Concept type) {
-        set(ATTRIBUTE_TYPE, type);
+        has(ATTRIBUTE_TYPE, type);
         return this;
     }
 
