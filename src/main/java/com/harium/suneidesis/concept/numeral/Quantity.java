@@ -5,31 +5,59 @@ import com.harium.suneidesis.concept.ConceptType;
 
 public class Quantity extends Concept {
 
+    private static final String ATTRIBUTE_UNIT = "unit";
     private static final String ATTRIBUTE_VALUE = "value";
+
     public static final Quantity ZERO = new Quantity("Zero", "0");
 
-    public Quantity(String name) {
+    /**
+     * This constructor uses value instead of name in purpose
+     * @param value - the value in unknown units
+     */
+    public Quantity(String value) {
+        super(ConceptType.QUANTITY);
+        setValue(value);
+    }
+
+    public Quantity(String value, String unit) {
+        super(ConceptType.QUANTITY);
+        setValue(value);
+        setUnit(unit);
+    }
+
+    public Quantity(String value, String unit, String name) {
         super(name, ConceptType.QUANTITY);
-        setExpression("0");
+        setValue(value);
+        setUnit(unit);
     }
 
-    public Quantity(String name, String expression) {
-        super(name, ConceptType.QUANTITY);
-        setExpression(expression);
+    public Concept getValue() {
+        return attributes.get(ATTRIBUTE_VALUE);
     }
 
-    public void setExpression(String value) {
-        Concept concept = new Concept();
-        // Hacky way to avoid stack overflow
-        concept.setId(value);
-        attributes.set(ATTRIBUTE_VALUE, concept);
-    }
-
-    public String getExpression() {
+    public String getValueText() {
         Concept value = attributes.get(ATTRIBUTE_VALUE);
         if (value == null) {
-            value = ZERO;
+            return "0";
         }
-        return value.getId();
+        return value.getName();
+    }
+
+    public Concept getUnit() {
+        return attributes.get(ATTRIBUTE_UNIT);
+    }
+
+    public String getUnitText() {
+        return attributes.get(ATTRIBUTE_UNIT).getName();
+    }
+
+    public Quantity setValue(String value) {
+        attributes.set(ATTRIBUTE_VALUE, new Concept(value));
+        return this;
+    }
+
+    public Quantity setUnit(String unit) {
+        attributes.set(ATTRIBUTE_UNIT, new Concept(unit));
+        return this;
     }
 }

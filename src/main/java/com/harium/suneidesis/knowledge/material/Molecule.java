@@ -11,6 +11,7 @@ public class Molecule extends Concept {
     protected Map<Atom, Set<Atom>> bonds;
 
     public Molecule() {
+        super();
     }
 
     public Molecule(String name) {

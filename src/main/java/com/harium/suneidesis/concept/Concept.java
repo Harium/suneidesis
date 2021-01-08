@@ -56,6 +56,10 @@ public class Concept extends Thing {
 		return this;
 	}
 
+	public Concept hasPart(String property, Quantity quantity) {
+		return hasPart(new Concept(property), quantity);
+	}
+
 	public Concept hasNo(Concept property) {
 		this.attributes.hasPart(property, Quantity.ZERO);
 		return this;

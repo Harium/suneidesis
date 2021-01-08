@@ -17,12 +17,12 @@ public class AttributesTest {
     public void testSimple() {
         Concept bat = new Concept("bat");
         bat.can(new Action("fly"));
-        bat.hasPart(new Concept("wing"), new Quantity("two", "2"));
+        bat.hasPart(new Concept("wing"), new Quantity( "2"));
         bat.isLocatedAt(new Place("cave"));
 
-        assertTrue(does(bat).has("wing", new GreaterThan("1")));
-        assertTrue(does(bat).has("wing", new Equals("2")));
-        assertTrue(does(bat).has("wing", new LowerThan("3")));
+        assertTrue(does(bat).hasPart("wing", new GreaterThan("1")));
+        assertTrue(does(bat).hasPart("wing", new Equals("2")));
+        assertTrue(does(bat).hasPart("wing", new LowerThan("3")));
         assertTrue(does(bat).isAt("cave"));
     }
 

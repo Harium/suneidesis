@@ -22,7 +22,7 @@ public class Attributes implements Repository<Concept> {
 
     private Abilities abilities;
     private Properties properties;
-    private Map<String, Concept> attributeMap = new HashMap<>();
+    private final Map<String, Concept> attributeMap = new HashMap<>();
 
     public Concept get(String key) {
         Concept concept = attributeMap.get(key);
@@ -125,38 +125,43 @@ public class Attributes implements Repository<Concept> {
     }
 
     public boolean equals(Attributes attributes) {
+        // Skip name from root
+        return equals(this, attributes, false);
+    }
+
+    private static boolean equals(Attributes a, Attributes b, boolean checkName) {
         boolean equals = true;
-        for (Map.Entry<String, Concept> entry: attributes.attributeMap.entrySet()) {
+        for (Map.Entry<String, Concept> entry: b.attributeMap.entrySet()) {
             String key = entry.getKey();
-            if (ATTRIBUTE_NAME.equals(key)) {
-                //equals &= getName().equals(attributes.getName());
+            if (checkName && ATTRIBUTE_NAME.equals(key)) {
+                equals &= b.getName().equals(a.getName());
                 continue;
             }
             if (ATTRIBUTE_PROPERTIES.equals(key)) {
-                equals &= propertiesEquals(attributes);
+                equals &= propertiesEquals(a.properties, b.properties);
             } else if (ATTRIBUTE_ABILITIES.equals(key)) {
-                equals &= abilitiesEquals(attributes);
+                equals &= abilitiesEquals(a.abilities, b.abilities);
             } else {
                 Concept value = entry.getValue();
-                Concept toCompare = attributes.get(key);
-                equals &= value.equals(toCompare);
+                Concept toCompare = a.get(key);
+                equals &= equals(value.getAttributes(), toCompare.getAttributes(), true);
             }
         }
 
         return equals;
     }
 
-    private boolean abilitiesEquals(Attributes attributes) {
-        if (attributes.abilities == null) {
-            return abilities == null;
+    private static boolean abilitiesEquals(Abilities a, Abilities b) {
+        if (a == null) {
+            return b == null;
         }
-        return attributes.abilities.equals(abilities);
+        return a.equals(b);
     }
 
-    private boolean propertiesEquals(Attributes attributes) {
-        if (attributes.properties == null) {
-            return properties == null;
+    private static boolean propertiesEquals(Properties a, Properties b) {
+        if (a == null) {
+            return b == null;
         }
-        return attributes.properties.equals(properties);
+        return a.equals(b);
     }
 }

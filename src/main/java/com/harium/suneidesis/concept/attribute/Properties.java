@@ -50,7 +50,10 @@ public class Properties extends Concept {
             Concept concept = properties.nameIndex.get(key.getName());
             Quantity toCompare = properties.map.get(concept);
 
-            equals &= q.getExpression().equals(toCompare.getExpression());
+            boolean sameValue = q.getValueText().equals(toCompare.getValueText());
+            boolean sameUnit = q.getUnitText().equals(toCompare.getUnitText());
+
+            equals &= sameValue && sameUnit;
         }
         return equals;
     }
