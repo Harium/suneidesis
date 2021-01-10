@@ -9,7 +9,7 @@ public class ConceptType {
 	public static final Concept BEING = new Concept("BEING");
 	public static final Concept EVENT = new Concept("EVENT");
 	public static final Concept FEELING = new Concept("FEELING");
-	public static final Concept MATERIAL = new Concept("MATERIAL");
+	public static final Concept SUBSTANCE = new Concept("SUBSTANCE");
 	public static final Concept MEANING = new Concept("MEANING");
 	public static final Concept PART = new Concept("PART");
 	public static final Concept PLACE = new Concept("PLACE");

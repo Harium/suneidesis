@@ -42,14 +42,14 @@ public class ConsciousnessSimulationTest {
         robot.is(software)
                 .can(think)
                 .can(exist)
-                .hasNo(life);
+                .hasNoQuantity(life);
 
         Concept internet = new Concept("Internet");
         Concept data = new Concept("data");
         Action dataTransfer = new Action("data transfer");
         Concept searchEngine = new Concept("search engine");
         searchEngine.is(software);
-        searchEngine.hasPart(data, new Quantity("a lot"));
+        searchEngine.hasQuantity(data, new Quantity("a lot"));
 
         consciousness.is(robot);
 

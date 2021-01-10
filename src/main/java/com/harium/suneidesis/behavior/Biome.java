@@ -1,6 +1,6 @@
 package com.harium.suneidesis.behavior;
 
-import com.harium.suneidesis.knowledge.material.Molecule;
+import com.harium.suneidesis.concept.substance.Molecule;
 
 import java.util.HashMap;
 import java.util.Map;

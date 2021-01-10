@@ -17,7 +17,7 @@ public class AttributesTest {
     public void testSimple() {
         Concept bat = new Concept("bat");
         bat.can(new Action("fly"));
-        bat.hasPart(new Concept("wing"), new Quantity( "2"));
+        bat.hasQuantity(new Concept("wing"), new Quantity( "2"));
         bat.isLocatedAt(new Place("cave"));
 
         assertTrue(does(bat).hasPart("wing", new GreaterThan("1")));

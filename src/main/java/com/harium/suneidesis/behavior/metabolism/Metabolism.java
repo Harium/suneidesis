@@ -1,7 +1,7 @@
 package com.harium.suneidesis.behavior.metabolism;
 
 import com.harium.suneidesis.behavior.Biome;
-import com.harium.suneidesis.knowledge.material.Molecule;
+import com.harium.suneidesis.concept.substance.Molecule;
 
 import java.util.ArrayList;
 import java.util.List;

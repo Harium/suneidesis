@@ -1,6 +1,6 @@
 package com.harium.suneidesis.behavior.metabolism;
 
-import com.harium.suneidesis.knowledge.material.Molecule;
+import com.harium.suneidesis.concept.substance.Molecule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
