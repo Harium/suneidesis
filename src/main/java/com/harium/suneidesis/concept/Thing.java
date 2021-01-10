@@ -2,12 +2,14 @@ package com.harium.suneidesis.concept;
 
 import com.harium.suneidesis.concept.attribute.Attributes;
 import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.generator.BaseIdGenerator;
+import com.harium.suneidesis.generator.IdGenerator;
 
 import java.util.Objects;
 
 public class Thing {
 
-	private static long currentId = 0;
+	private static IdGenerator idGenerator = new BaseIdGenerator();
 
 	protected String id;
 
@@ -24,7 +26,7 @@ public class Thing {
 	}
 
 	private String generateId() {
-		return Long.toString(currentId++);
+		return idGenerator.generateId();
 	}
 
 	public Attributes getAttributes() {
@@ -53,6 +55,10 @@ public class Thing {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public static void setIdGenerator(IdGenerator idGenerator) {
+		Thing.idGenerator = idGenerator;
 	}
 
 	@Override
