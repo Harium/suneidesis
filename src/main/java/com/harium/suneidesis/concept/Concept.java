@@ -47,6 +47,10 @@ public class Concept extends Thing {
 	}
 
 	public Concept has(String key, Concept property) {
+		return set(key, property);
+	}
+
+	public Concept set(String key, Concept property) {
 		this.attributes.set(key, property);
 		return this;
 	}

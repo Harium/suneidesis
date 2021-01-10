@@ -11,6 +11,11 @@ public class Being extends Concept {
     public static final String ATTRIBUTE_ANCESTRY = "ancestry";
     public static final String ATTRIBUTE_GENDER = "gender";
 
+    public Being() {
+        super(ConceptType.BEING);
+        hasQuantity(new Concept("life"), new Quantity("one", "1"));
+    }
+
     public Being(String name) {
         super(name, ConceptType.BEING);
         hasQuantity(new Concept("life"), new Quantity("one", "1"));

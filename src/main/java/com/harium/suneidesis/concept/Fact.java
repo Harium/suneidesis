@@ -1,7 +1,5 @@
 package com.harium.suneidesis.concept;
 
-import com.harium.suneidesis.knowledge.weather.Weather;
-
 /**
  * Fact is a model to represent actions from being's perspective
  * The same fact(action) can be perceived differently by observers and/or actors
@@ -21,6 +19,7 @@ public class Fact extends Concept {
     public static final String ATTRIBUTE_PLACE = "place";
     public static final String ATTRIBUTE_TIME = "time";
     public static final String ATTRIBUTE_WEATHER = "weather";
+    public static final String ATTRIBUTE_THEN = "then";
 
     public Fact() {
         super(ConceptType.THEORY);
@@ -105,6 +104,15 @@ public class Fact extends Concept {
     public Fact weather(Phenomenon phenomenon) {
         this.attributes.set(ATTRIBUTE_WEATHER, phenomenon);
         return this;
+    }
+
+    public Fact then(Fact fact) {
+        this.attributes.set(ATTRIBUTE_THEN, fact);
+        return this;
+    }
+
+    public Concept getNext() {
+        return attributes.get(ATTRIBUTE_THEN);
     }
 
     public Concept getAcquisitionMethod() {
