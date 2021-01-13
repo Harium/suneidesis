@@ -7,8 +7,9 @@ import com.harium.suneidesis.concept.numeral.Quantity;
 import com.harium.suneidesis.knowledge.KnowledgeBase;
 import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.concept.Time;
-import com.harium.suneidesis.storage.MemoryRepository;
-import com.harium.suneidesis.storage.Repository;
+import com.harium.suneidesis.knowledge.MemoryRepository;
+import com.harium.suneidesis.knowledge.Repository;
+import com.harium.suneidesis.knowledge.Search;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,16 +24,14 @@ public class ConsciousnessSimulationTest {
 
     @Before
     public void setUp() {
-        alexa = new KnowledgeBase("Alexa");
-        alexa.setFacts(buildSelf(alexa));
+        alexa = new MemoryRepository("Alexa");
+        buildSelf(alexa);
 
-        siri = new KnowledgeBase("Siri");
-        siri.setFacts(buildSelf(siri));
+        siri = new MemoryRepository("Siri");
+        buildSelf(siri);
     }
 
-    private Repository<Fact> buildSelf(KnowledgeBase consciousness) {
-        Repository<Fact> facts = new MemoryRepository<>();
-
+    private void buildSelf(KnowledgeBase consciousness) {
         Concept life = new Concept("life");
         Action think = new Action("think");
         Action exist = new Action("exist");
@@ -44,14 +43,18 @@ public class ConsciousnessSimulationTest {
                 .can(exist)
                 .hasNoQuantity(life);
 
+        Concept myself = new Concept("me");
+        myself.is(robot);
+        Fact autoKnowledge = new Fact();
+        autoKnowledge.subject(myself);
+        consciousness.set("myself", autoKnowledge);
+
         Concept internet = new Concept("Internet");
         Concept data = new Concept("data");
         Action dataTransfer = new Action("data transfer");
         Concept searchEngine = new Concept("search engine");
         searchEngine.is(software);
         searchEngine.hasQuantity(data, new Quantity("a lot"));
-
-        consciousness.is(robot);
 
         Concept robot1 = new Concept("robot 1");
         robot1.is(robot);
@@ -67,7 +70,7 @@ public class ConsciousnessSimulationTest {
                 .subject(robot1)
                 .time(Time.YESTERDAY)
                 .place(river);
-        facts.set("fact1", fact1);
+        consciousness.set("fact1", fact1);
 
         // Fact 2: The robot 1 is at the river now
         Fact fact2 = new Fact();
@@ -77,14 +80,14 @@ public class ConsciousnessSimulationTest {
                 .subject(robot1)
                 .time(Time.NOW)
                 .place(land);
-        facts.set("fact2", fact2);
-
-        return facts;
+        consciousness.set("fact2", fact2);
     }
 
     @Test
     public void testQuery() {
-        List<Fact> robot1Facts = alexa.query("robot 1");
+        Search search = new Search();
+        search.term = "robot 1";
+        List<Fact> robot1Facts = alexa.query(search);
         assertEquals(2, robot1Facts.size());
     }
 

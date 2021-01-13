@@ -8,6 +8,7 @@ public class Concept extends Thing {
 	public static final String ATTRIBUTE_TYPE = "type";
 
 	public static final Concept UNKNOWN = new Concept(ConceptType.UNKNOWN);
+	public static final Concept SECRET = new Concept(ConceptType.SECRET);
 
 	public Concept() {
 		super();
@@ -85,5 +86,9 @@ public class Concept extends Thing {
 
 	public boolean isUnknown() {
 		return (ConceptType.UNKNOWN.equals(getType()));
+	}
+
+	public boolean isSecret() {
+		return (ConceptType.SECRET.equals(getType()));
 	}
 }

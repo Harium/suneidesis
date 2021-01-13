@@ -1,12 +1,14 @@
-package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database;
+package com.harium.suneidesis.knowledge.linguistic.core.storage;
 
+import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.concept.word.WordVerbConjugation;
+import com.harium.suneidesis.knowledge.Repository;
 
 import java.util.List;
 
-public interface WordDatabase {
+public interface WordRepository extends Repository<Fact> {
 
     String save(Word word);
 

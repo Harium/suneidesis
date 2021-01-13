@@ -3,6 +3,7 @@ package com.harium.suneidesis.concept;
 public class ConceptType {
 
 	public static final Concept UNKNOWN = new Concept("UNKNOWN");
+	public static final Concept SECRET = new Concept("SECRET");
 	public static final Concept ADJECTIVE = new Concept("ADJECTIVE");
 	public static final Concept ACTION = new Concept("ACTION");
 	public static final Concept ARTIFACT = new Concept("ARTIFACT");

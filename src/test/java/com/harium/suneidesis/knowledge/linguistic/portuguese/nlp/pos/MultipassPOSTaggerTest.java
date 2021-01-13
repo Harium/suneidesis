@@ -3,9 +3,9 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
+import com.harium.suneidesis.knowledge.linguistic.core.storage.WordRepository;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.tokenizer.Tokenizer;
-import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryDatabase;
+import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryWordRepository;
 import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.tokenization.RuleBasedTokenizer;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,7 +18,7 @@ public class MultipassPOSTaggerTest {
 
     Tokenizer tokenizer;
     MultipassPOSTagger tagger;
-    WordDatabase database;
+    WordRepository database;
 
     @Before
     public void setUp() {
@@ -27,8 +27,8 @@ public class MultipassPOSTaggerTest {
         tokenizer = new RuleBasedTokenizer();
     }
 
-    private WordDatabase buildDatabase() {
-        MemoryDatabase database = new MemoryDatabase();
+    private WordRepository buildDatabase() {
+        MemoryWordRepository database = new MemoryWordRepository();
 
         WordVerb go = database.addVerb("ir", "a|de|X", "");
 

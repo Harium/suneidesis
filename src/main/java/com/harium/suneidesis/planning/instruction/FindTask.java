@@ -1,8 +1,9 @@
 package com.harium.suneidesis.planning.instruction;
 
-import com.harium.suneidesis.behavior.Environment;
+import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.concept.Thing;
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.knowledge.KnowledgeBase;
 import com.harium.suneidesis.planning.Inventory;
 import com.harium.suneidesis.planning.BaseTask;
 
@@ -15,16 +16,20 @@ public class FindTask extends BaseTask {
     }
 
     @Override
-    public boolean execute(Concept subject, Environment environment) {
+    public boolean execute(Concept subject, KnowledgeBase environment) {
         boolean found = false;
-        for (Thing concept : environment.getAll()) {
-            if (concept instanceof Inventory) {
-                Inventory inventory = (Inventory) concept;
-                canAccess(subject, inventory);
-                for (Thing item : inventory.getAll()) {
-                    if (target == item) {
-                        found = true;
-                        break;
+        for (Fact fact : environment.getAll()) {
+            if (fact.getSubject() instanceof Fact) {
+                Fact subfact = (Fact) fact.getSubject();
+                Concept concept = subfact.getSubject();
+                if (concept instanceof Inventory) {
+                    Inventory inventory = (Inventory) concept;
+                    canAccess(subject, inventory);
+                    for (Concept item : inventory.getAttributes().getAll()) {
+                        if (target == item) {
+                            found = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -38,7 +43,7 @@ public class FindTask extends BaseTask {
     }
 
     private boolean canAccess(Concept subject, Inventory inventory) {
-        return inventory.canAccess(subject);
+        return inventory.getOwner().equals(subject);
     }
 
 }

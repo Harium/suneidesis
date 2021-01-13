@@ -2,10 +2,14 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 
-public class MemoryDatabase extends com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.MemoryDatabase {
+public class MemoryWordRepository extends com.harium.suneidesis.knowledge.linguistic.core.storage.MemoryWordRepository {
 
-    public MemoryDatabase() {
-        super();
+    public MemoryWordRepository() {
+        this("");
+    }
+
+    public MemoryWordRepository(String name) {
+        super(name);
         addPunctuation();
         addDeterminers();
         addPrepositions();

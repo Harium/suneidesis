@@ -11,11 +11,11 @@ public class Abilities extends Concept {
     private final Map<String, Action> map = new HashMap<>();
 
     public void add(Action action) {
-        map.put(action.getId(), action);
+        map.put(action.getName(), action);
     }
 
     public boolean query(Action action) {
-        return map.containsKey(action.getId());
+        return map.containsKey(action.getName());
     }
 
     public boolean query(String name) {

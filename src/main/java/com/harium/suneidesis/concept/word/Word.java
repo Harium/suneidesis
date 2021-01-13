@@ -21,6 +21,7 @@ public class Word extends Concept {
     public static final String TAG_VERB = "verb";
     public static final String TAG_VERB_CONJUGATION = "verb_conj";
 
+    private String id;
     private String word;
 
     public Word(String name) {
@@ -39,9 +40,18 @@ public class Word extends Concept {
         word = name;
     }
 
+    @Override
     public String getName() {
         // Hacky way to avoid stack overflow
         return word;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Word getLemma() {
@@ -71,4 +81,5 @@ public class Word extends Concept {
     public void setTag(String tagName) {
         attributes.set(ATTRIBUTE_TAG, new Word(tagName));
     }
+
 }

@@ -2,7 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
+import com.harium.suneidesis.knowledge.linguistic.core.storage.WordRepository;
 import com.harium.suneidesis.concept.word.Word;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
         super();
     }
 
-    public RuleBasedPOSTagger(WordDatabase database) {
+    public RuleBasedPOSTagger(WordRepository database) {
         super(database);
     }
 

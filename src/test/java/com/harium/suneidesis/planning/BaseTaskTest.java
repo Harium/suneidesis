@@ -1,8 +1,9 @@
 package com.harium.suneidesis.planning;
 
-import com.harium.suneidesis.behavior.Environment;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.knowledge.MemoryRepository;
 import com.harium.suneidesis.planning.instruction.FindTask;
 import org.junit.Test;
 
@@ -17,11 +18,15 @@ public class BaseTaskTest {
 
         Concept garlic = new Concept();
         Inventory fridge = new Inventory();
-        fridge.setOwner(myself);
+        fridge.owner(myself);
         fridge.add(garlic);
 
-        Environment environment = new Environment();
-        environment.add(fridge);
+        Fact fact = new Fact();
+        fact.source(new Concept("sensors"));
+        fact.subject(fridge);
+
+        MemoryRepository environment = new MemoryRepository("environment");
+        environment.add(fact);
 
         BaseTask chopGarlic = new BaseTask();
         chopGarlic.addTask(new FindTask(garlic));
@@ -35,11 +40,15 @@ public class BaseTaskTest {
 
         Concept garlic = new Concept();
         Inventory fridge = new Inventory();
-        fridge.setOwner(myself);
+        fridge.owner(myself);
         //fridge.add(garlic);
 
-        Environment environment = new Environment();
-        environment.add(fridge);
+        Fact fact = new Fact();
+        fact.source(new Concept("sensors"));
+        fact.subject(fridge);
+
+        MemoryRepository environment = new MemoryRepository("environment");
+        environment.add(fact);
 
         BaseTask chopGarlic = new BaseTask();
         chopGarlic.addTask(new FindTask(garlic));

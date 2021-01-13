@@ -5,7 +5,7 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Place;
 import com.harium.suneidesis.concept.numeral.Quantity;
 import com.harium.suneidesis.concept.word.Word;
-import com.harium.suneidesis.storage.Repository;
+import com.harium.suneidesis.knowledge.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
