@@ -88,7 +88,7 @@ public class RuleBasedPhonetizer implements Phonetizer {
                     char lastLetter = lastSyllable.charAt(lastSyllable.length() - 1);
                     if (lastLetter == 'x') {
                         fixed.remove(fixed.size() - 1);
-                        phonemes.add(String.valueOf("xc"));
+                        phonemes.add("xc");
                         phonemes.add(String.valueOf(syllable.charAt(1)));
                         return phonemes;
                     }
@@ -97,10 +97,10 @@ public class RuleBasedPhonetizer implements Phonetizer {
                 char vowel = syllable.charAt(1);
                 char rawVowel = Portuguese.rawVowel(vowel);
                 if ('i' == rawVowel || 'e' == rawVowel) {
-                    phonemes.add(String.valueOf("s"));
+                    phonemes.add("s");
                     phonemes.add(String.valueOf(vowel));
                 } else {
-                    phonemes.add(String.valueOf("k"));
+                    phonemes.add("k");
                     phonemes.add(String.valueOf(syllable.charAt(1)));
                 }
                 return phonemes;
@@ -108,10 +108,10 @@ public class RuleBasedPhonetizer implements Phonetizer {
                 char vowel = syllable.charAt(1);
                 char rawVowel = Portuguese.rawVowel(vowel);
                 if ('i' == rawVowel || 'e' == rawVowel) {
-                    phonemes.add(String.valueOf("j"));
+                    phonemes.add("j");
                     phonemes.add(String.valueOf(vowel));
                 } else {
-                    phonemes.add(String.valueOf("g"));
+                    phonemes.add("g");
                     phonemes.add(String.valueOf(vowel));
                 }
                 return phonemes;
@@ -177,7 +177,7 @@ public class RuleBasedPhonetizer implements Phonetizer {
                             || "ne".equals(lastSyllable)
                             || "ve".equals(lastSyllable)
                             || Portuguese.isConsonantCluster(0, lastSyllable)) {
-                        phonemes.add(String.valueOf("ks"));
+                        phonemes.add("ks");
                         phonemes.add(String.valueOf(vowel));
                         return phonemes;
                         // Example: e[xa]to, e[xa]me
@@ -240,12 +240,12 @@ public class RuleBasedPhonetizer implements Phonetizer {
 
                 // Example e[xer]cício
                 if (index < syllables.size() - 2) {
-                    phonemes.add(String.valueOf("z"));
+                    phonemes.add("z");
                     phonemes.add(String.valueOf(syllable.charAt(1)));
                     phonemes.add(String.valueOf(syllable.charAt(2)));
                 } else {
                     // Syllables starting with X
-                    phonemes.add(String.valueOf("ch"));
+                    phonemes.add("ch");
                     phonemes.add(String.valueOf(syllable.charAt(1)));
                     phonemes.add(String.valueOf(syllable.charAt(2)));
                 }
@@ -257,7 +257,7 @@ public class RuleBasedPhonetizer implements Phonetizer {
                 if (vowel == 'e') {
                     phonemes.add(String.valueOf(syllable.charAt(0)));
                     phonemes.add(String.valueOf(syllable.charAt(1)));
-                    phonemes.add(String.valueOf("s"));
+                    phonemes.add("s");
                     return phonemes;
                 }
             }
