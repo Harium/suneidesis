@@ -9,24 +9,19 @@ import java.util.Objects;
 
 public class Thing {
 
-	private static IdGenerator idGenerator = new BaseIdGenerator();
+	//private static IdGenerator idGenerator = new BaseIdGenerator();
 
-	protected String id;
+	//protected String id;
 
 	protected final Attributes attributes = new Attributes();
 
 	protected Thing() {
 		super();
-		this.id = generateId();
 	}
 
 	public Thing(String name) {
 		this();
 		setName(name);
-	}
-
-	private String generateId() {
-		return idGenerator.generateId();
 	}
 
 	public Attributes getAttributes() {
@@ -49,20 +44,12 @@ public class Thing {
 		attributes.setNameWord(name);
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public static void setIdGenerator(IdGenerator idGenerator) {
+	/*public static void setIdGenerator(IdGenerator idGenerator) {
 		Thing.idGenerator = idGenerator;
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, attributes);
+		return Objects.hash(attributes);
 	}
 }

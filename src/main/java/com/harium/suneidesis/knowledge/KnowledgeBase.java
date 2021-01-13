@@ -2,34 +2,85 @@ package com.harium.suneidesis.knowledge;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Fact;
-import com.harium.suneidesis.storage.MemoryRepository;
-import com.harium.suneidesis.storage.Repository;
+import com.harium.suneidesis.concept.Time;
+import com.harium.suneidesis.generator.BaseIdGenerator;
+import com.harium.suneidesis.generator.BaseTimeGenerator;
+import com.harium.suneidesis.generator.IdGenerator;
+import com.harium.suneidesis.generator.TimeGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnowledgeBase extends Concept {
+public abstract class KnowledgeBase implements Repository<Fact> {
 
-    private Repository<Fact> facts = new MemoryRepository<>();
+    private static final String ATTRIBUTE_CREATED_AT = "createdAt";
+
+    private String name;
+
+    private IdGenerator idGenerator = new BaseIdGenerator();
+
+    private TimeGenerator timeGenerator = new BaseTimeGenerator();
 
     public KnowledgeBase(String name) {
-        super(name);
+        super();
+        this.name = name;
     }
 
-    public void setFacts(Repository<Fact> facts) {
-        this.facts = facts;
+    public KnowledgeBase(IdGenerator idGenerator) {
+        super();
+        this.idGenerator = idGenerator;
     }
 
-    public List<Fact> query(String term) {
+    public abstract void merge(KnowledgeBase facts);
+
+    public List<Fact> query(Search search) {
         List<Fact> result = new ArrayList<>();
-        for (Fact fact : facts.getAll()) {
+        for (Fact fact : getAll()) {
+            // Search nested concepts
             for (Concept concept : fact.getAttributes().getAll()) {
-                if (term.equals(concept.getName())) {
-                    result.add(fact);
+                if (search.term.equals(concept.getName())) {
+                    // Check permission
+                    if (!concept.isSecret()) {
+                        result.add(fact);
+                    } else if (fact.getSourceId().getName().equals(search.userId)) {
+                        result.add(fact);
+                    }
                     break;
                 }
             }
         }
         return result;
+    }
+
+    public String add(Concept concept) {
+        String id = idGenerator.generateId();
+        Fact wrap = wrap(concept);
+        set(id, wrap);
+        return id;
+    }
+
+    protected Fact wrap(Concept info) {
+        Fact fact = new Fact();
+        String when = timeGenerator.generateTime();
+        Time time = new Time(when);
+        fact.time(time);
+        fact.subject(info);
+        return fact;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public IdGenerator getIdGenerator() {
+        return idGenerator;
+    }
+
+    public void setIdGenerator(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
     }
 }

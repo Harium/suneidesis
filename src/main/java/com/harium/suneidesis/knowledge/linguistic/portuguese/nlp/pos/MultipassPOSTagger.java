@@ -2,7 +2,7 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
+import com.harium.suneidesis.knowledge.linguistic.core.storage.WordRepository;
 import com.harium.suneidesis.concept.word.Word;
 
 import java.util.Arrays;
@@ -19,7 +19,7 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
 
     public static final String PASSIVE_VOICE_PARTICLE = "foi";
 
-    public MultipassPOSTagger(WordDatabase database) {
+    public MultipassPOSTagger(WordRepository database) {
         super(database);
     }
 

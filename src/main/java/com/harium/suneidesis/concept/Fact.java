@@ -9,6 +9,7 @@ public class Fact extends Concept {
 
     // Provenance
     public static final String ATTRIBUTE_SOURCE = "source";
+    public static final String ATTRIBUTE_SOURCE_ID = "source_id";
     public static final String ATTRIBUTE_ACQUISITION_METHOD = "acquisition_method";
     public static final String ATTRIBUTE_ACQUISITION_MEDIUM = "acquisition_medium";
 
@@ -40,6 +41,15 @@ public class Fact extends Concept {
 
     public Fact source(Concept source) {
         this.attributes.set(ATTRIBUTE_SOURCE, source);
+        return this;
+    }
+
+    public Concept getSourceId() {
+        return attributes.get(ATTRIBUTE_SOURCE_ID);
+    }
+
+    public Fact sourceId(Concept source) {
+        this.attributes.set(ATTRIBUTE_SOURCE_ID, source);
         return this;
     }
 

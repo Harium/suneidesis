@@ -1,28 +1,60 @@
-package com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database;
+package com.harium.suneidesis.knowledge.linguistic.core.storage;
 
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.knowledge.MemoryRepository;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.concept.word.WordVerbConjugation;
 import com.harium.suneidesis.concept.word.Word;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class MemoryDatabase implements WordDatabase {
+import static com.harium.suneidesis.knowledge.linguistic.core.storage.Source.*;
+
+public class MemoryWordRepository extends MemoryRepository implements WordRepository {
 
     // Key is the pure word
     Map<String, List<Word>> words = new HashMap<>();
-    // Key is the id and value the word
+    // Key is the fact id and value the word
     Map<String, Word> wordIds = new HashMap<>();
     Map<String, WordVerb> verbs = new HashMap<>();
     Map<String, WordVerbConjugation> verbConjugations = new HashMap<>();
 
-    private long id = 0;
+    public MemoryWordRepository(String name) {
+        super(name);
+    }
 
-    public MemoryDatabase() {
-        super();
+    protected String add(String word, Tag tag) {
+        Word w = new Word(word);
+        w.setTag(tag.name());
+
+        return save(w);
+    }
+
+    @Override
+    public String save(Word w) {
+        String factId = add(w);
+        w.setId(factId);
+        List<Word> words = this.words.computeIfAbsent(w.getName(), k -> new ArrayList<>());
+        words.add(w);
+        wordIds.put(w.getId(), w);
+        return factId;
+    }
+
+    @Override
+    protected Fact wrap(Concept info) {
+        Fact wrap = super.wrap(info);
+        wrap.acquisitionMedium(MEDIUM_TEXT);
+        wrap.acquisitionMethod(METHOD_INPUT);
+        return wrap;
+    }
+
+    @Override
+    public String save(WordVerb verb) {
+        String verbId = save((Word)verb);
+        verbs.put(verbId, verb);
+        return verbId;
     }
 
     protected void addVerb(String word, String lemma, Tag tag) {
@@ -38,36 +70,6 @@ public class MemoryDatabase implements WordDatabase {
 
         WordVerb v = new WordVerb(lemmaId);
         verbs.put(word, v);
-    }
-
-    protected String add(String word, Tag tag) {
-        Word w = new Word(word);
-        w.setTag(tag.name());
-
-        return save(w);
-    }
-
-    private String generateId() {
-        id++;
-        return Long.toString(id);
-    }
-
-    @Override
-    public String save(Word w) {
-        String id = generateId();
-        w.setId(id);
-        List<Word> words = this.words.computeIfAbsent(w.getName(), k -> new ArrayList<>());
-        words.add(w);
-
-        wordIds.put(id, w);
-        return id;
-    }
-
-    @Override
-    public String save(WordVerb verb) {
-        save((Word)verb);
-        verbs.put(verb.getId(), verb);
-        return verb.getId();
     }
 
     @Override
@@ -139,4 +141,5 @@ public class MemoryDatabase implements WordDatabase {
 
         return save(conjugation);
     }
+
 }

@@ -3,18 +3,18 @@ package com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.pos;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.POSTagger;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.Tag;
 import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.TagPair;
-import com.harium.suneidesis.knowledge.linguistic.core.nlp.pos.database.WordDatabase;
-import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryDatabase;
+import com.harium.suneidesis.knowledge.linguistic.core.storage.WordRepository;
+import com.harium.suneidesis.knowledge.linguistic.portuguese.nlp.database.MemoryWordRepository;
 
 public abstract class DatabasePOSTagger implements POSTagger {
 
-    protected WordDatabase database;
+    protected WordRepository database;
 
     public DatabasePOSTagger() {
-        this.database = new MemoryDatabase();
+        this.database = new MemoryWordRepository();
     }
 
-    public DatabasePOSTagger(WordDatabase database) {
+    public DatabasePOSTagger(WordRepository database) {
         this.database = database;
     }
 

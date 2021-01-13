@@ -1,37 +1,22 @@
 package com.harium.suneidesis.planning;
 
-import com.harium.suneidesis.concept.Thing;
+import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.storage.MemoryRepository;
-import com.harium.suneidesis.storage.Repository;
-
-import java.util.Collection;
 
 public class Inventory extends Concept {
 
-    private Concept owner;
-
-    private Repository<Thing> items = new MemoryRepository<>();
+    private static final String ATTRIBUTE_OWNER = "owner";
 
     public void add(Concept concept) {
-        items.set(concept.getId(), concept);
+        set(concept.getName(), concept);
     }
 
-    public Collection<Thing> getAll() {
-        return items.getAll();
+    public Inventory owner(Being owner) {
+        set(ATTRIBUTE_OWNER, owner);
+        return this;
     }
 
     public Concept getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Concept owner) {
-        this.owner = owner;
-    }
-
-    // Private property
-    // TODO Relax rules in case of emergency?
-    public boolean canAccess(Concept subject) {
-        return owner == subject;
+        return get(ATTRIBUTE_OWNER);
     }
 }
