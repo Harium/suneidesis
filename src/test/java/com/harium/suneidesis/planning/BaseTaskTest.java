@@ -3,7 +3,7 @@ package com.harium.suneidesis.planning;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Fact;
-import com.harium.suneidesis.knowledge.MemoryRepository;
+import com.harium.suneidesis.repository.MemoryRepository;
 import com.harium.suneidesis.planning.instruction.FindTask;
 import org.junit.Test;
 

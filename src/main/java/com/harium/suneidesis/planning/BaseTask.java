@@ -1,7 +1,7 @@
 package com.harium.suneidesis.planning;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.knowledge.KnowledgeBase;
+import com.harium.suneidesis.repository.KnowledgeBase;
 
 import java.util.ArrayList;
 import java.util.List;
