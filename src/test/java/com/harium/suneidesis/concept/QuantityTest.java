@@ -3,7 +3,7 @@ package com.harium.suneidesis.concept;
 import com.harium.suneidesis.concept.numeral.Quantity;
 import org.junit.Test;
 
-import static com.harium.suneidesis.knowledge.inspector.Inspector.does;
+import static com.harium.suneidesis.inspector.Inspector.does;
 import static org.junit.Assert.*;
 
 public class QuantityTest {

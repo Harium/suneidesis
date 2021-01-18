@@ -4,12 +4,11 @@ import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Place;
 import com.harium.suneidesis.concept.numeral.Quantity;
-import com.harium.suneidesis.knowledge.KnowledgeBase;
+import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.concept.Time;
-import com.harium.suneidesis.knowledge.MemoryRepository;
-import com.harium.suneidesis.knowledge.Repository;
-import com.harium.suneidesis.knowledge.Search;
+import com.harium.suneidesis.repository.MemoryRepository;
+import com.harium.suneidesis.repository.Search;
 import org.junit.Before;
 import org.junit.Test;
 

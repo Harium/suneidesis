@@ -1,9 +1,8 @@
 package com.harium.suneidesis.planning.instruction;
 
 import com.harium.suneidesis.concept.Fact;
-import com.harium.suneidesis.concept.Thing;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.knowledge.KnowledgeBase;
+import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.planning.Inventory;
 import com.harium.suneidesis.planning.BaseTask;
 

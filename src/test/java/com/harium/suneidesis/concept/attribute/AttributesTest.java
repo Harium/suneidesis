@@ -1,13 +1,13 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
-import com.harium.suneidesis.knowledge.inspector.matchers.Equals;
-import com.harium.suneidesis.knowledge.inspector.matchers.GreaterThan;
-import com.harium.suneidesis.knowledge.inspector.matchers.LowerThan;
+import com.harium.suneidesis.inspector.matchers.Equals;
+import com.harium.suneidesis.inspector.matchers.GreaterThan;
+import com.harium.suneidesis.inspector.matchers.LowerThan;
 import com.harium.suneidesis.concept.numeral.Quantity;
 import org.junit.Test;
 
-import static com.harium.suneidesis.knowledge.inspector.Inspector.does;
+import static com.harium.suneidesis.inspector.Inspector.does;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
