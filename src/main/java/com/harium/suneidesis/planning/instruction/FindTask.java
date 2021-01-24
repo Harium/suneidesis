@@ -17,14 +17,14 @@ public class FindTask extends BaseTask {
     @Override
     public boolean execute(Concept subject, KnowledgeBase environment) {
         boolean found = false;
-        for (Fact fact : environment.getAll()) {
+        for (Fact fact : environment.getValues()) {
             if (fact.getSubject() instanceof Fact) {
                 Fact subfact = (Fact) fact.getSubject();
                 Concept concept = subfact.getSubject();
                 if (concept instanceof Inventory) {
                     Inventory inventory = (Inventory) concept;
                     canAccess(subject, inventory);
-                    for (Concept item : inventory.getAttributes().getAll()) {
+                    for (Concept item : inventory.getAttributes().getValues()) {
                         if (target == item) {
                             found = true;
                             break;

@@ -9,6 +9,7 @@ import com.harium.suneidesis.generator.IdGenerator;
 import com.harium.suneidesis.generator.TimeGenerator;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class KnowledgeBase implements Repository<Fact> {
@@ -21,6 +22,10 @@ public abstract class KnowledgeBase implements Repository<Fact> {
 
     private TimeGenerator timeGenerator = new BaseTimeGenerator();
 
+    public KnowledgeBase() {
+        super();
+    }
+
     public KnowledgeBase(String name) {
         super();
         this.name = name;
@@ -31,13 +36,19 @@ public abstract class KnowledgeBase implements Repository<Fact> {
         this.idGenerator = idGenerator;
     }
 
+    @Override
+    public Collection<Fact> getValues() {
+        return getAll().values();
+    }
+
+
     public abstract void merge(KnowledgeBase facts);
 
     public List<Fact> query(Search search) {
         List<Fact> result = new ArrayList<>();
-        for (Fact fact : getAll()) {
+        for (Fact fact : getValues()) {
             // Search nested concepts
-            for (Concept concept : fact.getAttributes().getAll()) {
+            for (Concept concept : fact.getAttributes().getValues()) {
                 if (search.term.equals(concept.getName())) {
                     // Check permission
                     if (!concept.isSecret()) {

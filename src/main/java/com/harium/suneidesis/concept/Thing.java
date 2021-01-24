@@ -20,6 +20,10 @@ public class Thing {
 		return attributes.getValueContent();
 	}
 
+	public Concept getNameConcept() {
+		return attributes.getValue();
+	}
+
 	public void setName(String name) {
 		attributes.setValue(name);
 	}

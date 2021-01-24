@@ -2,7 +2,7 @@ package com.harium.suneidesis.linguistic.storage;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Fact;
-import com.harium.suneidesis.repository.MemoryRepository;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.concept.word.WordVerbConjugation;
@@ -12,7 +12,7 @@ import java.util.*;
 
 import static com.harium.suneidesis.linguistic.storage.Source.*;
 
-public class MemoryWordRepository extends MemoryRepository implements WordRepository {
+public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepository {
 
     // Key is the pure word
     Map<String, List<Word>> words = new HashMap<>();
@@ -21,7 +21,7 @@ public class MemoryWordRepository extends MemoryRepository implements WordReposi
     Map<String, WordVerb> verbs = new HashMap<>();
     Map<String, WordVerbConjugation> verbConjugations = new HashMap<>();
 
-    public MemoryWordRepository(String name) {
+    public MemoryWordBase(String name) {
         super(name);
     }
 

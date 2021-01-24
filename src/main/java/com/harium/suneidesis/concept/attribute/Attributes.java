@@ -18,13 +18,12 @@ public class Attributes implements Repository<Concept> {
 
     public static final Word UNKNOWN_WORD = new Word("");
 
+    private DataType dataType = DataType.OBJECT;
+    private String value;
+
     private Abilities abilities;
     private Properties properties;
     private final Map<String, Concept> attributeMap = new HashMap<>();
-
-    private DataType dataType = DataType.OBJECT;
-    // TODO RENAME TO VALUE
-    private String value;
 
     public Concept get(String key) {
         Concept concept = attributeMap.get(key);
@@ -39,7 +38,12 @@ public class Attributes implements Repository<Concept> {
     }
 
     @Override
-    public Collection<Concept> getAll() {
+    public Map<String, Concept> getAll() {
+        return attributeMap;
+    }
+
+    @Override
+    public Collection<Concept> getValues() {
         return attributeMap.values();
     }
 

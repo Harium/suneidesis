@@ -5,7 +5,7 @@ import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
 import com.harium.suneidesis.linguistic.storage.WordRepository;
 import com.harium.suneidesis.linguistic.nlp.tokenization.Tokenizer;
-import com.harium.suneidesis.linguistic.portuguese.nlp.database.MemoryWordRepository;
+import com.harium.suneidesis.linguistic.portuguese.nlp.database.MemoryWordBase;
 import com.harium.suneidesis.linguistic.portuguese.nlp.tokenization.RuleBasedTokenizer;
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,7 +28,7 @@ public class MultipassPOSTaggerTest {
     }
 
     private WordRepository buildDatabase() {
-        MemoryWordRepository database = new MemoryWordRepository();
+        MemoryWordBase database = new MemoryWordBase();
 
         WordVerb go = database.addVerb("ir", "a|de|X", "");
 

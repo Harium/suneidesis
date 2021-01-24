@@ -7,7 +7,7 @@ import com.harium.suneidesis.concept.numeral.Measure;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.concept.Time;
-import com.harium.suneidesis.repository.MemoryRepository;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.Search;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,10 +23,10 @@ public class ConsciousnessSimulationTest {
 
     @Before
     public void setUp() {
-        alexa = new MemoryRepository("Alexa");
+        alexa = new MemoryKnowledgeBase("Alexa");
         buildSelf(alexa);
 
-        siri = new MemoryRepository("Siri");
+        siri = new MemoryKnowledgeBase("Siri");
         buildSelf(siri);
     }
 

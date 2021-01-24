@@ -3,25 +3,28 @@ package com.harium.suneidesis.repository;
 import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.generator.IdGenerator;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MemoryRepository extends KnowledgeBase {
+public class MemoryKnowledgeBase extends KnowledgeBase {
 
     private Map<String, Fact> data = new HashMap<>();
 
-    public MemoryRepository(String name) {
+    public MemoryKnowledgeBase() {
+        super();
+    }
+
+    public MemoryKnowledgeBase(String name) {
         super(name);
     }
 
-    public MemoryRepository(IdGenerator idGenerator) {
+    public MemoryKnowledgeBase(IdGenerator idGenerator) {
         super(idGenerator);
     }
 
     @Override
-    public Collection<Fact> getAll() {
-        return data.values();
+    public Map<String, Fact> getAll() {
+        return data;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class MemoryRepository extends KnowledgeBase {
     public void merge(KnowledgeBase facts) {
         // TODO Wrap facts in facts
         // Fact -> merged from another base -> Real Fact = the real information
-        for (Fact fact: facts.getAll()) {
+        for (Fact fact: facts.getValues()) {
             add(fact);
         }
     }

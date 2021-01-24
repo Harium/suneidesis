@@ -3,7 +3,7 @@ package com.harium.suneidesis.planning;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Fact;
-import com.harium.suneidesis.repository.MemoryRepository;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.planning.instruction.FindTask;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class BaseTaskTest {
         fact.source(new Concept("sensors"));
         fact.subject(fridge);
 
-        MemoryRepository environment = new MemoryRepository("environment");
+        MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.add(fact);
 
         BaseTask chopGarlic = new BaseTask();
@@ -47,7 +47,7 @@ public class BaseTaskTest {
         fact.source(new Concept("sensors"));
         fact.subject(fridge);
 
-        MemoryRepository environment = new MemoryRepository("environment");
+        MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.add(fact);
 
         BaseTask chopGarlic = new BaseTask();
