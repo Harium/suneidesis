@@ -8,6 +8,7 @@ public class ConceptType {
 	public static final Concept ACTION = new Concept("ACTION");
 	public static final Concept ARTIFACT = new Concept("ARTIFACT");
 	public static final Concept BEING = new Concept("BEING");
+	public static final Concept DATA = new Concept("DATA");
 	public static final Concept EVENT = new Concept("EVENT");
 	public static final Concept FEELING = new Concept("FEELING");
 	public static final Concept SUBSTANCE = new Concept("SUBSTANCE");
@@ -15,7 +16,7 @@ public class ConceptType {
 	public static final Concept PART = new Concept("PART");
 	public static final Concept PLACE = new Concept("PLACE");
 	public static final Concept PHENOMENON = new Concept("PHENOMENA");
-	public static final Concept QUANTITY = new Concept("QUANTITY");
+	public static final Concept MEASURE = new Concept("MEASURE");
 	public static final Concept TIME_UNIT = new Concept("TIME UNIT");
 	public static final Concept SOUND = new Concept("SOUND");
 	public static final Concept SIMULATION = new Concept("SIMULATION");

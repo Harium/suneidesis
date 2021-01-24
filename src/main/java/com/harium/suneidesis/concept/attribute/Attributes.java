@@ -1,9 +1,7 @@
 package com.harium.suneidesis.concept.attribute;
 
-import com.harium.suneidesis.concept.Action;
-import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Place;
-import com.harium.suneidesis.concept.numeral.Quantity;
+import com.harium.suneidesis.concept.*;
+import com.harium.suneidesis.concept.numeral.Measure;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
 
@@ -23,6 +21,10 @@ public class Attributes implements Repository<Concept> {
     private Abilities abilities;
     private Properties properties;
     private final Map<String, Concept> attributeMap = new HashMap<>();
+
+    private DataType dataType = DataType.OBJECT;
+    // TODO RENAME TO VALUE
+    private String value;
 
     public Concept get(String key) {
         Concept concept = attributeMap.get(key);
@@ -60,22 +62,41 @@ public class Attributes implements Repository<Concept> {
     /**
      * Helper Methods
      */
-    public String getNameWord() {
-        return getName().getName();
+    public DataType getDataType() {
+        return dataType;
     }
 
-    public Word getName() {
-        Concept name = attributeMap.get(ATTRIBUTE_NAME);
-        if (name != null) {
-            return (Word) name;
-        }
+    public void setDataType(DataType dataType) {
+        this.dataType = dataType;
+    }
 
+    public String getValueContent() {
+        if (DataType.PRIMITIVE.equals(getDataType())) {
+            return value;
+        } else {
+            return getValue().getName();
+        }
+    }
+
+    public Word getValue() {
+        if (DataType.PRIMITIVE.equals(getDataType())) {
+            return new Word(value);
+        } else {
+            Concept value = attributeMap.get(ATTRIBUTE_NAME);
+            if (value != null) {
+                return (Word) value;
+            }
+        }
         return UNKNOWN_WORD;
     }
 
-    public void setName(String name) {
-        Word nameWord = getOrCreateWord(name);
-        setNameWord(nameWord);
+    public void setValue(String value) {
+        if (DataType.PRIMITIVE.equals(getDataType())) {
+            this.value = value;
+        } else {
+            Word nameWord = getOrCreateWord(value);
+            setNameWord(nameWord);
+        }
     }
 
     public void setNameWord(Word name) {
@@ -112,8 +133,8 @@ public class Attributes implements Repository<Concept> {
         getAbilities().add(concept);
     }
 
-    public void hasPart(Concept part, Quantity quantity) {
-        getProperties().add(part, quantity);
+    public void hasPart(Concept part, Measure measure) {
+        getProperties().add(part, measure);
     }
 
     public void isLocatedAt(Place concept) {
@@ -134,7 +155,7 @@ public class Attributes implements Repository<Concept> {
         for (Map.Entry<String, Concept> entry: b.attributeMap.entrySet()) {
             String key = entry.getKey();
             if (checkName && ATTRIBUTE_NAME.equals(key)) {
-                equals &= b.getName().equals(a.getName());
+                equals &= b.getValue().equals(a.getValue());
                 continue;
             }
             if (ATTRIBUTE_PROPERTIES.equals(key)) {
@@ -164,4 +185,5 @@ public class Attributes implements Repository<Concept> {
         }
         return a.equals(b);
     }
+
 }

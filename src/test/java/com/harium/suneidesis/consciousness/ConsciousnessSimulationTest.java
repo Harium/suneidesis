@@ -3,7 +3,7 @@ package com.harium.suneidesis.consciousness;
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Place;
-import com.harium.suneidesis.concept.numeral.Quantity;
+import com.harium.suneidesis.concept.numeral.Measure;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.concept.Time;
@@ -53,7 +53,7 @@ public class ConsciousnessSimulationTest {
         Action dataTransfer = new Action("data transfer");
         Concept searchEngine = new Concept("search engine");
         searchEngine.is(software);
-        searchEngine.hasQuantity(data, new Quantity("a lot"));
+        searchEngine.hasQuantity(data, new Measure("a lot"));
 
         Concept robot1 = new Concept("robot 1");
         robot1.is(robot);

@@ -1,12 +1,11 @@
 package com.harium.suneidesis.concept;
 
 
-import com.harium.suneidesis.concept.numeral.Quantity;
+import com.harium.suneidesis.concept.numeral.Measure;
 
 public class Concept extends Thing {
 
 	public static final String ATTRIBUTE_TYPE = "type";
-
 	public static final Concept UNKNOWN = new Concept(ConceptType.UNKNOWN);
 	public static final Concept SECRET = new Concept(ConceptType.SECRET);
 
@@ -15,7 +14,8 @@ public class Concept extends Thing {
 	}
 
 	public Concept(String name) {
-		super(name);
+		super();
+		setName(name);
 	}
 
 	public Concept(Concept type) {
@@ -23,9 +23,16 @@ public class Concept extends Thing {
 		type(type);
 	}
 
-	public Concept(String name, Concept type) {
-		super(name);
+	public Concept(Concept type, DataType dataType) {
+		super();
 		type(type);
+		dataType(dataType);
+	}
+
+	public Concept(String name, Concept type) {
+		super();
+		type(type);
+		setName(name);
 	}
 
 	public Concept getType() {
@@ -34,6 +41,15 @@ public class Concept extends Thing {
 
 	public Concept type(Concept type) {
 		attributes.set(ATTRIBUTE_TYPE, type);
+		return this;
+	}
+
+	public DataType getDataType() {
+		return attributes.getDataType();
+	}
+
+	public Concept dataType(DataType dataType) {
+		this.attributes.setDataType(dataType);
 		return this;
 	}
 
@@ -56,18 +72,18 @@ public class Concept extends Thing {
 		return this;
 	}
 
-	public Concept hasQuantity(Concept property, Quantity quantity) {
-		this.attributes.hasPart(property, quantity);
+	public Concept hasQuantity(Concept property, Measure measure) {
+		this.attributes.hasPart(property, measure);
 		return this;
 	}
 
-	public Concept hasQuantity(String property, Quantity quantity) {
-		return hasQuantity(new Concept(property), quantity);
+	public Concept hasQuantity(String property, Measure measure) {
+		return hasQuantity(new Concept(property), measure);
 	}
 
 	// Maybe replace by negative modifier
 	public Concept hasNoQuantity(Concept property) {
-		this.attributes.hasPart(property, Quantity.ZERO);
+		this.attributes.hasPart(property, Measure.ZERO);
 		return this;
 	}
 

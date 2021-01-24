@@ -12,21 +12,16 @@ public class Thing {
 		super();
 	}
 
-	public Thing(String name) {
-		this();
-		setName(name);
-	}
-
 	public Attributes getAttributes() {
 		return attributes;
 	}
 
 	public String getName() {
-		return attributes.getNameWord();
+		return attributes.getValueContent();
 	}
 
 	public void setName(String name) {
-		attributes.setName(name);
+		attributes.setValue(name);
 	}
 
 	@Override

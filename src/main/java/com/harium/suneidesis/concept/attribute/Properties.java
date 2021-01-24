@@ -1,32 +1,32 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.numeral.Quantity;
+import com.harium.suneidesis.concept.numeral.Measure;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.harium.suneidesis.concept.numeral.Quantity.ZERO;
+import static com.harium.suneidesis.concept.numeral.Measure.ZERO;
 
 public class Properties extends Concept {
 
     private final Map<String, Concept> nameIndex = new HashMap<>();
-    private final Map<Concept, Quantity> map = new HashMap<>();
+    private final Map<Concept, Measure> map = new HashMap<>();
 
-    public void add(Concept property, Quantity quantity) {
+    public void add(Concept property, Measure measure) {
         nameIndex.put(property.getName(), property);
-        map.put(property, quantity);
+        map.put(property, measure);
     }
 
-    public Quantity query(Concept part) {
-        Quantity quantity = map.get(part);
-        if (quantity == null) {
-            quantity = ZERO;
+    public Measure query(Concept part) {
+        Measure measure = map.get(part);
+        if (measure == null) {
+            measure = ZERO;
         }
-        return quantity;
+        return measure;
     }
 
-    public Quantity query(String name) {
+    public Measure query(String name) {
         Concept key = nameIndex.get(name);
         if (key == null) {
            return ZERO;
@@ -36,19 +36,19 @@ public class Properties extends Concept {
     }
 
     public void merge(Properties properties) {
-        for (Map.Entry<Concept, Quantity> entry : properties.map.entrySet()) {
+        for (Map.Entry<Concept, Measure> entry : properties.map.entrySet()) {
             add(entry.getKey(), entry.getValue());
         }
     }
 
     public boolean equals(Properties properties) {
         boolean equals = true;
-        for (Map.Entry<Concept, Quantity> entry : map.entrySet()) {
+        for (Map.Entry<Concept, Measure> entry : map.entrySet()) {
             Concept key = entry.getKey();
-            Quantity q = entry.getValue();
+            Measure q = entry.getValue();
 
             Concept concept = properties.nameIndex.get(key.getName());
-            Quantity toCompare = properties.map.get(concept);
+            Measure toCompare = properties.map.get(concept);
 
             boolean sameValue = q.getValueText().equals(toCompare.getValueText());
             boolean sameUnit = q.getUnitText().equals(toCompare.getUnitText());

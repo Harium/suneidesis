@@ -1,7 +1,7 @@
 package com.harium.suneidesis.concept.beign.ancestry;
 
 import com.harium.suneidesis.concept.Being;
-import com.harium.suneidesis.concept.beign.Gender;
+import com.harium.suneidesis.concept.Concept;
 
 /**
  * Class to represent individuals created from a single genetic source
@@ -16,7 +16,7 @@ public class SingleAncestor extends Ancestry {
     public SingleAncestor(String ancestorName) {
         super(NAME);
         this.source = new Being(ancestorName);
-        this.source.setGender(Gender.UNKNOWN);
+        this.source.setGender(Concept.UNKNOWN);
     }
 
     public SingleAncestor(Being source) {

@@ -2,8 +2,10 @@ package com.harium.suneidesis.concept.word;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
+import com.harium.suneidesis.concept.DataType;
+import com.harium.suneidesis.concept.Primitive;
 
-public class Word extends Concept {
+public class Word extends Primitive {
 
     public static final String ATTRIBUTE_TAG = "tag";
     public static final String ATTRIBUTE_LEMMA = "lemma";
@@ -22,28 +24,15 @@ public class Word extends Concept {
     public static final String TAG_VERB_CONJUGATION = "verb_conj";
 
     private String id;
-    private String word;
 
     public Word(String name) {
         super(ConceptType.WORD);
-        this.word = name;
+        setName(name);
     }
 
     public Word(String name, String tag) {
         this(name);
         has(ATTRIBUTE_TAG, new Word(tag));
-    }
-
-    @Override
-    public void setName(String name) {
-        // Hacky way to avoid stack overflow
-        word = name;
-    }
-
-    @Override
-    public String getName() {
-        // Hacky way to avoid stack overflow
-        return word;
     }
 
     public String getId() {

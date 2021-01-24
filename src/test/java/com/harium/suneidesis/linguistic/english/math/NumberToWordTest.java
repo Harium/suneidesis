@@ -1,6 +1,5 @@
 package com.harium.suneidesis.linguistic.english.math;
 
-import com.harium.suneidesis.linguistic.english.math.SimpleNumberToWord;
 import com.harium.suneidesis.linguistic.math.NumberToWord;
 import org.junit.Assert;
 import org.junit.Before;

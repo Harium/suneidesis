@@ -3,30 +3,30 @@ package com.harium.suneidesis.concept.numeral;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 
-public class Quantity extends Concept {
+public class Measure extends Concept {
 
     private static final String ATTRIBUTE_UNIT = "unit";
     private static final String ATTRIBUTE_VALUE = "value";
 
-    public static final Quantity ZERO = new Quantity("Zero", "0");
+    public static final Measure ZERO = new Measure("Zero", "0");
 
     /**
      * This constructor uses value instead of name in purpose
      * @param value - the value in unknown units
      */
-    public Quantity(String value) {
-        super(ConceptType.QUANTITY);
+    public Measure(String value) {
+        super(ConceptType.MEASURE);
         setValue(value);
     }
 
-    public Quantity(String value, String unit) {
-        super(ConceptType.QUANTITY);
+    public Measure(String value, String unit) {
+        super(ConceptType.MEASURE);
         setValue(value);
         setUnit(unit);
     }
 
-    public Quantity(String value, String unit, String name) {
-        super(name, ConceptType.QUANTITY);
+    public Measure(String value, String unit, String name) {
+        super(name, ConceptType.MEASURE);
         setValue(value);
         setUnit(unit);
     }
@@ -51,12 +51,12 @@ public class Quantity extends Concept {
         return attributes.get(ATTRIBUTE_UNIT).getName();
     }
 
-    public Quantity setValue(String value) {
+    public Measure setValue(String value) {
         attributes.set(ATTRIBUTE_VALUE, new Concept(value));
         return this;
     }
 
-    public Quantity setUnit(String unit) {
+    public Measure setUnit(String unit) {
         attributes.set(ATTRIBUTE_UNIT, new Concept(unit));
         return this;
     }
