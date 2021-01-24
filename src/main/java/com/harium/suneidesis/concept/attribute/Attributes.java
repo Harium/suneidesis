@@ -34,6 +34,10 @@ public class Attributes implements Repository<Concept> {
         return concept;
     }
 
+    public boolean contains(String key) {
+        return attributeMap.containsKey(key);
+    }
+
     @Override
     public Collection<Concept> getAll() {
         return attributeMap.values();
@@ -41,6 +45,10 @@ public class Attributes implements Repository<Concept> {
 
     public void set(String key, Concept concept) {
         attributeMap.put(key, concept);
+    }
+
+    public void remove(Concept concept) {
+        attributeMap.values().remove(concept);
     }
 
     public Abilities getAbilities() {

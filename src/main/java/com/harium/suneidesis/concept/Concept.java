@@ -6,6 +6,7 @@ import com.harium.suneidesis.concept.numeral.Measure;
 public class Concept extends Thing {
 
 	public static final String ATTRIBUTE_TYPE = "type";
+
 	public static final Concept UNKNOWN = new Concept(ConceptType.UNKNOWN);
 	public static final Concept SECRET = new Concept(ConceptType.SECRET);
 
