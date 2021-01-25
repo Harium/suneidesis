@@ -35,18 +35,18 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
     @Override
     public String save(Word w) {
         String factId = add(w);
-        w.setId(factId);
+        w.setWordId(factId);
         List<Word> words = this.words.computeIfAbsent(w.getName(), k -> new ArrayList<>());
         words.add(w);
-        wordIds.put(w.getId(), w);
+        wordIds.put(w.getWordId(), w);
         return factId;
     }
 
     @Override
-    protected Fact wrap(Concept info) {
-        Fact wrap = super.wrap(info);
-        wrap.acquisitionMedium(MEDIUM_TEXT);
-        wrap.acquisitionMethod(METHOD_INPUT);
+    protected Concept wrap(Concept info) {
+        Concept wrap = super.wrap(info);
+        wrap.set(Fact.ATTRIBUTE_ACQUISITION_MEDIUM, MEDIUM_TEXT);
+        wrap.set(Fact.ATTRIBUTE_ACQUISITION_METHOD, METHOD_INPUT);
         return wrap;
     }
 
@@ -65,7 +65,7 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
         if (!words.containsKey(lemma)) {
             lemmaId = add(lemma, Tag.VERB);
         } else {
-            lemmaId = words.get(lemma).get(0).getId();
+            lemmaId = words.get(lemma).get(0).getWordId();
         }
 
         WordVerb v = new WordVerb(lemmaId);
@@ -75,8 +75,8 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
     @Override
     public String save(WordVerbConjugation verbConjugation) {
         save((Word)verbConjugation);
-        verbConjugations.put(verbConjugation.getId(), verbConjugation);
-        return verbConjugation.getId();
+        verbConjugations.put(verbConjugation.getWordId(), verbConjugation);
+        return verbConjugation.getWordId();
     }
 
     @Override

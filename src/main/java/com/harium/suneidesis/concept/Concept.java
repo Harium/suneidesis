@@ -2,9 +2,12 @@ package com.harium.suneidesis.concept;
 
 
 import com.harium.suneidesis.concept.numeral.Measure;
+import com.harium.suneidesis.concept.primitive.Text;
+import com.harium.suneidesis.concept.word.Word;
 
 public class Concept extends Thing {
 
+	public static final String ATTRIBUTE_ID = "id";
 	public static final String ATTRIBUTE_TYPE = "type";
 
 	public static final Concept UNKNOWN = new Concept(ConceptType.UNKNOWN);
@@ -42,6 +45,15 @@ public class Concept extends Thing {
 
 	public Concept type(Concept type) {
 		attributes.set(ATTRIBUTE_TYPE, type);
+		return this;
+	}
+
+	public Concept getId() {
+		return attributes.get(ATTRIBUTE_ID);
+	}
+
+	public Concept id(String id) {
+		attributes.set(ATTRIBUTE_TYPE, new Text(id));
 		return this;
 	}
 

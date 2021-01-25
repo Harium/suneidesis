@@ -84,7 +84,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
         if (words == null || words.isEmpty()) {
             return null;
         }
-        return words.get(0).getId();
+        return words.get(0).getWordId();
     }
 
     private boolean isVerb(String tag) {

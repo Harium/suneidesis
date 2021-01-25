@@ -1,6 +1,6 @@
 package com.harium.suneidesis.repository;
 
-import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.generator.IdGenerator;
 
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class MemoryKnowledgeBase extends KnowledgeBase {
 
-    private Map<String, Fact> data = new HashMap<>();
+    private Map<String, Concept> data = new HashMap<>();
 
     public MemoryKnowledgeBase() {
         super();
@@ -23,26 +23,31 @@ public class MemoryKnowledgeBase extends KnowledgeBase {
     }
 
     @Override
-    public Map<String, Fact> getAll() {
+    public Map<String, Concept> getAll() {
         return data;
     }
 
     @Override
-    public void set(String key, Fact fact) {
-        data.put(key, fact);
+    public void set(String key, Concept concept) {
+        data.put(key, concept);
     }
 
     @Override
-    public Fact get(String key) {
+    public Concept get(String key) {
         return data.get(key);
     }
 
     @Override
-    public void merge(KnowledgeBase facts) {
-        // TODO Wrap facts in facts
-        // Fact -> merged from another base -> Real Fact = the real information
-        for (Fact fact: facts.getValues()) {
-            add(fact);
+    public boolean contains(String key) {
+        return data.containsKey(key);
+    }
+
+    @Override
+    public void merge(KnowledgeBase concepts) {
+        // TODO Wrap concepts into concepts (like heard from something heard)
+        // Concept -> merged from another base -> Real Fact = the real information
+        for (Concept concept: concepts.getValues()) {
+            add(concept);
         }
     }
 }

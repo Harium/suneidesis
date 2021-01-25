@@ -1,8 +1,6 @@
 package com.harium.suneidesis.concept.word;
 
-import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
-import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.concept.Primitive;
 
 public class Word extends Primitive {
@@ -23,7 +21,7 @@ public class Word extends Primitive {
     public static final String TAG_VERB = "verb";
     public static final String TAG_VERB_CONJUGATION = "verb_conj";
 
-    private String id;
+    private String wordId;
 
     public Word(String name) {
         super(ConceptType.WORD);
@@ -35,12 +33,12 @@ public class Word extends Primitive {
         has(ATTRIBUTE_TAG, new Word(tag));
     }
 
-    public String getId() {
-        return id;
+    public String getWordId() {
+        return wordId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setWordId(String id) {
+        this.wordId = id;
     }
 
     public Word getLemma() {

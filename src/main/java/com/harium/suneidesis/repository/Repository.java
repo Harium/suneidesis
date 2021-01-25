@@ -15,4 +15,6 @@ public interface Repository<T extends Thing> {
 
     T get(String key);
 
+    boolean contains(String key);
+
 }
