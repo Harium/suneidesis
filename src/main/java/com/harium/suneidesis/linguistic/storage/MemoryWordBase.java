@@ -1,5 +1,6 @@
 package com.harium.suneidesis.linguistic.storage;
 
+import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
@@ -21,8 +22,19 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
     Map<String, WordVerb> verbs = new HashMap<>();
     Map<String, WordVerbConjugation> verbConjugations = new HashMap<>();
 
+    public static final Concept MEDIUM_TEXT = new Concept("dictionary");
+    public static final Action METHOD_INPUT = new Action("input");
+
     public MemoryWordBase(String name) {
         super(name);
+        init();
+    }
+
+    private void init() {
+        MEDIUM_TEXT.id(getIdGenerator().generateId());
+        add(MEDIUM_TEXT);
+        METHOD_INPUT.id(getIdGenerator().generateId());
+        add(METHOD_INPUT);
     }
 
     protected String add(String word, Tag tag) {
@@ -49,11 +61,11 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
         wrap.set(Fact.ATTRIBUTE_ACQUISITION_METHOD, METHOD_INPUT);
         return wrap;
     }
-
+    
     @Override
     public String save(WordVerb verb) {
         String verbId = save((Word)verb);
-        verbs.put(verbId, verb);
+        verbs.put(verb.getWordId(), verb);
         return verbId;
     }
 
@@ -104,7 +116,7 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
         if (w == null) {
             return null;
         }
-        return verbs.get(w.getId());
+        return verbs.get(w.getWordId());
     }
 
     @Override
@@ -113,7 +125,7 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
         if (w == null) {
             return null;
         }
-        return verbConjugations.get(w.getId());
+        return verbConjugations.get(w.getWordId());
     }
 
     public WordVerb addVerb(String verbWord, String prepositions, String transitivity) {

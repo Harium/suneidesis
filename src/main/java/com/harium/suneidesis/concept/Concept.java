@@ -3,7 +3,6 @@ package com.harium.suneidesis.concept;
 
 import com.harium.suneidesis.concept.numeral.Measure;
 import com.harium.suneidesis.concept.primitive.Text;
-import com.harium.suneidesis.concept.word.Word;
 
 public class Concept extends Thing {
 
@@ -48,12 +47,16 @@ public class Concept extends Thing {
 		return this;
 	}
 
+	public String getIdText() {
+		return getId().getName();
+	}
+
 	public Concept getId() {
 		return attributes.get(ATTRIBUTE_ID);
 	}
 
 	public Concept id(String id) {
-		attributes.set(ATTRIBUTE_TYPE, new Text(id));
+		attributes.set(ATTRIBUTE_ID, new Text(id));
 		return this;
 	}
 
@@ -78,6 +81,10 @@ public class Concept extends Thing {
 
 	public Concept has(String key, Concept property) {
 		return set(key, property);
+	}
+
+	public boolean hasKey(String key) {
+		return !get(key).isUnknown();
 	}
 
 	public Concept set(String key, Concept property) {
@@ -120,4 +127,5 @@ public class Concept extends Thing {
 	public boolean isSecret() {
 		return (ConceptType.SECRET.equals(getType()));
 	}
+
 }

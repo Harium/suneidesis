@@ -2,6 +2,7 @@ package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.numeral.Measure;
+import com.harium.suneidesis.concept.primitive.Text;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
 
@@ -18,7 +19,7 @@ public class Attributes implements Repository<Concept> {
     public static final String ATTRIBUTE_NAME = "name";
     public static final String ATTRIBUTE_DATA_TYPE = "dataType";
 
-    public static final Word UNKNOWN_WORD = new Word("");
+    public static final Text UNKNOWN_WORD = new Text("?");
 
     private DataType dataType = DataType.OBJECT;
     private String value;
@@ -92,13 +93,13 @@ public class Attributes implements Repository<Concept> {
         }
     }
 
-    public Word getValue() {
+    public Text getValue() {
         if (DataType.PRIMITIVE.equals(getDataType())) {
-            return new Word(value);
+            return new Text(value);
         } else {
             Concept value = attributeMap.get(ATTRIBUTE_NAME);
             if (value != null) {
-                return (Word) value;
+                return (Text) value;
             }
         }
         return UNKNOWN_WORD;
@@ -108,17 +109,17 @@ public class Attributes implements Repository<Concept> {
         if (DataType.PRIMITIVE.equals(getDataType())) {
             this.value = value;
         } else {
-            Word nameWord = getOrCreateWord(value);
-            setNameWord(nameWord);
+            Text nameWord = getOrCreateWord(value);
+            setNameConcept(nameWord);
         }
     }
 
-    public void setNameWord(Word name) {
+    public void setNameConcept(Concept name) {
         attributeMap.put(ATTRIBUTE_NAME, name);
     }
 
-    private Word getOrCreateWord(String name) {
-        return new Word(name);
+    private Text getOrCreateWord(String name) {
+        return new Text(name);
     }
 
     public void is(Concept concept) {

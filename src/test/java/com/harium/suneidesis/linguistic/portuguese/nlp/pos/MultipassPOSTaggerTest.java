@@ -13,6 +13,7 @@ import org.junit.Test;
 
 public class MultipassPOSTaggerTest {
 
+    private static final String INFINITIVE = "inf";
     private static final String FIRST_PERSON_SINGULAR = "eu";
     private static final String THIRD_PERSON_SINGULAR = "ele";
 
@@ -31,7 +32,6 @@ public class MultipassPOSTaggerTest {
         MemoryWordBase database = new MemoryWordBase();
 
         WordVerb go = database.addVerb("ir", "a|de|X", "");
-
         database.addVerbConjugation("fui", go, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), FIRST_PERSON_SINGULAR);
         database.addVerbConjugation("foi", go, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), THIRD_PERSON_SINGULAR);
 

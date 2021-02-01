@@ -28,6 +28,10 @@ public class Thing {
 		attributes.setValue(name);
 	}
 
+	public void setNameConcept(Concept nameConcept) {
+		attributes.setNameConcept(nameConcept);
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(attributes);

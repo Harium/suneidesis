@@ -27,10 +27,7 @@ public class KnowledgeBaseJacksonSerializer implements KnowledgeBaseSerializer {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(stream, knowledgeBase);
-        String finalString = new String(stream.toByteArray());
-
-        System.out.println(finalString);
-        return finalString;
+        return new String(stream.toByteArray());
     }
 
 }

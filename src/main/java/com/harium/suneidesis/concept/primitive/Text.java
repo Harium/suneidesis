@@ -6,6 +6,10 @@ import com.harium.suneidesis.concept.Primitive;
 public class Text extends Primitive {
 
     public Text(String value) {
-        super(ConceptType.DATA);
+        super(value, ConceptType.DATA);
+    }
+
+    public boolean isUnknown() {
+        return getType().isUnknown();
     }
 }

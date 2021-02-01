@@ -20,7 +20,7 @@ public class CustomKnowledgeBaseSerializer extends StdSerializer<KnowledgeBase> 
     public void serialize(KnowledgeBase knowledgeBase, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
         jgen.writeStringField("name", knowledgeBase.getName());
-        jgen.writeObjectField("facts", knowledgeBase.getAll());
+        jgen.writeObjectField("concepts", knowledgeBase.getAll());
         jgen.writeEndObject();
     }
 }

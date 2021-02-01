@@ -86,7 +86,7 @@ public class ConsciousnessSimulationTest {
     public void testQuery() {
         Search search = new Search();
         search.term = "robot 1";
-        List<Fact> robot1Facts = alexa.query(search);
+        List<Concept> robot1Facts = alexa.query(search);
         assertEquals(2, robot1Facts.size());
     }
 

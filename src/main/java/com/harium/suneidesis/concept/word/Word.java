@@ -24,8 +24,7 @@ public class Word extends Primitive {
     private String wordId;
 
     public Word(String name) {
-        super(ConceptType.WORD);
-        setName(name);
+        super(name, ConceptType.WORD);
     }
 
     public Word(String name, String tag) {

@@ -25,6 +25,7 @@ public class FactSerializer extends StdSerializer<Fact> {
         writeConcept(Fact.ATTRIBUTE_SUBJECT, fact.getSubject(), jgen);
         writeConcept(Fact.ATTRIBUTE_OBJECT, fact.getObject(), jgen);
         writeConcept(Fact.ATTRIBUTE_PREDICATE, fact.getPredicate(), jgen);
+        writeConcept(Fact.ATTRIBUTE_TIME, fact.getTime(), jgen);
 
         jgen.writeEndObject();
     }
