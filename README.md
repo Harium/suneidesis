@@ -20,12 +20,13 @@ Suneidesis is a project to represent knowledge. It can also be used as a chat bo
 
 - [sunbot-discord](https://github.com/Harium/sunbot-discord/)
 - [sunbot-slack](https://github.com/Harium/sunbot-slack/)
+- [sunbot-http](https://github.com/Harium/sunbot-http/)
 - [sunbot-mqtt](https://github.com/Harium/sunbot-mqtt/)
 
 ## Examples
 
 ```
-// A simple parrot bot (console)
+// A simple parrot bot (using console)
 public static void main(String[] args) {
   LanguageBox box = new EchoBox();
   Instance bot = new Instance("Parrot Bot");
