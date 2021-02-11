@@ -20,7 +20,7 @@ public class TerminalExample {
         });
 
         Terminal terminal = new Terminal();
-        terminal.addBox(box);
+        terminal.addParser(box);
     }
 
 }

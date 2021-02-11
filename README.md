@@ -28,12 +28,10 @@ Suneidesis is a project to represent knowledge. It can also be used as a chat bo
 ```
 // A simple parrot bot (using console)
 public static void main(String[] args) {
-  LanguageBox box = new EchoBox();
-  Instance bot = new Instance("Parrot Bot");
-  bot.setLanguageBox(box);
-
+  Parser box = new EchoBox();
+  
   Terminal terminal = new Terminal();
-  terminal.addInstance(bot);
+  terminal.addParser(box);
 }
 ```
 

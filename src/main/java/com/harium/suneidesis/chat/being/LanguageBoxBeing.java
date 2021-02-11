@@ -1,8 +1,8 @@
 package com.harium.suneidesis.chat.being;
 
+import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.chat.box.ChatBox;
 import com.harium.suneidesis.chat.box.DummyBox;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.instance.LanguageBox;
@@ -16,7 +16,7 @@ public class LanguageBoxBeing extends Being implements LanguageBox {
 
     private Identity identity;
 
-    private ChatBox chatBox = new DummyBox();
+    private Parser parser = new DummyBox();
 
     public LanguageBoxBeing(Identity identity) {
         super(identity.getName());
@@ -38,17 +38,17 @@ public class LanguageBoxBeing extends Being implements LanguageBox {
         this.identity = new Identity(name);
     }
 
-    public void input(InputContext context, Output output) {
+    public boolean parse(InputContext context, Output output) {
         context.getProperties().put(PARAM_INSTANCE, this);
-        chatBox.input(context, output);
+        return parser.parse(context, output);
     }
 
-    public ChatBox getChatBox() {
-        return chatBox;
+    public Parser getParser() {
+        return parser;
     }
 
-    public void setChatBox(ChatBox chatBox) {
-        this.chatBox = chatBox;
+    public void setParser(Parser parser) {
+        this.parser = parser;
     }
 
     @Override

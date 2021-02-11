@@ -28,8 +28,8 @@ public class BaseEnglishBox extends BaseChatBox {
     }
 
     @Override
-    public void input(InputContext input, Output output) {
-        super.input(input, output);
+    public boolean parse(InputContext input, Output output) {
+        return super.parse(input, output);
     }
 
     public static boolean checkAction(String action, String... verbs) {
