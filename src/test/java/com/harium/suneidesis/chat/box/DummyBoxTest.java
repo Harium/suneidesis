@@ -24,16 +24,16 @@ public class DummyBoxTest {
 
         Out output = new Out();
 
-        box.input(context("How are you?"), output);
+        box.parse(context("How are you?"), output);
         Assert.assertEquals("", output.answer);
 
-        box.input(context("What's your name?"), output);
+        box.parse(context("What's your name?"), output);
         Assert.assertEquals("", output.answer);
 
-        box.input(context("Tell me more about the Theory of Relativity"), output);
+        box.parse(context("Tell me more about the Theory of Relativity"), output);
         Assert.assertEquals("", output.answer);
 
-        box.input(context("Thank you for listen to me"), output);
+        box.parse(context("Thank you for listen to me"), output);
         Assert.assertEquals("", output.answer);
     }
 

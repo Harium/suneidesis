@@ -7,20 +7,20 @@ import com.harium.suneidesis.chat.output.Output;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseChatBox implements ChatBox {
+public class BaseChatBox implements Parser {
 
     protected Parser currentParser = null;
     protected List<Parser> parsers = new ArrayList<>();
 
     @Override
-    public void input(InputContext input, Output output) {
+    public boolean parse(InputContext input, Output output) {
         input.setCurrentParser(currentParser);
 
         // Remove Question Mark
         String clean = clearSentence(input.getSentence());
         input.setSentence(clean);
 
-        queryParsers(input, output);
+        return queryParsers(input, output);
     }
 
     protected String clearSentence(String sentence) {
@@ -30,10 +30,10 @@ public class BaseChatBox implements ChatBox {
         return sentence.replaceAll("\\?", "").trim();
     }
 
-    private void queryParsers(InputContext context, Output output) {
+    private boolean queryParsers(InputContext context, Output output) {
         if (currentParser != null) {
             if (currentParser.parse(context, output)) {
-                return;
+                return true;
             }
         }
 
@@ -41,10 +41,11 @@ public class BaseChatBox implements ChatBox {
             if (parser != currentParser) {
                 if (parser.parse(context, output)) {
                     currentParser = parser;
-                    break;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public void addParser(Parser parser) {
