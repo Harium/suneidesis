@@ -1,7 +1,9 @@
 package com.harium.suneidesis.chat.box;
 
+import com.harium.suneidesis.chat.Interceptor;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.input.InputContext;
+import com.harium.suneidesis.chat.interceptor.QuestionMarkRemoverInterceptor;
 import com.harium.suneidesis.chat.output.Output;
 
 import java.util.ArrayList;
@@ -11,23 +13,26 @@ public class BaseChatBox implements Parser {
 
     protected Parser currentParser = null;
     protected List<Parser> parsers = new ArrayList<>();
+    protected List<Interceptor> interceptors = new ArrayList<>();
+
+    public BaseChatBox() {
+        // Removes Question Mark
+        interceptors.add(new QuestionMarkRemoverInterceptor());
+    }
 
     @Override
     public boolean parse(InputContext input, Output output) {
         input.setCurrentParser(currentParser);
 
-        // Remove Question Mark
-        String clean = clearSentence(input.getSentence());
-        input.setSentence(clean);
+        interceptInput(input, output);
 
         return queryParsers(input, output);
     }
 
-    protected String clearSentence(String sentence) {
-        if (sentence == null) {
-            return sentence;
+    private void interceptInput(InputContext input, Output output) {
+        for (Interceptor interceptor : interceptors) {
+            interceptor.intercept(input, output);
         }
-        return sentence.replaceAll("\\?", "").trim();
     }
 
     private boolean queryParsers(InputContext context, Output output) {
@@ -46,6 +51,10 @@ public class BaseChatBox implements Parser {
             }
         }
         return false;
+    }
+
+    public void addInterceptor(Interceptor interceptor) {
+        interceptors.add(interceptor);
     }
 
     public void addParser(Parser parser) {
