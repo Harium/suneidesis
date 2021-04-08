@@ -1,6 +1,7 @@
 package com.harium.suneidesis.serialization;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.storage.MemoryWordBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
@@ -40,8 +41,11 @@ public class KnowledgeBaseSerializerTest {
         System.out.println(result);
 
         String expected = "{name:\"dictionary\", \"concepts\":{"
-                + "\"0\":{\"name\":\"cat\", \"tag\":\"NN\"},"
-                + "\"1\":{\"name\":\"duck\", \"tag\":\"NN\"}"
+                + "\"0\":{\"name\":\"cat\", \"tag\":\"NOUN\"},"
+                + "\"1\":{\"name\":\"duck\", \"tag\":\"NOUN\"},"
+                // TODO UNIFY TAGS
+                + "\"2\":{\"name\":\"go\", \"tag\":\"verb\", \"lemma\":\"go\", \"prepositions\":\"on|through\"},"
+                + "\"3\":{\"name\":\"went\", \"tag\":\"VERB_PAST_TENSE\", \"lemma\":\"go\"}"
                 +"}}";
 
         JSONAssert.assertEquals(expected, result, false);
@@ -61,6 +65,9 @@ public class KnowledgeBaseSerializerTest {
         MemoryWordBase database = new MemoryWordBase("dictionary");
         database.addWord("cat", Tag.NOUN);
         database.addWord("duck", Tag.NOUN);
+
+        WordVerb go = database.addVerb("go", "on|through", "");
+        database.addVerbConjugation("went", go, Tag.VERB_PAST_TENSE, "PAST", "");
 
         return database;
     }

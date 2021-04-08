@@ -7,6 +7,7 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.concept.attribute.Attributes;
+import com.harium.suneidesis.concept.word.Word;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -87,6 +88,15 @@ public class ConceptSerializer extends StdSerializer<Concept> {
                 jgen.writeObjectField(entry.getKey(), entry.getValue());
                 continue;
             }
+            if (DataType.PRIMITIVE == entry.getValue().getDataType()) {
+                if (entry.getValue() instanceof Word) {
+                    Word word = (Word) entry.getValue();
+                    jgen.writeObjectField(entry.getKey(), word.getName());
+                }
+
+                continue;
+            }
+
 
             // Serialize id to avoid circular dependencies
             jgen.writeStringField(entry.getKey(), entry.getValue().getIdText());
