@@ -40,19 +40,11 @@ public class KnowledgeBaseSerializerTest {
         System.out.println(result);
 
         String expected = "{name:\"dictionary\", \"concepts\":{"
-                + "\"0\":{\"name\":\"cat\",\"fruit\":\"1\"},"
-                + "\"1\":{\"name\":\"dog\"}"
+                + "\"0\":{\"name\":\"cat\", \"tag\":\"NN\"},"
+                + "\"1\":{\"name\":\"duck\", \"tag\":\"NN\"}"
                 +"}}";
 
         JSONAssert.assertEquals(expected, result, false);
-    }
-
-    private KnowledgeBase buildWordDatabase() {
-        MemoryWordBase database = new MemoryWordBase("dictionary");
-        database.addWord("cat", Tag.NOUN);
-        database.addWord("duck", Tag.NOUN);
-
-        return database;
     }
 
     private KnowledgeBase buildSimpleKnowledgeBase() {
@@ -63,6 +55,14 @@ public class KnowledgeBaseSerializerTest {
         base.add(appleTree);
 
         return base;
+    }
+
+    private KnowledgeBase buildWordDatabase() {
+        MemoryWordBase database = new MemoryWordBase("dictionary");
+        database.addWord("cat", Tag.NOUN);
+        database.addWord("duck", Tag.NOUN);
+
+        return database;
     }
 
 }

@@ -2,11 +2,11 @@ package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.DataType;
-import com.harium.suneidesis.concept.Time;
 import com.harium.suneidesis.generator.BaseIdGenerator;
 import com.harium.suneidesis.generator.BaseTimeGenerator;
 import com.harium.suneidesis.generator.IdGenerator;
-import com.harium.suneidesis.generator.TimeGenerator;
+import com.harium.suneidesis.repository.decorator.EntryDecorator;
+import com.harium.suneidesis.repository.decorator.TimeDecorator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,16 +15,15 @@ import java.util.Map;
 
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
 import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
+import static com.harium.suneidesis.repository.decorator.TimeDecorator.ATTRIBUTE_CREATED_AT;
 
 public abstract class KnowledgeBase implements Repository<Concept> {
-
-    public static final String ATTRIBUTE_CREATED_AT = "created_at";
 
     private String name;
 
     private IdGenerator idGenerator = new BaseIdGenerator();
 
-    private TimeGenerator timeGenerator = new BaseTimeGenerator();
+    protected List<EntryDecorator> decorators = new ArrayList<>();
 
     public KnowledgeBase() {
         super();
@@ -38,6 +37,10 @@ public abstract class KnowledgeBase implements Repository<Concept> {
     public KnowledgeBase(IdGenerator idGenerator) {
         super();
         this.idGenerator = idGenerator;
+    }
+
+    protected void initDecorators() {
+        decorators.add(new TimeDecorator(new BaseTimeGenerator()));
     }
 
     @Override
@@ -80,7 +83,7 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         if (!id.isUnknown() && contains(id.getName())) {
             return id.getName();
         }
-        Concept wrap = wrap(concept);
+        Concept wrap = decorate(concept);
 
         String idText = idGenerator.generateId();
         wrap.id(idText);
@@ -104,12 +107,10 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         return idText;
     }
 
-    protected Concept wrap(Concept info) {
-        String when = timeGenerator.generateTime();
-
-        Time time = new Time(when);
-        info.set(ATTRIBUTE_CREATED_AT, time);
-
+    protected Concept decorate(Concept info) {
+        for (EntryDecorator decorator : decorators) {
+            decorator.decorate(info);
+        }
         return info;
     }
 

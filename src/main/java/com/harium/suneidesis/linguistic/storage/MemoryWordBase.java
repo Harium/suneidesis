@@ -1,15 +1,15 @@
 package com.harium.suneidesis.linguistic.storage;
 
-import com.harium.suneidesis.concept.Action;
-import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Provenance;
-import com.harium.suneidesis.repository.MemoryKnowledgeBase;
-import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.concept.word.WordVerbConjugation;
-import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepository {
 
@@ -20,19 +20,8 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
     Map<String, WordVerb> verbs = new HashMap<>();
     Map<String, WordVerbConjugation> verbConjugations = new HashMap<>();
 
-    public static final Concept MEDIUM_TEXT = new Concept("dictionary");
-    public static final Action METHOD_INPUT = new Action("input");
-
     public MemoryWordBase(String name) {
         super(name);
-        init();
-    }
-
-    private void init() {
-        MEDIUM_TEXT.id(getIdGenerator().generateId());
-        add(MEDIUM_TEXT);
-        METHOD_INPUT.id(getIdGenerator().generateId());
-        add(METHOD_INPUT);
     }
 
     public String addWord(String word, Tag tag) {
@@ -53,16 +42,8 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
     }
 
     @Override
-    protected Concept wrap(Concept info) {
-        Concept wrap = super.wrap(info);
-        wrap.set(Provenance.ATTRIBUTE_ACQUISITION_MEDIUM, MEDIUM_TEXT);
-        wrap.set(Provenance.ATTRIBUTE_ACQUISITION_METHOD, METHOD_INPUT);
-        return wrap;
-    }
-    
-    @Override
     public String save(WordVerb verb) {
-        String verbId = save((Word)verb);
+        String verbId = save((Word) verb);
         verbs.put(verb.getWordId(), verb);
         return verbId;
     }
@@ -84,7 +65,7 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
 
     @Override
     public String save(WordVerbConjugation verbConjugation) {
-        save((Word)verbConjugation);
+        save((Word) verbConjugation);
         verbConjugations.put(verbConjugation.getWordId(), verbConjugation);
         return verbConjugation.getWordId();
     }
@@ -151,5 +132,4 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
 
         return save(conjugation);
     }
-
 }

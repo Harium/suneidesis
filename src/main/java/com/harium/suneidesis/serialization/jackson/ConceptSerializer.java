@@ -18,7 +18,7 @@ import static com.harium.suneidesis.concept.Time.ATTRIBUTE_END;
 import static com.harium.suneidesis.concept.Time.ATTRIBUTE_START;
 import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_DATA_TYPE;
 import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
-import static com.harium.suneidesis.repository.KnowledgeBase.ATTRIBUTE_CREATED_AT;
+import static com.harium.suneidesis.repository.decorator.TimeDecorator.ATTRIBUTE_CREATED_AT;
 
 public class ConceptSerializer extends StdSerializer<Concept> {
 
@@ -83,7 +83,8 @@ public class ConceptSerializer extends StdSerializer<Concept> {
             }
 
             if (ConceptType.TIME_UNIT == entry.getValue().getType()) {
-                jgen.writeObjectField(ATTRIBUTE_CREATED_AT, entry.getValue());
+                // Write full concept not only the id
+                jgen.writeObjectField(entry.getKey(), entry.getValue());
                 continue;
             }
 
