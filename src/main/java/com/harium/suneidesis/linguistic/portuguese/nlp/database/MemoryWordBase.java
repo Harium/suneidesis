@@ -21,133 +21,133 @@ public class MemoryWordBase extends com.harium.suneidesis.linguistic.storage.Mem
     }
 
     private void addPunctuation() {
-        add(".", Tag.PUNCTUATION);
-        add(",", Tag.PUNCTUATION);
-        add(":", Tag.PUNCTUATION);
-        add(";", Tag.PUNCTUATION);
-        add("!", Tag.PUNCTUATION);
-        add("?", Tag.PUNCTUATION);
+        addWord(".", Tag.PUNCTUATION);
+        addWord(",", Tag.PUNCTUATION);
+        addWord(":", Tag.PUNCTUATION);
+        addWord(";", Tag.PUNCTUATION);
+        addWord("!", Tag.PUNCTUATION);
+        addWord("?", Tag.PUNCTUATION);
     }
 
     private void addDeterminers() {
-        add("o", Tag.DETERMINER);
-        add("a", Tag.DETERMINER);
-        add("os", Tag.DETERMINER);
-        add("as", Tag.DETERMINER);
-        add("um", Tag.DETERMINER);
-        add("uma", Tag.DETERMINER);
-        add("uns", Tag.DETERMINER);
-        add("umas", Tag.DETERMINER);
+        addWord("o", Tag.DETERMINER);
+        addWord("a", Tag.DETERMINER);
+        addWord("os", Tag.DETERMINER);
+        addWord("as", Tag.DETERMINER);
+        addWord("um", Tag.DETERMINER);
+        addWord("uma", Tag.DETERMINER);
+        addWord("uns", Tag.DETERMINER);
+        addWord("umas", Tag.DETERMINER);
     }
 
     private void addPrepositions() {
-        add("a", Tag.PREPOSITION);
-        add("ante", Tag.PREPOSITION);
-        add("após", Tag.PREPOSITION);
-        add("até", Tag.PREPOSITION);
-        add("com", Tag.PREPOSITION);
-        add("contra", Tag.PREPOSITION);
-        add("de", Tag.PREPOSITION);
-        add("desde", Tag.PREPOSITION);
-        add("em", Tag.PREPOSITION);
-        add("entre", Tag.PREPOSITION);
-        add("para", Tag.PREPOSITION);
-        add("perante", Tag.PREPOSITION);
-        add("por", Tag.PREPOSITION);
-        add("sem", Tag.PREPOSITION);
-        add("sob", Tag.PREPOSITION);
-        add("sobre", Tag.PREPOSITION);
-        add("trás", Tag.PREPOSITION);
+        addWord("a", Tag.PREPOSITION);
+        addWord("ante", Tag.PREPOSITION);
+        addWord("após", Tag.PREPOSITION);
+        addWord("até", Tag.PREPOSITION);
+        addWord("com", Tag.PREPOSITION);
+        addWord("contra", Tag.PREPOSITION);
+        addWord("de", Tag.PREPOSITION);
+        addWord("desde", Tag.PREPOSITION);
+        addWord("em", Tag.PREPOSITION);
+        addWord("entre", Tag.PREPOSITION);
+        addWord("para", Tag.PREPOSITION);
+        addWord("perante", Tag.PREPOSITION);
+        addWord("por", Tag.PREPOSITION);
+        addWord("sem", Tag.PREPOSITION);
+        addWord("sob", Tag.PREPOSITION);
+        addWord("sobre", Tag.PREPOSITION);
+        addWord("trás", Tag.PREPOSITION);
     }
 
     private void addPronouns() {
-        add("eu", Tag.PERSONAL_PRONOUN);
-        add("tu", Tag.PERSONAL_PRONOUN);
-        add("você", Tag.PERSONAL_PRONOUN);
-        add("ele", Tag.PERSONAL_PRONOUN);
-        add("ela", Tag.PERSONAL_PRONOUN);
-        add("nós", Tag.PERSONAL_PRONOUN);
-        add("vós", Tag.PERSONAL_PRONOUN);
-        add("eles", Tag.PERSONAL_PRONOUN);
-        add("elas", Tag.PERSONAL_PRONOUN);
+        addWord("eu", Tag.PERSONAL_PRONOUN);
+        addWord("tu", Tag.PERSONAL_PRONOUN);
+        addWord("você", Tag.PERSONAL_PRONOUN);
+        addWord("ele", Tag.PERSONAL_PRONOUN);
+        addWord("ela", Tag.PERSONAL_PRONOUN);
+        addWord("nós", Tag.PERSONAL_PRONOUN);
+        addWord("vós", Tag.PERSONAL_PRONOUN);
+        addWord("eles", Tag.PERSONAL_PRONOUN);
+        addWord("elas", Tag.PERSONAL_PRONOUN);
 
-        add("me", Tag.PERSONAL_PRONOUN);
-        add("mim", Tag.PERSONAL_PRONOUN);
-        add("comigo", Tag.PERSONAL_PRONOUN);
-        add("te", Tag.PERSONAL_PRONOUN);
-        add("ti", Tag.PERSONAL_PRONOUN);
-        add("contigo", Tag.PERSONAL_PRONOUN);
-        add("o", Tag.PERSONAL_PRONOUN);
-        add("a", Tag.PERSONAL_PRONOUN);
-        add("lhe", Tag.PERSONAL_PRONOUN);
-        add("se", Tag.PERSONAL_PRONOUN);
-        add("si", Tag.PERSONAL_PRONOUN);
-        add("nos", Tag.PERSONAL_PRONOUN);
-        add("vos", Tag.PERSONAL_PRONOUN);
+        addWord("me", Tag.PERSONAL_PRONOUN);
+        addWord("mim", Tag.PERSONAL_PRONOUN);
+        addWord("comigo", Tag.PERSONAL_PRONOUN);
+        addWord("te", Tag.PERSONAL_PRONOUN);
+        addWord("ti", Tag.PERSONAL_PRONOUN);
+        addWord("contigo", Tag.PERSONAL_PRONOUN);
+        addWord("o", Tag.PERSONAL_PRONOUN);
+        addWord("a", Tag.PERSONAL_PRONOUN);
+        addWord("lhe", Tag.PERSONAL_PRONOUN);
+        addWord("se", Tag.PERSONAL_PRONOUN);
+        addWord("si", Tag.PERSONAL_PRONOUN);
+        addWord("nos", Tag.PERSONAL_PRONOUN);
+        addWord("vos", Tag.PERSONAL_PRONOUN);
 
         // Handled by tokenizer
-        //add("consigo", PERSONAL_PRONOUN);
-        //add("conosco", PERSONAL_PRONOUN);
-        //add("convosco", PERSONAL_PRONOUN);
+        //addWord("consigo", PERSONAL_PRONOUN);
+        //addWord("conosco", PERSONAL_PRONOUN);
+        //addWord("convosco", PERSONAL_PRONOUN);
 
         // Interrogative
-        add("quem", Tag.WH_PRONOUN);
+        addWord("quem", Tag.WH_PRONOUN);
     }
 
     private void addAdverbs() {
-        add("sempre", Tag.ADVERB);
-        add("nunca", Tag.ADVERB);
-        add("muito", Tag.ADVERB);
-        add("pouco", Tag.ADVERB);
-        add("tão", Tag.ADVERB);
+        addWord("sempre", Tag.ADVERB);
+        addWord("nunca", Tag.ADVERB);
+        addWord("muito", Tag.ADVERB);
+        addWord("pouco", Tag.ADVERB);
+        addWord("tão", Tag.ADVERB);
 
         // Time
-        add("hoje", Tag.ADVERB);
-        add("logo", Tag.ADVERB);
-        add("primeiro", Tag.ADVERB);
-        add("ontem", Tag.ADVERB);
-        add("tarde", Tag.ADVERB);
-        add("outrora", Tag.ADVERB);
-        add("amanhã", Tag.ADVERB);
-        add("cedo", Tag.ADVERB);
-        add("dantes", Tag.ADVERB);
-        add("depois", Tag.ADVERB);
-        add("ainda", Tag.ADVERB);
-        add("antigamente", Tag.ADVERB);
-        add("antes", Tag.ADVERB);
-        add("doravante", Tag.ADVERB);
-        add("então", Tag.ADVERB);
-        add("ora", Tag.ADVERB);
-        add("jamais", Tag.ADVERB);
-        add("agora", Tag.ADVERB);
-        add("já", Tag.ADVERB);
-        add("enfim", Tag.ADVERB);
-        add("afinal", Tag.ADVERB);
-        add("amiúde", Tag.ADVERB);
-        add("breve", Tag.ADVERB);
-        add("constantemente", Tag.ADVERB);
-        add("entrementes", Tag.ADVERB);
-        add("imediatamente", Tag.ADVERB);
-        add("primeiramente", Tag.ADVERB);
-        add("provisoriamente", Tag.ADVERB);
-        add("sucessivamente", Tag.ADVERB);
+        addWord("hoje", Tag.ADVERB);
+        addWord("logo", Tag.ADVERB);
+        addWord("primeiro", Tag.ADVERB);
+        addWord("ontem", Tag.ADVERB);
+        addWord("tarde", Tag.ADVERB);
+        addWord("outrora", Tag.ADVERB);
+        addWord("amanhã", Tag.ADVERB);
+        addWord("cedo", Tag.ADVERB);
+        addWord("dantes", Tag.ADVERB);
+        addWord("depois", Tag.ADVERB);
+        addWord("ainda", Tag.ADVERB);
+        addWord("antigamente", Tag.ADVERB);
+        addWord("antes", Tag.ADVERB);
+        addWord("doravante", Tag.ADVERB);
+        addWord("então", Tag.ADVERB);
+        addWord("ora", Tag.ADVERB);
+        addWord("jamais", Tag.ADVERB);
+        addWord("agora", Tag.ADVERB);
+        addWord("já", Tag.ADVERB);
+        addWord("enfim", Tag.ADVERB);
+        addWord("afinal", Tag.ADVERB);
+        addWord("amiúde", Tag.ADVERB);
+        addWord("breve", Tag.ADVERB);
+        addWord("constantemente", Tag.ADVERB);
+        addWord("entrementes", Tag.ADVERB);
+        addWord("imediatamente", Tag.ADVERB);
+        addWord("primeiramente", Tag.ADVERB);
+        addWord("provisoriamente", Tag.ADVERB);
+        addWord("sucessivamente", Tag.ADVERB);
         // Expressions
-        //add("às vezes", ADVERB);
-        //add("à tarde", ADVERB);
-        //add("à noite", ADVERB);
-        //add("de manhã", ADVERB);
-        //add("de repente", ADVERB);
-        //add("de vez em quando", ADVERB);
-        //add("de quando em quando", ADVERB);
-        //add("a qualquer momento", ADVERB);
-        //add("de tempos em tempos", ADVERB);
-        //add("em breve", ADVERB);
-        //add("hoje em dia", ADVERB);
+        //addWord("às vezes", ADVERB);
+        //addWord("à tarde", ADVERB);
+        //addWord("à noite", ADVERB);
+        //addWord("de manhã", ADVERB);
+        //addWord("de repente", ADVERB);
+        //addWord("de vez em quando", ADVERB);
+        //addWord("de quando em quando", ADVERB);
+        //addWord("a qualquer momento", ADVERB);
+        //addWord("de tempos em tempos", ADVERB);
+        //addWord("em breve", ADVERB);
+        //addWord("hoje em dia", ADVERB);
     }
 
     private void addVerbs() {
         // To be
-        add("estou", Tag.VERB);
+        addWord("estou", Tag.VERB);
         addVerb("ser", "ser", Tag.VERB);
         addVerb("é", "ser", Tag.VERB);
         addVerb("és", "ser", Tag.VERB);
@@ -156,9 +156,9 @@ public class MemoryWordBase extends com.harium.suneidesis.linguistic.storage.Mem
         addVerb("são", "ser", Tag.VERB);
         addVerb("será", "ser", Tag.VERB);
 
-        add("quero", Tag.VERB);
-        add("queria", Tag.VERB);
-        add("vou", Tag.VERB);
+        addWord("quero", Tag.VERB);
+        addWord("queria", Tag.VERB);
+        addWord("vou", Tag.VERB);
 
         // First Conjugation
         addRegularVerb("amar");
@@ -469,24 +469,24 @@ public class MemoryWordBase extends com.harium.suneidesis.linguistic.storage.Mem
     }
 
     private void addConjuctions() {
-        add("e", Tag.COORDINATING_CONJUCTION);
+        addWord("e", Tag.COORDINATING_CONJUCTION);
     }
 
     private void addNumerals() {
-        add("0", Tag.NUMERAL);
-        add("1", Tag.NUMERAL);
-        add("2", Tag.NUMERAL);
-        add("3", Tag.NUMERAL);
-        add("4", Tag.NUMERAL);
-        add("5", Tag.NUMERAL);
-        add("6", Tag.NUMERAL);
-        add("7", Tag.NUMERAL);
-        add("8", Tag.NUMERAL);
-        add("9", Tag.NUMERAL);
+        addWord("0", Tag.NUMERAL);
+        addWord("1", Tag.NUMERAL);
+        addWord("2", Tag.NUMERAL);
+        addWord("3", Tag.NUMERAL);
+        addWord("4", Tag.NUMERAL);
+        addWord("5", Tag.NUMERAL);
+        addWord("6", Tag.NUMERAL);
+        addWord("7", Tag.NUMERAL);
+        addWord("8", Tag.NUMERAL);
+        addWord("9", Tag.NUMERAL);
 
         // Roman
-        add("I", Tag.NUMERAL);
-        add("II", Tag.NUMERAL);
-        add("III", Tag.NUMERAL);
+        addWord("I", Tag.NUMERAL);
+        addWord("II", Tag.NUMERAL);
+        addWord("III", Tag.NUMERAL);
     }
 }

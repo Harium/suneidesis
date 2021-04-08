@@ -2,7 +2,7 @@ package com.harium.suneidesis.linguistic.storage;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.Provenance;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.concept.word.WordVerb;
@@ -10,8 +10,6 @@ import com.harium.suneidesis.concept.word.WordVerbConjugation;
 import com.harium.suneidesis.concept.word.Word;
 
 import java.util.*;
-
-import static com.harium.suneidesis.linguistic.storage.Source.*;
 
 public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepository {
 
@@ -37,7 +35,7 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
         add(METHOD_INPUT);
     }
 
-    protected String add(String word, Tag tag) {
+    public String addWord(String word, Tag tag) {
         Word w = new Word(word);
         w.setTag(tag.name());
 
@@ -57,8 +55,8 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
     @Override
     protected Concept wrap(Concept info) {
         Concept wrap = super.wrap(info);
-        wrap.set(Fact.ATTRIBUTE_ACQUISITION_MEDIUM, MEDIUM_TEXT);
-        wrap.set(Fact.ATTRIBUTE_ACQUISITION_METHOD, METHOD_INPUT);
+        wrap.set(Provenance.ATTRIBUTE_ACQUISITION_MEDIUM, MEDIUM_TEXT);
+        wrap.set(Provenance.ATTRIBUTE_ACQUISITION_METHOD, METHOD_INPUT);
         return wrap;
     }
     
@@ -71,11 +69,11 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
 
     protected void addVerb(String word, String lemma, Tag tag) {
         // Add word to database
-        add(word, tag);
+        addWord(word, tag);
 
         String lemmaId;
         if (!words.containsKey(lemma)) {
-            lemmaId = add(lemma, Tag.VERB);
+            lemmaId = addWord(lemma, Tag.VERB);
         } else {
             lemmaId = words.get(lemma).get(0).getWordId();
         }

@@ -1,6 +1,6 @@
 package com.harium.suneidesis.linguistic.nlp.pos;
 
-import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.linguistic.fact.Reconstructor;
 import com.harium.suneidesis.linguistic.nlp.pos.converter.PennTreebankTagConverter;
 import com.harium.suneidesis.linguistic.nlp.pos.converter.TagConverter;
@@ -18,7 +18,7 @@ public class POSTaggerReconstructor implements Reconstructor {
     }
 
     @Override
-    public String reconstruct(Fact frame) {
+    public String reconstruct(Concept frame) {
         StringBuilder builder = new StringBuilder();
 
         /*if (frame.getSubject() != null) {

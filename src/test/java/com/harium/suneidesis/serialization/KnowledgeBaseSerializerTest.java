@@ -1,6 +1,8 @@
 package com.harium.suneidesis.serialization;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+import com.harium.suneidesis.linguistic.storage.MemoryWordBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;
@@ -23,13 +25,34 @@ public class KnowledgeBaseSerializerTest {
     @Test
     public void testSimple() throws IOException, JSONException {
         String result = serializer.serialize(buildSimpleKnowledgeBase());
-        System.out.println(result);
+        //System.out.println(result);
 
         String expected = "{name:\"database\", \"concepts\":{"
                 + "\"0\":{\"name\":\"apple tree\",\"fruit\":\"1\"},"
                 + "\"1\":{\"name\":\"apple\"}"
                 +"}}";
         JSONAssert.assertEquals(expected, result, false);
+    }
+
+    @Test
+    public void testWordDatabase() throws IOException, JSONException {
+        String result = serializer.serialize(buildWordDatabase());
+        System.out.println(result);
+
+        String expected = "{name:\"dictionary\", \"concepts\":{"
+                + "\"0\":{\"name\":\"cat\",\"fruit\":\"1\"},"
+                + "\"1\":{\"name\":\"dog\"}"
+                +"}}";
+
+        JSONAssert.assertEquals(expected, result, false);
+    }
+
+    private KnowledgeBase buildWordDatabase() {
+        MemoryWordBase database = new MemoryWordBase("dictionary");
+        database.addWord("cat", Tag.NOUN);
+        database.addWord("duck", Tag.NOUN);
+
+        return database;
     }
 
     private KnowledgeBase buildSimpleKnowledgeBase() {

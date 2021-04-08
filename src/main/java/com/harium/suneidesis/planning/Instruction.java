@@ -1,9 +1,9 @@
 package com.harium.suneidesis.planning;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.Provenance;
 
-public class Instruction extends Fact {
+public class Instruction extends Concept {
 
     public Instruction() {
         super();
@@ -11,9 +11,9 @@ public class Instruction extends Fact {
 
     public Instruction(Concept subject, Concept predicate, Concept object) {
         super();
-        this.subject(subject);
-        this.predicate(predicate);
-        this.object(object);
+        set(Provenance.ATTRIBUTE_SUBJECT, subject);
+        set(Provenance.ATTRIBUTE_PREDICATE, predicate);
+        set(Provenance.ATTRIBUTE_OBJECT, object);
     }
 
 }

@@ -8,6 +8,10 @@ import com.harium.suneidesis.repository.KnowledgeBase;
 import java.io.IOException;
 
 public class CustomKnowledgeBaseSerializer extends StdSerializer<KnowledgeBase> {
+
+    public static final String ATTR_CONCEPTS = "concepts";
+    public static final String ATTR_NAME = "name";
+
     public CustomKnowledgeBaseSerializer() {
         this(null);
     }
@@ -19,8 +23,9 @@ public class CustomKnowledgeBaseSerializer extends StdSerializer<KnowledgeBase> 
     @Override
     public void serialize(KnowledgeBase knowledgeBase, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartObject();
-        jgen.writeStringField("name", knowledgeBase.getName());
-        jgen.writeObjectField("concepts", knowledgeBase.getAll());
+        jgen.writeStringField(ATTR_NAME, knowledgeBase.getName());
+        // TODO Ideally, it should be a reverse linked hash map
+        jgen.writeObjectField(ATTR_CONCEPTS, knowledgeBase.getAll());
         jgen.writeEndObject();
     }
 }

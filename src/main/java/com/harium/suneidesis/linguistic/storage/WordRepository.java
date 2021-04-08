@@ -1,7 +1,6 @@
 package com.harium.suneidesis.linguistic.storage;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.concept.word.WordVerbConjugation;
