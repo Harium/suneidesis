@@ -1,9 +1,11 @@
-package com.harium.suneidesis.linguistic.storage;
+package com.harium.suneidesis.linguistic.repository;
 
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.concept.word.WordVerbConjugation;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 
 import java.util.ArrayList;
@@ -11,29 +13,66 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepository {
+public class MemoryWordBase extends WordKnowledgeBase implements WordRepository {
+
+    // Delegate
+    private MemoryKnowledgeBase base = new MemoryKnowledgeBase();
 
     // Key is the pure word
-    Map<String, List<Word>> words = new HashMap<>();
+    protected Map<String, List<Word>> words = new HashMap<>();
     // Key is the fact id and value the word
-    Map<String, Word> wordIds = new HashMap<>();
-    Map<String, WordVerb> verbs = new HashMap<>();
-    Map<String, WordVerbConjugation> verbConjugations = new HashMap<>();
+    protected Map<String, Word> wordIds = new HashMap<>();
+    protected Map<String, WordVerb> verbs = new HashMap<>();
+    protected Map<String, WordVerbConjugation> verbConjugations = new HashMap<>();
 
     public MemoryWordBase(String name) {
         super(name);
     }
 
-    public String addWord(String word, Tag tag) {
-        Word w = new Word(word);
-        w.setTag(tag.name());
-
-        return save(w);
+    @Override
+    public void set(String key, Concept concept) {
+        base.set(key, concept);
+        postSet(key, concept);
     }
 
     @Override
-    public String save(Word w) {
-        String factId = add(w);
+    public void postSet(String key, Concept concept) {
+        if (concept instanceof Word) {
+            index((Word) concept);
+        }
+    }
+
+    @Override
+    public void merge(KnowledgeBase concepts) {
+        base.merge(concepts);
+    }
+
+    @Override
+    public Map<String, Concept> getAll() {
+        return base.getAll();
+    }
+
+    @Override
+    public Concept get(String key) {
+        return base.get(key);
+    }
+
+    @Override
+    public boolean contains(String key) {
+        return base.contains(key);
+    }
+
+    public String addWord(String word, Tag tag) {
+        Word w = new Word(word);
+        w.setTag(tag.name());
+        add(w);
+
+        return index(w);
+    }
+
+    public String index(Word w) {
+        //String factId = add(w);
+        String factId = w.getIdText();
         w.setWordId(factId);
         List<Word> words = this.words.computeIfAbsent(w.getName(), k -> new ArrayList<>());
         words.add(w);
@@ -42,8 +81,8 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
     }
 
     @Override
-    public String save(WordVerb verb) {
-        String verbId = save((Word) verb);
+    public String index(WordVerb verb) {
+        String verbId = index((Word) verb);
         verbs.put(verb.getWordId(), verb);
         return verbId;
     }
@@ -60,12 +99,14 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
         }
 
         WordVerb v = new WordVerb(lemmaId);
+        //save(v);
         verbs.put(word, v);
     }
 
     @Override
-    public String save(WordVerbConjugation verbConjugation) {
-        save((Word) verbConjugation);
+    public String index(WordVerbConjugation verbConjugation) {
+
+        index((Word) verbConjugation);
         verbConjugations.put(verbConjugation.getWordId(), verbConjugation);
         return verbConjugation.getWordId();
     }
@@ -112,24 +153,26 @@ public class MemoryWordBase extends MemoryKnowledgeBase implements WordRepositor
         verb.setLemma(verb);
         verb.setPrepositions(new Word(prepositions));
         verb.setTransitivity(new Word(transitivity));
-        save(verb);
+        add(verb);
+        index(verb);
 
         return verb;
     }
 
     public String addVerbConjugation(String word, WordVerb verb, Tag tag, String tense, String person) {
-        Word infinitive = verb;
+        //Word infinitive = verb;
         /*Word w = new Word(verbWord);
         w.setTag(tag.name());
         w.setLemma(new Word(infinitiveWordId));
         String wordId = save(w);*/
-
         WordVerbConjugation conjugation = new WordVerbConjugation(word);
         conjugation.setLemma(verb);
         conjugation.setTag(tag.name());
         conjugation.setTense(new Word(tense));
         conjugation.setPerson(new Word(person));
+        add(conjugation);
 
-        return save(conjugation);
+        return index(conjugation);
     }
+
 }

@@ -3,7 +3,7 @@ package com.harium.suneidesis.serialization;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
-import com.harium.suneidesis.linguistic.storage.MemoryWordBase;
+import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;

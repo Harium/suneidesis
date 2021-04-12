@@ -33,6 +33,11 @@ public class MemoryKnowledgeBase extends KnowledgeBase {
     }
 
     @Override
+    protected void postSet(String key, Concept concept) {
+
+    }
+
+    @Override
     public Concept get(String key) {
         return data.get(key);
     }

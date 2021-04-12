@@ -1,4 +1,4 @@
-package com.harium.suneidesis.linguistic.storage;
+package com.harium.suneidesis.linguistic.repository;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;

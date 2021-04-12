@@ -2,7 +2,7 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.database;
 
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
-public class MemoryWordBase extends com.harium.suneidesis.linguistic.storage.MemoryWordBase {
+public class MemoryWordBase extends com.harium.suneidesis.linguistic.repository.MemoryWordBase {
 
     public MemoryWordBase() {
         this("");

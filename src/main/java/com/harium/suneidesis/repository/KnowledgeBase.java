@@ -48,6 +48,13 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         return getAll().values();
     }
 
+    @Override
+    public void set(String key, Concept concept) {
+        postSet(key, concept);
+    }
+
+    protected abstract void postSet(String key, Concept concept);
+
     public abstract void merge(KnowledgeBase concepts);
 
     public List<Concept> query(Search search) {

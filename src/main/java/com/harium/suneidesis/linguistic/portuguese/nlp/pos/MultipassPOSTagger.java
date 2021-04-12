@@ -2,7 +2,7 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.linguistic.storage.WordRepository;
+import com.harium.suneidesis.linguistic.repository.WordRepository;
 import com.harium.suneidesis.concept.word.Word;
 
 import java.util.Arrays;
