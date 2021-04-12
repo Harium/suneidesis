@@ -3,7 +3,7 @@ package com.harium.suneidesis.concept.word;
 public class WordNoun extends Word {
 
 	private static final String ATTRIBUTE_GENDER = "gender";
-	private static final String ATTRIBUTE_TYPE = "type";
+	private static final String ATTRIBUTE_WORD_TYPE = "word_type";
 
 	public static final Word GENDER_MASCULINE = new Word("masculine");
 	public static final Word GENDER_FEMININE = new Word("feminine");
@@ -25,8 +25,8 @@ public class WordNoun extends Word {
 		attributes.set(ATTRIBUTE_GENDER, gender);
 	}
 
-	public Word getType() {
-		return (Word) attributes.get(ATTRIBUTE_TYPE);
+	public Word getWordType() {
+		return (Word) attributes.get(ATTRIBUTE_WORD_TYPE);
 	}
 
 	public String getTypeWord() {
@@ -34,6 +34,6 @@ public class WordNoun extends Word {
 	}
 
 	public void setType(Word Type) {
-		attributes.set(ATTRIBUTE_TYPE, Type);
+		attributes.set(ATTRIBUTE_WORD_TYPE, Type);
 	}
 }

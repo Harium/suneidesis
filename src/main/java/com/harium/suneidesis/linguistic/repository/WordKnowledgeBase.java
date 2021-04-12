@@ -28,7 +28,7 @@ public abstract class WordKnowledgeBase extends KnowledgeBase implements WordRep
 
     protected abstract String index(WordVerbConjugation verbConjugation);
 
-    protected abstract void addVerb(String word, String lemma, Tag tag);
+    protected abstract void addVerb(String word, String tag);
 
     public WordVerb addVerb(String verbWord, String prepositions, String transitivity) {
         WordVerb verb = new WordVerb(verbWord);

@@ -62,9 +62,9 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
         return base.contains(key);
     }
 
-    public String addWord(String word, Tag tag) {
+    public String addWord(String word, String tag) {
         Word w = new Word(word);
-        w.setTag(tag.name());
+        w.setTag(tag);
         add(w);
 
         return index(w);
@@ -87,25 +87,24 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
         return verbId;
     }
 
-    protected void addVerb(String word, String lemma, Tag tag) {
+    protected void addVerb(String word, String tag) {
         // Add word to database
-        addWord(word, tag);
+        String lemmaId = addWord(word, tag);
 
-        String lemmaId;
+        /*String lemmaId;
         if (!words.containsKey(lemma)) {
+            // Add the lemma as a new verb
             lemmaId = addWord(lemma, Tag.VERB);
         } else {
             lemmaId = words.get(lemma).get(0).getWordId();
-        }
+        }*/
 
         WordVerb v = new WordVerb(lemmaId);
-        //save(v);
         verbs.put(word, v);
     }
 
     @Override
     public String index(WordVerbConjugation verbConjugation) {
-
         index((Word) verbConjugation);
         verbConjugations.put(verbConjugation.getWordId(), verbConjugation);
         return verbConjugation.getWordId();
@@ -159,15 +158,10 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
         return verb;
     }
 
-    public String addVerbConjugation(String word, WordVerb verb, Tag tag, String tense, String person) {
-        //Word infinitive = verb;
-        /*Word w = new Word(verbWord);
-        w.setTag(tag.name());
-        w.setLemma(new Word(infinitiveWordId));
-        String wordId = save(w);*/
+    public String addVerbConjugation(String word, WordVerb verb, String tag, String tense, String person) {
         WordVerbConjugation conjugation = new WordVerbConjugation(word);
         conjugation.setLemma(verb);
-        conjugation.setTag(tag.name());
+        conjugation.setTag(tag);
         conjugation.setTense(new Word(tense));
         conjugation.setPerson(new Word(person));
         add(conjugation);
