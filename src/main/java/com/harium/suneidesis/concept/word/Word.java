@@ -7,6 +7,7 @@ public class Word extends Primitive {
 
     public static final String ATTRIBUTE_TAG = "tag";
     public static final String ATTRIBUTE_LEMMA = "lemma";
+    public static final String ATTRIBUTE_WORD_TYPE = "word_type";
 
     public static final String TAG_ADJECTIVE = "adjective";
     public static final String TAG_ADVERB = "adverb";
@@ -68,4 +69,15 @@ public class Word extends Primitive {
         attributes.set(ATTRIBUTE_TAG, new Word(tagName));
     }
 
+    public Word getWordType() {
+        return (Word) attributes.get(ATTRIBUTE_WORD_TYPE);
+    }
+
+    public String getWordTypeText() {
+        return getWordType().getName();
+    }
+
+    public void setWordType(Word Type) {
+        attributes.set(ATTRIBUTE_WORD_TYPE, Type);
+    }
 }
