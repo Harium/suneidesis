@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.serialization.KnowledgeBaseDeserializer;
@@ -16,6 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
+import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_DATA_TYPE;
 import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
 import static com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseSerializer.ATTR_CONCEPTS;
 
@@ -50,13 +53,18 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             Map.Entry<String, JsonNode> child = it.next();
             // Deserialize concepts
             Concept concept = deserializeConcept(child, base, relationshipList);
-            base.set(child.getKey(), concept);
+            base.insert(child.getKey(), concept);
         }
 
         for (Relationship relationship : relationshipList) {
             Concept from = base.get(relationship.from);
             Concept target = base.get(relationship.target);
-            from.set(relationship.relation, target);
+            if (target != null) {
+                from.set(relationship.relation, target);
+            } else {
+                from.set(relationship.relation, new Concept(relationship.target));
+            }
+
         }
     }
 
@@ -82,11 +90,15 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
                continue;
             }
 
-            // TODO CHANGE TO CONSTANTS
-            if ("dataType".equals(entry.getKey())) {
+            if (ATTRIBUTE_DATA_TYPE.equals(entry.getKey())) {
                 deserializeDataType(concept, entry.getValue());
                 continue;
             }
+            if (ATTRIBUTE_TYPE.equals(entry.getKey())) {
+                concept.type(ConceptType.getFromName(entry.getValue().asText()));
+                continue;
+            }
+            // TODO CHANGE TO CONSTANTS
             if ("created_at".equals(entry.getKey())) {
                 // Ignore for now
                 continue;

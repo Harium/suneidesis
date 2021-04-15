@@ -50,7 +50,7 @@ public class Word extends Primitive {
     }
 
     public void setLemma(Word lemma) {
-        attributes.set(ATTRIBUTE_LEMMA, lemma);
+        attributes.insert(ATTRIBUTE_LEMMA, lemma);
     }
 
     public Word getTag() {
@@ -62,11 +62,11 @@ public class Word extends Primitive {
     }
 
     public void setTag(Word tag) {
-        attributes.set(ATTRIBUTE_TAG, tag);
+        attributes.insert(ATTRIBUTE_TAG, tag);
     }
 
     public void setTag(String tagName) {
-        attributes.set(ATTRIBUTE_TAG, new Word(tagName));
+        attributes.insert(ATTRIBUTE_TAG, new Word(tagName));
     }
 
     public Word getWordType() {
@@ -78,6 +78,6 @@ public class Word extends Primitive {
     }
 
     public void setWordType(Word Type) {
-        attributes.set(ATTRIBUTE_WORD_TYPE, Type);
+        attributes.insert(ATTRIBUTE_WORD_TYPE, Type);
     }
 }

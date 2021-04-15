@@ -1,6 +1,9 @@
 package com.harium.suneidesis.serialization;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
+import com.harium.suneidesis.linguistic.repository.WordKnowledgeBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseDeserializer;
@@ -12,6 +15,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
@@ -42,6 +46,26 @@ public class KnowledgeBaseDeserializerTest {
 
         Concept apple = database.get("1");
         assertEquals("apple", apple.getName());
+    }
+
+    @Test
+    public void testDictionary() throws IOException, URISyntaxException {
+        String json = loadFileAsString("dictionary_simple.json");
+
+        KnowledgeBase database = new MemoryKnowledgeBase();
+        deserializer.deserialize(json, database);
+
+        WordKnowledgeBase wordDatabase = new MemoryWordBase("");
+        wordDatabase.merge(database);
+
+        assertEquals("dictionary", database.getName());
+        assertEquals(4, database.getAll().size());
+
+        List<Word> words = wordDatabase.getWords("cat");
+        assertEquals("cat", words.get(0).getName());
+
+        words = wordDatabase.getWords("duck");
+        assertEquals("duck", words.get(0).getName());
     }
 
     private String loadFileAsString(String filename) throws IOException, URISyntaxException {

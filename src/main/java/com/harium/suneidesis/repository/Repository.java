@@ -11,7 +11,7 @@ public interface Repository<T extends Thing> {
 
     Collection<T> getValues();
 
-    void set(String key, T t);
+    void insert(String key, T t);
 
     T get(String key);
 

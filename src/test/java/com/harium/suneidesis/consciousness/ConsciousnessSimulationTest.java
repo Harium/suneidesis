@@ -42,7 +42,7 @@ public class ConsciousnessSimulationTest {
         myself.is(robot);
         Concept autoKnowledge = new Concept();
         Provenance.setSubject(autoKnowledge, myself);
-        consciousness.set("myself", autoKnowledge);
+        consciousness.insert("myself", autoKnowledge);
 
         Concept internet = new Concept("Internet");
         Concept data = new Concept("data");
@@ -66,7 +66,7 @@ public class ConsciousnessSimulationTest {
                 .subject(robot1)
                 .time(Time.YESTERDAY)
                 .place(river);
-        consciousness.set("fact1", fact1);
+        consciousness.insert("fact1", fact1);
 
         // Fact 2: The robot 1 is at the river now
         Concept fact2 = new Concept();
@@ -77,7 +77,7 @@ public class ConsciousnessSimulationTest {
                 .subject(robot1)
                 .time(Time.NOW)
                 .place(land);
-        consciousness.set("fact2", fact2);
+        consciousness.insert("fact2", fact2);
     }
 
     @Test

@@ -32,12 +32,12 @@ public class Provenance {
     }
 
     public Provenance source(Concept source) {
-        concept.attributes.set(ATTRIBUTE_SOURCE, source);
+        concept.attributes.insert(ATTRIBUTE_SOURCE, source);
         return this;
     }
 
     public static void setSource(Concept concept, Concept source) {
-        concept.attributes.set(ATTRIBUTE_SOURCE, source);
+        concept.attributes.insert(ATTRIBUTE_SOURCE, source);
     }
 
     public Concept getSourceId() {
@@ -45,12 +45,12 @@ public class Provenance {
     }
 
     public Provenance sourceId(Concept sourceId) {
-        concept.attributes.set(ATTRIBUTE_SOURCE_ID, sourceId);
+        concept.attributes.insert(ATTRIBUTE_SOURCE_ID, sourceId);
         return this;
     }
 
     public static void setSourceId(Concept concept, Concept sourceId) {
-        concept.attributes.set(ATTRIBUTE_SOURCE_ID, sourceId);
+        concept.attributes.insert(ATTRIBUTE_SOURCE_ID, sourceId);
     }
 
     public Concept getSubject() {
@@ -58,12 +58,12 @@ public class Provenance {
     }
 
     public Provenance subject(Concept subject) {
-        concept.attributes.set(ATTRIBUTE_SUBJECT, subject);
+        concept.attributes.insert(ATTRIBUTE_SUBJECT, subject);
         return this;
     }
 
     public static void setSubject(Concept concept, Concept subject) {
-        concept.attributes.set(ATTRIBUTE_SUBJECT, subject);
+        concept.attributes.insert(ATTRIBUTE_SUBJECT, subject);
     }
 
     public Concept getPredicate() {
@@ -71,12 +71,12 @@ public class Provenance {
     }
 
     public Provenance predicate(Concept predicate) {
-        concept.attributes.set(ATTRIBUTE_PREDICATE, predicate);
+        concept.attributes.insert(ATTRIBUTE_PREDICATE, predicate);
         return this;
     }
 
     public static void setPredicate(Concept concept, Concept predicate) {
-        concept.attributes.set(ATTRIBUTE_PREDICATE, predicate);
+        concept.attributes.insert(ATTRIBUTE_PREDICATE, predicate);
     }
 
     public Concept getObject() {
@@ -84,12 +84,12 @@ public class Provenance {
     }
 
     public Provenance object(Concept object) {
-        concept.attributes.set(ATTRIBUTE_OBJECT, object);
+        concept.attributes.insert(ATTRIBUTE_OBJECT, object);
         return this;
     }
 
     public static void setObject(Concept concept, Concept object) {
-        concept.attributes.set(ATTRIBUTE_OBJECT, object);
+        concept.attributes.insert(ATTRIBUTE_OBJECT, object);
     }
 
     public Concept getObjectPart() {
@@ -97,12 +97,12 @@ public class Provenance {
     }
 
     public Provenance objectPart(Concept objectPart) {
-        concept.attributes.set(ATTRIBUTE_OBJECT_PART, objectPart);
+        concept.attributes.insert(ATTRIBUTE_OBJECT_PART, objectPart);
         return this;
     }
 
     public static void setObjectPart(Concept concept, Concept objectPart) {
-        concept.attributes.set(ATTRIBUTE_OBJECT_PART, objectPart);
+        concept.attributes.insert(ATTRIBUTE_OBJECT_PART, objectPart);
     }
 
     public Concept getPlace() {
@@ -110,12 +110,12 @@ public class Provenance {
     }
 
     public Provenance place(Place place) {
-        concept.attributes.set(ATTRIBUTE_PLACE, place);
+        concept.attributes.insert(ATTRIBUTE_PLACE, place);
         return this;
     }
 
     public static void setPlace(Concept concept, Concept place) {
-        concept.attributes.set(ATTRIBUTE_PLACE, place);
+        concept.attributes.insert(ATTRIBUTE_PLACE, place);
     }
 
     public Concept getTime() {
@@ -123,12 +123,12 @@ public class Provenance {
     }
 
     public Provenance time(Time time) {
-        concept.attributes.set(ATTRIBUTE_TIME, time);
+        concept.attributes.insert(ATTRIBUTE_TIME, time);
         return this;
     }
 
     public static void setTime(Concept concept, Concept time) {
-        concept.attributes.set(ATTRIBUTE_TIME, time);
+        concept.attributes.insert(ATTRIBUTE_TIME, time);
     }
 
     public Concept getWeather() {
@@ -136,21 +136,21 @@ public class Provenance {
     }
 
     public Provenance weather(Phenomenon phenomenon) {
-        concept.attributes.set(ATTRIBUTE_PHENOMENON, phenomenon);
+        concept.attributes.insert(ATTRIBUTE_PHENOMENON, phenomenon);
         return this;
     }
 
     public static void setPhenomenon(Concept concept, Concept phenomenon) {
-        concept.attributes.set(ATTRIBUTE_PHENOMENON, phenomenon);
+        concept.attributes.insert(ATTRIBUTE_PHENOMENON, phenomenon);
     }
 
     public Provenance then(Concept fact) {
-        concept.attributes.set(ATTRIBUTE_THEN, fact);
+        concept.attributes.insert(ATTRIBUTE_THEN, fact);
         return this;
     }
 
     public static void setThen(Concept concept, Concept then) {
-        concept.attributes.set(ATTRIBUTE_THEN, then);
+        concept.attributes.insert(ATTRIBUTE_THEN, then);
     }
 
     public Concept getNext() {
@@ -162,12 +162,12 @@ public class Provenance {
     }
 
     public Provenance acquisitionMethod(Action action) {
-        concept.attributes.set(ATTRIBUTE_ACQUISITION_METHOD, action);
+        concept.attributes.insert(ATTRIBUTE_ACQUISITION_METHOD, action);
         return this;
     }
 
     public static void setAcquisitionMethod(Concept concept, Action action) {
-        concept.attributes.set(ATTRIBUTE_ACQUISITION_METHOD, action);
+        concept.attributes.insert(ATTRIBUTE_ACQUISITION_METHOD, action);
     }
 
     public Concept getAcquisitionMedium() {
@@ -175,11 +175,11 @@ public class Provenance {
     }
 
     public Provenance acquisitionMedium(Concept medium) {
-        concept.attributes.set(ATTRIBUTE_ACQUISITION_MEDIUM, medium);
+        concept.attributes.insert(ATTRIBUTE_ACQUISITION_MEDIUM, medium);
         return this;
     }
 
     public static void setAcquisitionMedium(Concept concept, Concept medium) {
-        concept.attributes.set(ATTRIBUTE_ACQUISITION_MEDIUM, medium);
+        concept.attributes.insert(ATTRIBUTE_ACQUISITION_MEDIUM, medium);
     }
 }

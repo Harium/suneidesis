@@ -16,7 +16,7 @@ import java.util.Map;
 public class MemoryWordBase extends WordKnowledgeBase implements WordRepository {
 
     // Delegate
-    private MemoryKnowledgeBase base = new MemoryKnowledgeBase();
+    private final MemoryKnowledgeBase base = new MemoryKnowledgeBase();
 
     // Key is the pure word
     protected Map<String, List<Word>> words = new HashMap<>();
@@ -27,19 +27,12 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
 
     public MemoryWordBase(String name) {
         super(name);
+        base.addListener(this);
     }
 
     @Override
-    public void set(String key, Concept concept) {
-        base.set(key, concept);
-        postSet(key, concept);
-    }
-
-    @Override
-    public void postSet(String key, Concept concept) {
-        if (concept instanceof Word) {
-            index((Word) concept);
-        }
+    public void insert(String key, Concept concept) {
+        base.insert(key, concept);
     }
 
     @Override
@@ -55,6 +48,10 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
     @Override
     public Concept get(String key) {
         return base.get(key);
+    }
+
+    public List<Word> getWords(String key) {
+        return words.get(key);
     }
 
     @Override

@@ -50,7 +50,7 @@ public class Attributes implements Repository<Concept> {
         return attributeMap.values();
     }
 
-    public void set(String key, Concept concept) {
+    public void insert(String key, Concept concept) {
         attributeMap.put(key, concept);
     }
 
@@ -126,7 +126,7 @@ public class Attributes implements Repository<Concept> {
         merge(concept.getAttributes());
     }
 
-    private void merge(Attributes attributes) {
+    public void merge(Attributes attributes) {
         for (Map.Entry<String, Concept> entry: attributes.attributeMap.entrySet()) {
             String key = entry.getKey();
             if (ATTRIBUTE_NAME.equals(key)) {
@@ -204,4 +204,5 @@ public class Attributes implements Repository<Concept> {
     public Set<Map.Entry<String, Concept>> entrySet() {
         return attributeMap.entrySet();
     }
+
 }

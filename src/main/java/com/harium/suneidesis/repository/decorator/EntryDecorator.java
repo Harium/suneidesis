@@ -4,6 +4,6 @@ import com.harium.suneidesis.concept.Concept;
 
 public interface EntryDecorator {
 
-    public void decorate(Concept concept);
+    void decorate(Concept concept);
 
 }

@@ -41,7 +41,7 @@ public class Atom extends Substance {
 
 	public void setAtomicNumber(int atomicNumber) {
 		String text = Integer.toString(atomicNumber);
-		this.attributes.set(ATTRIBUTE_ATOMIC_NUMBER, new Measure(text));
+		this.attributes.insert(ATTRIBUTE_ATOMIC_NUMBER, new Measure(text));
 	}
 
 	public Concept getMassNumber() {

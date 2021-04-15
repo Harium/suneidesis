@@ -43,7 +43,7 @@ public class Concept extends Thing {
 	}
 
 	public Concept type(Concept type) {
-		attributes.set(ATTRIBUTE_TYPE, type);
+		attributes.insert(ATTRIBUTE_TYPE, type);
 		return this;
 	}
 
@@ -56,7 +56,7 @@ public class Concept extends Thing {
 	}
 
 	public Concept id(String id) {
-		attributes.set(ATTRIBUTE_ID, new Text(id));
+		attributes.insert(ATTRIBUTE_ID, new Text(id));
 		return this;
 	}
 
@@ -88,7 +88,7 @@ public class Concept extends Thing {
 	}
 
 	public Concept set(String key, Concept property) {
-		this.attributes.set(key, property);
+		this.attributes.insert(key, property);
 		return this;
 	}
 

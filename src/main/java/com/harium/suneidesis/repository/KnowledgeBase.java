@@ -5,8 +5,10 @@ import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.generator.BaseIdGenerator;
 import com.harium.suneidesis.generator.BaseTimeGenerator;
 import com.harium.suneidesis.generator.IdGenerator;
+import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
 import com.harium.suneidesis.repository.decorator.EntryDecorator;
 import com.harium.suneidesis.repository.decorator.TimeDecorator;
+import com.harium.suneidesis.repository.listener.RepositoryListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +26,7 @@ public abstract class KnowledgeBase implements Repository<Concept> {
     private IdGenerator idGenerator = new BaseIdGenerator();
 
     protected List<EntryDecorator> decorators = new ArrayList<>();
+    protected List<RepositoryListener> listeners = new ArrayList<>();
 
     public KnowledgeBase() {
         super();
@@ -49,11 +52,11 @@ public abstract class KnowledgeBase implements Repository<Concept> {
     }
 
     @Override
-    public void set(String key, Concept concept) {
-        postSet(key, concept);
+    public void insert(String key, Concept concept) {
+        for (RepositoryListener repositoryListener: listeners) {
+            repositoryListener.onInsert(key, concept);
+        }
     }
-
-    protected abstract void postSet(String key, Concept concept);
 
     public abstract void merge(KnowledgeBase concepts);
 
@@ -94,7 +97,7 @@ public abstract class KnowledgeBase implements Repository<Concept> {
 
         String idText = idGenerator.generateId();
         wrap.id(idText);
-        set(idText, wrap);
+        insert(idText, wrap);
 
         if (DataType.OBJECT == concept.getDataType()) {
             for (Map.Entry<String, Concept> entry : concept.getAttributes().entrySet()) {
@@ -135,5 +138,9 @@ public abstract class KnowledgeBase implements Repository<Concept> {
 
     public void setIdGenerator(IdGenerator idGenerator) {
         this.idGenerator = idGenerator;
+    }
+
+    public void addListener(RepositoryListener listener) {
+        listeners.add(listener);
     }
 }

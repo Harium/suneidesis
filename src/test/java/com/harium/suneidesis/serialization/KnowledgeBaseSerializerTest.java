@@ -40,14 +40,14 @@ public class KnowledgeBaseSerializerTest {
     @Test
     public void testWordDatabase() throws IOException, JSONException {
         String result = serializer.serialize(buildWordDatabase());
-        //System.out.println(result);
+        System.out.println(result);
 
         String expected = "{name:\"dictionary\", \"concepts\":{"
                 + "\"0\":{\"name\":\"cat\", \"tag\":\"noun\"},"
                 + "\"1\":{\"name\":\"duck\", \"tag\":\"noun\"},"
                 // TODO UNIFY TAGS
                 + "\"2\":{\"name\":\"go\", \"tag\":\"verb\", \"lemma\":\"go\", \"prepositions\":\"on|through\"},"
-                + "\"3\":{\"name\":\"went\", \"tag\":\"VERB_PAST_TENSE\", \"lemma\":\"go\"}"
+                + "\"3\":{\"name\":\"went\", \"tag\":\"verb_conj\", \"lemma\":\"go\"}"
                 +"}}";
 
         JSONAssert.assertEquals(expected, result, false);
@@ -71,7 +71,7 @@ public class KnowledgeBaseSerializerTest {
         database.add(duck);
 
         WordVerb go = database.addVerb("go", "on|through", "");
-        database.addVerbConjugation("went", go, Tag.VERB_PAST_TENSE.name(), "PAST", "");
+        database.addVerbConjugation("went", go, Word.TAG_VERB_CONJUGATION, "PAST", "");
 
         return database;
     }

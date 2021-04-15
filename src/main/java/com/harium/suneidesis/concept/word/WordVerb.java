@@ -21,7 +21,7 @@ public class WordVerb extends Word {
 	}
 
 	public void setPrepositions(Word gender) {
-		attributes.set(ATTRIBUTE_PREPOSITIONS, gender);
+		attributes.insert(ATTRIBUTE_PREPOSITIONS, gender);
 	}
 
 	public Word getTransitivity() {
@@ -33,6 +33,6 @@ public class WordVerb extends Word {
 	}
 
 	public void setTransitivity(Word Transitivity) {
-		attributes.set(ATTRIBUTE_TRANSITIVITY, Transitivity);
+		attributes.insert(ATTRIBUTE_TRANSITIVITY, Transitivity);
 	}
 }

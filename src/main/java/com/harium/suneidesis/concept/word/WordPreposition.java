@@ -17,6 +17,6 @@ public class WordPreposition extends Word {
 	}
 
 	public void setUse(Word use) {
-		attributes.set(ATTRIBUTE_USE, use);
+		attributes.insert(ATTRIBUTE_USE, use);
 	}
 }

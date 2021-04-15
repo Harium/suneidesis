@@ -1,0 +1,35 @@
+{
+  "name" : "dictionary",
+  "concepts" : {
+    "0" : {
+      "name" : "cat",
+      "dataType" : "PRIMITIVE",
+      "type" : "WORD",
+      "tag" : "noun"
+    },
+    "1" : {
+      "name" : "duck",
+      "dataType" : "PRIMITIVE",
+      "type" : "WORD",
+      "tag" : "noun"
+    },
+    "2" : {
+      "name" : "go",
+      "dataType" : "PRIMITIVE",
+      "type" : "WORD",
+      "transitivity" : "",
+      "lemma" : "go",
+      "tag" : "verb",
+      "prepositions" : "on|through"
+    },
+    "3" : {
+      "name" : "went",
+      "dataType" : "PRIMITIVE",
+      "type" : "WORD",
+      "person" : "",
+      "lemma" : "go",
+      "tag" : "verb_conj",
+      "tense" : "PAST"
+    }
+  }
+}
