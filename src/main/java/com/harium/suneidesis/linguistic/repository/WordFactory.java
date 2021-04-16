@@ -2,6 +2,7 @@ package com.harium.suneidesis.linguistic.repository;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.*;
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
 import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
 
@@ -22,29 +23,31 @@ public class WordFactory {
 
     private static Word getWordByTag(String tag, String name) {
         Word word = null;
-        if (Word.TAG_ADJECTIVE.equals(tag)) {
+        if (Tag.ADJECTIVE.name().equals(tag)) {
             word = new WordAdjective(name);
-        } else if (Word.TAG_ADVERB.equals(tag)) {
+        } else if (Tag.ADVERB.name().equals(tag)) {
             word = new WordAdverb(name);
-        } else if (Word.TAG_CONJUNCTION.equals(tag)) {
+        } else if (Tag.CONJUCTION.name().equals(tag) ||
+                   Tag.COORDINATING_CONJUCTION.name().equals(tag) ||
+                   Tag.SUBORDINATING_CONJUCTION.name().equals(tag)) {
             word = new WordConjunction(name);
-        } else if (Word.TAG_DETERMINER.equals(tag)) {
+        } else if (Tag.DETERMINER.name().equals(tag)) {
             word = new WordDeterminer(name);
-        } else if (Word.TAG_INTERJECTION.equals(tag)) {
+        } else if (Tag.INTERJECTION.name().equals(tag)) {
             word = new WordInterjection(name);
-        } else if (Word.TAG_NOUN.equals(tag)) {
+        } else if (Tag.NOUN.name().equals(tag)) {
             word = new WordNoun(name);
-        } else if (Word.TAG_NUMERAL.equals(tag)) {
+        } else if (Tag.NUMERAL.name().equals(tag)) {
             word = new WordNumeral(name);
-        } else if (Word.TAG_PREPOSITION.equals(tag)) {
+        } else if (Tag.PREPOSITION.name().equals(tag)) {
             word = new WordPreposition(name);
-        } else if (Word.TAG_PRONOUN.equals(tag)) {
+        } else if (Tag.PERSONAL_PRONOUN.name().equals(tag)) {
             word = new WordPronoun(name);
-        } else if (Word.TAG_PUNCTUATION.equals(tag)) {
+        } else if (Tag.PUNCTUATION.name().equals(tag)) {
             word = new WordPunctuation(name);
-        } else if (Word.TAG_VERB.equals(tag)) {
+        } else if (Tag.VERB.name().equals(tag)) {
             word = new WordVerb(name);
-        } else if (Word.TAG_VERB_CONJUGATION.equals(tag)) {
+        } else if (Tag.VERB_CONJUGATION.name().equals(tag)) {
             word = new WordVerbConjugation(name);
         }
         return word;

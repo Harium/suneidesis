@@ -1,9 +1,12 @@
 package com.harium.suneidesis.linguistic.nlp.pos;
 
+import com.harium.suneidesis.concept.word.Word;
+
 /**
  * Tags borrowed from Penn Treebank/Nltk
  */
 public enum Tag {
+    CONJUCTION, // Generalization of Conjuctions
     COORDINATING_CONJUCTION,
     DETERMINER,
     EXISTENTIAL_THERE,
@@ -21,6 +24,7 @@ public enum Tag {
     NUMERAL,// Cardinal Digit
     PREDETERMINER,
     POSSESSIVE,
+    PRONOUN, // Generalization of Pronouns
     PERSONAL_PRONOUN,
     POSSESSIVE_PRONOUN,
     ADVERB,
@@ -33,6 +37,7 @@ public enum Tag {
     TO,
     INTERJECTION,
     VERB,
+    VERB_CONJUGATION,
     VERB_PAST_TENSE,
     VERB_GERUND,
     VERB_PAST_PARTICIPLE,
@@ -43,5 +48,5 @@ public enum Tag {
     WH_POSSESSIVE_PRONOUN,
     WH_ADVERB,
     PUNCTUATION,
-    UNKNOWN
+    UNKNOWN;
 }

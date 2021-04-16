@@ -39,19 +39,14 @@ public abstract class WordKnowledgeBase extends KnowledgeBase implements WordRep
     }
 
     public String addVerbConjugation(String word, WordVerb verb, Tag tag, String tense, String person) {
-        Word infinitive = verb;
-        /*Word w = new Word(verbWord);
-        w.setTag(tag.name());
-        w.setLemma(new Word(infinitiveWordId));
-        String wordId = save(w);*/
+        WordVerbConjugation verbConjugation = new WordVerbConjugation(word);
+        verbConjugation.setLemma(verb);
+        verbConjugation.setTag(tag.name());
+        verbConjugation.setTense(new Word(tense));
+        verbConjugation.setPerson(new Word(person));
+        add(verbConjugation);
 
-        WordVerbConjugation conjugation = new WordVerbConjugation(word);
-        conjugation.setLemma(verb);
-        conjugation.setTag(tag.name());
-        conjugation.setTense(new Word(tense));
-        conjugation.setPerson(new Word(person));
-
-        return index(conjugation);
+        return index(verbConjugation);
     }
 
     @Override

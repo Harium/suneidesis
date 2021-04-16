@@ -1,11 +1,13 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+
 public class WordAdjective extends Word {
 
 	public static final String ATTRIBUTE_GENDER = "gender";
 
 	public WordAdjective(String name) {
-		super(name, Word.TAG_ADJECTIVE);
+		super(name, Tag.ADJECTIVE);
 	}
 	
 	public Word getGender() {

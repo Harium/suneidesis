@@ -59,9 +59,15 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
         return base.contains(key);
     }
 
+    public String addWord(String word, Tag tag) {
+        Word w = new Word(word, tag);
+        add(w);
+
+        return index(w);
+    }
+
     public String addWord(String word, String tag) {
-        Word w = new Word(word);
-        w.setTag(tag);
+        Word w = new Word(word, tag);
         add(w);
 
         return index(w);
@@ -153,17 +159,6 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
         index(verb);
 
         return verb;
-    }
-
-    public String addVerbConjugation(String word, WordVerb verb, String tag, String tense, String person) {
-        WordVerbConjugation conjugation = new WordVerbConjugation(word);
-        conjugation.setLemma(verb);
-        conjugation.setTag(tag);
-        conjugation.setTense(new Word(tense));
-        conjugation.setPerson(new Word(person));
-        add(conjugation);
-
-        return index(conjugation);
     }
 
 }

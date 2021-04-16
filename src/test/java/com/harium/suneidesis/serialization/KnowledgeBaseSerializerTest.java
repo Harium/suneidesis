@@ -43,11 +43,11 @@ public class KnowledgeBaseSerializerTest {
         System.out.println(result);
 
         String expected = "{name:\"dictionary\", \"concepts\":{"
-                + "\"0\":{\"name\":\"cat\", \"tag\":\"noun\"},"
-                + "\"1\":{\"name\":\"duck\", \"tag\":\"noun\"},"
+                + "\"0\":{\"name\":\"cat\", \"tag\":\"" + Tag.NOUN +"\"},"
+                + "\"1\":{\"name\":\"duck\", \"tag\":\"" + Tag.NOUN +"\"},"
                 // TODO UNIFY TAGS
-                + "\"2\":{\"name\":\"go\", \"tag\":\"verb\", \"lemma\":\"go\", \"prepositions\":\"on|through\"},"
-                + "\"3\":{\"name\":\"went\", \"tag\":\"verb_conj\", \"lemma\":\"go\"}"
+                + "\"2\":{\"name\":\"go\", \"tag\":\"" + Tag.VERB + "\", \"lemma\":\"go\", \"prepositions\":\"on|through\"},"
+                + "\"3\":{\"name\":\"went\", \"tag\":\"" + Tag.VERB_CONJUGATION + "\", \"lemma\":\"go\"}"
                 +"}}";
 
         JSONAssert.assertEquals(expected, result, false);
@@ -65,13 +65,13 @@ public class KnowledgeBaseSerializerTest {
 
     private KnowledgeBase buildWordDatabase() {
         MemoryWordBase database = new MemoryWordBase("dictionary");
-        database.addWord("cat", Word.TAG_NOUN);
+        database.addWord("cat", Tag.NOUN);
 
         WordNoun duck = new WordNoun("duck");
         database.add(duck);
 
         WordVerb go = database.addVerb("go", "on|through", "");
-        database.addVerbConjugation("went", go, Word.TAG_VERB_CONJUGATION, "PAST", "");
+        database.addVerbConjugation("went", go, Tag.VERB_CONJUGATION, "PAST", "");
 
         return database;
     }

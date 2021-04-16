@@ -1,12 +1,14 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+
 public class WordVerbConjugation extends Word {
 
 	public static final String ATTRIBUTE_PERSON = "person";
 	public static final String ATTRIBUTE_TENSE = "tense";
 
 	public WordVerbConjugation(String name) {
-		super(name, Word.TAG_VERB_CONJUGATION);
+		super(name, Tag.VERB_CONJUGATION);
 	}
 	
 	public Word getPerson() {

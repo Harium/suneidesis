@@ -5,13 +5,13 @@
       "name" : "cat",
       "dataType" : "PRIMITIVE",
       "type" : "WORD",
-      "tag" : "noun"
+      "tag" : "NOUN"
     },
     "1" : {
       "name" : "duck",
       "dataType" : "PRIMITIVE",
       "type" : "WORD",
-      "tag" : "noun"
+      "tag" : "NOUN"
     },
     "2" : {
       "name" : "go",
@@ -19,7 +19,7 @@
       "type" : "WORD",
       "transitivity" : "",
       "lemma" : "go",
-      "tag" : "verb",
+      "tag" : "VERB",
       "prepositions" : "on|through"
     },
     "3" : {
@@ -28,7 +28,7 @@
       "type" : "WORD",
       "person" : "",
       "lemma" : "go",
-      "tag" : "verb_conj",
+      "tag" : "VERB_CONJUGATION",
       "tense" : "PAST"
     }
   }

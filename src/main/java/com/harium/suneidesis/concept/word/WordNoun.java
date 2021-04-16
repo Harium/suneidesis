@@ -1,5 +1,7 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+
 public class WordNoun extends Word {
 
 	private static final String ATTRIBUTE_GENDER = "gender";
@@ -9,7 +11,7 @@ public class WordNoun extends Word {
 	public static final Word GENDER_NEUTRAL = new Word("neutral");
 
 	public WordNoun(String name) {
-		super(name, Word.TAG_NOUN);
+		super(name, Tag.NOUN);
 	}
 	
 	public Word getGender() {
