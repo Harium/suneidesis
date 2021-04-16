@@ -3,7 +3,8 @@ package com.harium.suneidesis.linguistic.english.box;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
-import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.Provenance;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,35 +59,39 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
         return BaseEnglishBox.checkAction(parts[0], DID);
     }
 
-    private List<Fact> findActionByActorsName(String actorName, Collection<Fact> actions) {
-        List<Fact> facts = new ArrayList<>();
+    private List<Concept> findActionByActorsName(String actorName, Collection<Concept> actions) {
+        List<Concept> facts = new ArrayList<>();
         String name = actorName.toLowerCase();
 
-        for (Fact frame : actions) {
+        for (Concept concept : actions) {
+            Provenance frame = new Provenance(concept);
             boolean hasActor = frame.getSubject() !=null && frame.getSubject().getName().toLowerCase().contains(name);
             boolean hasTarget = frame.getObject() != null && frame.getObject().getName().toLowerCase().contains(name);
 
             if (hasActor || hasTarget) {
-                facts.add(frame);
+                facts.add(concept);
             }
         }
 
         return facts;
     }
 
-    private List<Fact> findByActionName(String actionName, Collection<Fact> actions) {
-        List<Fact> facts = new ArrayList<>();
-        for (Fact fact : actions) {
+    private List<Concept> findByActionName(String actionName, Collection<Concept> actions) {
+        List<Concept> facts = new ArrayList<>();
+        for (Concept concept : actions) {
+            Provenance fact = new Provenance(concept);
             if (fact.getPredicate() !=null && fact.getPredicate().getName().toLowerCase().contains(actionName)) {
-                facts.add(fact);
+                facts.add(concept);
             }
         }
 
         return facts;
     }
 
-    public String describeAction(Fact frame) {
+    public String describeAction(Concept concept) {
         StringBuilder builder = new StringBuilder();
+
+        Provenance frame = new Provenance(concept);
 
         // Change Based on source
         builder.append("I heard that");

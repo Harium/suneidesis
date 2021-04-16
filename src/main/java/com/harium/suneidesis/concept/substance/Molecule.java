@@ -20,7 +20,12 @@ public class Molecule extends Substance {
 
         // Improve it
         Concept formula = get(Substance.ATTRIBUTE_FORMULA);
-        String current = formula.getName();
+        String current;
+        if (formula.isUnknown()) {
+            current = "";
+        } else {
+            current = formula.getName();
+        }
         current += substanceFormula.getName();
         setFormula(current);
     }

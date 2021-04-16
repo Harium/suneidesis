@@ -1,25 +1,36 @@
 package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Fact;
-import com.harium.suneidesis.concept.Time;
+import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.generator.BaseIdGenerator;
 import com.harium.suneidesis.generator.BaseTimeGenerator;
 import com.harium.suneidesis.generator.IdGenerator;
-import com.harium.suneidesis.generator.TimeGenerator;
+import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
+import com.harium.suneidesis.repository.decorator.EntryDecorator;
+import com.harium.suneidesis.repository.decorator.TimeDecorator;
+import com.harium.suneidesis.repository.listener.RepositoryListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-public abstract class KnowledgeBase implements Repository<Fact> {
+import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
+import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
+import static com.harium.suneidesis.repository.decorator.TimeDecorator.ATTRIBUTE_CREATED_AT;
 
-    private static final String ATTRIBUTE_CREATED_AT = "created_at";
+public abstract class KnowledgeBase implements Repository<Concept> {
 
     private String name;
 
     private IdGenerator idGenerator = new BaseIdGenerator();
 
-    private TimeGenerator timeGenerator = new BaseTimeGenerator();
+    protected List<EntryDecorator> decorators = new ArrayList<>();
+    protected List<RepositoryListener> listeners = new ArrayList<>();
+
+    public KnowledgeBase() {
+        super();
+    }
 
     public KnowledgeBase(String name) {
         super();
@@ -31,41 +42,86 @@ public abstract class KnowledgeBase implements Repository<Fact> {
         this.idGenerator = idGenerator;
     }
 
-    public abstract void merge(KnowledgeBase facts);
+    protected void initDecorators() {
+        decorators.add(new TimeDecorator(new BaseTimeGenerator()));
+    }
 
-    public List<Fact> query(Search search) {
-        List<Fact> result = new ArrayList<>();
-        for (Fact fact : getAll()) {
+    @Override
+    public Collection<Concept> getValues() {
+        return getAll().values();
+    }
+
+    @Override
+    public void insert(String key, Concept concept) {
+        for (RepositoryListener repositoryListener: listeners) {
+            repositoryListener.onInsert(key, concept);
+        }
+    }
+
+    public abstract void merge(KnowledgeBase concepts);
+
+    public List<Concept> query(Search search) {
+        List<Concept> result = new ArrayList<>();
+        for (Concept concept : getValues()) {
             // Search nested concepts
-            for (Concept concept : fact.getAttributes().getAll()) {
-                if (search.term.equals(concept.getName())) {
-                    // Check permission
-                    if (!concept.isSecret()) {
-                        result.add(fact);
-                    } else if (fact.getSourceId().getName().equals(search.userId)) {
-                        result.add(fact);
-                    }
-                    break;
+            if(!checkConcept(search, result, concept)) {
+                for (Concept attribute : concept.getAttributes().getValues()) {
+                    checkConcept(search, result, attribute);
                 }
             }
         }
         return result;
     }
 
-    public String add(Concept concept) {
-        String id = idGenerator.generateId();
-        Fact wrap = wrap(concept);
-        set(id, wrap);
-        return id;
+    private boolean checkConcept(Search search, List<Concept> result, Concept concept) {
+        if (search.term.equals(concept.getName())) {
+            // Check permission
+            if (!concept.isSecret()) {
+                result.add(concept);
+            } /*else if (concept.getSourceId().getName().equals(search.userId)) {
+                result.add(concept);
+            }*/
+            return true;
+        }
+        return false;
     }
 
-    protected Fact wrap(Concept info) {
-        Fact fact = new Fact();
-        String when = timeGenerator.generateTime();
-        Time time = new Time(when);
-        fact.time(time);
-        fact.subject(info);
-        return fact;
+    public String add(Concept concept) {
+        //System.out.println(concept.getName());
+
+        Concept id = concept.getId();
+        if (!id.isUnknown() && contains(id.getName())) {
+            return id.getName();
+        }
+        Concept wrap = decorate(concept);
+
+        String idText = idGenerator.generateId();
+        wrap.id(idText);
+        insert(idText, wrap);
+
+        if (DataType.OBJECT == concept.getDataType()) {
+            for (Map.Entry<String, Concept> entry : concept.getAttributes().entrySet()) {
+                if (ATTRIBUTE_CREATED_AT.equals(entry.getKey())) {
+                    continue;
+                }
+                if (ATTRIBUTE_NAME.equals(entry.getKey())) {
+                    continue;
+                }
+                if (ATTRIBUTE_ID.equals(entry.getKey())) {
+                    continue;
+                }
+                add(entry.getValue());
+            }
+        }
+
+        return idText;
+    }
+
+    protected Concept decorate(Concept info) {
+        for (EntryDecorator decorator : decorators) {
+            decorator.decorate(info);
+        }
+        return info;
     }
 
     public String getName() {
@@ -82,5 +138,9 @@ public abstract class KnowledgeBase implements Repository<Fact> {
 
     public void setIdGenerator(IdGenerator idGenerator) {
         this.idGenerator = idGenerator;
+    }
+
+    public void addListener(RepositoryListener listener) {
+        listeners.add(listener);
     }
 }

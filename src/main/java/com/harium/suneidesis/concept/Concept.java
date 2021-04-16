@@ -2,9 +2,11 @@ package com.harium.suneidesis.concept;
 
 
 import com.harium.suneidesis.concept.numeral.Measure;
+import com.harium.suneidesis.concept.primitive.Text;
 
 public class Concept extends Thing {
 
+	public static final String ATTRIBUTE_ID = "id";
 	public static final String ATTRIBUTE_TYPE = "type";
 
 	public static final Concept UNKNOWN = new Concept(ConceptType.UNKNOWN);
@@ -41,7 +43,20 @@ public class Concept extends Thing {
 	}
 
 	public Concept type(Concept type) {
-		attributes.set(ATTRIBUTE_TYPE, type);
+		attributes.insert(ATTRIBUTE_TYPE, type);
+		return this;
+	}
+
+	public String getIdText() {
+		return getId().getName();
+	}
+
+	public Concept getId() {
+		return attributes.get(ATTRIBUTE_ID);
+	}
+
+	public Concept id(String id) {
+		attributes.insert(ATTRIBUTE_ID, new Text(id));
 		return this;
 	}
 
@@ -68,8 +83,12 @@ public class Concept extends Thing {
 		return set(key, property);
 	}
 
+	public boolean hasKey(String key) {
+		return !get(key).isUnknown();
+	}
+
 	public Concept set(String key, Concept property) {
-		this.attributes.set(key, property);
+		this.attributes.insert(key, property);
 		return this;
 	}
 
@@ -108,4 +127,5 @@ public class Concept extends Thing {
 	public boolean isSecret() {
 		return (ConceptType.SECRET.equals(getType()));
 	}
+
 }

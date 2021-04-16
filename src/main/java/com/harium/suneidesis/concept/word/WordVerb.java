@@ -1,5 +1,7 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+
 public class WordVerb extends Word {
 
 	// The same verb may have none or more than one
@@ -9,7 +11,7 @@ public class WordVerb extends Word {
 	public static final String ATTRIBUTE_TRANSITIVITY = "transitivity";
 
 	public WordVerb(String name) {
-		super(name, Word.TAG_VERB);
+		super(name, Tag.VERB);
 	}
 	
 	public Word getPrepositions() {
@@ -21,7 +23,7 @@ public class WordVerb extends Word {
 	}
 
 	public void setPrepositions(Word gender) {
-		attributes.set(ATTRIBUTE_PREPOSITIONS, gender);
+		attributes.insert(ATTRIBUTE_PREPOSITIONS, gender);
 	}
 
 	public Word getTransitivity() {
@@ -33,6 +35,6 @@ public class WordVerb extends Word {
 	}
 
 	public void setTransitivity(Word Transitivity) {
-		attributes.set(ATTRIBUTE_TRANSITIVITY, Transitivity);
+		attributes.insert(ATTRIBUTE_TRANSITIVITY, Transitivity);
 	}
 }

@@ -2,7 +2,7 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.linguistic.storage.WordRepository;
+import com.harium.suneidesis.linguistic.repository.WordRepository;
 import com.harium.suneidesis.concept.word.Word;
 
 import java.util.List;
@@ -84,7 +84,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
         if (words == null || words.isEmpty()) {
             return null;
         }
-        return words.get(0).getId();
+        return words.get(0).getWordId();
     }
 
     private boolean isVerb(String tag) {

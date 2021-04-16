@@ -1,9 +1,9 @@
 package com.harium.suneidesis.linguistic.fact;
 
-import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.Concept;
 
 public interface Reconstructor {
 
-    String reconstruct(Fact frame);
+    String reconstruct(Concept frame);
 
 }

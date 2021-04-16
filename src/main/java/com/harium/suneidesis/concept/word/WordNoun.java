@@ -1,16 +1,17 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+
 public class WordNoun extends Word {
 
 	private static final String ATTRIBUTE_GENDER = "gender";
-	private static final String ATTRIBUTE_TYPE = "type";
 
 	public static final Word GENDER_MASCULINE = new Word("masculine");
 	public static final Word GENDER_FEMININE = new Word("feminine");
 	public static final Word GENDER_NEUTRAL = new Word("neutral");
 
 	public WordNoun(String name) {
-		super(name, Word.TAG_NOUN);
+		super(name, Tag.NOUN);
 	}
 	
 	public Word getGender() {
@@ -22,18 +23,7 @@ public class WordNoun extends Word {
 	}
 
 	public void setGender(Word gender) {
-		attributes.set(ATTRIBUTE_GENDER, gender);
+		attributes.insert(ATTRIBUTE_GENDER, gender);
 	}
 
-	public Word getType() {
-		return (Word) attributes.get(ATTRIBUTE_TYPE);
-	}
-
-	public String getTypeWord() {
-		return getType().getName();
-	}
-
-	public void setType(Word Type) {
-		attributes.set(ATTRIBUTE_TYPE, Type);
-	}
 }

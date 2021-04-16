@@ -2,8 +2,8 @@ package com.harium.suneidesis.planning;
 
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Fact;
-import com.harium.suneidesis.repository.MemoryRepository;
+import com.harium.suneidesis.concept.Provenance;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.planning.instruction.FindTask;
 import org.junit.Test;
 
@@ -21,12 +21,13 @@ public class BaseTaskTest {
         fridge.owner(myself);
         fridge.add(garlic);
 
-        Fact fact = new Fact();
+        Concept task = new Concept();
+        Provenance fact = new Provenance(task);
         fact.source(new Concept("sensors"));
         fact.subject(fridge);
 
-        MemoryRepository environment = new MemoryRepository("environment");
-        environment.add(fact);
+        MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
+        environment.add(task);
 
         BaseTask chopGarlic = new BaseTask();
         chopGarlic.addTask(new FindTask(garlic));
@@ -43,12 +44,13 @@ public class BaseTaskTest {
         fridge.owner(myself);
         //fridge.add(garlic);
 
-        Fact fact = new Fact();
+        Concept task = new Concept();
+        Provenance fact = new Provenance(task);
         fact.source(new Concept("sensors"));
         fact.subject(fridge);
 
-        MemoryRepository environment = new MemoryRepository("environment");
-        environment.add(fact);
+        MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
+        environment.add(task);
 
         BaseTask chopGarlic = new BaseTask();
         chopGarlic.addTask(new FindTask(garlic));

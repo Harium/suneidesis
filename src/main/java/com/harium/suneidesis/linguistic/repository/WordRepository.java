@@ -1,6 +1,6 @@
-package com.harium.suneidesis.linguistic.storage;
+package com.harium.suneidesis.linguistic.repository;
 
-import com.harium.suneidesis.concept.Fact;
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.concept.word.WordVerbConjugation;
@@ -8,13 +8,7 @@ import com.harium.suneidesis.repository.Repository;
 
 import java.util.List;
 
-public interface WordRepository extends Repository<Fact> {
-
-    String save(Word word);
-
-    String save(WordVerb verb);
-
-    String save(WordVerbConjugation verbConjugation);
+public interface WordRepository extends Repository<Concept> {
 
     List<Word> findAllWords(String word);
 

@@ -1,13 +1,9 @@
 package com.harium.suneidesis.consciousness;
 
-import com.harium.suneidesis.concept.Action;
-import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Place;
+import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.numeral.Measure;
 import com.harium.suneidesis.repository.KnowledgeBase;
-import com.harium.suneidesis.concept.Fact;
-import com.harium.suneidesis.concept.Time;
-import com.harium.suneidesis.repository.MemoryRepository;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.Search;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,10 +19,10 @@ public class ConsciousnessSimulationTest {
 
     @Before
     public void setUp() {
-        alexa = new MemoryRepository("Alexa");
+        alexa = new MemoryKnowledgeBase("Alexa");
         buildSelf(alexa);
 
-        siri = new MemoryRepository("Siri");
+        siri = new MemoryKnowledgeBase("Siri");
         buildSelf(siri);
     }
 
@@ -44,9 +40,9 @@ public class ConsciousnessSimulationTest {
 
         Concept myself = new Concept("me");
         myself.is(robot);
-        Fact autoKnowledge = new Fact();
-        autoKnowledge.subject(myself);
-        consciousness.set("myself", autoKnowledge);
+        Concept autoKnowledge = new Concept();
+        Provenance.setSubject(autoKnowledge, myself);
+        consciousness.insert("myself", autoKnowledge);
 
         Concept internet = new Concept("Internet");
         Concept data = new Concept("data");
@@ -62,31 +58,33 @@ public class ConsciousnessSimulationTest {
         Place land = new Place("land");
 
         // Fact 1: The robot 1 was at the river yesterday
-        Fact fact1 = new Fact();
-        fact1.source(searchEngine)
+        Concept fact1 = new Concept();
+        Provenance fact1Wrapper = new Provenance(fact1);
+        fact1Wrapper.source(searchEngine)
                 .acquisitionMedium(internet)
                 .acquisitionMethod(dataTransfer)
                 .subject(robot1)
                 .time(Time.YESTERDAY)
                 .place(river);
-        consciousness.set("fact1", fact1);
+        consciousness.insert("fact1", fact1);
 
         // Fact 2: The robot 1 is at the river now
-        Fact fact2 = new Fact();
-        fact2.source(searchEngine)
+        Concept fact2 = new Concept();
+        Provenance fact2Wrapper = new Provenance(fact2);
+        fact2Wrapper.source(searchEngine)
                 .acquisitionMedium(internet)
                 .acquisitionMethod(dataTransfer)
                 .subject(robot1)
                 .time(Time.NOW)
                 .place(land);
-        consciousness.set("fact2", fact2);
+        consciousness.insert("fact2", fact2);
     }
 
     @Test
     public void testQuery() {
         Search search = new Search();
         search.term = "robot 1";
-        List<Fact> robot1Facts = alexa.query(search);
+        List<Concept> robot1Facts = alexa.query(search);
         assertEquals(2, robot1Facts.size());
     }
 

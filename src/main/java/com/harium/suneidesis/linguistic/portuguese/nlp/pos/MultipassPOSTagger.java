@@ -2,7 +2,7 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.linguistic.storage.WordRepository;
+import com.harium.suneidesis.linguistic.repository.WordRepository;
 import com.harium.suneidesis.concept.word.Word;
 
 import java.util.Arrays;
@@ -75,7 +75,7 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
                 WordVerb verb;
                 for (Word w: words) {
                     if (isVerb(w.getTagWord())) {
-                        verb = database.findVerbByWordId(w.getLemma().getId());
+                        verb = database.findVerbByWordId(w.getLemma().getWordId());
 
                         String[] prepositionsList = verb.getPrepositionsWord().split("\\|");
                         Set<String> prepositions = new HashSet<>(Arrays.asList(prepositionsList));

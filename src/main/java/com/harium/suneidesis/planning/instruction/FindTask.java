@@ -1,10 +1,10 @@
 package com.harium.suneidesis.planning.instruction;
 
-import com.harium.suneidesis.concept.Fact;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.repository.KnowledgeBase;
-import com.harium.suneidesis.planning.Inventory;
+import com.harium.suneidesis.concept.Provenance;
 import com.harium.suneidesis.planning.BaseTask;
+import com.harium.suneidesis.planning.Inventory;
+import com.harium.suneidesis.repository.KnowledgeBase;
 
 public class FindTask extends BaseTask {
 
@@ -17,21 +17,20 @@ public class FindTask extends BaseTask {
     @Override
     public boolean execute(Concept subject, KnowledgeBase environment) {
         boolean found = false;
-        for (Fact fact : environment.getAll()) {
-            if (fact.getSubject() instanceof Fact) {
-                Fact subfact = (Fact) fact.getSubject();
-                Concept concept = subfact.getSubject();
-                if (concept instanceof Inventory) {
-                    Inventory inventory = (Inventory) concept;
-                    canAccess(subject, inventory);
-                    for (Concept item : inventory.getAttributes().getAll()) {
-                        if (target == item) {
-                            found = true;
-                            break;
-                        }
+        for (Concept concept : environment.getValues()) {
+            Provenance fact = new Provenance(concept);
+            Concept factSubject = fact.getSubject();
+            if (factSubject instanceof Inventory) {
+                Inventory inventory = (Inventory) factSubject;
+                canAccess(subject, inventory);
+                for (Concept item : inventory.getAttributes().getValues()) {
+                    if (target == item) {
+                        found = true;
+                        break;
                     }
                 }
             }
+
         }
 
         if (!found) {

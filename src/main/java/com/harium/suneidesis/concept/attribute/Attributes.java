@@ -2,12 +2,14 @@ package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.numeral.Measure;
+import com.harium.suneidesis.concept.primitive.Text;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Attributes implements Repository<Concept> {
 
@@ -15,16 +17,16 @@ public class Attributes implements Repository<Concept> {
     public static final String ATTRIBUTE_PROPERTIES = "props";
     public static final String ATTRIBUTE_LOCATION = "location";
     public static final String ATTRIBUTE_NAME = "name";
+    public static final String ATTRIBUTE_DATA_TYPE = "dataType";
 
-    public static final Word UNKNOWN_WORD = new Word("");
+    public static final Text UNKNOWN_WORD = new Text("?");
+
+    private DataType dataType = DataType.OBJECT;
+    private String value;
 
     private Abilities abilities;
     private Properties properties;
     private final Map<String, Concept> attributeMap = new HashMap<>();
-
-    private DataType dataType = DataType.OBJECT;
-    // TODO RENAME TO VALUE
-    private String value;
 
     public Concept get(String key) {
         Concept concept = attributeMap.get(key);
@@ -39,11 +41,16 @@ public class Attributes implements Repository<Concept> {
     }
 
     @Override
-    public Collection<Concept> getAll() {
+    public Map<String, Concept> getAll() {
+        return attributeMap;
+    }
+
+    @Override
+    public Collection<Concept> getValues() {
         return attributeMap.values();
     }
 
-    public void set(String key, Concept concept) {
+    public void insert(String key, Concept concept) {
         attributeMap.put(key, concept);
     }
 
@@ -86,13 +93,13 @@ public class Attributes implements Repository<Concept> {
         }
     }
 
-    public Word getValue() {
+    public Text getValue() {
         if (DataType.PRIMITIVE.equals(getDataType())) {
-            return new Word(value);
+            return new Text(value);
         } else {
             Concept value = attributeMap.get(ATTRIBUTE_NAME);
             if (value != null) {
-                return (Word) value;
+                return (Text) value;
             }
         }
         return UNKNOWN_WORD;
@@ -102,24 +109,24 @@ public class Attributes implements Repository<Concept> {
         if (DataType.PRIMITIVE.equals(getDataType())) {
             this.value = value;
         } else {
-            Word nameWord = getOrCreateWord(value);
-            setNameWord(nameWord);
+            Text nameWord = getOrCreateWord(value);
+            setNameConcept(nameWord);
         }
     }
 
-    public void setNameWord(Word name) {
+    public void setNameConcept(Concept name) {
         attributeMap.put(ATTRIBUTE_NAME, name);
     }
 
-    private Word getOrCreateWord(String name) {
-        return new Word(name);
+    private Text getOrCreateWord(String name) {
+        return new Text(name);
     }
 
     public void is(Concept concept) {
         merge(concept.getAttributes());
     }
 
-    private void merge(Attributes attributes) {
+    public void merge(Attributes attributes) {
         for (Map.Entry<String, Concept> entry: attributes.attributeMap.entrySet()) {
             String key = entry.getKey();
             if (ATTRIBUTE_NAME.equals(key)) {
@@ -192,6 +199,10 @@ public class Attributes implements Repository<Concept> {
             return b == null;
         }
         return a.equals(b);
+    }
+
+    public Set<Map.Entry<String, Concept>> entrySet() {
+        return attributeMap.entrySet();
     }
 
 }

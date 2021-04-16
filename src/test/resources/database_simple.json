@@ -1,0 +1,26 @@
+{
+  "name" : "database",
+  "concepts" : {
+    "0" : {
+      "name" : "apple tree",
+      "dataType" : "OBJECT",
+      "fruit" : "1",
+      "created_at" : {
+        "dataType" : "OBJECT",
+        "type" : "TIME UNIT",
+        "time_start" : "1617839812105",
+        "time_end" : "1617839812105"
+      }
+    },
+    "1" : {
+      "name" : "apple",
+      "dataType" : "OBJECT",
+      "created_at" : {
+        "dataType" : "OBJECT",
+        "type" : "TIME UNIT",
+        "time_start" : "1617839812106",
+        "time_end" : "1617839812106"
+      }
+    }
+  }
+}

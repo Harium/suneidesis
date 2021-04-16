@@ -52,12 +52,12 @@ public class Measure extends Concept {
     }
 
     public Measure setValue(String value) {
-        attributes.set(ATTRIBUTE_VALUE, new Concept(value));
+        attributes.insert(ATTRIBUTE_VALUE, new Concept(value));
         return this;
     }
 
     public Measure setUnit(String unit) {
-        attributes.set(ATTRIBUTE_UNIT, new Concept(unit));
+        attributes.insert(ATTRIBUTE_UNIT, new Concept(unit));
         return this;
     }
 }

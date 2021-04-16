@@ -1,12 +1,13 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+
 public class WordDeterminer extends Word {
 
 	public static final String ATTRIBUTE_GENDER = "gender";
-	public static final String ATTRIBUTE_TYPE = "type";
 
 	public WordDeterminer(String name) {
-		super(name, Word.TAG_DETERMINER);
+		super(name, Tag.DETERMINER);
 	}
 	
 	public Word getGender() {
@@ -18,18 +19,7 @@ public class WordDeterminer extends Word {
 	}
 
 	public void setGender(Word gender) {
-		attributes.set(ATTRIBUTE_GENDER, gender);
+		attributes.insert(ATTRIBUTE_GENDER, gender);
 	}
 
-	public Word getType() {
-		return (Word) attributes.get(ATTRIBUTE_TYPE);
-	}
-
-	public String getTypeWord() {
-		return getType().getName();
-	}
-
-	public void setType(Word Type) {
-		attributes.set(ATTRIBUTE_TYPE, Type);
-	}
 }
