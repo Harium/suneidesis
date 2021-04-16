@@ -12,7 +12,7 @@ Suneidesis is a project to represent knowledge. It can also be used as a chat bo
 <dependency>
     <groupId>com.harium.suneidesis</groupId>
     <artifactId>core</artifactId>
-    <version>1.3.5</version>
+    <version>1.4.0</version>
 </dependency>
 ```
 
