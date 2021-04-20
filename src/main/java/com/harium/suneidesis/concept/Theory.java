@@ -2,8 +2,8 @@ package com.harium.suneidesis.concept;
 
 /**
  * Theory types from:
- * A. G. Larkins & C. W. McKinney (1980)
- * Four Types of Theory: Implications for Research in Social Education, Theory & Research in Social Education,
+ * A. G. Larkins &amp; C. W. McKinney (1980)
+ * Four Types of Theory: Implications for Research in Social Education, Theory &amp; Research in Social Education,
  * 8:1, 9-17, DOI: 10.1080/00933104.1980.10506072
  */
 public class Theory extends Concept {
