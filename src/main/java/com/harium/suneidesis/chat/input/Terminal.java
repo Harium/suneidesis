@@ -6,6 +6,7 @@ import com.harium.suneidesis.chat.output.TextOutput;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Terminal implements BoxHandler {
@@ -47,13 +48,30 @@ public class Terminal implements BoxHandler {
         }
     }
 
-    private void enhanceInputContext(InputContext context) {
+    protected void enhanceInputContext(InputContext context) {
         // Custom Properties
-        context.getProperties().put(InputContext.USER_ID, "id");
-        context.getProperties().put(InputContext.USER_NAME, "Full Name");
-        context.getProperties().put(InputContext.USER_USERNAME, "user");
-        context.getProperties().put(InputContext.CHANNEL_ID, "cid");
-        context.getProperties().put(InputContext.CHANNEL_NAME, "console");
+        context.getProperties().put(InputContext.USER_USERNAME, getUsername());
+        context.getProperties().put(InputContext.USER_ID, "");
+        context.getProperties().put(InputContext.USER_NAME, "");
+        context.getProperties().put(InputContext.CHANNEL_ID, "");
+        context.getProperties().put(InputContext.CHANNEL_NAME, "");
+        context.getProperties().put(InputContext.LANGUAGE, getLanguage());
+    }
+
+    protected String getUsername() {
+        return getSystemProperty("user.name");
+    }
+
+    protected String getLanguage() {
+        return getSystemProperty("user.language");
+    }
+
+    private String getSystemProperty(String property) {
+        String value = System.getProperty(property);
+        if (value == null || value.trim().isEmpty()) {
+            return "";
+        }
+        return value;
     }
 
     @Override
