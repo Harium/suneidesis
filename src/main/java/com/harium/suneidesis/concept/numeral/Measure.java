@@ -7,6 +7,7 @@ public class Measure extends Concept {
 
     private static final String ATTRIBUTE_UNIT = "unit";
     private static final String ATTRIBUTE_VALUE = "value";
+    private static final String ATTRIBUTE_ACCURACY = "accuracy";
 
     public static final Measure ZERO = new Measure("Zero", "0");
 

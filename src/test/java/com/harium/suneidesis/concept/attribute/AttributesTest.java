@@ -1,6 +1,7 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
+import com.harium.suneidesis.inspector.Inspector;
 import com.harium.suneidesis.inspector.matchers.Equals;
 import com.harium.suneidesis.inspector.matchers.GreaterThan;
 import com.harium.suneidesis.inspector.matchers.LowerThan;
@@ -8,8 +9,7 @@ import com.harium.suneidesis.concept.numeral.Measure;
 import org.junit.Test;
 
 import static com.harium.suneidesis.inspector.Inspector.does;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class AttributesTest {
 
@@ -41,6 +41,24 @@ public class AttributesTest {
         assertTrue(does(bat).can("fly"));
 
         assertTrue(does(bat).is(flying));
+    }
+
+    @Test
+    public void testIsMap() {
+        Concept horse = new Concept("horse");
+        Concept mammal = new Concept("mammal");
+        Concept animal = new Concept("animal");
+        Concept fish = new Concept("fish");
+
+        horse.is(mammal);
+        mammal.is(animal);
+        fish.is(animal);
+        animal.has("life", new Concept("life"));
+
+        assertTrue(Inspector.does(horse).is(animal));
+        assertTrue(Inspector.does(horse).has("life"));
+        assertTrue(Inspector.does(fish).is(animal));
+        assertTrue(Inspector.does(fish).has("life"));
     }
 
 }

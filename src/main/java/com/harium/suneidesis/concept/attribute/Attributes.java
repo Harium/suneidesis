@@ -3,7 +3,6 @@ package com.harium.suneidesis.concept.attribute;
 import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.numeral.Measure;
 import com.harium.suneidesis.concept.primitive.Text;
-import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
 
 import java.util.Collection;
@@ -24,20 +23,45 @@ public class Attributes implements Repository<Concept> {
     private DataType dataType = DataType.OBJECT;
     private String value;
 
+    // What the concept can do
     private Abilities abilities;
+    // What the concept has
     private Properties properties;
+    // How the concept is defined
     private final Map<String, Concept> attributeMap = new HashMap<>();
+    // Primitive concepts that this concept borrows from
+    private final Map<String, Concept> isMap = new HashMap<>();
 
     public Concept get(String key) {
         Concept concept = attributeMap.get(key);
-        if (concept == null) {
-            return Concept.UNKNOWN;
+        if (concept != null) {
+            return concept;
         }
-        return concept;
+        // Check super classes
+        for (Concept is : isMap.values()) {
+            concept = is.getAttributes().get(key);
+            if (concept != null) {
+                return concept;
+            }
+        }
+        return Concept.UNKNOWN;
     }
 
     public boolean contains(String key) {
         return attributeMap.containsKey(key);
+    }
+
+    public boolean is(String key) {
+        for (Map.Entry<String, Concept> entry : isMap.entrySet()) {
+            if (key.equals(entry.getKey())) {
+                return true;
+            }
+            // Recursive
+            if (entry.getValue().getAttributes().is(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -123,11 +147,12 @@ public class Attributes implements Repository<Concept> {
     }
 
     public void is(Concept concept) {
-        merge(concept.getAttributes());
+        isMap.put(concept.getName(), concept);
+        // TODO OPTIMIZATION (Merge attributes from Map if super concept also has them)
     }
 
     public void merge(Attributes attributes) {
-        for (Map.Entry<String, Concept> entry: attributes.attributeMap.entrySet()) {
+        for (Map.Entry<String, Concept> entry : attributes.attributeMap.entrySet()) {
             String key = entry.getKey();
             if (ATTRIBUTE_NAME.equals(key)) {
                 continue;
@@ -146,6 +171,20 @@ public class Attributes implements Repository<Concept> {
 
     public void can(Action concept) {
         getAbilities().add(concept);
+    }
+
+    public boolean can(String actionKey) {
+        if (getAbilities().query(actionKey)) {
+            return true;
+        }
+
+        for (Concept is : isMap.values()) {
+            if (is.getAttributes().getAbilities().query(actionKey)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void hasPart(Concept part, Measure measure) {
