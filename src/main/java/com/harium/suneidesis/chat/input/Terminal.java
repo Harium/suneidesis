@@ -1,5 +1,6 @@
 package com.harium.suneidesis.chat.input;
 
+import com.harium.suneidesis.chat.Interceptor;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.box.BoxHandler;
 import com.harium.suneidesis.chat.output.TextOutput;
@@ -14,6 +15,7 @@ public class Terminal implements BoxHandler {
     private TextOutput output = new TextOutput();
 
     private List<Parser> parsers = new ArrayList<>();
+    private List<Interceptor> interceptors = new ArrayList<>();
 
     public Terminal() {
         super();
@@ -41,8 +43,11 @@ public class Terminal implements BoxHandler {
         context.setSentence(sentence);
         enhanceInputContext(context);
 
-        for (Parser box : parsers) {
-            if (box.parse(context, output)) {
+        for (Interceptor interceptor : interceptors) {
+            interceptor.intercept(context, output);
+        }
+        for (Parser parser : parsers) {
+            if (parser.parse(context, output)) {
                 break;
             }
         }
