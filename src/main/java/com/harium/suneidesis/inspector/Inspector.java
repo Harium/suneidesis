@@ -21,7 +21,7 @@ public class Inspector {
     public boolean is(Concept concept) {
         // Contains the concept as a superclass
         String conceptName = concept.getName();
-        if (this.concept.getAttributes().is(conceptName)) {
+        if (this.concept.getAttributes().queryIs(conceptName)) {
             return true;
         }
 
@@ -46,7 +46,7 @@ public class Inspector {
         return this.concept.hasKey(key);
     }
 
-    public boolean hasPart(String key, Matcher matcher) {
+    public boolean hasPart(String key, MeasureMatcher matcher) {
         Concept toEval = this.concept.getAttributes().getProperty(key);
         if (!ConceptType.MEASURE.equals(toEval.getType())) {
             return false;

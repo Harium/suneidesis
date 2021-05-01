@@ -16,7 +16,7 @@ import java.util.Map;
 public class MemoryWordBase extends WordKnowledgeBase implements WordRepository {
 
     // Delegate
-    private final MemoryKnowledgeBase base = new MemoryKnowledgeBase();
+    private final MemoryKnowledgeBase delegate = new MemoryKnowledgeBase();
 
     // Key is the pure word
     protected Map<String, List<Word>> words = new HashMap<>();
@@ -27,27 +27,27 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
 
     public MemoryWordBase(String name) {
         super(name);
-        base.addListener(this);
+        delegate.addListener(this);
     }
 
     @Override
     public void insert(String key, Concept concept) {
-        base.insert(key, concept);
+        delegate.insert(key, concept);
     }
 
     @Override
     public void merge(KnowledgeBase concepts) {
-        base.merge(concepts);
+        delegate.merge(concepts);
     }
 
     @Override
     public Map<String, Concept> getAll() {
-        return base.getAll();
+        return delegate.getAll();
     }
 
     @Override
     public Concept get(String key) {
-        return base.get(key);
+        return delegate.get(key);
     }
 
     public List<Word> getWords(String key) {
@@ -56,7 +56,7 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
 
     @Override
     public boolean contains(String key) {
-        return base.contains(key);
+        return delegate.contains(key);
     }
 
     public String addWord(String word, Tag tag) {
@@ -161,4 +161,7 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
         return verb;
     }
 
+    public MemoryKnowledgeBase getDelegate() {
+        return delegate;
+    }
 }

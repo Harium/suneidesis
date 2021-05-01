@@ -2,20 +2,18 @@ package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.DataType;
+import com.harium.suneidesis.concept.attribute.Inheritance;
 import com.harium.suneidesis.generator.BaseIdGenerator;
 import com.harium.suneidesis.generator.BaseTimeGenerator;
 import com.harium.suneidesis.generator.IdGenerator;
-import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
 import com.harium.suneidesis.repository.decorator.EntryDecorator;
 import com.harium.suneidesis.repository.decorator.TimeDecorator;
 import com.harium.suneidesis.repository.listener.RepositoryListener;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
+import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_INHERITANCE;
 import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
 import static com.harium.suneidesis.repository.decorator.TimeDecorator.ATTRIBUTE_CREATED_AT;
 
@@ -86,9 +84,13 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         return false;
     }
 
-    public String add(Concept concept) {
-        //System.out.println(concept.getName());
+    public void addAll(Collection<Concept> concepts) {
+        for (Concept concept : concepts) {
+            add(concept);
+        }
+    }
 
+    public String add(Concept concept) {
         Concept id = concept.getId();
         if (!id.isUnknown() && contains(id.getName())) {
             return id.getName();
@@ -108,6 +110,12 @@ public abstract class KnowledgeBase implements Repository<Concept> {
                     continue;
                 }
                 if (ATTRIBUTE_ID.equals(entry.getKey())) {
+                    continue;
+                }
+                // TODO Handle Inheritance
+                if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
+                    Inheritance inheritance = (Inheritance) entry.getValue();
+                    addAll(inheritance.getMap().values());
                     continue;
                 }
                 add(entry.getValue());

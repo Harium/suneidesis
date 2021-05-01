@@ -44,21 +44,58 @@ public class AttributesTest {
     }
 
     @Test
-    public void testIsMap() {
+    public void testInheritance() {
         Concept horse = new Concept("horse");
         Concept mammal = new Concept("mammal");
         Concept animal = new Concept("animal");
         Concept fish = new Concept("fish");
 
+        Concept life = new Concept("life");
+        animal.has("life", life);
+        mammal.has("life", life);
+
         horse.is(mammal);
         mammal.is(animal);
         fish.is(animal);
-        animal.has("life", new Concept("life"));
 
         assertTrue(Inspector.does(horse).is(animal));
         assertTrue(Inspector.does(horse).has("life"));
         assertTrue(Inspector.does(fish).is(animal));
         assertTrue(Inspector.does(fish).has("life"));
+
+        // Verify if optimization removed life from map
+        assertFalse(mammal.getAttributes().getAll().containsKey("life"));
+    }
+
+    @Test
+    public void testInheritanceMapOverwrite() {
+        Concept horse = new Concept("horse");
+        Concept mammal = new Concept("mammal");
+        Concept animal = new Concept("animal");
+
+        Concept unicorn = new Concept("unicorn");
+
+        unicorn.is(horse);
+        horse.is(mammal);
+        mammal.is(animal);
+
+        horse.hasNoQuantity("horn");
+        unicorn.hasQuantity("horn", new Measure("1"));
+
+        assertTrue(Inspector.does(horse).is(animal));
+        assertTrue(Inspector.does(horse).hasPart("horn", new Equals("0")));
+        assertTrue(Inspector.does(unicorn).hasPart("horn", new GreaterThan("0")));
+    }
+
+    @Test
+    public void testInheritanceHasKey() {
+        Concept waterTank = new Concept("water tank");
+        Concept tank = new Concept("tank");
+        tank.set("content", new Concept("content"));
+
+        waterTank.is(tank);
+
+        assertTrue(Inspector.does(waterTank).has("content"));
     }
 
 }

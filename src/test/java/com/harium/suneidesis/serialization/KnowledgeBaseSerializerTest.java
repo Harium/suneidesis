@@ -18,6 +18,8 @@ import java.io.IOException;
 
 public class KnowledgeBaseSerializerTest {
 
+    private static final boolean PRINT_RESULT = true;
+
     private KnowledgeBaseJacksonSerializer serializer;
 
     @Before
@@ -28,11 +30,23 @@ public class KnowledgeBaseSerializerTest {
     @Test
     public void testSimple() throws IOException, JSONException {
         String result = serializer.serialize(buildSimpleKnowledgeBase());
-        //System.out.println(result);
+        print(result);
 
         String expected = "{name:\"database\", \"concepts\":{"
-                + "\"0\":{\"name\":\"apple tree\",\"fruit\":\"1\"},"
+                + "\"0\":{\"name\":\"apple tree\",\"fruit\":{\"id\":\"1\"}},"
                 + "\"1\":{\"name\":\"apple\"}"
+                +"}}";
+        JSONAssert.assertEquals(expected, result, false);
+    }
+
+    @Test
+    public void testComplex() throws IOException, JSONException {
+        String result = serializer.serialize(buildComplexKnowledgeBase());
+        print(result);
+
+        String expected = "{name:\"database\", \"concepts\":{"
+                + "\"0\":{\"name\":\"apple tree\",\"fruit\":{\"id\":\"1\"}},"
+                + "\"1\":{\"name\":\"apple\",\"inheritance\":{\"food\":{\"id\":\"2\"}}}"
                 +"}}";
         JSONAssert.assertEquals(expected, result, false);
     }
@@ -40,7 +54,7 @@ public class KnowledgeBaseSerializerTest {
     @Test
     public void testWordDatabase() throws IOException, JSONException {
         String result = serializer.serialize(buildWordDatabase());
-        System.out.println(result);
+        print(result);
 
         String expected = "{name:\"dictionary\", \"concepts\":{"
                 + "\"0\":{\"name\":\"cat\", \"tag\":\"" + Tag.NOUN +"\"},"
@@ -63,6 +77,19 @@ public class KnowledgeBaseSerializerTest {
         return base;
     }
 
+    private KnowledgeBase buildComplexKnowledgeBase() {
+        Concept appleTree = new Concept("apple tree");
+        Concept apple = new Concept("apple");
+        Concept food = new Concept("food");
+        apple.is(food);
+
+        appleTree.set("fruit", apple);
+        KnowledgeBase base = new MemoryKnowledgeBase("database");
+        base.add(appleTree);
+
+        return base;
+    }
+
     private KnowledgeBase buildWordDatabase() {
         MemoryWordBase database = new MemoryWordBase("dictionary");
         database.addWord("cat", Tag.NOUN);
@@ -74,6 +101,13 @@ public class KnowledgeBaseSerializerTest {
         database.addVerbConjugation("went", go, Tag.VERB_CONJUGATION, "PAST", "");
 
         return database;
+    }
+
+    private void print(String result) {
+        if (!PRINT_RESULT) {
+            return;
+        }
+        System.out.println(result);
     }
 
 }

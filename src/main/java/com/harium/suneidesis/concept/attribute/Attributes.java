@@ -14,6 +14,7 @@ public class Attributes implements Repository<Concept> {
 
     public static final String ATTRIBUTE_ABILITIES = "abilities";
     public static final String ATTRIBUTE_PROPERTIES = "props";
+    public static final String ATTRIBUTE_INHERITANCE = "inheritance";
     public static final String ATTRIBUTE_LOCATION = "location";
     public static final String ATTRIBUTE_NAME = "name";
     public static final String ATTRIBUTE_DATA_TYPE = "dataType";
@@ -30,38 +31,25 @@ public class Attributes implements Repository<Concept> {
     // How the concept is defined
     private final Map<String, Concept> attributeMap = new HashMap<>();
     // Primitive concepts that this concept borrows from
-    private final Map<String, Concept> isMap = new HashMap<>();
+    private Inheritance inheritance;
+
+    //private final Map<String, Concept> isMap = new HashMap<>();
 
     public Concept get(String key) {
         Concept concept = attributeMap.get(key);
         if (concept != null) {
             return concept;
         }
-        // Check super classes
-        for (Concept is : isMap.values()) {
-            concept = is.getAttributes().get(key);
-            if (concept != null) {
-                return concept;
-            }
-        }
-        return Concept.UNKNOWN;
+
+        return getInheritance().getKey(key);
     }
 
     public boolean contains(String key) {
-        return attributeMap.containsKey(key);
+        return !get(key).isUnknown();
     }
 
-    public boolean is(String key) {
-        for (Map.Entry<String, Concept> entry : isMap.entrySet()) {
-            if (key.equals(entry.getKey())) {
-                return true;
-            }
-            // Recursive
-            if (entry.getValue().getAttributes().is(key)) {
-                return true;
-            }
-        }
-        return false;
+    public boolean queryIs(String key) {
+        return getInheritance().queryIs(key);
     }
 
     @Override
@@ -96,6 +84,14 @@ public class Attributes implements Repository<Concept> {
             attributeMap.put(ATTRIBUTE_PROPERTIES, properties);
         }
         return properties;
+    }
+
+    public Inheritance getInheritance() {
+        if (inheritance == null) {
+            inheritance = new Inheritance();
+            attributeMap.put(ATTRIBUTE_INHERITANCE, inheritance);
+        }
+        return inheritance;
     }
 
     /**
@@ -133,9 +129,13 @@ public class Attributes implements Repository<Concept> {
         if (DataType.PRIMITIVE.equals(getDataType())) {
             this.value = value;
         } else {
-            Text nameWord = getOrCreateWord(value);
-            setNameConcept(nameWord);
+            setNameText(value);
         }
+    }
+
+    public void setNameText(String text) {
+        Text nameWord = getOrCreateWord(text);
+        setNameConcept(nameWord);
     }
 
     public void setNameConcept(Concept name) {
@@ -146,9 +146,20 @@ public class Attributes implements Repository<Concept> {
         return new Text(name);
     }
 
+    // Assign a super class
     public void is(Concept concept) {
-        isMap.put(concept.getName(), concept);
-        // TODO OPTIMIZATION (Merge attributes from Map if super concept also has them)
+        getInheritance().add(concept);
+
+        // For each attribute
+        for (Map.Entry<String, Concept> entry : attributeMap.entrySet()) {
+            String key = entry.getKey();
+            Concept c = entry.getValue();
+
+            // If both attributes and super class' attributes has the same concept, remove the concept from map
+            if (c.equals(concept.getAttributes().get(key))) {
+                attributeMap.remove(key);
+            }
+        }
     }
 
     public void merge(Attributes attributes) {
@@ -163,6 +174,9 @@ public class Attributes implements Repository<Concept> {
             } else if (ATTRIBUTE_ABILITIES.equals(key)) {
                 Abilities abilities = (Abilities) entry.getValue();
                 getAbilities().merge(abilities);
+            } else if (ATTRIBUTE_INHERITANCE.equals(key)) {
+                Inheritance inheritance = (Inheritance) entry.getValue();
+                getInheritance().merge(inheritance);
             } else {
                 attributeMap.put(key, entry.getValue());
             }
@@ -178,13 +192,7 @@ public class Attributes implements Repository<Concept> {
             return true;
         }
 
-        for (Concept is : isMap.values()) {
-            if (is.getAttributes().getAbilities().query(actionKey)) {
-                return true;
-            }
-        }
-
-        return false;
+        return inheritance.can(actionKey);
     }
 
     public void hasPart(Concept part, Measure measure) {
@@ -216,6 +224,8 @@ public class Attributes implements Repository<Concept> {
                 equals &= propertiesEquals(a.properties, b.properties);
             } else if (ATTRIBUTE_ABILITIES.equals(key)) {
                 equals &= abilitiesEquals(a.abilities, b.abilities);
+            } else if (ATTRIBUTE_INHERITANCE.equals(key)) {
+                equals &= inheritanceEquals(a.inheritance, b.inheritance);
             } else {
                 Concept value = entry.getValue();
                 Concept toCompare = a.get(key);
@@ -234,6 +244,13 @@ public class Attributes implements Repository<Concept> {
     }
 
     private static boolean propertiesEquals(Properties a, Properties b) {
+        if (a == null) {
+            return b == null;
+        }
+        return a.equals(b);
+    }
+
+    private static boolean inheritanceEquals(Inheritance a, Inheritance b) {
         if (a == null) {
             return b == null;
         }

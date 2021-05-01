@@ -10,6 +10,15 @@
     },
     "1" : {
       "name" : "apple",
+      "dataType" : "OBJECT",
+      "inheritance" : {
+        "food" : {
+          "id" : "2"
+        }
+      }
+    },
+    "2" : {
+      "name" : "food",
       "dataType" : "OBJECT"
     }
   }

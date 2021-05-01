@@ -8,8 +8,11 @@ public class Measure extends Concept {
     private static final String ATTRIBUTE_UNIT = "unit";
     private static final String ATTRIBUTE_VALUE = "value";
     private static final String ATTRIBUTE_ACCURACY = "accuracy";
+    private static final String ATTRIBUTE_MODIFIER = "modifier";
 
-    public static final Measure ZERO = new Measure("Zero", "0");
+    private static final String MODIFIER_NO = "no";
+
+    public static final Measure ZERO = new Measure("0", "u").modifier(MODIFIER_NO);
 
     /**
      * This constructor uses value instead of name in purpose
@@ -17,19 +20,19 @@ public class Measure extends Concept {
      */
     public Measure(String value) {
         super(ConceptType.MEASURE);
-        setValue(value);
+        value(value);
     }
 
     public Measure(String value, String unit) {
         super(ConceptType.MEASURE);
-        setValue(value);
-        setUnit(unit);
+        value(value);
+        unit(unit);
     }
 
     public Measure(String value, String unit, String name) {
         super(name, ConceptType.MEASURE);
-        setValue(value);
-        setUnit(unit);
+        value(value);
+        unit(unit);
     }
 
     public Concept getValue() {
@@ -38,7 +41,7 @@ public class Measure extends Concept {
 
     public String getValueText() {
         Concept value = attributes.get(ATTRIBUTE_VALUE);
-        if (value == null) {
+        if (value.isUnknown()) {
             return "0";
         }
         return value.getName();
@@ -52,13 +55,23 @@ public class Measure extends Concept {
         return attributes.get(ATTRIBUTE_UNIT).getName();
     }
 
-    public Measure setValue(String value) {
+    public Measure value(String value) {
         attributes.insert(ATTRIBUTE_VALUE, new Concept(value));
         return this;
     }
 
-    public Measure setUnit(String unit) {
+    public Measure unit(String unit) {
         attributes.insert(ATTRIBUTE_UNIT, new Concept(unit));
+        return this;
+    }
+
+    public Measure accuracy(String accuracy) {
+        attributes.insert(ATTRIBUTE_ACCURACY, new Concept(accuracy));
+        return this;
+    }
+
+    public Measure modifier(String modifier) {
+        attributes.insert(ATTRIBUTE_MODIFIER, new Concept(modifier));
         return this;
     }
 }
