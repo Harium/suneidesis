@@ -84,7 +84,7 @@ public class Concept extends Thing {
 	}
 
 	public boolean hasKey(String key) {
-		return !get(key).isUnknown();
+		return this.attributes.contains(key);
 	}
 
 	public Concept set(String key, Concept property) {
@@ -101,10 +101,12 @@ public class Concept extends Thing {
 		return hasQuantity(new Concept(property), measure);
 	}
 
-	// Maybe replace by negative modifier
 	public Concept hasNoQuantity(Concept property) {
-		this.attributes.hasPart(property, Measure.ZERO);
-		return this;
+		return hasQuantity(property, Measure.ZERO);
+	}
+
+	public Concept hasNoQuantity(String property) {
+		return hasNoQuantity(new Concept(property));
 	}
 
 	public Concept get(String key) {

@@ -1,6 +1,7 @@
 package com.harium.suneidesis.linguistic.repository;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.concept.word.*;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
@@ -11,6 +12,9 @@ public class WordFactory {
     public static Word buildWord(Concept concept) {
         String tag = concept.get(Word.ATTRIBUTE_TAG).getName();
         String name = concept.get(ATTRIBUTE_NAME).getName();
+        if (DataType.PRIMITIVE == concept.getDataType()) {
+           name = concept.getName();
+        }
         Word word = getWordByTag(tag, name);
 
         if (word == null) {

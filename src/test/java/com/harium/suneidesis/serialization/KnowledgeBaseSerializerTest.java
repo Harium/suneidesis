@@ -18,6 +18,8 @@ import java.io.IOException;
 
 public class KnowledgeBaseSerializerTest {
 
+    private static final boolean PRINT_RESULT = true;
+
     private KnowledgeBaseJacksonSerializer serializer;
 
     @Before
@@ -28,11 +30,24 @@ public class KnowledgeBaseSerializerTest {
     @Test
     public void testSimple() throws IOException, JSONException {
         String result = serializer.serialize(buildSimpleKnowledgeBase());
-        //System.out.println(result);
+        print(result);
 
         String expected = "{name:\"database\", \"concepts\":{"
-                + "\"0\":{\"name\":\"apple tree\",\"fruit\":\"1\"},"
+                + "\"0\":{\"name\":\"apple tree\",\"fruit\":{\"id\":\"1\"}},"
                 + "\"1\":{\"name\":\"apple\"}"
+                +"}}";
+        JSONAssert.assertEquals(expected, result, false);
+    }
+
+    @Test
+    public void testComplex() throws IOException, JSONException {
+        String result = serializer.serialize(buildComplexKnowledgeBase());
+        print(result);
+
+        String expected = "{name:\"database\", \"concepts\":{"
+                + "\"0\":{\"name\":\"apple tree\",\"fruit\":{\"id\":\"1\"}},"
+                + "\"1\":{\"name\":\"apple\",\"inheritance\":[\"2\"]},"
+                + "\"2\":{\"name\":\"food\"}"
                 +"}}";
         JSONAssert.assertEquals(expected, result, false);
     }
@@ -40,12 +55,11 @@ public class KnowledgeBaseSerializerTest {
     @Test
     public void testWordDatabase() throws IOException, JSONException {
         String result = serializer.serialize(buildWordDatabase());
-        System.out.println(result);
+        print(result);
 
         String expected = "{name:\"dictionary\", \"concepts\":{"
                 + "\"0\":{\"name\":\"cat\", \"tag\":\"" + Tag.NOUN +"\"},"
                 + "\"1\":{\"name\":\"duck\", \"tag\":\"" + Tag.NOUN +"\"},"
-                // TODO UNIFY TAGS
                 + "\"2\":{\"name\":\"go\", \"tag\":\"" + Tag.VERB + "\", \"lemma\":\"go\", \"prepositions\":\"on|through\"},"
                 + "\"3\":{\"name\":\"went\", \"tag\":\"" + Tag.VERB_CONJUGATION + "\", \"lemma\":\"go\"}"
                 +"}}";
@@ -56,6 +70,19 @@ public class KnowledgeBaseSerializerTest {
     private KnowledgeBase buildSimpleKnowledgeBase() {
         Concept appleTree = new Concept("apple tree");
         Concept apple = new Concept("apple");
+        appleTree.set("fruit", apple);
+        KnowledgeBase base = new MemoryKnowledgeBase("database");
+        base.add(appleTree);
+
+        return base;
+    }
+
+    private KnowledgeBase buildComplexKnowledgeBase() {
+        Concept appleTree = new Concept("apple tree");
+        Concept apple = new Concept("apple");
+        Concept food = new Concept("food");
+        apple.is(food);
+
         appleTree.set("fruit", apple);
         KnowledgeBase base = new MemoryKnowledgeBase("database");
         base.add(appleTree);
@@ -74,6 +101,13 @@ public class KnowledgeBaseSerializerTest {
         database.addVerbConjugation("went", go, Tag.VERB_CONJUGATION, "PAST", "");
 
         return database;
+    }
+
+    private void print(String result) {
+        if (!PRINT_RESULT) {
+            return;
+        }
+        System.out.println(result);
     }
 
 }

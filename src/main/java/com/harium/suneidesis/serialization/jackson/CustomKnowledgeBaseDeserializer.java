@@ -7,7 +7,11 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.DataType;
+import com.harium.suneidesis.concept.Primitive;
+import com.harium.suneidesis.concept.attribute.Inheritance;
+import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.KnowledgeBase;
+import com.harium.suneidesis.repository.decorator.TimeDecorator;
 import com.harium.suneidesis.serialization.KnowledgeBaseDeserializer;
 
 import java.io.IOException;
@@ -17,9 +21,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
-import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_DATA_TYPE;
-import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
+import static com.harium.suneidesis.concept.attribute.Attributes.*;
 import static com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseSerializer.ATTR_CONCEPTS;
 
 public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserializer {
@@ -31,6 +35,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         SimpleModule module = new SimpleModule();
         module.addSerializer(KnowledgeBase.class, new CustomKnowledgeBaseSerializer());
         module.addSerializer(Concept.class, new ConceptSerializer());
+        module.addSerializer(Inheritance.class, new InheritanceSerializer());
         objectMapper.registerModule(module);
     }
 
@@ -60,9 +65,18 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             Concept from = base.get(relationship.from);
             Concept target = base.get(relationship.target);
             if (target != null) {
-                from.set(relationship.relation, target);
+                if (!Relationship.INHERITANCE.equals(relationship.relation)) {
+                    from.set(relationship.relation, target);
+                } else {
+                    from.is(target);
+                }
             } else {
-                from.set(relationship.relation, new Concept(relationship.target));
+                if (!Relationship.INHERITANCE.equals(relationship.relation)) {
+                    from.set(relationship.relation, new Concept(relationship.target));
+                } else {
+                    // It should never happen (otherwise the inheritance is missing)
+                    from.is(new Concept(relationship.target));
+                }
             }
 
         }
@@ -75,7 +89,12 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         Concept concept;
 
         if (node.has(ATTRIBUTE_NAME)) {
-            concept = new Concept(node.get(ATTRIBUTE_NAME).asText());
+            if (DataType.PRIMITIVE.name().equals(node.get(ATTRIBUTE_DATA_TYPE).asText())) {
+                // Init concept as primitive
+                concept = new Primitive(node.get(ATTRIBUTE_NAME).asText());
+            } else {
+                concept = new Concept(node.get(ATTRIBUTE_NAME).asText());
+            }
         } else {
             concept = new Concept();
         }
@@ -98,30 +117,64 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
                 concept.type(ConceptType.getFromName(entry.getValue().asText()));
                 continue;
             }
-            // TODO CHANGE TO CONSTANTS
-            if ("created_at".equals(entry.getKey())) {
+
+            if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
+                List<String> inheritances = deserializeInheritanceList(entry.getValue());
+                for (String targetId: inheritances) {
+                    assignConcept(base, concept, targetId, Relationship.INHERITANCE, relationshipList);
+                }
+                continue;
+            }
+
+            if (TimeDecorator.ATTRIBUTE_CREATED_AT.equals(entry.getKey())) {
                 // Ignore for now
                 continue;
             }
 
-            // If value is a text, it's an id
-            if (entry.getValue().isTextual()) {
-               String targetId = entry.getValue().asText();
-               if (base.contains(targetId)) {
-                   Concept target = base.get(targetId);
-                   concept.set(entry.getKey(), target);
-                   continue;
-               } else {
-                   // Add the relationship between concepts to a queue
-                   Relationship relationship = new Relationship();
-                   relationship.from = concept.getIdText();
-                   relationship.target = targetId;
-                   relationship.relation = entry.getKey();
-                   relationshipList.add(relationship);
-               }
+            // If value is an object that has id, it's a concept
+            JsonNode value = entry.getValue();
+
+            if (value.isTextual()) {
+                concept.set(entry.getKey(), new Word(value.asText()));
+                continue;
+            }
+
+            if (value.isObject() && value.has(ATTRIBUTE_ID)) {
+                String key = entry.getKey();
+                String targetId = value.get(ATTRIBUTE_ID).asText();
+                assignConcept(base, concept, targetId, key, relationshipList);
             }
         }
         return concept;
+    }
+
+    private void assignConcept(KnowledgeBase base, Concept concept, String targetId, String relation, List<Relationship> relationshipList) {
+        // If concept is already loaded
+        if (base.contains(targetId)) {
+            // Assign concept
+            Concept target = base.get(targetId);
+            if (!Relationship.INHERITANCE.equals(relation)) {
+                concept.set(relation, target);
+            } else {
+                concept.is(target);
+            }
+        } else {
+            // Add the relationship between concepts to a queue
+            Relationship relationship = new Relationship();
+            relationship.from = concept.getIdText();
+            relationship.target = targetId;
+            relationship.relation = relation;
+            relationshipList.add(relationship);
+        }
+    }
+
+    private List<String> deserializeInheritanceList(JsonNode node) {
+        List<String> inheritances = new ArrayList<>();
+        for (JsonNode child : node) {
+            String targetId = child.asText();
+            inheritances.add(targetId);
+        }
+        return inheritances;
     }
 
     private void deserializeDataType(Concept concept, JsonNode value) {
@@ -130,6 +183,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
     }
 
     class Relationship {
+        private static final String INHERITANCE = "inheritance";
         String from;
         String target;
         String relation;

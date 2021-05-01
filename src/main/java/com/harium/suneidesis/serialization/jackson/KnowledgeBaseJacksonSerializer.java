@@ -3,6 +3,8 @@ package com.harium.suneidesis.serialization.jackson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.attribute.Inheritance;
+import com.harium.suneidesis.linguistic.repository.WordKnowledgeBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.serialization.KnowledgeBaseSerializer;
 
@@ -18,6 +20,7 @@ public class KnowledgeBaseJacksonSerializer implements KnowledgeBaseSerializer {
         SimpleModule module = new SimpleModule();
         module.addSerializer(KnowledgeBase.class, new CustomKnowledgeBaseSerializer());
         module.addSerializer(Concept.class, new ConceptSerializer());
+        module.addSerializer(Inheritance.class, new InheritanceSerializer());
         objectMapper.registerModule(module);
     }
 

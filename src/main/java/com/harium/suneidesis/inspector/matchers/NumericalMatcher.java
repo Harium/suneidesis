@@ -1,10 +1,10 @@
 package com.harium.suneidesis.inspector.matchers;
 
-import com.harium.suneidesis.inspector.Matcher;
+import com.harium.suneidesis.inspector.MeasureMatcher;
 
 import java.math.BigDecimal;
 
-public abstract class NumericalMatcher implements Matcher {
+public abstract class NumericalMatcher implements MeasureMatcher {
 
     protected final BigDecimal reference;
 

@@ -1,6 +1,6 @@
 package com.harium.suneidesis.inspector;
 
-public interface Matcher {
+public interface MeasureMatcher {
 
     boolean evaluate(String expression);
 

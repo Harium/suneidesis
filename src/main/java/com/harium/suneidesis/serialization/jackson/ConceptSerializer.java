@@ -7,7 +7,9 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.concept.attribute.Attributes;
+import com.harium.suneidesis.concept.attribute.Inheritance;
 import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.serialization.ConceptId;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,9 +19,7 @@ import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
 import static com.harium.suneidesis.concept.Time.ATTRIBUTE_END;
 import static com.harium.suneidesis.concept.Time.ATTRIBUTE_START;
-import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_DATA_TYPE;
-import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
-import static com.harium.suneidesis.repository.decorator.TimeDecorator.ATTRIBUTE_CREATED_AT;
+import static com.harium.suneidesis.concept.attribute.Attributes.*;
 
 public class ConceptSerializer extends StdSerializer<Concept> {
 
@@ -62,12 +62,7 @@ public class ConceptSerializer extends StdSerializer<Concept> {
         }
 
         jgen.writeStartObject();
-
-        if (DataType.PRIMITIVE.equals(concept.getDataType())) {
-            jgen.writeStringField(Attributes.ATTRIBUTE_NAME, concept.getName());
-        } else {
-            jgen.writeObjectField(Attributes.ATTRIBUTE_NAME, concept.getName());
-        }
+        jgen.writeObjectField(Attributes.ATTRIBUTE_NAME, concept.getName());
 
         jgen.writeObjectField(ATTRIBUTE_DATA_TYPE, concept.getDataType());
         serializeField(concept.getType(), ATTRIBUTE_TYPE, jgen);
@@ -80,6 +75,14 @@ public class ConceptSerializer extends StdSerializer<Concept> {
                 continue;
             }
             if (ATTRIBUTE_ID.equals(entry.getKey())) {
+                continue;
+            }
+            if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
+                Inheritance inheritance = (Inheritance) entry.getValue();
+                // Skip inheritance if empty
+                if (!inheritance.getMap().isEmpty()) {
+                    jgen.writeObjectField(entry.getKey(), entry.getValue());
+                }
                 continue;
             }
 
@@ -97,9 +100,7 @@ public class ConceptSerializer extends StdSerializer<Concept> {
                 continue;
             }
 
-
-            // Serialize id to avoid circular dependencies
-            jgen.writeStringField(entry.getKey(), entry.getValue().getIdText());
+            serializeConceptId(jgen, entry.getKey(), entry.getValue());
         }
         jgen.writeEndObject();
     }
@@ -122,4 +123,11 @@ public class ConceptSerializer extends StdSerializer<Concept> {
             jgen.writeObjectField(field, concept.getName());
         }
     }
+
+    // Serialize concept as id to avoid circular dependencies
+    public static void serializeConceptId(JsonGenerator jgen, String key, Concept concept) throws IOException {
+        //jgen.writeStringField(entry.getKey(), entry.getValue().getIdText());
+        jgen.writeObjectField(key, new ConceptId(concept.getIdText()));
+    }
+
 }

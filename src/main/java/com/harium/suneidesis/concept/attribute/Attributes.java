@@ -3,7 +3,6 @@ package com.harium.suneidesis.concept.attribute;
 import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.numeral.Measure;
 import com.harium.suneidesis.concept.primitive.Text;
-import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
 
 import java.util.Collection;
@@ -15,6 +14,7 @@ public class Attributes implements Repository<Concept> {
 
     public static final String ATTRIBUTE_ABILITIES = "abilities";
     public static final String ATTRIBUTE_PROPERTIES = "props";
+    public static final String ATTRIBUTE_INHERITANCE = "inheritance";
     public static final String ATTRIBUTE_LOCATION = "location";
     public static final String ATTRIBUTE_NAME = "name";
     public static final String ATTRIBUTE_DATA_TYPE = "dataType";
@@ -24,20 +24,30 @@ public class Attributes implements Repository<Concept> {
     private DataType dataType = DataType.OBJECT;
     private String value;
 
+    // What the concept can do
     private Abilities abilities;
+    // What the concept has
     private Properties properties;
+    // Primitive concepts that this concept borrows from
+    private Inheritance inheritance;
+    // How the concept is defined
     private final Map<String, Concept> attributeMap = new HashMap<>();
 
     public Concept get(String key) {
         Concept concept = attributeMap.get(key);
-        if (concept == null) {
-            return Concept.UNKNOWN;
+        if (concept != null) {
+            return concept;
         }
-        return concept;
+
+        return getInheritance().getKey(key);
     }
 
     public boolean contains(String key) {
-        return attributeMap.containsKey(key);
+        return !get(key).isUnknown();
+    }
+
+    public boolean queryIs(String key) {
+        return getInheritance().queryIs(key);
     }
 
     @Override
@@ -72,6 +82,14 @@ public class Attributes implements Repository<Concept> {
             attributeMap.put(ATTRIBUTE_PROPERTIES, properties);
         }
         return properties;
+    }
+
+    public Inheritance getInheritance() {
+        if (inheritance == null) {
+            inheritance = new Inheritance();
+            attributeMap.put(ATTRIBUTE_INHERITANCE, inheritance);
+        }
+        return inheritance;
     }
 
     /**
@@ -122,12 +140,26 @@ public class Attributes implements Repository<Concept> {
         return new Text(name);
     }
 
+    // Assign a super class
     public void is(Concept concept) {
-        merge(concept.getAttributes());
+        getInheritance().add(concept);
+
+        // TODO Optimize super classes (if a super class has the same inheritance, it can be removed)
+
+        // For each attribute
+        for (Map.Entry<String, Concept> entry : attributeMap.entrySet()) {
+            String key = entry.getKey();
+            Concept c = entry.getValue();
+
+            // If both attributes and super class' attributes has the same concept, remove the concept from map
+            if (c.equals(concept.getAttributes().get(key))) {
+                attributeMap.remove(key);
+            }
+        }
     }
 
     public void merge(Attributes attributes) {
-        for (Map.Entry<String, Concept> entry: attributes.attributeMap.entrySet()) {
+        for (Map.Entry<String, Concept> entry : attributes.attributeMap.entrySet()) {
             String key = entry.getKey();
             if (ATTRIBUTE_NAME.equals(key)) {
                 continue;
@@ -138,6 +170,9 @@ public class Attributes implements Repository<Concept> {
             } else if (ATTRIBUTE_ABILITIES.equals(key)) {
                 Abilities abilities = (Abilities) entry.getValue();
                 getAbilities().merge(abilities);
+            } else if (ATTRIBUTE_INHERITANCE.equals(key)) {
+                Inheritance inheritance = (Inheritance) entry.getValue();
+                getInheritance().merge(inheritance);
             } else {
                 attributeMap.put(key, entry.getValue());
             }
@@ -146,6 +181,14 @@ public class Attributes implements Repository<Concept> {
 
     public void can(Action concept) {
         getAbilities().add(concept);
+    }
+
+    public boolean can(String actionKey) {
+        if (getAbilities().query(actionKey)) {
+            return true;
+        }
+
+        return inheritance.can(actionKey);
     }
 
     public void hasPart(Concept part, Measure measure) {
@@ -177,6 +220,8 @@ public class Attributes implements Repository<Concept> {
                 equals &= propertiesEquals(a.properties, b.properties);
             } else if (ATTRIBUTE_ABILITIES.equals(key)) {
                 equals &= abilitiesEquals(a.abilities, b.abilities);
+            } else if (ATTRIBUTE_INHERITANCE.equals(key)) {
+                equals &= inheritanceEquals(a.inheritance, b.inheritance);
             } else {
                 Concept value = entry.getValue();
                 Concept toCompare = a.get(key);
@@ -195,6 +240,13 @@ public class Attributes implements Repository<Concept> {
     }
 
     private static boolean propertiesEquals(Properties a, Properties b) {
+        if (a == null) {
+            return b == null;
+        }
+        return a.equals(b);
+    }
+
+    private static boolean inheritanceEquals(Inheritance a, Inheritance b) {
         if (a == null) {
             return b == null;
         }

@@ -19,6 +19,13 @@ public class Inspector {
     }
 
     public boolean is(Concept concept) {
+        // Contains the concept as a superclass
+        String conceptName = concept.getName();
+        if (this.concept.getAttributes().queryIs(conceptName)) {
+            return true;
+        }
+
+        // Compare attributes
         return this.concept.getAttributes().equals(concept.getAttributes());
     }
 
@@ -26,8 +33,8 @@ public class Inspector {
         return concept.getAttributes().getAbilities().query(action);
     }
 
-    public boolean can(String action) {
-        return concept.getAttributes().getAbilities().query(action);
+    public boolean can(String actionKey) {
+        return concept.getAttributes().can(actionKey);
     }
 
     public boolean has(String key, Concept concept) {
@@ -35,7 +42,11 @@ public class Inspector {
         return toCompare.getAttributes().equals(concept.getAttributes());
     }
 
-    public boolean hasPart(String key, Matcher matcher) {
+    public boolean has(String key) {
+        return this.concept.hasKey(key);
+    }
+
+    public boolean hasPart(String key, MeasureMatcher matcher) {
         Concept toEval = this.concept.getAttributes().getProperty(key);
         if (!ConceptType.MEASURE.equals(toEval.getType())) {
             return false;
