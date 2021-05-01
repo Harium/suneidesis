@@ -62,19 +62,7 @@ public class ConceptSerializer extends StdSerializer<Concept> {
         }
 
         jgen.writeStartObject();
-
-        if (DataType.PRIMITIVE.equals(concept.getDataType())) {
-            String name;
-            if (ConceptType.WORD.getName().equals(concept.getType().getName())) {
-                // Without this workaround the serialization doesn't fill the names
-                name = concept.get(ATTRIBUTE_NAME).getName();
-            } else {
-                name = concept.getName();
-            }
-            jgen.writeStringField(Attributes.ATTRIBUTE_NAME, name);
-        } else {
-            jgen.writeObjectField(Attributes.ATTRIBUTE_NAME, concept.getName());
-        }
+        jgen.writeObjectField(Attributes.ATTRIBUTE_NAME, concept.getName());
 
         jgen.writeObjectField(ATTRIBUTE_DATA_TYPE, concept.getDataType());
         serializeField(concept.getType(), ATTRIBUTE_TYPE, jgen);

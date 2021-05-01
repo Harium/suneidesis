@@ -28,12 +28,10 @@ public class Attributes implements Repository<Concept> {
     private Abilities abilities;
     // What the concept has
     private Properties properties;
-    // How the concept is defined
-    private final Map<String, Concept> attributeMap = new HashMap<>();
     // Primitive concepts that this concept borrows from
     private Inheritance inheritance;
-
-    //private final Map<String, Concept> isMap = new HashMap<>();
+    // How the concept is defined
+    private final Map<String, Concept> attributeMap = new HashMap<>();
 
     public Concept get(String key) {
         Concept concept = attributeMap.get(key);
@@ -129,13 +127,9 @@ public class Attributes implements Repository<Concept> {
         if (DataType.PRIMITIVE.equals(getDataType())) {
             this.value = value;
         } else {
-            setNameText(value);
+            Text nameWord = getOrCreateWord(value);
+            setNameConcept(nameWord);
         }
-    }
-
-    public void setNameText(String text) {
-        Text nameWord = getOrCreateWord(text);
-        setNameConcept(nameWord);
     }
 
     public void setNameConcept(Concept name) {
@@ -149,6 +143,8 @@ public class Attributes implements Repository<Concept> {
     // Assign a super class
     public void is(Concept concept) {
         getInheritance().add(concept);
+
+        // TODO Optimize super classes (if a super class has the same inheritance, it can be removed)
 
         // For each attribute
         for (Map.Entry<String, Concept> entry : attributeMap.entrySet()) {

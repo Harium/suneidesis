@@ -112,7 +112,6 @@ public abstract class KnowledgeBase implements Repository<Concept> {
                 if (ATTRIBUTE_ID.equals(entry.getKey())) {
                     continue;
                 }
-                // TODO Handle Inheritance
                 if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
                     Inheritance inheritance = (Inheritance) entry.getValue();
                     addAll(inheritance.getMap().values());

@@ -67,6 +67,7 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
     }
 
     public String addWord(String word, String tag) {
+        // TODO Check if word is in database before (re)insert it.
         Word w = new Word(word, tag);
         add(w);
 
@@ -161,7 +162,4 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
         return verb;
     }
 
-    public MemoryKnowledgeBase getDelegate() {
-        return delegate;
-    }
 }

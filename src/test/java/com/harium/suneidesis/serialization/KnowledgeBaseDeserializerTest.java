@@ -76,7 +76,6 @@ public class KnowledgeBaseDeserializerTest {
         assertTrue(Inspector.does(apple).is(food));
 
         String serialized = new KnowledgeBaseJacksonSerializer().serialize(database);
-        System.out.println(serialized);
         JSONAssert.assertEquals(json, serialized, false);
     }
 

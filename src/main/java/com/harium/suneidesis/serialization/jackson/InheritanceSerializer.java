@@ -21,11 +21,11 @@ public class InheritanceSerializer extends StdSerializer<Inheritance> {
 
     @Override
     public void serialize(Inheritance inheritance, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
-        jgen.writeStartObject();
+        jgen.writeStartArray();
         for (Map.Entry<String, Concept> entry : inheritance.getMap().entrySet()) {
-            ConceptSerializer.serializeConceptId(jgen, entry.getKey(), entry.getValue());
+            jgen.writeString(entry.getValue().getIdText());
         }
-        jgen.writeEndObject();
+        jgen.writeEndArray();
     }
 
 }

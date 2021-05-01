@@ -36,5 +36,4 @@ public class Thing {
 	public int hashCode() {
 		return Objects.hash(attributes);
 	}
-
 }

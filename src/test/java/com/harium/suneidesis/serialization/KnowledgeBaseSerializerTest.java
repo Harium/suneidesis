@@ -46,7 +46,8 @@ public class KnowledgeBaseSerializerTest {
 
         String expected = "{name:\"database\", \"concepts\":{"
                 + "\"0\":{\"name\":\"apple tree\",\"fruit\":{\"id\":\"1\"}},"
-                + "\"1\":{\"name\":\"apple\",\"inheritance\":{\"food\":{\"id\":\"2\"}}}"
+                + "\"1\":{\"name\":\"apple\",\"inheritance\":[\"2\"]},"
+                + "\"2\":{\"name\":\"food\"}"
                 +"}}";
         JSONAssert.assertEquals(expected, result, false);
     }
@@ -59,7 +60,6 @@ public class KnowledgeBaseSerializerTest {
         String expected = "{name:\"dictionary\", \"concepts\":{"
                 + "\"0\":{\"name\":\"cat\", \"tag\":\"" + Tag.NOUN +"\"},"
                 + "\"1\":{\"name\":\"duck\", \"tag\":\"" + Tag.NOUN +"\"},"
-                // TODO UNIFY TAGS
                 + "\"2\":{\"name\":\"go\", \"tag\":\"" + Tag.VERB + "\", \"lemma\":\"go\", \"prepositions\":\"on|through\"},"
                 + "\"3\":{\"name\":\"went\", \"tag\":\"" + Tag.VERB_CONJUGATION + "\", \"lemma\":\"go\"}"
                 +"}}";

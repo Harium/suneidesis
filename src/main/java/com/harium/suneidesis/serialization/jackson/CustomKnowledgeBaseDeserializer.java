@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.DataType;
+import com.harium.suneidesis.concept.Primitive;
 import com.harium.suneidesis.concept.attribute.Inheritance;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.KnowledgeBase;
@@ -88,7 +89,12 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         Concept concept;
 
         if (node.has(ATTRIBUTE_NAME)) {
-            concept = new Concept(node.get(ATTRIBUTE_NAME).asText());
+            if (DataType.PRIMITIVE.name().equals(node.get(ATTRIBUTE_DATA_TYPE).asText())) {
+                // Init concept as primitive
+                concept = new Primitive(node.get(ATTRIBUTE_NAME).asText());
+            } else {
+                concept = new Concept(node.get(ATTRIBUTE_NAME).asText());
+            }
         } else {
             concept = new Concept();
         }
@@ -113,8 +119,6 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             }
 
             if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
-                // Deserialize correctly
-                // TODO YOU CAN USE RELATION HERE
                 List<String> inheritances = deserializeInheritanceList(entry.getValue());
                 for (String targetId: inheritances) {
                     assignConcept(base, concept, targetId, Relationship.INHERITANCE, relationshipList);
@@ -167,7 +171,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
     private List<String> deserializeInheritanceList(JsonNode node) {
         List<String> inheritances = new ArrayList<>();
         for (JsonNode child : node) {
-            String targetId = child.get(ATTRIBUTE_ID).asText();
+            String targetId = child.asText();
             inheritances.add(targetId);
         }
         return inheritances;
