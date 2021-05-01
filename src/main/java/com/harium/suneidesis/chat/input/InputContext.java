@@ -16,8 +16,19 @@ public class InputContext {
 
     public static final String LANGUAGE = "lang";
 
+    // The original sentence from the input
+    public static final String ORIGINAL_SENTENCE = "sentence";
+
+    // Output/Parser would try to answer as a robot
+    public static final String HINT_ROBOT_MODE = "robot";
+
+    // Output/Parser would try to treat all input as secret
+    public static final String HINT_SECRET_MODE = "secret";
+
+    // Output/Parser would try to answer based on the prosody param
+    public static final String HINT_PROSODY = "prosody";
+
     private String sentence;
-    private String originalSentence;
     private Parser currentParser;
 
     private Map<String, Object> properties = new HashMap<>();
@@ -29,7 +40,7 @@ public class InputContext {
     public InputContext(String sentence) {
         super();
         this.sentence = sentence;
-        this.originalSentence = sentence;
+        setOriginalSentence(sentence);
     }
 
     public String getSentence() {
@@ -38,14 +49,6 @@ public class InputContext {
 
     public void setSentence(String sentence) {
         this.sentence = sentence;
-    }
-
-    public String getOriginalSentence() {
-        return originalSentence;
-    }
-
-    public void setOriginalSentence(String originalSentence) {
-        this.originalSentence = originalSentence;
     }
 
     public Parser getCurrentParser() {
@@ -64,4 +67,29 @@ public class InputContext {
         this.properties = properties;
     }
 
+    public String getOriginalSentence() {
+        return (String) properties.getOrDefault(ORIGINAL_SENTENCE, "");
+    }
+
+    public void setOriginalSentence(String sentence) {
+        properties.put(ORIGINAL_SENTENCE, sentence);
+    }
+
+    // If not assigned, robot mode returns true
+    public boolean isRobotMode() {
+        return (boolean) properties.getOrDefault(HINT_ROBOT_MODE, true);
+    }
+
+    public void setRobotMode(boolean robotMode) {
+        properties.put(HINT_ROBOT_MODE, robotMode);
+    }
+
+    // If not assigned, secret mode returns false
+    public boolean isSecretMode() {
+        return (boolean) properties.getOrDefault(HINT_SECRET_MODE, false);
+    }
+
+    public void setSecretMode(boolean robotMode) {
+        properties.put(HINT_SECRET_MODE, robotMode);
+    }
 }
