@@ -1,7 +1,7 @@
 package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.generator.IdGenerator;
+import com.harium.suneidesis.repository.generator.IdGenerator;
 
 import java.util.HashMap;
 import java.util.Map;

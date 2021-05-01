@@ -3,9 +3,9 @@ package com.harium.suneidesis.repository;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.concept.attribute.Inheritance;
-import com.harium.suneidesis.generator.BaseIdGenerator;
-import com.harium.suneidesis.generator.BaseTimeGenerator;
-import com.harium.suneidesis.generator.IdGenerator;
+import com.harium.suneidesis.repository.generator.BaseIdGenerator;
+import com.harium.suneidesis.repository.generator.BaseTimeGenerator;
+import com.harium.suneidesis.repository.generator.IdGenerator;
 import com.harium.suneidesis.repository.decorator.EntryDecorator;
 import com.harium.suneidesis.repository.decorator.TimeDecorator;
 import com.harium.suneidesis.repository.listener.RepositoryListener;
@@ -18,6 +18,9 @@ import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
 import static com.harium.suneidesis.repository.decorator.TimeDecorator.ATTRIBUTE_CREATED_AT;
 
 public abstract class KnowledgeBase implements Repository<Concept> {
+
+    // Reserved word for introspection
+    public static final String SELF = "self";
 
     private String name;
 

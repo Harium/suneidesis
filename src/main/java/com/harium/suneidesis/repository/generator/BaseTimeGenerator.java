@@ -1,4 +1,4 @@
-package com.harium.suneidesis.generator;
+package com.harium.suneidesis.repository.generator;
 
 public class BaseTimeGenerator implements TimeGenerator {
 

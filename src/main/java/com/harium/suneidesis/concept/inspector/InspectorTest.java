@@ -1,4 +1,4 @@
-package com.harium.suneidesis.inspector;
+package com.harium.suneidesis.concept.inspector;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
@@ -6,7 +6,7 @@ import com.harium.suneidesis.concept.beign.Taxonomy;
 import com.harium.suneidesis.concept.word.WordNoun;
 import org.junit.Test;
 
-import static com.harium.suneidesis.inspector.Inspector.does;
+import static com.harium.suneidesis.concept.inspector.Inspector.does;
 import static org.junit.Assert.*;
 
 public class InspectorTest {

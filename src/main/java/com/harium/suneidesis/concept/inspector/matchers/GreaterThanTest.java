@@ -1,4 +1,4 @@
-package com.harium.suneidesis.inspector.matchers;
+package com.harium.suneidesis.concept.inspector.matchers;
 
 import org.junit.Test;
 

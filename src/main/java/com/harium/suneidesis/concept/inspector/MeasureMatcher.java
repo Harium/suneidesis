@@ -1,4 +1,4 @@
-package com.harium.suneidesis.inspector;
+package com.harium.suneidesis.concept.inspector;
 
 public interface MeasureMatcher {
 

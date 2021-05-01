@@ -42,7 +42,7 @@ public class ConsciousnessSimulationTest {
         myself.is(robot);
         Concept autoKnowledge = new Concept();
         Provenance.setSubject(autoKnowledge, myself);
-        consciousness.insert("myself", autoKnowledge);
+        consciousness.insert(KnowledgeBase.SELF, autoKnowledge);
 
         Concept internet = new Concept("Internet");
         Concept data = new Concept("data");

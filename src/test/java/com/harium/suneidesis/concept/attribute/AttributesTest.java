@@ -1,14 +1,14 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
-import com.harium.suneidesis.inspector.Inspector;
-import com.harium.suneidesis.inspector.matchers.Equals;
-import com.harium.suneidesis.inspector.matchers.GreaterThan;
-import com.harium.suneidesis.inspector.matchers.LowerThan;
+import com.harium.suneidesis.concept.inspector.Inspector;
+import com.harium.suneidesis.concept.inspector.matchers.Equals;
+import com.harium.suneidesis.concept.inspector.matchers.GreaterThan;
+import com.harium.suneidesis.concept.inspector.matchers.LowerThan;
 import com.harium.suneidesis.concept.numeral.Measure;
 import org.junit.Test;
 
-import static com.harium.suneidesis.inspector.Inspector.does;
+import static com.harium.suneidesis.concept.inspector.Inspector.does;
 import static org.junit.Assert.*;
 
 public class AttributesTest {
