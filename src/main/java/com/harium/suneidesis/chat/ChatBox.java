@@ -1,13 +1,14 @@
-package com.harium.suneidesis.chat.box;
+package com.harium.suneidesis.chat;
 
-import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.output.Output;
 
 public interface ChatBox {
 
     void init();
 
-    void addParser(Parser instance);
+    void addParser(Parser parser);
+
+    void addInterceptor(Interceptor interceptor);
 
     void sendMessage(String channel, String message);
 

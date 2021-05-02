@@ -2,7 +2,7 @@ package com.harium.suneidesis.chat.input;
 
 import com.harium.suneidesis.chat.Interceptor;
 import com.harium.suneidesis.chat.Parser;
-import com.harium.suneidesis.chat.box.ChatBox;
+import com.harium.suneidesis.chat.ChatBox;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.chat.output.TextOutput;
 
@@ -55,7 +55,8 @@ public class Terminal implements ChatBox {
     protected void enhanceInputContext(InputContext context) {
         // Custom Properties
         context.getProperties().put(InputContext.USER_USERNAME, getUsername());
-        context.getProperties().put(InputContext.USER_ID, "");
+        // Fill with the same data until we find a better way to get user's id
+        context.getProperties().put(InputContext.USER_ID, getUsername());
         context.getProperties().put(InputContext.USER_NAME, "");
         context.getProperties().put(InputContext.CHANNEL_ID, "");
         context.getProperties().put(InputContext.CHANNEL_NAME, "");
@@ -79,8 +80,13 @@ public class Terminal implements ChatBox {
     }
 
     @Override
-    public void addParser(Parser box) {
-        parsers.add(box);
+    public void addParser(Parser parser) {
+        parsers.add(parser);
+    }
+
+    @Override
+    public void addInterceptor(Interceptor interceptor) {
+        interceptors.add(interceptor);
     }
 
     @Override
