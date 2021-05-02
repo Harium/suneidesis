@@ -35,7 +35,11 @@ public class MemoryKnowledgeBase extends KnowledgeBase {
 
     @Override
     public Concept get(String key) {
-        return data.get(key);
+        Concept concept = data.get(key);
+        if (concept != null) {
+            return concept;
+        }
+        return Concept.UNKNOWN;
     }
 
     @Override
