@@ -22,7 +22,7 @@ public class TerminalTest {
         terminal.enhanceInputContext(context);
 
         Map<String, Object> properties = context.getProperties();
-        assertEquals("", properties.get(InputContext.USER_ID));
+        assertEquals(terminal.getUsername(), properties.get(InputContext.USER_ID));
         assertEquals("", properties.get(InputContext.USER_NAME));
         assertEquals(terminal.getUsername(), properties.get(InputContext.USER_USERNAME));
         assertEquals("", properties.get(InputContext.CHANNEL_ID));
