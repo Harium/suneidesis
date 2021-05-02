@@ -1,7 +1,7 @@
 package examples;
 
 import com.harium.suneidesis.chat.Parser;
-import com.harium.suneidesis.chat.box.BaseChatBox;
+import com.harium.suneidesis.chat.box.BaseParser;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.input.Terminal;
 import com.harium.suneidesis.chat.output.Output;
@@ -9,7 +9,7 @@ import com.harium.suneidesis.chat.output.Output;
 public class TerminalExample {
 
     public static void main(String[] args) {
-        BaseChatBox box = new BaseChatBox();
+        BaseParser box = new BaseParser();
         box.addParser(new Parser() {
             @Override
             public boolean parse(InputContext context, Output output) {
@@ -21,6 +21,7 @@ public class TerminalExample {
 
         Terminal terminal = new Terminal();
         terminal.addParser(box);
+        terminal.init();
     }
 
 }

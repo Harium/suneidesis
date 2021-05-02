@@ -9,13 +9,13 @@ import com.harium.suneidesis.chat.output.Output;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseChatBox implements Parser {
+public class BaseParser implements Parser {
 
     protected Parser currentParser = null;
     protected List<Parser> parsers = new ArrayList<>();
     protected List<Interceptor> interceptors = new ArrayList<>();
 
-    public BaseChatBox() {
+    public BaseParser() {
         // Removes Question Mark
         interceptors.add(new QuestionMarkRemoverInterceptor());
     }

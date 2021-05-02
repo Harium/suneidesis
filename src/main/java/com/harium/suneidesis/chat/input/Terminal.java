@@ -2,27 +2,26 @@ package com.harium.suneidesis.chat.input;
 
 import com.harium.suneidesis.chat.Interceptor;
 import com.harium.suneidesis.chat.Parser;
-import com.harium.suneidesis.chat.box.BoxHandler;
+import com.harium.suneidesis.chat.box.ChatBox;
+import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.chat.output.TextOutput;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
-public class Terminal implements BoxHandler {
+public class Terminal implements ChatBox {
 
-    private TextOutput output = new TextOutput();
+    private Output output = new TextOutput();
 
     private List<Parser> parsers = new ArrayList<>();
     private List<Interceptor> interceptors = new ArrayList<>();
 
     public Terminal() {
         super();
-        initInput();
     }
 
-    private void initInput() {
+    public void init() {
         Scanner sc = new Scanner(System.in);
         new Thread(new Runnable() {
             @Override
@@ -89,11 +88,14 @@ public class Terminal implements BoxHandler {
         output.print(message);
     }
 
-    public TextOutput getOutput() {
+    @Override
+    public void setOutput(Output output) {
+        this.output = output;
+    }
+
+    @Override
+    public Output getOutput() {
         return output;
     }
 
-    public void setOutput(TextOutput output) {
-        this.output = output;
-    }
 }
