@@ -22,6 +22,9 @@ public class InputContext {
     // Output/Parser would try to answer as a robot
     public static final String HINT_ROBOT_MODE = "robot";
 
+    // Output/Parser would try to not answer when possible
+    public static final String HINT_SILENT_MODE = "silent";
+
     // Output/Parser would try to treat all input as secret
     public static final String HINT_SECRET_MODE = "secret";
 
