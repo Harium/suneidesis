@@ -19,7 +19,6 @@ public class Provenance {
     public static final String ATTRIBUTE_PLACE = "place";
     public static final String ATTRIBUTE_TIME = "time";
     public static final String ATTRIBUTE_PHENOMENON = "phenomenon";
-    public static final String ATTRIBUTE_THEN = "then";
 
     private final Concept concept;
 
@@ -142,19 +141,6 @@ public class Provenance {
 
     public static void setPhenomenon(Concept concept, Concept phenomenon) {
         concept.attributes.insert(ATTRIBUTE_PHENOMENON, phenomenon);
-    }
-
-    public Provenance then(Concept fact) {
-        concept.attributes.insert(ATTRIBUTE_THEN, fact);
-        return this;
-    }
-
-    public static void setThen(Concept concept, Concept then) {
-        concept.attributes.insert(ATTRIBUTE_THEN, then);
-    }
-
-    public Concept getNext() {
-        return concept.attributes.get(ATTRIBUTE_THEN);
     }
 
     public Concept getAcquisitionMethod() {

@@ -20,6 +20,7 @@ public class ConceptType {
     public static final Concept SIMULATION = new Concept("SIMULATION");
     public static final Concept SOUND = new Concept("SOUND");
     public static final Concept SUBSTANCE = new Concept("SUBSTANCE");
+    public static final Concept STORY = new Concept("STORY");
     public static final Concept THEORY = new Concept("THEORY");
     public static final Concept WORD = new Concept("WORD");
 
@@ -56,6 +57,8 @@ public class ConceptType {
             return SOUND;
         } else if (SUBSTANCE.getName().equals(name)) {
             return SUBSTANCE;
+        } else if (STORY.getName().equals(name)) {
+            return STORY;
         } else if (THEORY.getName().equals(name)) {
             return THEORY;
         } else if (WORD.getName().equals(name)) {
