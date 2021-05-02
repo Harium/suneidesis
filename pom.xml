@@ -75,14 +75,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
                     <optimize>true</optimize>
                     <compilerArgument>-parameters</compilerArgument>
                     <excludes>
-                        <exclude>**/examples/*</exclude>
+                        <exclude>**/examples/**/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
