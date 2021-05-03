@@ -2,20 +2,15 @@ package com.harium.suneidesis.chat.input;
 
 import com.harium.suneidesis.chat.Interceptor;
 import com.harium.suneidesis.chat.Parser;
-import com.harium.suneidesis.chat.ChatBox;
+import com.harium.suneidesis.chat.box.BaseChatBox;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.chat.output.TextOutput;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class Terminal implements ChatBox {
+public class Terminal extends BaseChatBox {
 
     private Output output = new TextOutput();
-
-    private List<Parser> parsers = new ArrayList<>();
-    private List<Interceptor> interceptors = new ArrayList<>();
 
     public Terminal() {
         super();
@@ -42,14 +37,7 @@ public class Terminal implements ChatBox {
         context.setSentence(sentence);
         enhanceInputContext(context);
 
-        for (Interceptor interceptor : interceptors) {
-            interceptor.intercept(context, output);
-        }
-        for (Parser parser : parsers) {
-            if (parser.parse(context, output)) {
-                break;
-            }
-        }
+        parseInput(context, output);
     }
 
     protected void enhanceInputContext(InputContext context) {

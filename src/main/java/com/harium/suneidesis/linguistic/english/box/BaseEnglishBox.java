@@ -1,10 +1,10 @@
 package com.harium.suneidesis.linguistic.english.box;
 
-import com.harium.suneidesis.chat.box.BaseParser;
+import com.harium.suneidesis.chat.box.BaseChatBox;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 
-public class BaseEnglishBox extends BaseParser {
+public abstract class BaseEnglishBox extends BaseChatBox {
 
     public static final String I_DON_T_KNOW = "I don't know.";
 
@@ -25,11 +25,6 @@ public class BaseEnglishBox extends BaseParser {
 
         // To be
         //parsers.add(new SimpleAdjectiveParser());
-    }
-
-    @Override
-    public boolean parse(InputContext input, Output output) {
-        return super.parse(input, output);
     }
 
     public static boolean checkAction(String action, String... verbs) {

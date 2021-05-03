@@ -7,7 +7,7 @@ import com.harium.suneidesis.chat.output.Output;
 public class QuestionMarkRemoverInterceptor implements Interceptor {
 
     @Override
-    public void intercept(InputContext input, Output output) {
+    public void preParsing(InputContext input, Output output) {
         // Remove Question Mark
         String clean = clearSentence(input.getSentence());
         input.setSentence(clean);
@@ -15,9 +15,14 @@ public class QuestionMarkRemoverInterceptor implements Interceptor {
 
     private String clearSentence(String sentence) {
         if (sentence == null) {
-            return sentence;
+            return null;
         }
         return sentence.replaceAll("\\?", "").trim();
+    }
+
+    @Override
+    public void postParsing(InputContext input, Output output) {
+
     }
 
 }

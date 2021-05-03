@@ -5,6 +5,8 @@ import com.harium.suneidesis.chat.output.Output;
 
 public interface Interceptor {
 
-    void intercept(InputContext input, Output output);
+    void preParsing(InputContext input, Output output);
+
+    void postParsing(InputContext input, Output output);
 
 }
