@@ -21,4 +21,12 @@ public class Primitive extends Concept {
     public String getName() {
         return value;
     }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }
