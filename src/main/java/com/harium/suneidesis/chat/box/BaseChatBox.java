@@ -19,20 +19,20 @@ public abstract class BaseChatBox implements ChatBox {
             interceptor.preParsing(input, output);
         }
 
-        runParsers(input, output);
+        Parser parser = runParsers(input, output);
 
         for (Interceptor interceptor : interceptors) {
-            interceptor.postParsing(input, output);
+            interceptor.postParsing(input, output, parser);
         }
     }
 
-    private boolean runParsers(InputContext context, Output output) {
+    private Parser runParsers(InputContext context, Output output) {
         for (Parser parser : parsers) {
             if (parser.parse(context, output)) {
-                return true;
+                return parser;
             }
         }
-        return false;
+        return null;
     }
 
     public void addInterceptor(Interceptor interceptor) {

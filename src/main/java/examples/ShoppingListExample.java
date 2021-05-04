@@ -1,4 +1,4 @@
-package examples.shopping;
+package examples;
 
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.input.InputContext;

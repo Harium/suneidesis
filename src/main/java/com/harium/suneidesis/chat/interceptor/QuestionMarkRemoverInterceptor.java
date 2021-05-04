@@ -1,6 +1,7 @@
 package com.harium.suneidesis.chat.interceptor;
 
 import com.harium.suneidesis.chat.Interceptor;
+import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 
@@ -21,7 +22,7 @@ public class QuestionMarkRemoverInterceptor implements Interceptor {
     }
 
     @Override
-    public void postParsing(InputContext input, Output output) {
+    public void postParsing(InputContext input, Output output, Parser parser) {
 
     }
 

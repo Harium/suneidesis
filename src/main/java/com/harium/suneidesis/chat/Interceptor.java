@@ -7,6 +7,6 @@ public interface Interceptor {
 
     void preParsing(InputContext input, Output output);
 
-    void postParsing(InputContext input, Output output);
+    void postParsing(InputContext input, Output output, Parser parser);
 
 }
