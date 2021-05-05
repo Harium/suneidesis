@@ -14,6 +14,7 @@ public class InputContext {
     public static final String CHANNEL_ID = "channel_id";
     public static final String CHANNEL_NAME = "channel_name";
 
+    private static final String DEFAULT_LANGUAGE = "en";
     public static final String LANGUAGE = "lang";
 
     // The original sentence from the input
@@ -74,6 +75,14 @@ public class InputContext {
 
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
+    }
+
+    /**
+     * Helper method to get the current language
+     * @return the language code in ISO 639-1
+     */
+    public String getLanguage() {
+        return (String) properties.getOrDefault(LANGUAGE, DEFAULT_LANGUAGE);
     }
 
     public String getOriginalSentence() {
