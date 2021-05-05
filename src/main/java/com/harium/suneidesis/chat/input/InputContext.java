@@ -28,6 +28,12 @@ public class InputContext {
     // Output/Parser would try to treat all input as secret
     public static final String HINT_SECRET_MODE = "secret";
 
+    // ChatBox would try to prioritize the Parser when possible
+    public static final String HINT_REQUEST_LOCK = "lock";
+
+    // ChatBox would try to prioritize the Parser when possible
+    public static final String HINT_RELEASE_LOCK = "unlock";
+
     // Output/Parser would try to answer based on the prosody param
     public static final String HINT_PROSODY = "prosody";
 
@@ -87,12 +93,35 @@ public class InputContext {
         properties.put(HINT_ROBOT_MODE, robotMode);
     }
 
-    // If not assigned, secret mode returns false
     public boolean isSecretMode() {
         return (boolean) properties.getOrDefault(HINT_SECRET_MODE, false);
     }
 
     public void setSecretMode(boolean robotMode) {
         properties.put(HINT_SECRET_MODE, robotMode);
+    }
+
+    public boolean isSilentMode() {
+        return (boolean) properties.getOrDefault(HINT_SILENT_MODE, false);
+    }
+
+    public void setSilentMode(boolean robotMode) {
+        properties.put(HINT_SILENT_MODE, robotMode);
+    }
+
+    public boolean isRequestLock() {
+        return (boolean) properties.getOrDefault(HINT_REQUEST_LOCK, false);
+    }
+
+    public void setRequestLock(boolean robotMode) {
+        properties.put(HINT_REQUEST_LOCK, robotMode);
+    }
+
+    public boolean isReleaseLock() {
+        return (boolean) properties.getOrDefault(HINT_RELEASE_LOCK, false);
+    }
+
+    public void setReleaseLock(boolean robotMode) {
+        properties.put(HINT_RELEASE_LOCK, robotMode);
     }
 }
