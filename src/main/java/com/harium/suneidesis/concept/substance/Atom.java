@@ -1,7 +1,7 @@
 package com.harium.suneidesis.concept.substance;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.numeral.Measure;
+import com.harium.suneidesis.concept.Measurement;
 
 public class Atom extends Substance {
 
@@ -41,7 +41,7 @@ public class Atom extends Substance {
 
 	public void setAtomicNumber(int atomicNumber) {
 		String text = Integer.toString(atomicNumber);
-		this.attributes.insert(ATTRIBUTE_ATOMIC_NUMBER, new Measure(text));
+		this.attributes.insert(ATTRIBUTE_ATOMIC_NUMBER, new Measurement(text));
 	}
 
 	public Concept getMassNumber() {
@@ -54,7 +54,7 @@ public class Atom extends Substance {
 
 	public void setMassNumber(int massNumber) {
 		String text = Integer.toString(massNumber);
-		this.has(ATTRIBUTE_ATOMIC_NUMBER, new Measure(text));
+		this.has(ATTRIBUTE_ATOMIC_NUMBER, new Measurement(text));
 	}
 	
 }

@@ -1,7 +1,6 @@
 package com.harium.suneidesis.concept;
 
 import com.harium.suneidesis.concept.beign.ancestry.Ancestry;
-import com.harium.suneidesis.concept.numeral.Measure;
 
 /**
  * Being here should be stateless
@@ -13,12 +12,12 @@ public class Being extends Concept {
 
     public Being() {
         super(ConceptType.BEING);
-        hasQuantity(new Concept("life"), new Measure("one", "1"));
+        hasQuantity(new Concept("life"), new Measurement("one", "1"));
     }
 
     public Being(String name) {
         super(name, ConceptType.BEING);
-        hasQuantity(new Concept("life"), new Measure("one", "1"));
+        hasQuantity(new Concept("life"), new Measurement("one", "1"));
     }
 
     public Being(String name, Concept gender) {

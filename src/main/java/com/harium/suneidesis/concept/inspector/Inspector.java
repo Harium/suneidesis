@@ -4,7 +4,7 @@ import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.attribute.Attributes;
-import com.harium.suneidesis.concept.numeral.Measure;
+import com.harium.suneidesis.concept.Measurement;
 
 public class Inspector {
 
@@ -48,11 +48,11 @@ public class Inspector {
 
     public boolean hasPart(String key, MeasureMatcher matcher) {
         Concept toEval = this.concept.getAttributes().getProperty(key);
-        if (!ConceptType.MEASURE.equals(toEval.getType())) {
+        if (!ConceptType.MEASUREMENT.equals(toEval.getType())) {
             return false;
         }
-        Measure measure = (Measure) toEval;
-        return matcher.evaluate(measure.getValueText());
+        Measurement measurement = (Measurement) toEval;
+        return matcher.evaluate(measurement.getValueText());
     }
 
     public boolean isAt(String name) {

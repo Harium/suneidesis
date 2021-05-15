@@ -31,7 +31,7 @@ public class Provenance {
     }
 
     public Provenance source(Concept source) {
-        concept.attributes.insert(ATTRIBUTE_SOURCE, source);
+        setSource(concept, source);
         return this;
     }
 
@@ -44,7 +44,7 @@ public class Provenance {
     }
 
     public Provenance sourceId(Concept sourceId) {
-        concept.attributes.insert(ATTRIBUTE_SOURCE_ID, sourceId);
+        setSourceId(concept, sourceId);
         return this;
     }
 
@@ -57,7 +57,7 @@ public class Provenance {
     }
 
     public Provenance subject(Concept subject) {
-        concept.attributes.insert(ATTRIBUTE_SUBJECT, subject);
+        setSubject(concept, subject);
         return this;
     }
 
@@ -70,7 +70,7 @@ public class Provenance {
     }
 
     public Provenance predicate(Concept predicate) {
-        concept.attributes.insert(ATTRIBUTE_PREDICATE, predicate);
+        setPredicate(concept, predicate);
         return this;
     }
 
@@ -83,7 +83,7 @@ public class Provenance {
     }
 
     public Provenance object(Concept object) {
-        concept.attributes.insert(ATTRIBUTE_OBJECT, object);
+        setObject(concept, object);
         return this;
     }
 
@@ -96,7 +96,7 @@ public class Provenance {
     }
 
     public Provenance objectPart(Concept objectPart) {
-        concept.attributes.insert(ATTRIBUTE_OBJECT_PART, objectPart);
+        setObjectPart(concept, objectPart);
         return this;
     }
 
@@ -109,7 +109,7 @@ public class Provenance {
     }
 
     public Provenance place(Place place) {
-        concept.attributes.insert(ATTRIBUTE_PLACE, place);
+        setPlace(concept, place);
         return this;
     }
 
@@ -122,7 +122,7 @@ public class Provenance {
     }
 
     public Provenance time(Time time) {
-        concept.attributes.insert(ATTRIBUTE_TIME, time);
+        setTime(concept, time);
         return this;
     }
 
@@ -135,7 +135,11 @@ public class Provenance {
     }
 
     public Provenance weather(Phenomenon phenomenon) {
-        concept.attributes.insert(ATTRIBUTE_PHENOMENON, phenomenon);
+        return phenomenon(phenomenon);
+    }
+
+    public Provenance phenomenon(Phenomenon phenomenon) {
+        setPhenomenon(concept, phenomenon);
         return this;
     }
 
@@ -148,7 +152,7 @@ public class Provenance {
     }
 
     public Provenance acquisitionMethod(Action action) {
-        concept.attributes.insert(ATTRIBUTE_ACQUISITION_METHOD, action);
+        setAcquisitionMethod(concept, action);
         return this;
     }
 
@@ -161,7 +165,7 @@ public class Provenance {
     }
 
     public Provenance acquisitionMedium(Concept medium) {
-        concept.attributes.insert(ATTRIBUTE_ACQUISITION_MEDIUM, medium);
+        setAcquisitionMedium(concept, medium);
         return this;
     }
 

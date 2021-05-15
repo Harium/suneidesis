@@ -5,7 +5,7 @@ import com.harium.suneidesis.concept.inspector.Inspector;
 import com.harium.suneidesis.concept.inspector.matchers.Equals;
 import com.harium.suneidesis.concept.inspector.matchers.GreaterThan;
 import com.harium.suneidesis.concept.inspector.matchers.LowerThan;
-import com.harium.suneidesis.concept.numeral.Measure;
+import com.harium.suneidesis.concept.Measurement;
 import org.junit.Test;
 
 import static com.harium.suneidesis.concept.inspector.Inspector.does;
@@ -17,7 +17,7 @@ public class AttributesTest {
     public void testSimple() {
         Concept bat = new Concept("bat");
         bat.can(new Action("fly"));
-        bat.hasQuantity(new Concept("wing"), new Measure( "2"));
+        bat.hasQuantity(new Concept("wing"), new Measurement("2"));
         bat.isLocatedAt(new Place("cave"));
 
         assertTrue(does(bat).hasPart("wing", new GreaterThan("1")));
@@ -80,7 +80,7 @@ public class AttributesTest {
         mammal.is(animal);
 
         horse.hasNoQuantity("horn");
-        unicorn.hasQuantity("horn", new Measure("1"));
+        unicorn.hasQuantity("horn", new Measurement("1"));
 
         assertTrue(Inspector.does(horse).is(animal));
         assertTrue(Inspector.does(horse).hasPart("horn", new Equals("0")));
