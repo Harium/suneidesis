@@ -22,6 +22,7 @@ Suneidesis is a project to represent knowledge. It can also be used as a chat bo
 - [sunbot-slack](https://github.com/Harium/sunbot-slack/)
 - [sunbot-slack-legacy](https://github.com/Harium/sunbot-slack-legacy/)
 - [sunbot-http](https://github.com/Harium/sunbot-http/)
+- [sunbot-http-client](https://github.com/Harium/sunbot-http-client)
 - [sunbot-mqtt](https://github.com/Harium/sunbot-mqtt/)
 
 ## Examples
