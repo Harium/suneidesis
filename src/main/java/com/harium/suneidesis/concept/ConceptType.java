@@ -15,12 +15,12 @@ public class ConceptType {
     public static final Concept PART = new Concept("PART");
     public static final Concept PHENOMENON = new Concept("PHENOMENA");
     public static final Concept PLACE = new Concept("PLACE");
-    public static final Concept MEASURE = new Concept("MEASURE");
-    public static final Concept TIME_UNIT = new Concept("TIME UNIT");
+    public static final Concept MEASUREMENT = new Concept("MEASURE");
     public static final Concept SIMULATION = new Concept("SIMULATION");
     public static final Concept SOUND = new Concept("SOUND");
     public static final Concept SUBSTANCE = new Concept("SUBSTANCE");
     public static final Concept STORY = new Concept("STORY");
+    public static final Concept TIME_UNIT = new Concept("TIME UNIT");
     public static final Concept THEORY = new Concept("THEORY");
     public static final Concept WORD = new Concept("WORD");
 
@@ -47,8 +47,8 @@ public class ConceptType {
             return PHENOMENON;
         } else if (PLACE.getName().equals(name)) {
             return PLACE;
-        } else if (MEASURE.getName().equals(name)) {
-            return MEASURE;
+        } else if (MEASUREMENT.getName().equals(name)) {
+            return MEASUREMENT;
         } else if (TIME_UNIT.getName().equals(name)) {
             return TIME_UNIT;
         } else if (SIMULATION.getName().equals(name)) {

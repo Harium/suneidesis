@@ -10,6 +10,9 @@ import java.util.Scanner;
 
 public class Terminal extends BaseChatBox {
 
+    private String language = "";
+    private String userName = "";
+
     private Output output = new TextOutput();
 
     public Terminal() {
@@ -44,18 +47,32 @@ public class Terminal extends BaseChatBox {
         // Custom Properties
         context.getProperties().put(InputContext.USER_USERNAME, getUsername());
         // Fill with the same data until we find a better way to get user's id
-        context.getProperties().put(InputContext.USER_ID, getUsername());
-        context.getProperties().put(InputContext.USER_NAME, "");
+        context.getProperties().put(InputContext.USER_ID, getUserId());
+        context.getProperties().put(InputContext.USER_NAME, getUserName());
         context.getProperties().put(InputContext.CHANNEL_ID, "");
         context.getProperties().put(InputContext.CHANNEL_NAME, "");
         context.getProperties().put(InputContext.LANGUAGE, getLanguage());
+    }
+
+    protected String getUserName() {
+        if (userName != null && !userName.isEmpty()) {
+            return userName;
+        }
+        return "";
     }
 
     protected String getUsername() {
         return getSystemProperty("user.name");
     }
 
+    protected String getUserId() {
+        return getUsername();
+    }
+
     protected String getLanguage() {
+        if (language != null && !language.isEmpty()) {
+            return language;
+        }
         return getSystemProperty("user.language");
     }
 
@@ -92,4 +109,11 @@ public class Terminal extends BaseChatBox {
         return output;
     }
 
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }

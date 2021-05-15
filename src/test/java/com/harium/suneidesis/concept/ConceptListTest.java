@@ -1,6 +1,5 @@
 package com.harium.suneidesis.concept;
 
-import com.harium.suneidesis.concept.numeral.Measure;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,7 +7,7 @@ public class ConceptListTest {
 
     @Test
     public void testSimple() {
-        ConceptList recipe = new ConceptList(ConceptType.MEASURE);
+        ConceptList recipe = new ConceptList(ConceptType.MEASUREMENT);
         recipe.setName("Chocolate Cake");
 
         recipe.add(ingredient("all-purpose flour", "1 ½", "cup"));
@@ -28,7 +27,7 @@ public class ConceptListTest {
 
     @Test
     public void testRemove() {
-        ConceptList recipe = new ConceptList(ConceptType.MEASURE);
+        ConceptList recipe = new ConceptList(ConceptType.MEASUREMENT);
         recipe.setName("Incomplete Cake");
 
         recipe.add(ingredient("all-purpose flour", "1 ½", "cup"));
@@ -55,7 +54,7 @@ public class ConceptListTest {
 
     private Concept ingredient(String name, String quantity, String unit) {
         Concept concept = new Concept(name);
-        concept.set("quantity", new Measure(quantity, unit));
+        concept.set("quantity", new Measurement(quantity, unit));
         return concept;
     }
 

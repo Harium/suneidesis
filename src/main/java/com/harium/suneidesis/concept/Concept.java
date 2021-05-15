@@ -1,7 +1,6 @@
 package com.harium.suneidesis.concept;
 
 
-import com.harium.suneidesis.concept.numeral.Measure;
 import com.harium.suneidesis.concept.primitive.Text;
 
 public class Concept extends Thing {
@@ -92,17 +91,17 @@ public class Concept extends Thing {
 		return this;
 	}
 
-	public Concept hasQuantity(Concept property, Measure measure) {
-		this.attributes.hasPart(property, measure);
+	public Concept hasQuantity(Concept property, Measurement measurement) {
+		this.attributes.hasPart(property, measurement);
 		return this;
 	}
 
-	public Concept hasQuantity(String property, Measure measure) {
-		return hasQuantity(new Concept(property), measure);
+	public Concept hasQuantity(String property, Measurement measurement) {
+		return hasQuantity(new Concept(property), measurement);
 	}
 
 	public Concept hasNoQuantity(Concept property) {
-		return hasQuantity(property, Measure.ZERO);
+		return hasQuantity(property, Measurement.ZERO);
 	}
 
 	public Concept hasNoQuantity(String property) {

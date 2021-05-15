@@ -1,7 +1,7 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
-import com.harium.suneidesis.concept.numeral.Measure;
+import com.harium.suneidesis.concept.Measurement;
 import com.harium.suneidesis.concept.primitive.Text;
 import com.harium.suneidesis.repository.Repository;
 
@@ -191,8 +191,8 @@ public class Attributes implements Repository<Concept> {
         return inheritance.can(actionKey);
     }
 
-    public void hasPart(Concept part, Measure measure) {
-        getProperties().add(part, measure);
+    public void hasPart(Concept part, Measurement measurement) {
+        getProperties().add(part, measurement);
     }
 
     public void isLocatedAt(Place concept) {
