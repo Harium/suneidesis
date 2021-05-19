@@ -11,10 +11,15 @@ import java.util.List;
 
 public abstract class BaseChatBox implements ChatBox {
 
+    protected boolean skipEmptySentences = true;
     protected List<Parser> parsers = new ArrayList<>();
     protected List<Interceptor> interceptors = new ArrayList<>();
 
     protected void parseInput(InputContext input, Output output) {
+        if (shouldSkipSentence(input)) {
+           return;
+        }
+
         for (Interceptor interceptor : interceptors) {
             interceptor.preParsing(input, output);
         }
@@ -24,6 +29,13 @@ public abstract class BaseChatBox implements ChatBox {
         for (Interceptor interceptor : interceptors) {
             interceptor.postParsing(input, output, parser);
         }
+    }
+
+    private boolean shouldSkipSentence(InputContext input) {
+        if (!skipEmptySentences) {
+            return false;
+        }
+        return input.getSentence() == null || input.getSentence().trim().isEmpty();
     }
 
     private Parser runParsers(InputContext context, Output output) {
