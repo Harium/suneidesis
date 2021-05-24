@@ -7,6 +7,7 @@ import com.harium.suneidesis.repository.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -60,12 +61,23 @@ public class Attributes implements Repository<Concept> {
         return attributeMap.values();
     }
 
-    public void insert(String key, Concept concept) {
-        attributeMap.put(key, concept);
+    public Concept insert(String key, Concept concept) {
+        return attributeMap.put(key, concept);
     }
 
-    public void remove(Concept concept) {
-        attributeMap.values().remove(concept);
+    public boolean remove(Concept concept) {
+        return attributeMap.values().remove(concept);
+    }
+
+    public boolean removeByName(String key) {
+        for (Iterator<Concept> iterator = attributeMap.values().iterator(); iterator.hasNext(); ) {
+            Concept concept = iterator.next();
+            if (key.equals(concept.getName())) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
     }
 
     public Abilities getAbilities() {

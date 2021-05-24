@@ -31,8 +31,9 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
     }
 
     @Override
-    public void insert(String key, Concept concept) {
+    public Concept insert(String key, Concept concept) {
         delegate.insert(key, concept);
+        return concept;
     }
 
     @Override

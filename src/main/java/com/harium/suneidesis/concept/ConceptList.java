@@ -1,11 +1,20 @@
 package com.harium.suneidesis.concept;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ConceptList extends Concept {
 
     private int size = 0;
 
+    public ConceptList(String name) {
+        super(name);
+        dataType(DataType.ARRAY);
+    }
+
     public ConceptList(Concept type) {
-        super(type, DataType.ARRAY);
+        super(type);
+        dataType(DataType.ARRAY);
     }
 
     public Concept get(int index) {
@@ -18,8 +27,15 @@ public class ConceptList extends Concept {
     }
 
     public void remove(Concept concept) {
-        attributes.remove(concept);
-        pack();
+        if (attributes.remove(concept)) {
+            pack();
+        }
+    }
+
+    public void removeByName(String key) {
+        if (attributes.removeByName(key)) {
+            pack();
+        }
     }
 
     private void pack() {
@@ -37,7 +53,22 @@ public class ConceptList extends Concept {
         size = realLength;
     }
 
+    public List<Concept> getAll() {
+        List<Concept> items = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            String key = Integer.toString(i);
+
+            Concept item = attributes.get(key);
+            if (!item.isUnknown()) {
+                items.add(item);
+            }
+        }
+        return items;
+    }
+
     public int getSize() {
         return size;
     }
+
 }

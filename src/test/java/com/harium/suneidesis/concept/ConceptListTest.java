@@ -3,6 +3,8 @@ package com.harium.suneidesis.concept;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 public class ConceptListTest {
 
     @Test
@@ -50,6 +52,30 @@ public class ConceptListTest {
         recipe.remove(oil);
         Assert.assertEquals("water", recipe.get(6).getName());
         Assert.assertEquals(7, recipe.getSize());
+    }
+
+    @Test
+    public void testGetAll() {
+        ConceptList list = new ConceptList("Just a List");
+
+        list.add(new Concept("item 1"));
+        list.add(new Concept("item 2"));
+        list.add(new Concept("item 3"));
+
+        List<Concept> result = list.getAll();
+
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals("item 1", list.get(0).getName());
+        Assert.assertEquals("item 2", list.get(1).getName());
+        Assert.assertEquals("item 3", list.get(2).getName());
+
+        list.removeByName("item 2");
+        list.add(new Concept("item 2"));
+
+        Assert.assertEquals(3, result.size());
+        Assert.assertEquals("item 1", list.get(0).getName());
+        Assert.assertEquals("item 3", list.get(1).getName());
+        Assert.assertEquals("item 2", list.get(2).getName());
     }
 
     private Concept ingredient(String name, String quantity, String unit) {

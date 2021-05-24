@@ -1,5 +1,6 @@
 package com.harium.suneidesis.repository;
 
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Thing;
 
 import java.util.Collection;
@@ -11,7 +12,7 @@ public interface Repository<T extends Thing> {
 
     Collection<T> getValues();
 
-    void insert(String key, T t);
+    Concept insert(String key, T t);
 
     T get(String key);
 

@@ -53,10 +53,11 @@ public abstract class KnowledgeBase implements Repository<Concept> {
     }
 
     @Override
-    public void insert(String key, Concept concept) {
+    public Concept insert(String key, Concept concept) {
         for (RepositoryListener repositoryListener: listeners) {
             repositoryListener.onInsert(key, concept);
         }
+        return concept;
     }
 
     public abstract void merge(KnowledgeBase concepts);

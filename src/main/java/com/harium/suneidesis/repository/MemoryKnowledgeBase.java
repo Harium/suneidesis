@@ -28,9 +28,10 @@ public class MemoryKnowledgeBase extends KnowledgeBase {
     }
 
     @Override
-    public void insert(String key, Concept concept) {
+    public Concept insert(String key, Concept concept) {
         data.put(key, concept);
         super.insert(key, concept);
+        return concept;
     }
 
     @Override
