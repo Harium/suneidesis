@@ -89,7 +89,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         Concept concept;
 
         if (node.has(ATTRIBUTE_NAME)) {
-            if (DataType.PRIMITIVE.name().equals(node.get(ATTRIBUTE_DATA_TYPE).asText())) {
+            if (isWord(node) || isPrimitive(node)) {
                 // Init concept as primitive
                 concept = new Primitive(node.get(ATTRIBUTE_NAME).asText());
             } else {
@@ -146,6 +146,22 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             }
         }
         return concept;
+    }
+
+    private boolean isPrimitive(JsonNode node) {
+        JsonNode dataType = node.get(ATTRIBUTE_DATA_TYPE);
+        if (dataType == null) {
+            return false;
+        }
+        return DataType.PRIMITIVE.name().equals(dataType.asText());
+    }
+
+    private boolean isWord(JsonNode node) {
+        JsonNode type = node.get(ATTRIBUTE_TYPE);
+        if (type == null) {
+           return false;
+        }
+        return ConceptType.WORD.getName().equals(type.asText());
     }
 
     private void assignConcept(KnowledgeBase base, Concept concept, String targetId, String relation, List<Relationship> relationshipList) {
