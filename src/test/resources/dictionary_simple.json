@@ -3,19 +3,16 @@
   "concepts" : {
     "0" : {
       "name" : "cat",
-      "dataType" : "PRIMITIVE",
       "type" : "WORD",
       "tag" : "NOUN"
     },
     "1" : {
       "name" : "duck",
-      "dataType" : "PRIMITIVE",
       "type" : "WORD",
       "tag" : "NOUN"
     },
     "2" : {
       "name" : "go",
-      "dataType" : "PRIMITIVE",
       "type" : "WORD",
       "transitivity" : "",
       "lemma" : "go",
@@ -24,7 +21,6 @@
     },
     "3" : {
       "name" : "went",
-      "dataType" : "PRIMITIVE",
       "type" : "WORD",
       "person" : "",
       "lemma" : "go",
