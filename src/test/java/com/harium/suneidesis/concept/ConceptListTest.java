@@ -78,6 +78,19 @@ public class ConceptListTest {
         Assert.assertEquals("item 2", list.get(2).getName());
     }
 
+    @Test
+    public void testClear() {
+        ConceptList list = new ConceptList("Just a List");
+
+        list.add(new Concept("item 1"));
+        list.add(new Concept("item 2"));
+
+        list.clear();
+
+        Assert.assertEquals(0, list.getSize());
+        Assert.assertTrue(list.get(0).isUnknown());
+    }
+
     private Concept ingredient(String name, String quantity, String unit) {
         Concept concept = new Concept(name);
         concept.set("quantity", new Measurement(quantity, unit));

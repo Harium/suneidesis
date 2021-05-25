@@ -26,6 +26,13 @@ public class ConceptList extends Concept {
         size++;
     }
 
+    public void clear() {
+        for (Concept concept : getAll()) {
+            attributes.remove(concept);
+        }
+        size = 0;
+    }
+
     public void remove(Concept concept) {
         if (attributes.remove(concept)) {
             pack();
