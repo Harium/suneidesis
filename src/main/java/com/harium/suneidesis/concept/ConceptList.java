@@ -26,13 +26,6 @@ public class ConceptList extends Concept {
         size++;
     }
 
-    public void clear() {
-        for (Concept concept : getAll()) {
-            attributes.remove(concept);
-        }
-        size = 0;
-    }
-
     public void remove(Concept concept) {
         if (attributes.remove(concept)) {
             pack();
@@ -57,6 +50,7 @@ public class ConceptList extends Concept {
                 }
             }
         }
+        // Update Size
         size = realLength;
     }
 
@@ -72,6 +66,17 @@ public class ConceptList extends Concept {
             }
         }
         return items;
+    }
+
+    public void clear() {
+        for (Concept concept : getAll()) {
+            attributes.remove(concept);
+        }
+        size = 0;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     public int getSize() {
