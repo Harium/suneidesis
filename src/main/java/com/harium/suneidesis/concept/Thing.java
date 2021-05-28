@@ -17,15 +17,15 @@ public class Thing {
 	}
 
 	public String getName() {
-		return attributes.getValueContent();
+		return attributes.getName();
 	}
 
 	public Concept getNameConcept() {
-		return attributes.getValue();
+		return attributes.getNameConcept();
 	}
 
 	public void setName(String name) {
-		attributes.setValue(name);
+		attributes.setName(name);
 	}
 
 	public void setNameConcept(Concept nameConcept) {

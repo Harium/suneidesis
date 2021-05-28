@@ -22,8 +22,8 @@ public class Attributes implements Repository<Concept> {
 
     public static final Text UNKNOWN_WORD = new Text("?");
 
+    private String name;
     private DataType dataType = DataType.OBJECT;
-    private String value;
 
     // What the concept can do
     private Abilities abilities;
@@ -115,33 +115,20 @@ public class Attributes implements Repository<Concept> {
         this.dataType = dataType;
     }
 
-    public String getValueContent() {
+    public String getName() {
+        return name;
+    }
+
+    public Concept getNameConcept() {
         if (DataType.PRIMITIVE.equals(getDataType())) {
-            return value;
+            return new Text(name);
         } else {
-            return getValue().getName();
+            return attributeMap.get(ATTRIBUTE_NAME);
         }
     }
 
-    public Text getValue() {
-        if (DataType.PRIMITIVE.equals(getDataType())) {
-            return new Text(value);
-        } else {
-            Concept value = attributeMap.get(ATTRIBUTE_NAME);
-            if (value != null) {
-                return (Text) value;
-            }
-        }
-        return UNKNOWN_WORD;
-    }
-
-    public void setValue(String value) {
-        if (DataType.PRIMITIVE.equals(getDataType())) {
-            this.value = value;
-        } else {
-            Text nameWord = getOrCreateWord(value);
-            setNameConcept(nameWord);
-        }
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setNameConcept(Concept name) {
@@ -222,12 +209,13 @@ public class Attributes implements Repository<Concept> {
 
     private static boolean equals(Attributes a, Attributes b, boolean checkName) {
         boolean equals = true;
+
+        if (checkName && !a.getName().equals(b.getName())) {
+            return false;
+        }
+
         for (Map.Entry<String, Concept> entry: b.attributeMap.entrySet()) {
             String key = entry.getKey();
-            if (checkName && ATTRIBUTE_NAME.equals(key)) {
-                equals &= b.getValue().equals(a.getValue());
-                continue;
-            }
             if (ATTRIBUTE_PROPERTIES.equals(key)) {
                 equals &= propertiesEquals(a.properties, b.properties);
             } else if (ATTRIBUTE_ABILITIES.equals(key)) {

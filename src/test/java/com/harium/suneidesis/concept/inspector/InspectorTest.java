@@ -15,10 +15,10 @@ public class InspectorTest {
     public void testIs() {
         Taxonomy animalia = new Taxonomy().kingdom(new Concept("animalia"));
 
-        Concept animal = new Concept();
+        Concept animal = new Concept("animal");
         animal.has(Taxonomy.ATTRIBUTE_TAXONOMY, animalia);
 
-        Concept dog = new Concept();
+        Concept dog = new Concept("dog");
         dog.is(animal);
 
         assertTrue(does(dog).is(animal));
@@ -29,10 +29,10 @@ public class InspectorTest {
     public void testInstance() {
         Taxonomy animalia = new Taxonomy().kingdom(new Concept("animalia"));
 
-        Concept animal = new Concept();
+        Concept animal = new Concept("animal");
         animal.has(Taxonomy.ATTRIBUTE_TAXONOMY, animalia);
 
-        Concept dog = new Concept();
+        Concept dog = new Concept("dog");
         dog.is(animal);
         dog.can(new Action("walk"));
 

@@ -23,7 +23,7 @@ public class Inheritance extends Concept {
 
     public boolean queryIs(String key) {
         for (Map.Entry<String, Concept> entry : map.entrySet()) {
-            if (key.equals(entry.getKey())) {
+            if (entry.getKey().equals(key)) {
                 return true;
             }
             // Recursive
