@@ -18,4 +18,5 @@ public interface Repository<T extends Thing> {
 
     boolean contains(String key);
 
+    void clear();
 }

@@ -49,6 +49,11 @@ public class MemoryKnowledgeBase extends KnowledgeBase {
     }
 
     @Override
+    public void clear() {
+        data.clear();
+    }
+
+    @Override
     public void merge(KnowledgeBase concepts) {
         // TODO Wrap concepts into concepts (like heard from something heard)
         // Concept -> merged from another base -> Real Fact = the real information

@@ -60,6 +60,11 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
         return delegate.contains(key);
     }
 
+    @Override
+    public void clear() {
+        delegate.clear();
+    }
+
     public String addWord(String word, Tag tag) {
         Word w = new Word(word, tag);
         add(w);

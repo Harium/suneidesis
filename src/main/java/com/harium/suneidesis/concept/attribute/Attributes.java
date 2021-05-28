@@ -47,6 +47,14 @@ public class Attributes implements Repository<Concept> {
         return !get(key).isUnknown();
     }
 
+    @Override
+    public void clear() {
+        attributeMap.clear();
+        properties.getAttributes().clear();
+        abilities.getAttributes().clear();
+        inheritance.getAttributes().clear();
+    }
+
     public boolean queryIs(String key) {
         return getInheritance().queryIs(key);
     }
