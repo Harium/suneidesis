@@ -39,6 +39,10 @@ public class Concept extends Thing {
 		setName(name);
 	}
 
+	public String getValue() {
+		return getName();
+	}
+
 	public Concept getType() {
 		return attributes.get(ATTRIBUTE_TYPE);
 	}

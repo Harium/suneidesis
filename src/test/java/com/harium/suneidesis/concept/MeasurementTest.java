@@ -10,10 +10,10 @@ public class MeasurementTest {
     @Test
     public void testInit() {
         Measurement measurement = new Measurement("5", "m");
-        assertEquals("5", measurement.getValueText());
+        assertEquals("5", measurement.getValue());
 
-        assertTrue(does(measurement.getValue()).is(new Concept("5")));
-        assertTrue(does(measurement.getUnit()).is(new Concept("m")));
+        assertTrue(does(measurement.getValueConcept()).is(new Concept("5")));
+        assertTrue(does(measurement.getUnitConcept()).is(new Concept("m")));
 
         Measurement toCompare = new Measurement("5", "m");
         assertTrue(measurement.equals(toCompare));

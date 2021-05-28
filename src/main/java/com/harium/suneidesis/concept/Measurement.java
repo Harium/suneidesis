@@ -30,11 +30,11 @@ public class Measurement extends Concept {
         unit(unit);
     }
 
-    public Concept getValue() {
+    public Concept getValueConcept() {
         return attributes.get(ATTRIBUTE_VALUE);
     }
 
-    public String getValueText() {
+    public String getValue() {
         Concept value = attributes.get(ATTRIBUTE_VALUE);
         if (value.isUnknown()) {
             return "0";
@@ -42,20 +42,20 @@ public class Measurement extends Concept {
         return value.getName();
     }
 
-    public Concept getUnit() {
+    public Concept getUnitConcept() {
         return attributes.get(ATTRIBUTE_UNIT);
     }
 
-    public String getUnitText() {
-        return getUnit().getName();
+    public String getUnit() {
+        return getUnitConcept().getName();
     }
 
-    public Concept getSymbol() {
+    public Concept getSymbolConcept() {
         return attributes.get(ATTRIBUTE_SYMBOL);
     }
 
-    public String getSymbolText() {
-        return getSymbol().getName();
+    public String getSymbol() {
+        return getSymbolConcept().getName();
     }
 
     public Measurement value(String value) {
@@ -79,8 +79,8 @@ public class Measurement extends Concept {
     }
 
     public boolean equals(Measurement q) {
-        boolean sameValue = q.getValueText().equals(getValueText());
-        boolean sameUnit = q.getUnitText().equals(getUnitText());
+        boolean sameValue = q.getValue().equals(getValue());
+        boolean sameUnit = q.getUnit().equals(getUnit());
 
         return sameValue && sameUnit;
     }

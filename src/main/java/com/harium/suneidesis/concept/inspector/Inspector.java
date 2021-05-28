@@ -52,7 +52,7 @@ public class Inspector {
             return false;
         }
         Measurement measurement = (Measurement) toEval;
-        return matcher.evaluate(measurement.getValueText());
+        return matcher.evaluate(measurement.getValue());
     }
 
     public boolean isAt(String name) {
