@@ -218,7 +218,7 @@ public class Attributes implements Repository<Concept> {
     private static boolean equals(Attributes a, Attributes b, boolean checkName) {
         boolean equals = true;
 
-        if (checkName && !a.getName().equals(b.getName())) {
+        if (checkName && a.getName() != null && !a.getName().equals(b.getName())) {
             return false;
         }
 
@@ -233,7 +233,13 @@ public class Attributes implements Repository<Concept> {
             } else {
                 Concept value = entry.getValue();
                 Concept toCompare = a.get(key);
-                equals &= equals(value.getAttributes(), toCompare.getAttributes(), true);
+                if (value.isPrimitive() && toCompare.isPrimitive()) {
+                    equals &= value.getName().equals(toCompare.getName());
+                } else if (!value.isPrimitive() && !toCompare.isPrimitive()) {
+                    equals &= equals(value.getAttributes(), toCompare.getAttributes(), true);
+                } else {
+                    return false;
+                }
             }
         }
 
