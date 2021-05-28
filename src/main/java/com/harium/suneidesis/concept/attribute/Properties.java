@@ -10,16 +10,16 @@ import static com.harium.suneidesis.concept.Measurement.ZERO;
 
 public class Properties extends Concept {
 
-    private final Map<String, Concept> nameIndex = new HashMap<>();
-    private final Map<Concept, Measurement> map = new HashMap<>();
+    private final Map<String, Concept> map = new HashMap<>();
+    private final Map<Concept, Measurement> quantities = new HashMap<>();
 
     public void add(Concept property, Measurement measurement) {
-        nameIndex.put(property.getName(), property);
-        map.put(property, measurement);
+        map.put(property.getName(), property);
+        quantities.put(property, measurement);
     }
 
     public Measurement query(Concept part) {
-        Measurement measurement = map.get(part);
+        Measurement measurement = quantities.get(part);
         if (measurement == null) {
             measurement = ZERO;
         }
@@ -27,28 +27,28 @@ public class Properties extends Concept {
     }
 
     public Measurement query(String name) {
-        Concept key = nameIndex.get(name);
+        Concept key = map.get(name);
         if (key == null) {
            return ZERO;
         }
 
-        return map.get(key);
+        return quantities.get(key);
     }
 
     public void merge(Properties properties) {
-        for (Map.Entry<Concept, Measurement> entry : properties.map.entrySet()) {
+        for (Map.Entry<Concept, Measurement> entry : properties.quantities.entrySet()) {
             add(entry.getKey(), entry.getValue());
         }
     }
 
     public boolean equals(Properties properties) {
         boolean equals = true;
-        for (Map.Entry<Concept, Measurement> entry : map.entrySet()) {
+        for (Map.Entry<Concept, Measurement> entry : quantities.entrySet()) {
             Concept key = entry.getKey();
             Measurement q = entry.getValue();
 
-            Concept concept = properties.nameIndex.get(key.getName());
-            Measurement toCompare = properties.map.get(concept);
+            Concept concept = properties.map.get(key.getName());
+            Measurement toCompare = properties.quantities.get(concept);
 
             equals &= q.equals(toCompare);
         }

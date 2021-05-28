@@ -3,6 +3,8 @@ package com.harium.suneidesis.concept;
 import com.harium.suneidesis.concept.beign.Gender;
 import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
+
 public class ConceptTest {
 
     @Test
@@ -33,6 +35,12 @@ public class ConceptTest {
              .title("Little Red Riding Hood")
              .storyType(Story.TYPE_FICTIONAL)
              .begin(wasAtHome.then(momAskedFavor.then(challengeAccepted)));
+    }
+
+    @Test
+    public void testIsUnknown() {
+        Concept concept = new Concept(ConceptType.UNKNOWN);
+        assertTrue(concept.isUnknown());
     }
 
 }

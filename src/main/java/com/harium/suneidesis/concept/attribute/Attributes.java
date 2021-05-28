@@ -25,11 +25,11 @@ public class Attributes implements Repository<Concept> {
     private String name;
     private DataType dataType = DataType.OBJECT;
 
-    // What the concept can do
+    // What the concept *can* do
     private Abilities abilities;
-    // What the concept has
+    // What the concept *has*
     private Properties properties;
-    // Primitive concepts that this concept borrows from
+    // Primitive concepts that this concept *is* derived from
     private Inheritance inheritance;
     // How the concept is defined
     private final Map<String, Concept> attributeMap = new HashMap<>();
