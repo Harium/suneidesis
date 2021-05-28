@@ -198,7 +198,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         concept.dataType(dataType);
     }
 
-    class Relationship {
+    static class Relationship {
         private static final String INHERITANCE = "inheritance";
         String from;
         String target;

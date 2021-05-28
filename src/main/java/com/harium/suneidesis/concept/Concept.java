@@ -132,4 +132,7 @@ public class Concept extends Thing {
 		return (ConceptType.SECRET.equals(getType()));
 	}
 
+	public boolean isPrimitive() {
+		return DataType.PRIMITIVE.equals(getDataType());
+	}
 }
