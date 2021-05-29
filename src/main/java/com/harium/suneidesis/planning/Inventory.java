@@ -7,6 +7,10 @@ public class Inventory extends Concept {
 
     private static final String ATTRIBUTE_OWNER = "owner";
 
+    public Inventory() {
+        super("inventory");
+    }
+
     public void add(Concept concept) {
         set(concept.getName(), concept);
     }

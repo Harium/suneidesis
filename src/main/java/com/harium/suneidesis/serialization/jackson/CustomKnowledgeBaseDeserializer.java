@@ -67,15 +67,19 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             if (target != null) {
                 if (!Relationship.INHERITANCE.equals(relationship.relation)) {
                     from.set(relationship.relation, target);
+                    base.save(from);
                 } else {
                     from.is(target);
+                    base.save(from);
                 }
             } else {
                 if (!Relationship.INHERITANCE.equals(relationship.relation)) {
                     from.set(relationship.relation, new Concept(relationship.target));
+                    base.save(from);
                 } else {
                     // It should never happen (otherwise the inheritance is missing)
                     from.is(new Concept(relationship.target));
+                    base.save(from);
                 }
             }
 

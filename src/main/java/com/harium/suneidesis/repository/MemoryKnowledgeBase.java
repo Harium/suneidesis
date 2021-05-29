@@ -54,6 +54,16 @@ public class MemoryKnowledgeBase extends KnowledgeBase {
     }
 
     @Override
+    public void close() {
+
+    }
+
+    @Override
+    public boolean isClosed() {
+        return false;
+    }
+
+    @Override
     public void merge(KnowledgeBase concepts) {
         // TODO Wrap concepts into concepts (like heard from something heard)
         // Concept -> merged from another base -> Real Fact = the real information

@@ -46,10 +46,14 @@ public class DocumentMapper {
         return mapFromDocument((Document)pair.getValue());
     }
 
-    public static Document mapToDocument(Concept concept) {
-        Document document = Document.createDocument(Attributes.ATTRIBUTE_NAME, concept.getName());
-
+    public static Document mapToDocument(Document document, Concept concept) {
+        if (document == null) {
+            document = Document.createDocument(Attributes.ATTRIBUTE_NAME, concept.getName());
+        }
         for (Map.Entry<String, Concept> entry : concept.getAttributes().entrySet()) {
+            if (entry.getKey() == null) {
+                continue;
+            }
             if (Attributes.ATTRIBUTE_NAME.equals(entry.getKey())) {
                 continue;
             }
@@ -57,11 +61,15 @@ public class DocumentMapper {
             if (v.isPrimitive()) {
                 document.put(entry.getKey(), v.getName());
             } else {
-                document.put(entry.getKey(), mapToDocument(entry.getValue()));
+                document.put(entry.getKey(), mapToDocument(v));
             }
         }
 
         return document;
+    }
+
+    public static Document mapToDocument(Concept concept) {
+        return mapToDocument(null, concept);
     }
 
 }

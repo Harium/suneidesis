@@ -16,12 +16,12 @@ public class BaseTaskTest {
     public void testFindTask() {
         Being myself = new Being("Robot");
 
-        Concept garlic = new Concept();
+        Concept garlic = new Concept("garlic");
         Inventory fridge = new Inventory();
         fridge.owner(myself);
         fridge.add(garlic);
 
-        Concept task = new Concept();
+        Concept task = new Concept("task");
         Provenance fact = new Provenance(task);
         fact.source(new Concept("sensors"));
         fact.subject(fridge);
@@ -29,8 +29,8 @@ public class BaseTaskTest {
         MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.add(task);
 
-        BaseTask chopGarlic = new BaseTask();
-        chopGarlic.addTask(new FindTask(garlic));
+        BaseTask chopGarlic = new BaseTask("chop garlic");
+        chopGarlic.addTask(new FindTask("find garlic", garlic));
         boolean executed = chopGarlic.execute(myself, environment);
         assertTrue(executed);
     }
@@ -39,12 +39,12 @@ public class BaseTaskTest {
     public void testFindTask_EmptyStorage() {
         Being myself = new Being("Robot");
 
-        Concept garlic = new Concept();
+        Concept garlic = new Concept("garlic");
         Inventory fridge = new Inventory();
         fridge.owner(myself);
         //fridge.add(garlic);
 
-        Concept task = new Concept();
+        Concept task = new Concept("task");
         Provenance fact = new Provenance(task);
         fact.source(new Concept("sensors"));
         fact.subject(fridge);
@@ -52,8 +52,8 @@ public class BaseTaskTest {
         MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.add(task);
 
-        BaseTask chopGarlic = new BaseTask();
-        chopGarlic.addTask(new FindTask(garlic));
+        BaseTask chopGarlic = new BaseTask("chop garlic");
+        chopGarlic.addTask(new FindTask("find garlic", garlic));
         boolean executed = chopGarlic.execute(myself, environment);
         assertFalse(executed);
     }

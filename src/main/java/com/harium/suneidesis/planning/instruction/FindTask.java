@@ -10,7 +10,8 @@ public class FindTask extends BaseTask {
 
     private Concept target;
 
-    public FindTask(Concept target) {
+    public FindTask(String name, Concept target) {
+        super(name);
         this.target = target;
     }
 

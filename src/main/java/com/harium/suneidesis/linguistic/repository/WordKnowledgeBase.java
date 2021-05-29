@@ -64,4 +64,14 @@ public abstract class WordKnowledgeBase extends KnowledgeBase implements WordRep
             //}
         }
     }
+
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public boolean isClosed() {
+        return false;
+    }
 }

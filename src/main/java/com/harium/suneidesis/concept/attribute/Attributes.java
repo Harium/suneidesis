@@ -22,7 +22,7 @@ public class Attributes implements Repository<Concept> {
 
     public static final Text UNKNOWN_WORD = new Text("?");
 
-    private String name;
+    private String name = "";
     private DataType dataType = DataType.OBJECT;
 
     // What the concept *can* do
@@ -55,6 +55,16 @@ public class Attributes implements Repository<Concept> {
         inheritance.getAttributes().clear();
     }
 
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public boolean isClosed() {
+        return false;
+    }
+
     public boolean queryIs(String key) {
         return getInheritance().queryIs(key);
     }
@@ -71,6 +81,11 @@ public class Attributes implements Repository<Concept> {
 
     public Concept insert(String key, Concept concept) {
         return attributeMap.put(key, concept);
+    }
+
+    @Override
+    public void save(Concept concept) {
+        insert(concept.getIdText(), concept);
     }
 
     public boolean remove(Concept concept) {

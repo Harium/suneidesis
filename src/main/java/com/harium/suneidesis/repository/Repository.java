@@ -14,9 +14,16 @@ public interface Repository<T extends Thing> {
 
     Concept insert(String key, T t);
 
+    void save(Concept concept);
+
     T get(String key);
 
     boolean contains(String key);
 
     void clear();
+
+    void close();
+
+    boolean isClosed();
+
 }

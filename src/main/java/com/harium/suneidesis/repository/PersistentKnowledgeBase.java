@@ -6,6 +6,7 @@ import com.harium.suneidesis.concept.attribute.Attributes;
 import com.harium.suneidesis.repository.nitrite.DocumentMapper;
 import org.dizitart.no2.Cursor;
 import org.dizitart.no2.Document;
+import org.dizitart.no2.Filter;
 import org.dizitart.no2.IndexType;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteCollection;
@@ -59,11 +60,23 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
 
     @Override
     public Concept insert(String key, Concept concept) {
-        Document doc = DocumentMapper.mapToDocument(concept);
-        collection.insert(doc);
-
+        save(concept);
         super.insert(key, concept);
         return concept;
+    }
+
+    @Override
+    public void save(Concept concept) {
+        Document saved = collection.find(eq(Concept.ATTRIBUTE_ID, concept.getIdText())).firstOrDefault();
+        boolean exists = saved != null;
+
+        if (!exists) {
+            Document doc = DocumentMapper.mapToDocument(concept);
+            collection.insert(doc);
+        } else {
+            Document doc = DocumentMapper.mapToDocument(saved, concept);
+            collection.update(doc);
+        }
     }
 
     @Override
@@ -76,6 +89,16 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
 
     public void clear() {
         collection.drop();
+    }
+
+    @Override
+    public void close() {
+        collection.close();
+    }
+
+    @Override
+    public boolean isClosed() {
+        return collection.isClosed();
     }
 
     @Override
@@ -107,6 +130,15 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     public boolean contains(String key) {
         Cursor cursor = collection.find(eq(Concept.ATTRIBUTE_ID, key));
         return cursor.iterator().hasNext();
+    }
+
+    // TODO Unify find methods and move to repository
+    public RepositoryCursor find() {
+        return new RepositoryCursor(collection.find());
+    }
+
+    public RepositoryCursor find(Filter filter) {
+        return new RepositoryCursor(collection.find(filter));
     }
 
 }
