@@ -11,6 +11,7 @@ import com.harium.suneidesis.repository.listener.RepositoryListener;
 
 import java.util.List;
 
+@Deprecated
 public abstract class WordKnowledgeBase extends KnowledgeBase implements WordRepository, RepositoryListener {
 
     public WordKnowledgeBase(String name) {

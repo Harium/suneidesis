@@ -25,4 +25,30 @@ public class RepositoryCursor {
         return DocumentMapper.mapFromDocument(document);
     }
 
+    public java.util.Iterator<Concept> iterator() {
+        return new Iterator(cursor.iterator());
+    }
+
+    public static class Iterator implements java.util.Iterator<Concept> {
+        final java.util.Iterator<Document> iterator;
+
+        public Iterator(java.util.Iterator<Document> iterator) {
+            this.iterator = iterator;
+        }
+
+        public boolean hasNext() {
+            return iterator.hasNext();
+        }
+
+        public Concept next() {
+            return DocumentMapper.mapFromDocument(iterator.next());
+        }
+
+        @Override
+        public void remove() {
+            iterator.remove();
+        }
+
+    }
+
 }

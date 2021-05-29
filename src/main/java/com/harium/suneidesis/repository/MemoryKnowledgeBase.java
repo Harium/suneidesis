@@ -6,6 +6,7 @@ import com.harium.suneidesis.repository.generator.IdGenerator;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public class MemoryKnowledgeBase extends KnowledgeBase {
 
     private Map<String, Concept> data = new HashMap<>();

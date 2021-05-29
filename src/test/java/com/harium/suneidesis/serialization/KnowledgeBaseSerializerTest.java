@@ -1,13 +1,13 @@
 package com.harium.suneidesis.serialization;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.word.WordNoun;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;
 import org.json.JSONException;
 import org.junit.Before;
@@ -69,9 +69,13 @@ public class KnowledgeBaseSerializerTest {
 
     private KnowledgeBase buildSimpleKnowledgeBase() {
         Concept appleTree = new Concept("apple tree");
+        appleTree.id("0");
+
         Concept apple = new Concept("apple");
+        apple.id("1");
+
         appleTree.set("fruit", apple);
-        KnowledgeBase base = new MemoryKnowledgeBase("database");
+        KnowledgeBase base = new NitriteMemoryKnowledgeBase("database");
         base.add(appleTree);
 
         return base;
@@ -79,8 +83,11 @@ public class KnowledgeBaseSerializerTest {
 
     private KnowledgeBase buildComplexKnowledgeBase() {
         Concept appleTree = new Concept("apple tree");
+        appleTree.id("0");
         Concept apple = new Concept("apple");
+        apple.id("1");
         Concept food = new Concept("food");
+        food.id("2");
         apple.is(food);
 
         appleTree.set("fruit", apple);
