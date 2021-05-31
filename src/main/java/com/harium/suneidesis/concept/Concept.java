@@ -22,16 +22,15 @@ public class Concept extends Thing {
 		type(type);
 	}
 
-	public Concept(Concept type, DataType dataType) {
-		super();
-		type(type);
-		dataType(dataType);
-	}
-
 	public Concept(String name, Concept type) {
 		super();
 		type(type);
 		setName(name);
+	}
+
+	public Concept(String name, Concept type, DataType dataType) {
+		this(name, type);
+		dataType(dataType);
 	}
 
 	public String getValue() {
@@ -124,7 +123,7 @@ public class Concept extends Thing {
 	}
 
 	public boolean isUnknown() {
-		return (ConceptType.UNKNOWN.equals(getType()));
+		return ConceptType.UNKNOWN.equals(getType());
 	}
 
 	public boolean isSecret() {
@@ -136,6 +135,7 @@ public class Concept extends Thing {
 	}
 
 	public Concept wrap(Concept concept) {
+		setName(concept.getName());
 		setAttributes(concept.getAttributes());
 		return this;
 	}

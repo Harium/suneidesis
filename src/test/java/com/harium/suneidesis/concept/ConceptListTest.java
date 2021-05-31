@@ -44,12 +44,12 @@ public class ConceptListTest {
         recipe.add(ingredient("distilled white vinegar", "1", "teaspoon"));
         recipe.add(ingredient("water", "1", "cup water"));
 
-        recipe.remove(salt);
+        recipe.removeByName(salt.getName());
         Assert.assertEquals("white sugar", recipe.get(1).getName());
         Assert.assertEquals("water", recipe.get(7).getName());
         Assert.assertEquals(8, recipe.getSize());
 
-        recipe.remove(oil);
+        recipe.removeByName(oil.getName());
         Assert.assertEquals("water", recipe.get(6).getName());
         Assert.assertEquals(7, recipe.getSize());
     }
