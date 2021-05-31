@@ -39,7 +39,7 @@ public class ConceptTest {
 
     @Test
     public void testIsUnknown() {
-        Concept concept = new Concept(ConceptType.UNKNOWN);
+        Concept concept = new Concept(ConceptType.UNKNOWN_TYPE);
         assertTrue(concept.isUnknown());
     }
 

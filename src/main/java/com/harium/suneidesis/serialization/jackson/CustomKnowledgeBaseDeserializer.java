@@ -100,7 +100,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
                 concept = new Concept(node.get(ATTRIBUTE_NAME).asText());
             }
         } else {
-            concept = new Concept(UNKNOWN_WORD);
+            concept = new Concept(ConceptType.UNKNOWN_TYPE);
         }
 
         concept.id(id);

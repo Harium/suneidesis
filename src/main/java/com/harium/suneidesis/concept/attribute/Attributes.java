@@ -40,7 +40,7 @@ public class Attributes implements Repository<Concept> {
         if (concept != null) {
             return concept;
         } else if (inheritance == null) {
-            return Concept.UNKNOWN;
+            return ConceptType.UNKNOWN;
         }
 
         return getInheritance().getKey(key);

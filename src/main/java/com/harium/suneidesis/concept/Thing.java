@@ -6,8 +6,6 @@ import java.util.Objects;
 
 public class Thing {
 
-	private String name = "";
-
 	private Attributes attributes;
 
 	public String getName() {
@@ -18,7 +16,7 @@ public class Thing {
 		return getAttributes().getNameConcept();
 	}
 
-	public void setName(String name) {
+	protected void setName(String name) {
 		getAttributes().setName(name);
 	}
 

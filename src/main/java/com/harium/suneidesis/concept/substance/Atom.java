@@ -14,12 +14,6 @@ public class Atom extends Substance {
 		super(name);
 	}
 
-	public Atom(int atomicNumber, int massNumber) {
-		super();
-		setAtomicNumber(atomicNumber);
-		setMassNumber(massNumber);
-	}
-
 	public Atom(String name, int atomicNumber, int massNumber) {
 		super(name);
 		setAtomicNumber(atomicNumber);

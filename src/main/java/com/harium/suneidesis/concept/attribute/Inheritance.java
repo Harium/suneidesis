@@ -1,6 +1,7 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +69,7 @@ public class Inheritance extends Concept {
                 return concept;
             }
         }
-        return Concept.UNKNOWN;
+        return ConceptType.UNKNOWN;
     }
 
     public Map<String, Concept> getMap() {

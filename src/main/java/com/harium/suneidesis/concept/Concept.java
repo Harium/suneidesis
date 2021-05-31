@@ -7,9 +7,6 @@ public class Concept extends Thing {
 	public static final String ATTRIBUTE_ID = "id";
 	public static final String ATTRIBUTE_TYPE = "type";
 
-	public static final Concept UNKNOWN = new Concept(ConceptType.UNKNOWN);
-	public static final Concept SECRET = new Concept(ConceptType.SECRET);
-
 	private String id;
 
 	public Concept(String name) {
@@ -17,18 +14,18 @@ public class Concept extends Thing {
 		setName(name);
 	}
 
-	public Concept(Concept type) {
+	public Concept(ConceptType type) {
 		super();
 		type(type);
 	}
 
-	public Concept(String name, Concept type) {
+	public Concept(String name, ConceptType type) {
 		super();
 		type(type);
 		setName(name);
 	}
 
-	public Concept(String name, Concept type, DataType dataType) {
+	public Concept(String name, ConceptType type, DataType dataType) {
 		this(name, type);
 		dataType(dataType);
 	}
@@ -123,11 +120,11 @@ public class Concept extends Thing {
 	}
 
 	public boolean isUnknown() {
-		return ConceptType.UNKNOWN.equals(getType());
+		return ConceptType.UNKNOWN_TYPE.equals(getType());
 	}
 
 	public boolean isSecret() {
-		return (ConceptType.SECRET.equals(getType()));
+		return ConceptType.SECRET_TYPE.equals(getType());
 	}
 
 	public boolean isPrimitive() {

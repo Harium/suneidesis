@@ -10,7 +10,7 @@ public class SubstanceTest {
 
     @Test
     public void testAddAtom() {
-        Molecule molecule = new Molecule();
+        Molecule molecule = new Molecule("H");
         molecule.add(HYDROGEN);
 
         Assert.assertEquals("H", molecule.getFormula().getName());
@@ -18,7 +18,7 @@ public class SubstanceTest {
 
     @Test
     public void testAddBond() {
-        Molecule molecule = new Molecule();
+        Molecule molecule = new Molecule("Methane");
         molecule.add(CARBON);
         molecule.add(HYDROGEN);
         molecule.add(HYDROGEN);

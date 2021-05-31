@@ -12,7 +12,7 @@ public class ConceptList extends Concept {
         dataType(DataType.ARRAY);
     }
 
-    public ConceptList(Concept type) {
+    public ConceptList(ConceptType type) {
         super(type);
         dataType(DataType.ARRAY);
     }

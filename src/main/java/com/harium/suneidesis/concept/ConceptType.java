@@ -1,32 +1,39 @@
 package com.harium.suneidesis.concept;
 
-public class ConceptType {
+public class ConceptType extends Concept {
 
-    public static final Concept UNKNOWN = new Concept("UNKNOWN");
-    public static final Concept SECRET = new Concept("SECRET");
-    public static final Concept ACTION = new Concept("ACTION");
-    public static final Concept ARTIFACT = new Concept("ARTIFACT");
-    public static final Concept BEING = new Concept("BEING");
-    public static final Concept CHARACTERISTIC = new Concept("CHARACTERISTIC");
-    public static final Concept DATA = new Concept("DATA");
-    public static final Concept EVENT = new Concept("EVENT");
-    public static final Concept FEELING = new Concept("FEELING");
-    public static final Concept MEANING = new Concept("MEANING");
-    public static final Concept PART = new Concept("PART");
-    public static final Concept PHENOMENON = new Concept("PHENOMENA");
-    public static final Concept PLACE = new Concept("PLACE");
-    public static final Concept MEASUREMENT = new Concept("MEASURE");
-    public static final Concept SIMULATION = new Concept("SIMULATION");
-    public static final Concept SOUND = new Concept("SOUND");
-    public static final Concept SUBSTANCE = new Concept("SUBSTANCE");
-    public static final Concept STORY = new Concept("STORY");
-    public static final Concept TIME_UNIT = new Concept("TIME UNIT");
-    public static final Concept THEORY = new Concept("THEORY");
-    public static final Concept WORD = new Concept("WORD");
+    public static final ConceptType UNKNOWN_TYPE = new ConceptType("UNKNOWN");
+    public static final ConceptType SECRET_TYPE = new ConceptType("SECRET");
+    public static final ConceptType ACTION = new ConceptType("ACTION");
+    public static final ConceptType ARTIFACT = new ConceptType("ARTIFACT");
+    public static final ConceptType BEING = new ConceptType("BEING");
+    public static final ConceptType CHARACTERISTIC = new ConceptType("CHARACTERISTIC");
+    public static final ConceptType DATA = new ConceptType("DATA");
+    public static final ConceptType EVENT = new ConceptType("EVENT");
+    public static final ConceptType FEELING = new ConceptType("FEELING");
+    public static final ConceptType MEANING = new ConceptType("MEANING");
+    public static final ConceptType PART = new ConceptType("PART");
+    public static final ConceptType PHENOMENON = new ConceptType("PHENOMENA");
+    public static final ConceptType PLACE = new ConceptType("PLACE");
+    public static final ConceptType MEASUREMENT = new ConceptType("MEASURE");
+    public static final ConceptType SIMULATION = new ConceptType("SIMULATION");
+    public static final ConceptType SOUND = new ConceptType("SOUND");
+    public static final ConceptType SUBSTANCE = new ConceptType("SUBSTANCE");
+    public static final ConceptType STORY = new ConceptType("STORY");
+    public static final ConceptType TIME_UNIT = new ConceptType("TIME UNIT");
+    public static final ConceptType THEORY = new ConceptType("THEORY");
+    public static final ConceptType WORD = new ConceptType("WORD");
 
-    public static Concept getFromName(String name) {
-        if (SECRET.getName().equals(name)) {
-            return SECRET;
+    public static final Concept UNKNOWN = new Concept(ConceptType.UNKNOWN_TYPE);
+    public static final Concept SECRET = new Concept(ConceptType.SECRET_TYPE);
+
+    public ConceptType(String name) {
+        super(name);
+    }
+
+    public static ConceptType getFromName(String name) {
+        if (SECRET_TYPE.getName().equals(name)) {
+            return SECRET_TYPE;
         } else if (CHARACTERISTIC.getName().equals(name)) {
             return CHARACTERISTIC;
         } else if (ACTION.getName().equals(name)) {
@@ -65,7 +72,7 @@ public class ConceptType {
             return WORD;
         }
 
-        return UNKNOWN;
+        return UNKNOWN_TYPE;
     }
     
 }

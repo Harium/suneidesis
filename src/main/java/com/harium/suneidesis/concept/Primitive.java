@@ -10,7 +10,7 @@ public class Primitive extends Concept {
         dataType(DataType.PRIMITIVE);
     }
 
-    public Primitive(String value, Concept type) {
+    public Primitive(String value, ConceptType type) {
         super(value, type);
         dataType(DataType.PRIMITIVE);
     }

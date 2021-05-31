@@ -1,6 +1,7 @@
 package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.repository.nitrite.DocumentMapper;
 import org.dizitart.no2.Cursor;
 import org.dizitart.no2.Document;
@@ -20,7 +21,7 @@ public class RepositoryCursor {
     public Concept firstOrDefault() {
         Document document = cursor.firstOrDefault();
         if (document == null) {
-           return Concept.UNKNOWN;
+           return ConceptType.UNKNOWN;
         }
         return DocumentMapper.mapFromDocument(document);
     }

@@ -1,6 +1,7 @@
 package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.repository.generator.IdGenerator;
 
 import java.util.HashMap;
@@ -41,7 +42,7 @@ public class MemoryKnowledgeBase extends KnowledgeBase {
         if (concept != null) {
             return concept;
         }
-        return Concept.UNKNOWN;
+        return ConceptType.UNKNOWN;
     }
 
     @Override

@@ -121,7 +121,7 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
         Cursor cursor = collection.find(eq(Concept.ATTRIBUTE_ID, key));
 
         if (cursor == null) {
-            return ConceptType.UNKNOWN;
+            return ConceptType.UNKNOWN_TYPE;
         }
         return DocumentMapper.mapFromDocument(cursor.firstOrDefault());
     }
