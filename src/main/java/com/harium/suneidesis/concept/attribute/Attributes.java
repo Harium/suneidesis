@@ -39,6 +39,8 @@ public class Attributes implements Repository<Concept> {
         Concept concept = attributeMap.get(key);
         if (concept != null) {
             return concept;
+        } else if (inheritance == null) {
+            return Concept.UNKNOWN;
         }
 
         return getInheritance().getKey(key);
@@ -102,6 +104,10 @@ public class Attributes implements Repository<Concept> {
             }
         }
         return false;
+    }
+
+    public Concept removeAttribute(String key) {
+        return attributeMap.remove(key);
     }
 
     public Abilities getAbilities() {

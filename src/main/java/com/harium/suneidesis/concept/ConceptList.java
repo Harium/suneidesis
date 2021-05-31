@@ -18,16 +18,30 @@ public class ConceptList extends Concept {
     }
 
     public Concept get(int index) {
-        return get(Integer.toString(index));
+        String key = Integer.toString(index);
+        return get(key);
     }
 
     public void add(Concept concept) {
-        getAttributes().insert(Integer.toString(size), concept);
+        String key = Integer.toString(size);
+        getAttributes().insert(key, concept);
         size++;
     }
 
     public void remove(Concept concept) {
         if (getAttributes().remove(concept)) {
+            pack();
+        }
+    }
+
+    public void remove(int index) {
+        removeAndPack(index, true);
+    }
+
+    private void removeAndPack(int index, boolean pack) {
+        String key = Integer.toString(index);
+        Concept removed = getAttributes().removeAttribute(key);
+        if (pack && removed != null) {
             pack();
         }
     }
@@ -69,8 +83,8 @@ public class ConceptList extends Concept {
     }
 
     public void clear() {
-        for (Concept concept : getAll()) {
-            getAttributes().remove(concept);
+        for (int i = size - 1; i >= 0; i--) {
+            removeAndPack(i, false);
         }
         size = 0;
     }
