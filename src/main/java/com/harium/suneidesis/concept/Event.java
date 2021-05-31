@@ -1,5 +1,7 @@
 package com.harium.suneidesis.concept;
 
+import com.harium.suneidesis.concept.helper.Provenance;
+
 public class Event extends Concept {
 
     public static final String ATTRIBUTE_THEN = "then";

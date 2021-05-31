@@ -10,6 +10,10 @@ public class Abilities extends Concept {
 
     private final Map<String, Action> map = new HashMap<>();
 
+    public Abilities(String name) {
+        super(name);
+    }
+
     public void add(Action action) {
         map.put(action.getName(), action);
     }

@@ -16,11 +16,11 @@ public class ConceptTest {
         Place house = new Place("house");
         house.isLocatedAt(village);
 
-        Being mother = new Being();
+        Being mother = new Being("mother");
         mother.setGender(Gender.FEMALE);
 
-        Concept redCloak = new Concept();
-        Being littleGirl = new Being();
+        Concept redCloak = new Concept("red cloak");
+        Being littleGirl = new Being("little girl");
         littleGirl.setGender(Gender.FEMALE);
         littleGirl.set("mother", mother);
         littleGirl.set("wear", redCloak);

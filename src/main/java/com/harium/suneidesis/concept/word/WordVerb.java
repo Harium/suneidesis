@@ -1,5 +1,6 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
 public class WordVerb extends Word {
@@ -15,19 +16,19 @@ public class WordVerb extends Word {
 	}
 	
 	public Word getPrepositions() {
-		return (Word) attributes.get(ATTRIBUTE_PREPOSITIONS);
+		return (Word) getAttributes().get(ATTRIBUTE_PREPOSITIONS);
 	}
 
 	public String getPrepositionsWord() {
-		return attributes.get(ATTRIBUTE_PREPOSITIONS).getName();
+		return getAttributes().get(ATTRIBUTE_PREPOSITIONS).getName();
 	}
 
 	public void setPrepositions(Word gender) {
-		attributes.insert(ATTRIBUTE_PREPOSITIONS, gender);
+		getAttributes().insert(ATTRIBUTE_PREPOSITIONS, gender);
 	}
 
 	public Word getTransitivity() {
-		return (Word) attributes.get(ATTRIBUTE_TRANSITIVITY);
+		return (Word) getAttributes().get(ATTRIBUTE_TRANSITIVITY);
 	}
 
 	public String getTransitivityWord() {
@@ -35,6 +36,13 @@ public class WordVerb extends Word {
 	}
 
 	public void setTransitivity(Word Transitivity) {
-		attributes.insert(ATTRIBUTE_TRANSITIVITY, Transitivity);
+		getAttributes().insert(ATTRIBUTE_TRANSITIVITY, Transitivity);
 	}
+
+	@Override
+	public WordVerb wrap(Concept concept) {
+		super.wrap(concept);
+		return this;
+	}
+
 }

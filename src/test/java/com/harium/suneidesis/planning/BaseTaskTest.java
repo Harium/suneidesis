@@ -2,7 +2,7 @@ package com.harium.suneidesis.planning;
 
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Provenance;
+import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.planning.instruction.FindTask;
 import org.junit.Test;

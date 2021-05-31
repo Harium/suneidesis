@@ -5,29 +5,18 @@ package com.harium.suneidesis.concept;
  */
 public class Primitive extends Concept {
 
-    private String value;
-
     public Primitive(String value) {
-        super(ConceptType.DATA, DataType.PRIMITIVE);
-        this.value = value;
+        super(value, ConceptType.DATA);
+        dataType(DataType.PRIMITIVE);
     }
 
     public Primitive(String value, Concept type) {
-        super(type, DataType.PRIMITIVE);
-        this.value = value;
-    }
-
-    @Override
-    public String getName() {
-        return value;
-    }
-
-    public String getValue() {
-        return value;
+        super(value, type);
+        dataType(DataType.PRIMITIVE);
     }
 
     public void setValue(String value) {
-        this.value = value;
+        this.setName(value);
     }
 
     public void setValue(boolean value) {

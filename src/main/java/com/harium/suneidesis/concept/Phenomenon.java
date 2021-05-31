@@ -20,4 +20,9 @@ public class Phenomenon extends Concept {
         return get(ATTRIBUTE_TYPE);
     }
 
+    @Override
+    public Phenomenon wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
+    }
 }

@@ -9,6 +9,10 @@ public class Inheritance extends Concept {
 
     private final Map<String, Concept> map = new HashMap<>();
 
+    public Inheritance(String name) {
+        super(name);
+    }
+
     public void add(Concept concept) {
         map.put(concept.getName(), concept);
     }

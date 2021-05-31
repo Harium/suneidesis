@@ -31,11 +31,11 @@ public class Measurement extends Concept {
     }
 
     public Concept getValueConcept() {
-        return attributes.get(ATTRIBUTE_VALUE);
+        return getAttributes().get(ATTRIBUTE_VALUE);
     }
 
     public String getValue() {
-        Concept value = attributes.get(ATTRIBUTE_VALUE);
+        Concept value = getAttributes().get(ATTRIBUTE_VALUE);
         if (value.isUnknown()) {
             return "0";
         }
@@ -43,7 +43,7 @@ public class Measurement extends Concept {
     }
 
     public Concept getUnitConcept() {
-        return attributes.get(ATTRIBUTE_UNIT);
+        return getAttributes().get(ATTRIBUTE_UNIT);
     }
 
     public String getUnit() {
@@ -51,7 +51,7 @@ public class Measurement extends Concept {
     }
 
     public Concept getSymbolConcept() {
-        return attributes.get(ATTRIBUTE_SYMBOL);
+        return getAttributes().get(ATTRIBUTE_SYMBOL);
     }
 
     public String getSymbol() {
@@ -59,22 +59,22 @@ public class Measurement extends Concept {
     }
 
     public Measurement value(String value) {
-        attributes.insert(ATTRIBUTE_VALUE, new Concept(value));
+        getAttributes().insert(ATTRIBUTE_VALUE, new Concept(value));
         return this;
     }
 
     public Measurement unit(String unit) {
-        attributes.insert(ATTRIBUTE_UNIT, new Concept(unit));
+        getAttributes().insert(ATTRIBUTE_UNIT, new Concept(unit));
         return this;
     }
 
     public Measurement accuracy(String accuracy) {
-        attributes.insert(ATTRIBUTE_ACCURACY, new Concept(accuracy));
+        getAttributes().insert(ATTRIBUTE_ACCURACY, new Concept(accuracy));
         return this;
     }
 
     public Measurement symbol(String accuracy) {
-        attributes.insert(ATTRIBUTE_SYMBOL, new Concept(accuracy));
+        getAttributes().insert(ATTRIBUTE_SYMBOL, new Concept(accuracy));
         return this;
     }
 

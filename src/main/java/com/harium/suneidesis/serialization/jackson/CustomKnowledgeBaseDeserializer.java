@@ -100,7 +100,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
                 concept = new Concept(node.get(ATTRIBUTE_NAME).asText());
             }
         } else {
-            concept = new Concept();
+            concept = new Concept(UNKNOWN_WORD);
         }
 
         concept.id(id);
@@ -181,7 +181,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         } else {
             // Add the relationship between concepts to a queue
             Relationship relationship = new Relationship();
-            relationship.from = concept.getIdText();
+            relationship.from = concept.getId();
             relationship.target = targetId;
             relationship.relation = relation;
             relationshipList.add(relationship);

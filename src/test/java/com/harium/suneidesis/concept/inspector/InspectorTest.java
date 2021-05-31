@@ -6,14 +6,14 @@ import com.harium.suneidesis.concept.beign.Taxonomy;
 import com.harium.suneidesis.concept.word.WordNoun;
 import org.junit.Test;
 
-import static com.harium.suneidesis.concept.inspector.Inspector.does;
+import static com.harium.suneidesis.concept.helper.Inspector.does;
 import static org.junit.Assert.*;
 
 public class InspectorTest {
 
     @Test
     public void testIs() {
-        Taxonomy animalia = new Taxonomy().kingdom(new Concept("animalia"));
+        Taxonomy animalia = new Taxonomy("taxonomy").kingdom(new Concept("animalia"));
 
         Concept animal = new Concept("animal");
         animal.has(Taxonomy.ATTRIBUTE_TAXONOMY, animalia);
@@ -27,7 +27,7 @@ public class InspectorTest {
 
     @Test
     public void testInstance() {
-        Taxonomy animalia = new Taxonomy().kingdom(new Concept("animalia"));
+        Taxonomy animalia = new Taxonomy("taxonomy").kingdom(new Concept("animalia"));
 
         Concept animal = new Concept("animal");
         animal.has(Taxonomy.ATTRIBUTE_TAXONOMY, animalia);
@@ -36,7 +36,7 @@ public class InspectorTest {
         dog.is(animal);
         dog.can(new Action("walk"));
 
-        Concept billy = new Concept();
+        Concept billy = new Concept("Billy");
         billy.is(dog);
         billy.has("nickname", new WordNoun("Bill"));
 

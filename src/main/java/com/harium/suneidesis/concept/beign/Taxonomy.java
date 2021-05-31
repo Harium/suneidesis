@@ -11,10 +11,6 @@ public class Taxonomy extends Concept {
 	private static final String ATTRIBUTE_CLADE = "taxonomy_clade";
 	private static final String ATTRIBUTE_ORDER = "taxonomy_order";
 
-	public Taxonomy() {
-		super();
-	}
-
 	public Taxonomy(String name) {
 		super(name);
 	}

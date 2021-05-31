@@ -4,10 +4,10 @@ public class ConceptType {
 
     public static final Concept UNKNOWN = new Concept("UNKNOWN");
     public static final Concept SECRET = new Concept("SECRET");
-    public static final Concept ADJECTIVE = new Concept("ADJECTIVE");
     public static final Concept ACTION = new Concept("ACTION");
     public static final Concept ARTIFACT = new Concept("ARTIFACT");
     public static final Concept BEING = new Concept("BEING");
+    public static final Concept CHARACTERISTIC = new Concept("CHARACTERISTIC");
     public static final Concept DATA = new Concept("DATA");
     public static final Concept EVENT = new Concept("EVENT");
     public static final Concept FEELING = new Concept("FEELING");
@@ -27,8 +27,8 @@ public class ConceptType {
     public static Concept getFromName(String name) {
         if (SECRET.getName().equals(name)) {
             return SECRET;
-        } else if (ADJECTIVE.getName().equals(name)) {
-            return ADJECTIVE;
+        } else if (CHARACTERISTIC.getName().equals(name)) {
+            return CHARACTERISTIC;
         } else if (ACTION.getName().equals(name)) {
             return ACTION;
         } else if (ARTIFACT.getName().equals(name)) {

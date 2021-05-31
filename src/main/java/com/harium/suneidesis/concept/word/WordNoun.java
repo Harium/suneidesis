@@ -1,5 +1,6 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
 public class WordNoun extends Word {
@@ -15,15 +16,20 @@ public class WordNoun extends Word {
 	}
 	
 	public Word getGender() {
-		return (Word) attributes.get(ATTRIBUTE_GENDER);
+		return (Word) getAttributes().get(ATTRIBUTE_GENDER);
 	}
 
 	public String getGenderWord() {
-		return attributes.get(ATTRIBUTE_GENDER).getName();
+		return getAttributes().get(ATTRIBUTE_GENDER).getName();
 	}
 
 	public void setGender(Word gender) {
-		attributes.insert(ATTRIBUTE_GENDER, gender);
+		getAttributes().insert(ATTRIBUTE_GENDER, gender);
 	}
 
+	@Override
+	public WordNoun wrap(Concept concept) {
+		super.wrap(concept);
+		return this;
+	}
 }

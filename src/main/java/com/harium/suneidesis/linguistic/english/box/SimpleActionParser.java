@@ -4,7 +4,7 @@ import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Provenance;
+import com.harium.suneidesis.concept.helper.Provenance;
 
 import java.util.ArrayList;
 import java.util.Collection;

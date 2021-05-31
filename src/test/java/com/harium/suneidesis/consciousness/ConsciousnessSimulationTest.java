@@ -2,6 +2,7 @@ package com.harium.suneidesis.consciousness;
 
 import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.Measurement;
+import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.RepositoryCursor;
 import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
@@ -39,7 +40,7 @@ public class ConsciousnessSimulationTest {
 
         Concept myself = new Concept("me");
         myself.is(robot);
-        Concept autoKnowledge = new Concept();
+        Concept autoKnowledge = new Concept("auto knowledge");
         Provenance.setSubject(autoKnowledge, myself);
         consciousness.insert(KnowledgeBase.SELF, autoKnowledge);
 

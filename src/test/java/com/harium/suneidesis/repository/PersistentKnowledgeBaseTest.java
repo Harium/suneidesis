@@ -35,11 +35,11 @@ public class PersistentKnowledgeBaseTest {
         persistentKnowledgeBase.insert("randomKey1", appleTree);
 
         Concept result = persistentKnowledgeBase.get("1");
-        assertEquals("1", result.getIdText());
+        assertEquals("1", result.getId());
         assertEquals(appleTree.getName(), result.getName());
         assertTrue(result.hasKey("fruit"));
         Concept fruit = result.get("fruit");
-        assertEquals("2", fruit.getIdText());
+        assertEquals("2", fruit.getId());
         assertEquals("77", fruit.get("kcal").getValue());
     }
 

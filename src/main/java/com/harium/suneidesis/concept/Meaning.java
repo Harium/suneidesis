@@ -13,4 +13,9 @@ public class Meaning extends Concept {
         super(name, ConceptType.MEANING);
     }
 
+    @Override
+    public Meaning wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
+    }
 }

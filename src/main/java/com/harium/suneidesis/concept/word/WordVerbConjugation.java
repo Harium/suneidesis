@@ -1,5 +1,6 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
 public class WordVerbConjugation extends Word {
@@ -12,19 +13,19 @@ public class WordVerbConjugation extends Word {
 	}
 	
 	public Word getPerson() {
-		return (Word) attributes.get(ATTRIBUTE_PERSON);
+		return (Word) getAttributes().get(ATTRIBUTE_PERSON);
 	}
 
 	public String getPersonWord() {
-		return attributes.get(ATTRIBUTE_PERSON).getName();
+		return getAttributes().get(ATTRIBUTE_PERSON).getName();
 	}
 
 	public void setPerson(Word gender) {
-		attributes.insert(ATTRIBUTE_PERSON, gender);
+		getAttributes().insert(ATTRIBUTE_PERSON, gender);
 	}
 
 	public Word getTense() {
-		return (Word) attributes.get(ATTRIBUTE_TENSE);
+		return (Word) getAttributes().get(ATTRIBUTE_TENSE);
 	}
 
 	public String getTenseWord() {
@@ -32,6 +33,13 @@ public class WordVerbConjugation extends Word {
 	}
 
 	public void setTense(Word Tense) {
-		attributes.insert(ATTRIBUTE_TENSE, Tense);
+		getAttributes().insert(ATTRIBUTE_TENSE, Tense);
 	}
+
+	@Override
+	public WordVerbConjugation wrap(Concept concept) {
+		super.wrap(concept);
+		return this;
+	}
+
 }

@@ -2,7 +2,7 @@ package com.harium.suneidesis.linguistic.repository;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Provenance;
+import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.repository.decorator.EntryDecorator;
 
 public class ProvenanceWordBase extends MemoryWordBase implements WordRepository {

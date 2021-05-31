@@ -127,7 +127,7 @@ public class ConceptSerializer extends StdSerializer<Concept> {
     // Serialize concept as id to avoid circular dependencies
     public static void serializeConceptId(JsonGenerator jgen, String key, Concept concept) throws IOException {
         //jgen.writeStringField(entry.getKey(), entry.getValue().getIdText());
-        jgen.writeObjectField(key, new ConceptId(concept.getIdText()));
+        jgen.writeObjectField(key, new ConceptId(concept.getId()));
     }
 
 }

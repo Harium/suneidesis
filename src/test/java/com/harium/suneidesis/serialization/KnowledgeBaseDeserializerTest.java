@@ -2,7 +2,7 @@ package com.harium.suneidesis.serialization;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;
-import com.harium.suneidesis.concept.inspector.Inspector;
+import com.harium.suneidesis.concept.helper.Inspector;
 import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
 import com.harium.suneidesis.linguistic.repository.WordKnowledgeBase;
 import com.harium.suneidesis.repository.KnowledgeBase;

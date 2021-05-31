@@ -6,30 +6,31 @@ import java.util.Objects;
 
 public class Thing {
 
-	protected final Attributes attributes = new Attributes();
+	private String name = "";
 
-	protected Thing() {
-		super();
-	}
-
-	public Attributes getAttributes() {
-		return attributes;
-	}
+	private Attributes attributes;
 
 	public String getName() {
-		return attributes.getName();
+		return getAttributes().getName();
 	}
 
 	public Concept getNameConcept() {
-		return attributes.getNameConcept();
+		return getAttributes().getNameConcept();
 	}
 
 	public void setName(String name) {
-		attributes.setName(name);
+		getAttributes().setName(name);
 	}
 
-	public void setNameConcept(Concept nameConcept) {
-		attributes.setNameConcept(nameConcept);
+	public Attributes getAttributes() {
+		if (attributes == null) {
+			attributes = new Attributes();
+		}
+		return attributes;
+	}
+
+	public void setAttributes(Attributes attributes) {
+		this.attributes = attributes;
 	}
 
 	@Override

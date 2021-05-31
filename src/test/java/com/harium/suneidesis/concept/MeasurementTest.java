@@ -2,7 +2,7 @@ package com.harium.suneidesis.concept;
 
 import org.junit.Test;
 
-import static com.harium.suneidesis.concept.inspector.Inspector.does;
+import static com.harium.suneidesis.concept.helper.Inspector.does;
 import static org.junit.Assert.*;
 
 public class MeasurementTest {

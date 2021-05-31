@@ -62,7 +62,7 @@ public abstract class KnowledgeBase implements Repository<Concept> {
 
     @Override
     public void save(Concept concept) {
-        insert(concept.getIdText(), concept);
+        insert(concept.getId(), concept);
     }
 
     public abstract void merge(KnowledgeBase concepts);
@@ -74,7 +74,7 @@ public abstract class KnowledgeBase implements Repository<Concept> {
     }
 
     public String add(Concept concept) {
-        Concept id = concept.getId();
+        Concept id = concept.getIdConcept();
         if (!id.isUnknown() && contains(id.getName())) {
             return id.getName();
         }

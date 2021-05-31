@@ -83,7 +83,7 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
 
     public String index(Word w) {
         //String factId = add(w);
-        String factId = w.getIdText();
+        String factId = w.getId();
         w.setWordId(factId);
         List<Word> words = this.words.computeIfAbsent(w.getName(), k -> new ArrayList<>());
         words.add(w);

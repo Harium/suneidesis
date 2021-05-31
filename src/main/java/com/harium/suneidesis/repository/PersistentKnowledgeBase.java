@@ -67,7 +67,7 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
 
     @Override
     public void save(Concept concept) {
-        Document saved = collection.find(eq(Concept.ATTRIBUTE_ID, concept.getIdText())).firstOrDefault();
+        Document saved = collection.find(eq(Concept.ATTRIBUTE_ID, concept.getId())).firstOrDefault();
         boolean exists = saved != null;
 
         if (!exists) {
