@@ -23,4 +23,10 @@ public class Inventory extends Concept {
     public Concept getOwner() {
         return get(ATTRIBUTE_OWNER);
     }
+
+    @Override
+    public Inventory wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
+    }
 }

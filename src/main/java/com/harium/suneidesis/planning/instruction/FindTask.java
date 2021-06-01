@@ -21,17 +21,16 @@ public class FindTask extends BaseTask {
         for (Concept concept : environment.getValues()) {
             Provenance fact = new Provenance(concept);
             Concept factSubject = fact.getSubject();
-            if (factSubject instanceof Inventory) {
-                Inventory inventory = (Inventory) factSubject;
+            if (isInventory(factSubject)) {
+                Inventory inventory = new Inventory().wrap(factSubject);
                 canAccess(subject, inventory);
                 for (Concept item : inventory.getAttributes().getValues()) {
-                    if (target == item) {
+                    if (target.getName().equals(item.getName())) {
                         found = true;
                         break;
                     }
                 }
             }
-
         }
 
         if (!found) {
@@ -39,6 +38,10 @@ public class FindTask extends BaseTask {
         }
 
         return super.execute(subject, environment);
+    }
+
+    private boolean isInventory(Concept factSubject) {
+        return "inventory".equals(factSubject.getName());
     }
 
     private boolean canAccess(Concept subject, Inventory inventory) {
