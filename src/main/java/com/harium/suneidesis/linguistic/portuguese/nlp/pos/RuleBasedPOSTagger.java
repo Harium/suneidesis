@@ -56,7 +56,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                         for (Word wv : ws) {
                             if (isVerb(wv.getTagWord())) {
                                 String toBeVerbId = verbWordId(VERB_TO_BE);
-                                if (toBeVerbId != null && toBeVerbId.equals(wv.getLemma().getId())) {
+                                if (toBeVerbId != null && toBeVerbId.equals(wv.getLemma().getIdConcept())) {
                                     output[i].setTag(Tag.ADJECTIVE);
                                 }
                             }

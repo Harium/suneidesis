@@ -2,11 +2,12 @@ package com.harium.suneidesis.serialization;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;
-import com.harium.suneidesis.concept.inspector.Inspector;
+import com.harium.suneidesis.concept.helper.Inspector;
 import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
 import com.harium.suneidesis.linguistic.repository.WordKnowledgeBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseDeserializer;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;
 import org.json.JSONException;
@@ -38,7 +39,7 @@ public class KnowledgeBaseDeserializerTest {
     public void testSimple() throws IOException, URISyntaxException, JSONException {
         String json = loadFileAsString("database_simple.json");
 
-        KnowledgeBase database = new MemoryKnowledgeBase();
+        KnowledgeBase database = new NitriteMemoryKnowledgeBase();
         deserializer.deserialize(json, database);
 
         assertEquals("database", database.getName());
@@ -59,7 +60,7 @@ public class KnowledgeBaseDeserializerTest {
     public void testComplex() throws IOException, URISyntaxException, JSONException {
         String json = loadFileAsString("database_complex.json");
 
-        KnowledgeBase database = new MemoryKnowledgeBase();
+        KnowledgeBase database = new NitriteMemoryKnowledgeBase();
         deserializer.deserialize(json, database);
 
         assertEquals("database", database.getName());

@@ -62,4 +62,11 @@ public class Story extends Concept {
     public Concept getStoryType() {
         return get(ATTRIBUTE_TYPE);
     }
+
+    @Override
+    public Story wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
+    }
+
 }

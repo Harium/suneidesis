@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Deprecated
 public class MemoryWordBase extends WordKnowledgeBase implements WordRepository {
 
     // Delegate
@@ -82,7 +83,7 @@ public class MemoryWordBase extends WordKnowledgeBase implements WordRepository 
 
     public String index(Word w) {
         //String factId = add(w);
-        String factId = w.getIdText();
+        String factId = w.getId();
         w.setWordId(factId);
         List<Word> words = this.words.computeIfAbsent(w.getName(), k -> new ArrayList<>());
         words.add(w);

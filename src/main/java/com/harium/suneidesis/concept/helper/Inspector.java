@@ -1,4 +1,4 @@
-package com.harium.suneidesis.concept.inspector;
+package com.harium.suneidesis.concept.helper;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
@@ -30,7 +30,7 @@ public class Inspector {
     }
 
     public boolean can(Action action) {
-        return concept.getAttributes().getAbilities().query(action);
+        return concept.getAttributes().getAbilities().contains(action.getName());
     }
 
     public boolean can(String actionKey) {

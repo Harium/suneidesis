@@ -60,33 +60,12 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         return concept;
     }
 
+    @Override
+    public void save(Concept concept) {
+        insert(concept.getId(), concept);
+    }
+
     public abstract void merge(KnowledgeBase concepts);
-
-    public List<Concept> query(Search search) {
-        List<Concept> result = new ArrayList<>();
-        for (Concept concept : getValues()) {
-            // Search nested concepts
-            if(!checkConcept(search, result, concept)) {
-                for (Concept attribute : concept.getAttributes().getValues()) {
-                    checkConcept(search, result, attribute);
-                }
-            }
-        }
-        return result;
-    }
-
-    private boolean checkConcept(Search search, List<Concept> result, Concept concept) {
-        if (search.term.equals(concept.getName())) {
-            // Check permission
-            if (!concept.isSecret()) {
-                result.add(concept);
-            } /*else if (concept.getSourceId().getName().equals(search.userId)) {
-                result.add(concept);
-            }*/
-            return true;
-        }
-        return false;
-    }
 
     public void addAll(Collection<Concept> concepts) {
         for (Concept concept : concepts) {
@@ -95,7 +74,7 @@ public abstract class KnowledgeBase implements Repository<Concept> {
     }
 
     public String add(Concept concept) {
-        Concept id = concept.getId();
+        Concept id = concept.getIdConcept();
         if (!id.isUnknown() && contains(id.getName())) {
             return id.getName();
         }

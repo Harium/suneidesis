@@ -23,5 +23,10 @@ public class Place extends Concept {
 	public Place getPlace() {
 		return (Place) get(ATTRIBUTE_AT);
 	}
-	
+
+	@Override
+	public Place wrap(Concept concept) {
+		super.wrap(concept);
+		return this;
+	}
 }

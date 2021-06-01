@@ -4,10 +4,6 @@ import com.harium.suneidesis.concept.Concept;
 
 public class Molecule extends Substance {
 
-    public Molecule() {
-        super();
-    }
-
     public Molecule(String name) {
         super(name);
     }

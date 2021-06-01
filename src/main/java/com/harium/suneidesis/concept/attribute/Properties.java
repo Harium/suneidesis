@@ -13,6 +13,10 @@ public class Properties extends Concept {
     private final Map<String, Concept> map = new HashMap<>();
     private final Map<Concept, Measurement> quantities = new HashMap<>();
 
+    public Properties(String name) {
+        super(name);
+    }
+
     public void add(Concept property, Measurement measurement) {
         map.put(property.getName(), property);
         quantities.put(property, measurement);

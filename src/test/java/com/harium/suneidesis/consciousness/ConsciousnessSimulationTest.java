@@ -2,27 +2,27 @@ package com.harium.suneidesis.consciousness;
 
 import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.Measurement;
+import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.repository.KnowledgeBase;
-import com.harium.suneidesis.repository.MemoryKnowledgeBase;
-import com.harium.suneidesis.repository.Search;
+import com.harium.suneidesis.repository.RepositoryCursor;
+import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
+import static org.dizitart.no2.filters.Filters.eq;
 import static org.junit.Assert.assertEquals;
 
 public class ConsciousnessSimulationTest {
 
-    private KnowledgeBase alexa;
-    private KnowledgeBase siri;
+    private NitriteMemoryKnowledgeBase alexa;
+    private NitriteMemoryKnowledgeBase siri;
 
     @Before
     public void setUp() {
-        alexa = new MemoryKnowledgeBase("Alexa");
+        alexa = new NitriteMemoryKnowledgeBase("Alexa");
         buildSelf(alexa);
 
-        siri = new MemoryKnowledgeBase("Siri");
+        siri = new NitriteMemoryKnowledgeBase("Siri");
         buildSelf(siri);
     }
 
@@ -40,7 +40,7 @@ public class ConsciousnessSimulationTest {
 
         Concept myself = new Concept("me");
         myself.is(robot);
-        Concept autoKnowledge = new Concept();
+        Concept autoKnowledge = new Concept("auto knowledge");
         Provenance.setSubject(autoKnowledge, myself);
         consciousness.insert(KnowledgeBase.SELF, autoKnowledge);
 
@@ -58,7 +58,7 @@ public class ConsciousnessSimulationTest {
         Place land = new Place("land");
 
         // Fact 1: The robot 1 was at the river yesterday
-        Concept fact1 = new Concept();
+        Concept fact1 = new Concept("fact1");
         Provenance fact1Wrapper = new Provenance(fact1);
         fact1Wrapper.source(searchEngine)
                 .acquisitionMedium(internet)
@@ -66,10 +66,10 @@ public class ConsciousnessSimulationTest {
                 .subject(robot1)
                 .time(Time.YESTERDAY)
                 .place(river);
-        consciousness.insert("fact1", fact1);
+        consciousness.add(fact1);
 
         // Fact 2: The robot 1 is at the river now
-        Concept fact2 = new Concept();
+        Concept fact2 = new Concept("fact2");
         Provenance fact2Wrapper = new Provenance(fact2);
         fact2Wrapper.source(searchEngine)
                 .acquisitionMedium(internet)
@@ -77,15 +77,16 @@ public class ConsciousnessSimulationTest {
                 .subject(robot1)
                 .time(Time.NOW)
                 .place(land);
-        consciousness.insert("fact2", fact2);
+        consciousness.add(fact2);
     }
 
     @Test
-    public void testQuery() {
-        Search search = new Search();
-        search.term = "robot 1";
-        List<Concept> robot1Facts = alexa.query(search);
-        assertEquals(2, robot1Facts.size());
+    public void testFind() {
+        RepositoryCursor cursor = alexa.find(eq("subject.name", "robot 1"));
+        assertEquals(2, cursor.size());
+
+        Concept concept = cursor.firstOrDefault();
+        assertEquals("fact1", concept.getName());
     }
 
 }

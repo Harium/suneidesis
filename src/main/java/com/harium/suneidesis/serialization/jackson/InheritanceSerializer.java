@@ -23,7 +23,7 @@ public class InheritanceSerializer extends StdSerializer<Inheritance> {
     public void serialize(Inheritance inheritance, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
         jgen.writeStartArray();
         for (Map.Entry<String, Concept> entry : inheritance.getMap().entrySet()) {
-            jgen.writeString(entry.getValue().getIdText());
+            jgen.writeString(entry.getValue().getId());
         }
         jgen.writeEndArray();
     }

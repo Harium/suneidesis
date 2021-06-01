@@ -7,6 +7,10 @@ public class Inventory extends Concept {
 
     private static final String ATTRIBUTE_OWNER = "owner";
 
+    public Inventory() {
+        super("inventory");
+    }
+
     public void add(Concept concept) {
         set(concept.getName(), concept);
     }
@@ -18,5 +22,11 @@ public class Inventory extends Concept {
 
     public Concept getOwner() {
         return get(ATTRIBUTE_OWNER);
+    }
+
+    @Override
+    public Inventory wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
     }
 }

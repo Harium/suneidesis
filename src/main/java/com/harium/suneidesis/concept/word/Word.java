@@ -1,5 +1,6 @@
 package com.harium.suneidesis.concept.word;
 
+import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.Primitive;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
@@ -9,8 +10,6 @@ public class Word extends Primitive {
     public static final String ATTRIBUTE_TAG = "tag";
     public static final String ATTRIBUTE_LEMMA = "lemma";
     public static final String ATTRIBUTE_WORD_TYPE = "word_type";
-
-    private String wordId;
 
     public Word(String name) {
         super(name, ConceptType.WORD);
@@ -27,43 +26,43 @@ public class Word extends Primitive {
     }
 
     public String getWordId() {
-        return wordId;
+        return getId();
     }
 
     public void setWordId(String id) {
-        this.wordId = id;
+        this.id(id);
     }
 
     public Word getLemma() {
-        return (Word) attributes.get(ATTRIBUTE_LEMMA);
+        return (Word) getAttributes().get(ATTRIBUTE_LEMMA);
     }
 
     public String getLemmaWord() {
-        return attributes.get(ATTRIBUTE_LEMMA).getName();
+        return getAttributes().get(ATTRIBUTE_LEMMA).getName();
     }
 
     public void setLemma(Word lemma) {
-        attributes.insert(ATTRIBUTE_LEMMA, lemma);
+        getAttributes().insert(ATTRIBUTE_LEMMA, lemma);
     }
 
     public Word getTag() {
-        return (Word) attributes.get(ATTRIBUTE_TAG);
+        return (Word) getAttributes().get(ATTRIBUTE_TAG);
     }
 
     public String getTagWord() {
-        return attributes.get(ATTRIBUTE_TAG).getName();
+        return getAttributes().get(ATTRIBUTE_TAG).getName();
     }
 
     public void setTag(Word tag) {
-        attributes.insert(ATTRIBUTE_TAG, tag);
+        getAttributes().insert(ATTRIBUTE_TAG, tag);
     }
 
     public void setTag(String tagName) {
-        attributes.insert(ATTRIBUTE_TAG, new Word(tagName));
+        getAttributes().insert(ATTRIBUTE_TAG, new Word(tagName));
     }
 
     public Word getWordType() {
-        return (Word) attributes.get(ATTRIBUTE_WORD_TYPE);
+        return (Word) getAttributes().get(ATTRIBUTE_WORD_TYPE);
     }
 
     public String getWordTypeText() {
@@ -71,6 +70,12 @@ public class Word extends Primitive {
     }
 
     public void setWordType(Word Type) {
-        attributes.insert(ATTRIBUTE_WORD_TYPE, Type);
+        getAttributes().insert(ATTRIBUTE_WORD_TYPE, Type);
+    }
+
+    @Override
+    public Word wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
     }
 }

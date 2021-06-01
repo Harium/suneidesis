@@ -7,10 +7,6 @@ public class Substance extends Concept {
 
     public static final String ATTRIBUTE_FORMULA = "material formula";
 
-    public Substance() {
-        super(ConceptType.SUBSTANCE);
-    }
-
     public Substance(String name){
         super(name, ConceptType.SUBSTANCE);
     }

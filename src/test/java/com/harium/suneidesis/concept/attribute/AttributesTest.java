@@ -1,14 +1,14 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
-import com.harium.suneidesis.concept.inspector.Inspector;
-import com.harium.suneidesis.concept.inspector.matchers.Equals;
-import com.harium.suneidesis.concept.inspector.matchers.GreaterThan;
-import com.harium.suneidesis.concept.inspector.matchers.LowerThan;
+import com.harium.suneidesis.concept.helper.Inspector;
+import com.harium.suneidesis.concept.helper.matchers.Equals;
+import com.harium.suneidesis.concept.helper.matchers.GreaterThan;
+import com.harium.suneidesis.concept.helper.matchers.LowerThan;
 import com.harium.suneidesis.concept.Measurement;
 import org.junit.Test;
 
-import static com.harium.suneidesis.concept.inspector.Inspector.does;
+import static com.harium.suneidesis.concept.helper.Inspector.does;
 import static org.junit.Assert.*;
 
 public class AttributesTest {
@@ -33,10 +33,8 @@ public class AttributesTest {
         assertTrue(does(flying).can("fly"));
 
         Concept bat = new Concept("bat");
-        bat.is(new Being(""));
         bat.is(flying);
 
-        assertEquals(ConceptType.BEING, bat.getType());
         assertEquals("bat", bat.getName());
         assertTrue(does(bat).can("fly"));
 

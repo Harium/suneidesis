@@ -67,18 +67,21 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             if (target != null) {
                 if (!Relationship.INHERITANCE.equals(relationship.relation)) {
                     from.set(relationship.relation, target);
+                    base.save(from);
                 } else {
                     from.is(target);
+                    base.save(from);
                 }
             } else {
                 if (!Relationship.INHERITANCE.equals(relationship.relation)) {
                     from.set(relationship.relation, new Concept(relationship.target));
+                    base.save(from);
                 } else {
                     // It should never happen (otherwise the inheritance is missing)
                     from.is(new Concept(relationship.target));
+                    base.save(from);
                 }
             }
-
         }
     }
 
@@ -96,7 +99,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
                 concept = new Concept(node.get(ATTRIBUTE_NAME).asText());
             }
         } else {
-            concept = new Concept();
+            concept = new Concept(ConceptType.UNKNOWN_TYPE);
         }
 
         concept.id(id);
@@ -177,7 +180,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         } else {
             // Add the relationship between concepts to a queue
             Relationship relationship = new Relationship();
-            relationship.from = concept.getIdText();
+            relationship.from = concept.getId();
             relationship.target = targetId;
             relationship.relation = relation;
             relationshipList.add(relationship);

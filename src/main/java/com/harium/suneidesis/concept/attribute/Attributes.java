@@ -2,7 +2,7 @@ package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.Measurement;
-import com.harium.suneidesis.concept.primitive.Text;
+import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
 
 import java.util.Collection;
@@ -13,16 +13,15 @@ import java.util.Set;
 
 public class Attributes implements Repository<Concept> {
 
+    public static final String ATTRIBUTE_NAME = "name";
+    public static final String ATTRIBUTE_DATA_TYPE = "dataType";
+
     public static final String ATTRIBUTE_ABILITIES = "abilities";
     public static final String ATTRIBUTE_PROPERTIES = "props";
     public static final String ATTRIBUTE_INHERITANCE = "inheritance";
     public static final String ATTRIBUTE_LOCATION = "location";
-    public static final String ATTRIBUTE_NAME = "name";
-    public static final String ATTRIBUTE_DATA_TYPE = "dataType";
 
-    public static final Text UNKNOWN_WORD = new Text("?");
-
-    private String name;
+    private String name = "";
     private DataType dataType = DataType.OBJECT;
 
     // What the concept *can* do
@@ -38,12 +37,22 @@ public class Attributes implements Repository<Concept> {
         Concept concept = attributeMap.get(key);
         if (concept != null) {
             return concept;
+        } else if (inheritance == null) {
+            return ConceptType.UNKNOWN;
         }
 
-        return getInheritance().getKey(key);
+        return getInheritance().get(key);
     }
 
     public boolean contains(String key) {
+        if (inheritance != null) {
+            for (Concept concept : getInheritance().getMap().values()) {
+                if (concept.hasKey(key)) {
+                    return true;
+                }
+            }
+        }
+
         return !get(key).isUnknown();
     }
 
@@ -53,6 +62,16 @@ public class Attributes implements Repository<Concept> {
         properties.getAttributes().clear();
         abilities.getAttributes().clear();
         inheritance.getAttributes().clear();
+    }
+
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public boolean isClosed() {
+        return false;
     }
 
     public boolean queryIs(String key) {
@@ -73,6 +92,11 @@ public class Attributes implements Repository<Concept> {
         return attributeMap.put(key, concept);
     }
 
+    @Override
+    public void save(Concept concept) {
+        insert(concept.getId(), concept);
+    }
+
     public boolean remove(Concept concept) {
         return attributeMap.values().remove(concept);
     }
@@ -88,9 +112,13 @@ public class Attributes implements Repository<Concept> {
         return false;
     }
 
+    public Concept removeAttribute(String key) {
+        return attributeMap.remove(key);
+    }
+
     public Abilities getAbilities() {
         if (abilities == null) {
-            abilities = new Abilities();
+            abilities = new Abilities(ATTRIBUTE_ABILITIES);
             attributeMap.put(ATTRIBUTE_ABILITIES, abilities);
         }
         return abilities;
@@ -98,7 +126,7 @@ public class Attributes implements Repository<Concept> {
 
     public Properties getProperties() {
         if (properties == null) {
-            properties = new Properties();
+            properties = new Properties(ATTRIBUTE_PROPERTIES);
             attributeMap.put(ATTRIBUTE_PROPERTIES, properties);
         }
         return properties;
@@ -106,7 +134,7 @@ public class Attributes implements Repository<Concept> {
 
     public Inheritance getInheritance() {
         if (inheritance == null) {
-            inheritance = new Inheritance();
+            inheritance = new Inheritance(ATTRIBUTE_INHERITANCE);
             attributeMap.put(ATTRIBUTE_INHERITANCE, inheritance);
         }
         return inheritance;
@@ -128,23 +156,11 @@ public class Attributes implements Repository<Concept> {
     }
 
     public Concept getNameConcept() {
-        if (DataType.PRIMITIVE.equals(getDataType())) {
-            return new Text(name);
-        } else {
-            return attributeMap.get(ATTRIBUTE_NAME);
-        }
+        return new Word(name);
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setNameConcept(Concept name) {
-        attributeMap.put(ATTRIBUTE_NAME, name);
-    }
-
-    private Text getOrCreateWord(String name) {
-        return new Text(name);
     }
 
     // Assign a super class
@@ -165,8 +181,8 @@ public class Attributes implements Repository<Concept> {
         }
     }
 
-    public void merge(Attributes attributes) {
-        for (Map.Entry<String, Concept> entry : attributes.attributeMap.entrySet()) {
+    public void merge(Attributes attr) {
+        for (Map.Entry<String, Concept> entry : attr.attributeMap.entrySet()) {
             String key = entry.getKey();
             if (ATTRIBUTE_NAME.equals(key)) {
                 continue;
@@ -176,10 +192,10 @@ public class Attributes implements Repository<Concept> {
                 getProperties().merge(properties);
             } else if (ATTRIBUTE_ABILITIES.equals(key)) {
                 Abilities abilities = (Abilities) entry.getValue();
-                getAbilities().merge(abilities);
+                getAbilities().getAttributes().merge(abilities.getAttributes());
             } else if (ATTRIBUTE_INHERITANCE.equals(key)) {
                 Inheritance inheritance = (Inheritance) entry.getValue();
-                getInheritance().merge(inheritance);
+                getInheritance().getAttributes().merge(inheritance.getAttributes());
             } else {
                 attributeMap.put(key, entry.getValue());
             }
@@ -191,11 +207,11 @@ public class Attributes implements Repository<Concept> {
     }
 
     public boolean can(String actionKey) {
-        if (getAbilities().query(actionKey)) {
+        if (getAbilities().contains(actionKey)) {
             return true;
         }
 
-        return inheritance.can(actionKey);
+        return getInheritance().can(actionKey);
     }
 
     public void hasPart(Concept part, Measurement measurement) {

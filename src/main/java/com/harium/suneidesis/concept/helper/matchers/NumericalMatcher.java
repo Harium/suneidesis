@@ -1,6 +1,6 @@
-package com.harium.suneidesis.concept.inspector.matchers;
+package com.harium.suneidesis.concept.helper.matchers;
 
-import com.harium.suneidesis.concept.inspector.MeasureMatcher;
+import com.harium.suneidesis.concept.helper.MeasureMatcher;
 
 import java.math.BigDecimal;
 

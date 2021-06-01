@@ -11,6 +11,7 @@ import com.harium.suneidesis.repository.listener.RepositoryListener;
 
 import java.util.List;
 
+@Deprecated
 public abstract class WordKnowledgeBase extends KnowledgeBase implements WordRepository, RepositoryListener {
 
     public WordKnowledgeBase(String name) {
@@ -63,5 +64,15 @@ public abstract class WordKnowledgeBase extends KnowledgeBase implements WordRep
                 onInsert(key, word);
             //}
         }
+    }
+
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public boolean isClosed() {
+        return false;
     }
 }

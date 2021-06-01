@@ -12,28 +12,42 @@ public class ConceptList extends Concept {
         dataType(DataType.ARRAY);
     }
 
-    public ConceptList(Concept type) {
+    public ConceptList(ConceptType type) {
         super(type);
         dataType(DataType.ARRAY);
     }
 
     public Concept get(int index) {
-        return get(Integer.toString(index));
+        String key = Integer.toString(index);
+        return get(key);
     }
 
     public void add(Concept concept) {
-        attributes.insert(Integer.toString(size), concept);
+        String key = Integer.toString(size);
+        getAttributes().insert(key, concept);
         size++;
     }
 
     public void remove(Concept concept) {
-        if (attributes.remove(concept)) {
+        if (getAttributes().remove(concept)) {
+            pack();
+        }
+    }
+
+    public void remove(int index) {
+        removeAndPack(index, true);
+    }
+
+    private void removeAndPack(int index, boolean pack) {
+        String key = Integer.toString(index);
+        Concept removed = getAttributes().removeAttribute(key);
+        if (pack && removed != null) {
             pack();
         }
     }
 
     public void removeByName(String key) {
-        if (attributes.removeByName(key)) {
+        if (getAttributes().removeByName(key)) {
             pack();
         }
     }
@@ -42,11 +56,11 @@ public class ConceptList extends Concept {
         int realLength = size;
         // Rearrange concepts so they can be contiguous
         for (int i = 0; i < size; i++) {
-            if (!attributes.contains(Integer.toString(i))) {
+            if (!getAttributes().contains(Integer.toString(i))) {
                 realLength--;
                 for (int k = i + 1; k < size; k++) {
-                    Concept concept = attributes.get(Integer.toString(k));
-                    attributes.insert(Integer.toString(k - 1), concept);
+                    Concept concept = getAttributes().get(Integer.toString(k));
+                    getAttributes().insert(Integer.toString(k - 1), concept);
                 }
             }
         }
@@ -60,7 +74,7 @@ public class ConceptList extends Concept {
         for (int i = 0; i < size; i++) {
             String key = Integer.toString(i);
 
-            Concept item = attributes.get(key);
+            Concept item = getAttributes().get(key);
             if (!item.isUnknown()) {
                 items.add(item);
             }
@@ -69,8 +83,8 @@ public class ConceptList extends Concept {
     }
 
     public void clear() {
-        for (Concept concept : getAll()) {
-            attributes.remove(concept);
+        for (int i = size - 1; i >= 0; i--) {
+            removeAndPack(i, false);
         }
         size = 0;
     }

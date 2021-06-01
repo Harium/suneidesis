@@ -6,12 +6,12 @@ import org.junit.Test;
 
 public class MetabolicProcessTest {
 
-    private static final Molecule CARBON_MONOXIDE = new Molecule();
-    private static final Molecule CARBON_DIOXIDE = new Molecule();
-    private static final Molecule HYDROGEN = new Molecule();
-    private static final Molecule WATER = new Molecule();
+    private static final Molecule CARBON_MONOXIDE = new Molecule("Carbon Monoxide");
+    private static final Molecule CARBON_DIOXIDE = new Molecule("Carbon Dioxide");
+    private static final Molecule HYDROGEN = new Molecule("Hydrogen");
+    private static final Molecule WATER = new Molecule("Water");
 
-    Metabolism metabolism;
+    private Metabolism metabolism;
 
     @Test
     public void testMetabolicProcess() {

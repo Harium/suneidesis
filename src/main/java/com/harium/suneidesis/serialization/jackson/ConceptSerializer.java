@@ -78,10 +78,10 @@ public class ConceptSerializer extends StdSerializer<Concept> {
                 continue;
             }
             if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
-                Inheritance inheritance = (Inheritance) entry.getValue();
+                Inheritance inheritance = new Inheritance("").wrap(entry.getValue());
                 // Skip inheritance if empty
                 if (!inheritance.getMap().isEmpty()) {
-                    jgen.writeObjectField(entry.getKey(), entry.getValue());
+                    jgen.writeObjectField(entry.getKey(), inheritance);
                 }
                 continue;
             }
@@ -127,7 +127,7 @@ public class ConceptSerializer extends StdSerializer<Concept> {
     // Serialize concept as id to avoid circular dependencies
     public static void serializeConceptId(JsonGenerator jgen, String key, Concept concept) throws IOException {
         //jgen.writeStringField(entry.getKey(), entry.getValue().getIdText());
-        jgen.writeObjectField(key, new ConceptId(concept.getIdText()));
+        jgen.writeObjectField(key, new ConceptId(concept.getId()));
     }
 
 }

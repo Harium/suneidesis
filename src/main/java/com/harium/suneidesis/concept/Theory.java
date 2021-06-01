@@ -28,4 +28,9 @@ public class Theory extends Concept {
         return get(ATTRIBUTE_TYPE);
     }
 
+    @Override
+    public Theory wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
+    }
 }

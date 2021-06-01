@@ -14,12 +14,6 @@ public class Atom extends Substance {
 		super(name);
 	}
 
-	public Atom(int atomicNumber, int massNumber) {
-		super();
-		setAtomicNumber(atomicNumber);
-		setMassNumber(massNumber);
-	}
-
 	public Atom(String name, int atomicNumber, int massNumber) {
 		super(name);
 		setAtomicNumber(atomicNumber);
@@ -32,24 +26,24 @@ public class Atom extends Substance {
 	}
 
 	public Concept getAtomicNumber() {
-		return attributes.get(ATTRIBUTE_ATOMIC_NUMBER);
+		return getAttributes().get(ATTRIBUTE_ATOMIC_NUMBER);
 	}
 
 	public String getAtomicNumberValue() {
-		return attributes.get(ATTRIBUTE_ATOMIC_NUMBER).getName();
+		return getAttributes().get(ATTRIBUTE_ATOMIC_NUMBER).getName();
 	}
 
 	public void setAtomicNumber(int atomicNumber) {
 		String text = Integer.toString(atomicNumber);
-		this.attributes.insert(ATTRIBUTE_ATOMIC_NUMBER, new Measurement(text));
+		this.getAttributes().insert(ATTRIBUTE_ATOMIC_NUMBER, new Measurement(text));
 	}
 
 	public Concept getMassNumber() {
-		return attributes.get(ATTRIBUTE_MASS_NUMBER);
+		return getAttributes().get(ATTRIBUTE_MASS_NUMBER);
 	}
 
 	public String getMassNumberValue() {
-		return attributes.get(ATTRIBUTE_MASS_NUMBER).getName();
+		return getAttributes().get(ATTRIBUTE_MASS_NUMBER).getName();
 	}
 
 	public void setMassNumber(int massNumber) {

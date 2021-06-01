@@ -29,7 +29,7 @@ public class Time extends Concept {
     }
 
     public Concept getStart() {
-        return attributes.get(ATTRIBUTE_START);
+        return getAttributes().get(ATTRIBUTE_START);
     }
 
     public Time start(String start) {
@@ -38,7 +38,7 @@ public class Time extends Concept {
     }
 
     public Concept getEnd() {
-        return attributes.get(ATTRIBUTE_END);
+        return getAttributes().get(ATTRIBUTE_END);
     }
 
     public Time end(String end) {
@@ -46,4 +46,9 @@ public class Time extends Concept {
         return this;
     }
 
+    @Override
+    public Time wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
+    }
 }

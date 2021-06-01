@@ -13,6 +13,10 @@ public class BaseTask extends Concept {
 
     private List<BaseTask> subTasks = new ArrayList<>();
 
+    public BaseTask(String name) {
+        super(name);
+    }
+
     public boolean execute(Concept subject, KnowledgeBase environment) {
         boolean success = true;
         for (BaseTask task : subTasks) {
