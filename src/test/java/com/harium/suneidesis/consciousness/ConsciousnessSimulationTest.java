@@ -5,7 +5,7 @@ import com.harium.suneidesis.concept.Measurement;
 import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.concept.measurement.Time;
 import com.harium.suneidesis.repository.KnowledgeBase;
-import com.harium.suneidesis.repository.RepositoryCursor;
+import com.harium.suneidesis.repository.RepositoryConceptCursor;
 import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
 import org.junit.Before;
 import org.junit.Test;
@@ -83,7 +83,7 @@ public class ConsciousnessSimulationTest {
 
     @Test
     public void testFind() {
-        RepositoryCursor cursor = alexa.find(eq("subject.name", "robot 1"));
+        RepositoryConceptCursor cursor = alexa.find(eq("subject.name", "robot 1"));
         assertEquals(2, cursor.size());
 
         Concept concept = cursor.firstOrDefault();

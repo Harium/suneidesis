@@ -1,5 +1,6 @@
 package com.harium.suneidesis.linguistic.english.box;
 
+import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
@@ -59,14 +60,13 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
         return BaseEnglishBox.checkAction(parts[0], DID);
     }
 
-    private List<Concept> findActionByActorsName(String actorName, Collection<Concept> actions) {
+    private List<Concept> findActionByActorsName(String actorName, Collection<Action> actions) {
         List<Concept> facts = new ArrayList<>();
         String name = actorName.toLowerCase();
 
-        for (Concept concept : actions) {
-            Provenance frame = new Provenance(concept);
-            boolean hasActor = frame.getSubject() !=null && frame.getSubject().getName().toLowerCase().contains(name);
-            boolean hasTarget = frame.getObject() != null && frame.getObject().getName().toLowerCase().contains(name);
+        for (Action concept : actions) {
+            boolean hasActor = concept.getSubject() !=null && concept.getSubject().getName().toLowerCase().contains(name);
+            boolean hasTarget = concept.getObject() != null && concept.getObject().getName().toLowerCase().contains(name);
 
             if (hasActor || hasTarget) {
                 facts.add(concept);
@@ -76,11 +76,10 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
         return facts;
     }
 
-    private List<Concept> findByActionName(String actionName, Collection<Concept> actions) {
+    private List<Concept> findByActionName(String actionName, Collection<Action> actions) {
         List<Concept> facts = new ArrayList<>();
-        for (Concept concept : actions) {
-            Provenance fact = new Provenance(concept);
-            if (fact.getPredicate() !=null && fact.getPredicate().getName().toLowerCase().contains(actionName)) {
+        for (Action concept : actions) {
+            if (concept.getPredicate() !=null && concept.getPredicate().getName().toLowerCase().contains(actionName)) {
                 facts.add(concept);
             }
         }
@@ -88,10 +87,8 @@ public class SimpleActionParser extends BeingParser implements ActionParser {
         return facts;
     }
 
-    public String describeAction(Concept concept) {
+    public String describeAction(Action frame) {
         StringBuilder builder = new StringBuilder();
-
-        Provenance frame = new Provenance(concept);
 
         // Change Based on source
         builder.append("I heard that");

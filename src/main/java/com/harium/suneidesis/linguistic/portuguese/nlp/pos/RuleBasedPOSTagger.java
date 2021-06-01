@@ -2,7 +2,7 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.linguistic.repository.WordRepository;
+import com.harium.suneidesis.repository.word.WordRepository;
 import com.harium.suneidesis.concept.word.Word;
 
 import java.util.List;
@@ -15,10 +15,6 @@ import java.util.List;
 public class RuleBasedPOSTagger extends DatabasePOSTagger {
 
     public static String VERB_TO_BE = "ser";
-
-    public RuleBasedPOSTagger() {
-        super();
-    }
 
     public RuleBasedPOSTagger(WordRepository database) {
         super(database);

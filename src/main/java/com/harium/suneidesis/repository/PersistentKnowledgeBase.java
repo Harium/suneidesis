@@ -133,12 +133,12 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     }
 
     // TODO Unify find methods and move to repository
-    public RepositoryCursor find() {
-        return new RepositoryCursor(collection.find());
+    public RepositoryConceptCursor find() {
+        return new RepositoryConceptCursor(collection.find());
     }
 
-    public RepositoryCursor find(Filter filter) {
-        return new RepositoryCursor(collection.find(filter));
+    public RepositoryConceptCursor find(Filter filter) {
+        return new RepositoryConceptCursor(collection.find(filter));
     }
 
 }

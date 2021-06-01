@@ -1,5 +1,6 @@
 package com.harium.suneidesis.planning.instruction;
 
+import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.planning.BaseTask;
@@ -19,7 +20,7 @@ public class FindTask extends BaseTask {
     public boolean execute(Concept subject, KnowledgeBase environment) {
         boolean found = false;
         for (Concept concept : environment.getValues()) {
-            Provenance fact = new Provenance(concept);
+            Action fact = new Action(concept.getName()).wrap(concept);
             Concept factSubject = fact.getSubject();
             if (isInventory(factSubject)) {
                 Inventory inventory = new Inventory().wrap(factSubject);

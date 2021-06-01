@@ -4,9 +4,10 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.WordNoun;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
-import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
+import com.harium.suneidesis.repository.word.MemoryWordBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
+import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;
 import org.json.JSONException;
 import org.junit.Before;
@@ -97,7 +98,7 @@ public class KnowledgeBaseSerializerTest {
     }
 
     private KnowledgeBase buildWordDatabase() {
-        MemoryWordBase database = new MemoryWordBase("dictionary");
+        WordKnowledgeBase database = new WordKnowledgeBase("dictionary");
         database.addWord("cat", Tag.NOUN);
 
         WordNoun duck = new WordNoun("duck");
