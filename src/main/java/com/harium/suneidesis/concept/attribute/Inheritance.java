@@ -1,33 +1,21 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.ConceptType;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Inheritance extends Concept {
-
-    private final Map<String, Concept> map = new HashMap<>();
 
     public Inheritance(String name) {
         super(name);
     }
 
     public void add(Concept concept) {
-        map.put(concept.getName(), concept);
-    }
-
-    public boolean query(Concept concept) {
-        return map.containsKey(concept.getName());
-    }
-
-    public boolean query(String name) {
-        return map.values().stream().anyMatch(concept -> name.equalsIgnoreCase(concept.getName()));
+        has(concept.getName(), concept);
     }
 
     public boolean queryIs(String key) {
-        for (Map.Entry<String, Concept> entry : map.entrySet()) {
+        for (Map.Entry<String, Concept> entry : getMap().entrySet()) {
             if (entry.getKey().equals(key)) {
                 return true;
             }
@@ -40,39 +28,21 @@ public class Inheritance extends Concept {
     }
 
     public boolean can(String actionKey) {
-        for (Concept is : map.values()) {
-            if (is.getAttributes().getAbilities().query(actionKey)) {
+        for (Concept concept : getMap().values()) {
+            if (concept.getAttributes().can(actionKey)) {
                 return true;
             }
         }
-
         return false;
     }
 
-    public void merge(Inheritance inheritance) {
-        map.putAll(inheritance.map);
-    }
-
     public boolean equals(Inheritance inheritance) {
-        boolean equals = true;
-        for (Concept concept : map.values()) {
-            equals &= inheritance.query(concept.getName());
-        }
-        return equals;
+        return getAttributes().equals(inheritance.getAttributes());
     }
 
-    public Concept getKey(String key) {
-        // Check super classes
-        for (Concept is : map.values()) {
-            Concept concept = is.getAttributes().get(key);
-            if (concept != null) {
-                return concept;
-            }
-        }
-        return ConceptType.UNKNOWN;
-    }
-
-    public Map<String, Concept> getMap() {
-        return map;
+    @Override
+    public Inheritance wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
     }
 }

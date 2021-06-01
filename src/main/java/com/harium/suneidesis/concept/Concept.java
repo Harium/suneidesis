@@ -2,6 +2,8 @@ package com.harium.suneidesis.concept;
 
 import com.harium.suneidesis.concept.word.Word;
 
+import java.util.Map;
+
 public class Concept extends Thing {
 
 	public static final String ATTRIBUTE_ID = "id";
@@ -129,6 +131,10 @@ public class Concept extends Thing {
 
 	public boolean isPrimitive() {
 		return DataType.PRIMITIVE.equals(getDataType());
+	}
+
+	public Map<String, Concept> getMap() {
+		return getAttributes().getAll();
 	}
 
 	public Concept wrap(Concept concept) {

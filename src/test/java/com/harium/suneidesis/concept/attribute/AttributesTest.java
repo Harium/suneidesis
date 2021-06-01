@@ -33,10 +33,8 @@ public class AttributesTest {
         assertTrue(does(flying).can("fly"));
 
         Concept bat = new Concept("bat");
-        bat.is(new Being(""));
         bat.is(flying);
 
-        assertEquals(ConceptType.BEING, bat.getType());
         assertEquals("bat", bat.getName());
         assertTrue(does(bat).can("fly"));
 

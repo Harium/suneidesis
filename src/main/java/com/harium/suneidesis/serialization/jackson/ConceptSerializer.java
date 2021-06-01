@@ -78,10 +78,10 @@ public class ConceptSerializer extends StdSerializer<Concept> {
                 continue;
             }
             if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
-                Inheritance inheritance = (Inheritance) entry.getValue();
+                Inheritance inheritance = new Inheritance("").wrap(entry.getValue());
                 // Skip inheritance if empty
                 if (!inheritance.getMap().isEmpty()) {
-                    jgen.writeObjectField(entry.getKey(), entry.getValue());
+                    jgen.writeObjectField(entry.getKey(), inheritance);
                 }
                 continue;
             }

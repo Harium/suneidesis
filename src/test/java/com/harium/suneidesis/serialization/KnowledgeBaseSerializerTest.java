@@ -91,7 +91,7 @@ public class KnowledgeBaseSerializerTest {
         apple.is(food);
 
         appleTree.set("fruit", apple);
-        KnowledgeBase base = new MemoryKnowledgeBase("database");
+        NitriteMemoryKnowledgeBase base = new NitriteMemoryKnowledgeBase("database");
         base.add(appleTree);
 
         return base;

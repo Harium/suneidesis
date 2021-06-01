@@ -30,7 +30,7 @@ public class Inspector {
     }
 
     public boolean can(Action action) {
-        return concept.getAttributes().getAbilities().query(action);
+        return concept.getAttributes().getAbilities().contains(action.getName());
     }
 
     public boolean can(String actionKey) {

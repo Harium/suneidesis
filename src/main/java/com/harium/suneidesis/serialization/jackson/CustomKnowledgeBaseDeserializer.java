@@ -82,7 +82,6 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
                     base.save(from);
                 }
             }
-
         }
     }
 

@@ -21,8 +21,6 @@ public class Attributes implements Repository<Concept> {
     public static final String ATTRIBUTE_INHERITANCE = "inheritance";
     public static final String ATTRIBUTE_LOCATION = "location";
 
-    public static final Word UNKNOWN_WORD = new Word("?");
-
     private String name = "";
     private DataType dataType = DataType.OBJECT;
 
@@ -43,10 +41,18 @@ public class Attributes implements Repository<Concept> {
             return ConceptType.UNKNOWN;
         }
 
-        return getInheritance().getKey(key);
+        return getInheritance().get(key);
     }
 
     public boolean contains(String key) {
+        if (inheritance != null) {
+            for (Concept concept : getInheritance().getMap().values()) {
+                if (concept.hasKey(key)) {
+                    return true;
+                }
+            }
+        }
+
         return !get(key).isUnknown();
     }
 
@@ -186,10 +192,10 @@ public class Attributes implements Repository<Concept> {
                 getProperties().merge(properties);
             } else if (ATTRIBUTE_ABILITIES.equals(key)) {
                 Abilities abilities = (Abilities) entry.getValue();
-                getAbilities().merge(abilities);
+                getAbilities().getAttributes().merge(abilities.getAttributes());
             } else if (ATTRIBUTE_INHERITANCE.equals(key)) {
                 Inheritance inheritance = (Inheritance) entry.getValue();
-                getInheritance().merge(inheritance);
+                getInheritance().getAttributes().merge(inheritance.getAttributes());
             } else {
                 attributeMap.put(key, entry.getValue());
             }
@@ -201,11 +207,11 @@ public class Attributes implements Repository<Concept> {
     }
 
     public boolean can(String actionKey) {
-        if (getAbilities().query(actionKey)) {
+        if (getAbilities().contains(actionKey)) {
             return true;
         }
 
-        return inheritance.can(actionKey);
+        return getInheritance().can(actionKey);
     }
 
     public void hasPart(Concept part, Measurement measurement) {
