@@ -1,38 +1,39 @@
 package com.harium.suneidesis.concept;
 
-import com.harium.suneidesis.concept.helper.Provenance;
+public class Event extends Action {
 
-public class Event extends Concept {
-
+    public static final String ATTRIBUTE_ACTION = "action";
     public static final String ATTRIBUTE_THEN = "then";
 
-    public Event() {
-        super(ConceptType.EVENT);
-    }
-
     public Event(String name) {
-        super(name, ConceptType.EVENT);
+        super(name);
+        type(ConceptType.EVENT);
     }
 
-    public Event(Concept subject, Concept predicate, Concept object) {
-        super(ConceptType.EVENT);
+    public Event(String name, Concept subject, Concept predicate, Concept object) {
+        this(name);
         subject(subject);
-        set(Provenance.ATTRIBUTE_PREDICATE, predicate);
-        set(Provenance.ATTRIBUTE_OBJECT, object);
+        set(Action.ATTRIBUTE_PREDICATE, predicate);
+        set(Action.ATTRIBUTE_OBJECT, object);
     }
 
-    public Event subject(Concept subject) {
-        set(Provenance.ATTRIBUTE_SUBJECT, subject);
+    public Event action(Action action) {
+        set(ATTRIBUTE_ACTION, action);
         return this;
     }
 
-    public Event action(Concept action) {
-        set(Provenance.ATTRIBUTE_PREDICATE, action);
+    public Event subject(Concept concept) {
+        super.subject(concept);
         return this;
     }
 
-    public Event object(Concept object) {
-        set(Provenance.ATTRIBUTE_OBJECT, object);
+    public Event predicate(Concept predicate) {
+        super.predicate(predicate);
+        return this;
+    }
+
+    public Event object(Concept predicate) {
+        super.object(predicate);
         return this;
     }
 
@@ -41,8 +42,18 @@ public class Event extends Concept {
         return this;
     }
 
-    public Event getNext() {
-        return (Event) get(ATTRIBUTE_THEN);
+    public Concept getNext() {
+        return get(ATTRIBUTE_THEN);
     }
 
+    public Event getNextEvent() {
+        Concept concept = getNext();
+        return new Event(concept.getName()).wrap(concept);
+    }
+
+    @Override
+    public Event wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
+    }
 }

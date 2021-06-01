@@ -26,9 +26,9 @@ public class ConceptTest {
         littleGirl.set("wear", redCloak);
         littleGirl.set("lives", house);
 
-        Event wasAtHome = new Event().subject(littleGirl).action(new Action("was")).object(house);
-        Event momAskedFavor = new Event().subject(mother).action(new Action("asked a favor")).object(littleGirl);
-        Event challengeAccepted = new Event().subject(littleGirl).action(new Action("hold")).object(new Concept("basket"));
+        Event wasAtHome = new Event("at home").subject(littleGirl).action(new Action("was")).object(house);
+        Event momAskedFavor = new Event("mom asked").subject(mother).action(new Action("asked a favor")).object(littleGirl);
+        Event challengeAccepted = new Event("accepted").subject(littleGirl).action(new Action("hold")).object(new Concept("basket"));
 
         Story story = new Story("Red Riding Hood");
         story.author("Charles Perrault")
