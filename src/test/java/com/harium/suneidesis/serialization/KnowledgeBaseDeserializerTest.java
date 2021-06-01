@@ -60,7 +60,7 @@ public class KnowledgeBaseDeserializerTest {
     public void testComplex() throws IOException, URISyntaxException, JSONException {
         String json = loadFileAsString("database_complex.json");
 
-        KnowledgeBase database = new MemoryKnowledgeBase();
+        KnowledgeBase database = new NitriteMemoryKnowledgeBase();
         deserializer.deserialize(json, database);
 
         assertEquals("database", database.getName());

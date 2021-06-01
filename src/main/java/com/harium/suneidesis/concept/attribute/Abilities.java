@@ -5,6 +5,10 @@ import com.harium.suneidesis.concept.Concept;
 
 public class Abilities extends Concept {
 
+    public Abilities() {
+        super(Attributes.ATTRIBUTE_ABILITIES);
+    }
+
     public Abilities(String name) {
         super(name);
     }

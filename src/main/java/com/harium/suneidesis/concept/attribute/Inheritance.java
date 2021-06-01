@@ -6,6 +6,10 @@ import java.util.Map;
 
 public class Inheritance extends Concept {
 
+    public Inheritance() {
+        super(Attributes.ATTRIBUTE_INHERITANCE);
+    }
+
     public Inheritance(String name) {
         super(name);
     }

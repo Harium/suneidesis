@@ -1,8 +1,11 @@
 package com.harium.suneidesis.repository.nitrite;
 
+import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Primitive;
+import com.harium.suneidesis.concept.attribute.Abilities;
 import com.harium.suneidesis.concept.attribute.Attributes;
+import com.harium.suneidesis.concept.attribute.Inheritance;
 import org.dizitart.no2.Document;
 import org.dizitart.no2.KeyValuePair;
 
@@ -25,6 +28,19 @@ public class DocumentMapper {
                 continue;
             } else if (Concept.ATTRIBUTE_ID.equals(pair.getKey())) {
                 concept.id(pair.getValue().toString());
+                continue;
+            } else if (Attributes.ATTRIBUTE_INHERITANCE.equals(pair.getKey())) {
+                Inheritance inheritance = new Inheritance().wrap(getValue(pair));
+                for (Concept in : inheritance.getMap().values()) {
+                    concept.is(in);
+                }
+                continue;
+            } else if (Attributes.ATTRIBUTE_ABILITIES.equals(pair.getKey())) {
+                Abilities abilities = new Abilities().wrap(getValue(pair));
+                for (Concept in : abilities.getMap().values()) {
+                    Action action = new Action(in.getName()).wrap(in);
+                    concept.can(action);
+                }
                 continue;
             } else if (isNitriteKey(pair.getKey())) {
                 continue;
