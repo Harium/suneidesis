@@ -3,6 +3,7 @@ package com.harium.suneidesis.consciousness;
 import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.Measurement;
 import com.harium.suneidesis.concept.helper.Provenance;
+import com.harium.suneidesis.concept.measurement.Time;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.RepositoryCursor;
 import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;

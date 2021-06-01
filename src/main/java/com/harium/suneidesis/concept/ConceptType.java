@@ -20,7 +20,7 @@ public class ConceptType extends Concept {
     public static final ConceptType SOUND = new ConceptType("SOUND");
     public static final ConceptType SUBSTANCE = new ConceptType("SUBSTANCE");
     public static final ConceptType STORY = new ConceptType("STORY");
-    public static final ConceptType TIME_UNIT = new ConceptType("TIME UNIT");
+    public static final ConceptType UNIT = new ConceptType("UNIT");
     public static final ConceptType THEORY = new ConceptType("THEORY");
     public static final ConceptType WORD = new ConceptType("WORD");
 
@@ -56,8 +56,8 @@ public class ConceptType extends Concept {
             return PLACE;
         } else if (MEASUREMENT.getName().equals(name)) {
             return MEASUREMENT;
-        } else if (TIME_UNIT.getName().equals(name)) {
-            return TIME_UNIT;
+        } else if (UNIT.getName().equals(name)) {
+            return UNIT;
         } else if (SIMULATION.getName().equals(name)) {
             return SIMULATION;
         } else if (SOUND.getName().equals(name)) {

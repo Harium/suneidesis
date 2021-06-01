@@ -1,8 +1,10 @@
-package com.harium.suneidesis.concept;
+package com.harium.suneidesis.concept.measurement;
 
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.Measurement;
 import com.harium.suneidesis.concept.word.Word;
 
-public class Time extends Concept {
+public class Time extends Measurement {
 
     public static final String ATTRIBUTE_START = "time_start";
     public static final String ATTRIBUTE_END = "time_end";
@@ -10,20 +12,16 @@ public class Time extends Concept {
     public static final Time NOW = new Time("time_now");
     public static final Time YESTERDAY = new Time("time_yesterday");
 
-    public Time(String when) {
-        super(ConceptType.TIME_UNIT);
-        start(when);
-        end(when);
+    public Time(String time) {
+        this(time, time, time);
     }
 
     public Time(String name, String time) {
-        super(name, ConceptType.TIME_UNIT);
-        start(time);
-        end(time);
+        this(name, time, time);
     }
 
     public Time(String name, String start, String end) {
-        super(name, ConceptType.TIME_UNIT);
+        super(name, TimeUnit.DATE);
         start(start);
         end(end);
     }

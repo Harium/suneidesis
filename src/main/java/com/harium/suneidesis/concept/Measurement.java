@@ -5,9 +5,9 @@ public class Measurement extends Concept {
     private static final String ATTRIBUTE_ACCURACY = "accuracy";
     private static final String ATTRIBUTE_UNIT = "unit";
     private static final String ATTRIBUTE_VALUE = "value";
-    private static final String ATTRIBUTE_SYMBOL = "symbol";
 
-    public static final Measurement ZERO = new Measurement("0", "u");
+    public static final Unit DEFAULT_UNIT = new Unit("unit", "u");
+    public static final Measurement ZERO = new Measurement("0", DEFAULT_UNIT);
 
     /**
      * This constructor uses value instead of name in purpose
@@ -16,6 +16,12 @@ public class Measurement extends Concept {
     public Measurement(String value) {
         super(ConceptType.MEASUREMENT);
         value(value);
+    }
+
+    public Measurement(String value, Concept unit) {
+        super(ConceptType.MEASUREMENT);
+        value(value);
+        unit(unit);
     }
 
     public Measurement(String value, String unit) {
@@ -39,7 +45,7 @@ public class Measurement extends Concept {
         if (value.isUnknown()) {
             return "0";
         }
-        return value.getName();
+        return value.getValue();
     }
 
     public Concept getUnitConcept() {
@@ -50,31 +56,22 @@ public class Measurement extends Concept {
         return getUnitConcept().getName();
     }
 
-    public Concept getSymbolConcept() {
-        return getAttributes().get(ATTRIBUTE_SYMBOL);
-    }
-
-    public String getSymbol() {
-        return getSymbolConcept().getName();
-    }
-
     public Measurement value(String value) {
         getAttributes().insert(ATTRIBUTE_VALUE, new Concept(value));
         return this;
     }
 
-    public Measurement unit(String unit) {
-        getAttributes().insert(ATTRIBUTE_UNIT, new Concept(unit));
+    public Measurement unit(Concept unit) {
+        getAttributes().insert(ATTRIBUTE_UNIT, unit);
         return this;
+    }
+
+    public Measurement unit(String unit) {
+        return unit(new Unit(unit));
     }
 
     public Measurement accuracy(String accuracy) {
         getAttributes().insert(ATTRIBUTE_ACCURACY, new Concept(accuracy));
-        return this;
-    }
-
-    public Measurement symbol(String accuracy) {
-        getAttributes().insert(ATTRIBUTE_SYMBOL, new Concept(accuracy));
         return this;
     }
 

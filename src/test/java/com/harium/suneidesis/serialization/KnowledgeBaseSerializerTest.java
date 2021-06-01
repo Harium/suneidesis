@@ -6,7 +6,6 @@ import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
-import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;
 import org.json.JSONException;
@@ -18,7 +17,7 @@ import java.io.IOException;
 
 public class KnowledgeBaseSerializerTest {
 
-    private static final boolean PRINT_RESULT = true;
+    private static final boolean PRINT_RESULT = false;
 
     private KnowledgeBaseJacksonSerializer serializer;
 

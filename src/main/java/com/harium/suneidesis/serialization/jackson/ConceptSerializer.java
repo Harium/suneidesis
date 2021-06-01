@@ -17,8 +17,8 @@ import java.util.Map;
 
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
-import static com.harium.suneidesis.concept.Time.ATTRIBUTE_END;
-import static com.harium.suneidesis.concept.Time.ATTRIBUTE_START;
+import static com.harium.suneidesis.concept.measurement.Time.ATTRIBUTE_END;
+import static com.harium.suneidesis.concept.measurement.Time.ATTRIBUTE_START;
 import static com.harium.suneidesis.concept.attribute.Attributes.*;
 
 public class ConceptSerializer extends StdSerializer<Concept> {
@@ -56,11 +56,6 @@ public class ConceptSerializer extends StdSerializer<Concept> {
     }
 
     private void serializeCurrentConcept(Concept concept, JsonGenerator jgen) throws IOException {
-        if (ConceptType.TIME_UNIT == concept.getType()) {
-            serializeTimeUnit(concept, jgen);
-            return;
-        }
-
         jgen.writeStartObject();
         jgen.writeObjectField(Attributes.ATTRIBUTE_NAME, concept.getName());
 
@@ -86,11 +81,6 @@ public class ConceptSerializer extends StdSerializer<Concept> {
                 continue;
             }
 
-            if (ConceptType.TIME_UNIT == entry.getValue().getType()) {
-                // Write full concept not only the id
-                jgen.writeObjectField(entry.getKey(), entry.getValue());
-                continue;
-            }
             if (DataType.PRIMITIVE == entry.getValue().getDataType()) {
                 if (entry.getValue() instanceof Word) {
                     Word word = (Word) entry.getValue();
@@ -102,19 +92,6 @@ public class ConceptSerializer extends StdSerializer<Concept> {
 
             serializeConceptId(jgen, entry.getKey(), entry.getValue());
         }
-        jgen.writeEndObject();
-    }
-
-    private void serializeTimeUnit(Concept concept, JsonGenerator jgen) throws IOException {
-        jgen.writeStartObject();
-        if (!concept.getNameConcept().isUnknown()) {
-            serializeField(concept.getNameConcept(), ATTRIBUTE_NAME, jgen);
-        }
-
-        jgen.writeObjectField(ATTRIBUTE_DATA_TYPE, concept.getDataType());
-        serializeField(concept.getType(), ATTRIBUTE_TYPE, jgen);
-        serializeField(concept.get(ATTRIBUTE_START), ATTRIBUTE_START, jgen);
-        serializeField(concept.get(ATTRIBUTE_END), ATTRIBUTE_END, jgen);
         jgen.writeEndObject();
     }
 

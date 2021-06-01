@@ -4,7 +4,7 @@ import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Phenomenon;
 import com.harium.suneidesis.concept.Place;
-import com.harium.suneidesis.concept.Time;
+import com.harium.suneidesis.concept.measurement.Time;
 
 /**
  * Provenance is a model that wraps concepts to represent actions from being's perspective
