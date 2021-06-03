@@ -123,11 +123,16 @@ public class WordKnowledgeBase implements Repository<Concept> {
     }
 
     public WordVerb findVerb(String name) {
-        Concept concept = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name)).iterator().next();
-        if (concept == null) {
-            return null;
+        Iterator<Concept> result = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name)).iterator();
+
+        while(result.hasNext()) {
+            Concept concept = result.next();
+            if (Tag.VERB.name().equals(concept.get(Word.ATTRIBUTE_TAG).getName())) {
+                return new WordVerb(concept.getName()).wrap(concept);
+            }
         }
-        return new WordVerb(concept.getName()).wrap(concept);
+
+        return null;
     }
 
     /*
