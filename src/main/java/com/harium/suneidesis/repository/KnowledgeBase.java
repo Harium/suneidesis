@@ -1,21 +1,16 @@
 package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.DataType;
-import com.harium.suneidesis.concept.attribute.Inheritance;
+import com.harium.suneidesis.repository.decorator.EntryDecorator;
+import com.harium.suneidesis.repository.decorator.TimeDecorator;
 import com.harium.suneidesis.repository.generator.BaseIdGenerator;
 import com.harium.suneidesis.repository.generator.BaseTimeGenerator;
 import com.harium.suneidesis.repository.generator.IdGenerator;
-import com.harium.suneidesis.repository.decorator.EntryDecorator;
-import com.harium.suneidesis.repository.decorator.TimeDecorator;
-import com.harium.suneidesis.repository.listener.RepositoryListener;
 
-import java.util.*;
-
-import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
-import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_INHERITANCE;
-import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
-import static com.harium.suneidesis.repository.decorator.TimeDecorator.ATTRIBUTE_CREATED_AT;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class KnowledgeBase implements Repository<Concept> {
 
@@ -24,10 +19,9 @@ public abstract class KnowledgeBase implements Repository<Concept> {
 
     private String name;
 
-    private IdGenerator idGenerator = new BaseIdGenerator();
+    protected IdGenerator idGenerator = new BaseIdGenerator();
 
     protected List<EntryDecorator> decorators = new ArrayList<>();
-    protected List<RepositoryListener> listeners = new ArrayList<>();
 
     public KnowledgeBase() {
         super();
@@ -48,22 +42,11 @@ public abstract class KnowledgeBase implements Repository<Concept> {
     }
 
     @Override
-    public Collection<Concept> getValues() {
-        return getAll().values();
+    public Iterator<Concept> iterator() {
+        return getAll().values().iterator();
     }
 
-    @Override
-    public Concept insert(String key, Concept concept) {
-        for (RepositoryListener repositoryListener: listeners) {
-            repositoryListener.onInsert(key, concept);
-        }
-        return concept;
-    }
-
-    @Override
-    public void save(Concept concept) {
-        insert(concept.getId(), concept);
-    }
+    public abstract String add(Concept concept);
 
     public abstract void merge(KnowledgeBase concepts);
 
@@ -71,40 +54,6 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         for (Concept concept : concepts) {
             add(concept);
         }
-    }
-
-    public String add(Concept concept) {
-        Concept id = concept.getIdConcept();
-        if (!id.isUnknown() && contains(id.getName())) {
-            return id.getName();
-        }
-        Concept wrap = decorate(concept);
-
-        String idText = idGenerator.generateId();
-        wrap.id(idText);
-        insert(idText, wrap);
-
-        if (DataType.OBJECT == concept.getDataType()) {
-            for (Map.Entry<String, Concept> entry : concept.getAttributes().entrySet()) {
-                if (ATTRIBUTE_CREATED_AT.equals(entry.getKey())) {
-                    continue;
-                }
-                if (ATTRIBUTE_NAME.equals(entry.getKey())) {
-                    continue;
-                }
-                if (ATTRIBUTE_ID.equals(entry.getKey())) {
-                    continue;
-                }
-                if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
-                    Inheritance inheritance = (Inheritance) entry.getValue();
-                    addAll(inheritance.getMap().values());
-                    continue;
-                }
-                add(entry.getValue());
-            }
-        }
-
-        return idText;
     }
 
     protected Concept decorate(Concept info) {
@@ -130,7 +79,4 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         this.idGenerator = idGenerator;
     }
 
-    public void addListener(RepositoryListener listener) {
-        listeners.add(listener);
-    }
 }

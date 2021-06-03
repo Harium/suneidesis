@@ -1,13 +1,17 @@
 package com.harium.suneidesis.repository.word;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.attribute.Attributes;
 import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.concept.word.WordVerb;
+import com.harium.suneidesis.concept.word.WordVerbConjugation;
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.Repository;
+import com.harium.suneidesis.repository.RepositoryCursor;
+import org.dizitart.no2.Filter;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import static org.dizitart.no2.filters.Filters.eq;
@@ -20,20 +24,41 @@ public class WordKnowledgeBase implements Repository<Concept> {
         this.knowledgeBase = knowledgeBase;
     }
 
-    public void addWord(String word, String tag) {
-        knowledgeBase.save(new Word(word, tag));
+    public Word addWord(String word, String tag) {
+        Word w = new Word(word, tag);
+        knowledgeBase.add(w);
+        return w;
     }
 
-    public void addWord(String word, String lemma, String tag) {
+    public Word addWord(String word, String lemma, String tag) {
         Word w = new Word(word, tag);
         w.setLemma(new Word(lemma));
 
-        knowledgeBase.save(w);
+        knowledgeBase.add(w);
+        return w;
     }
 
-    public List<Word> getWords(String name) {
-        return Collections.emptyList();
-        //knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name));
+    public WordVerb addVerb(String verb, String prepositions, String transitivity) {
+        WordVerb wordVerb = new WordVerb(verb);
+        wordVerb.setLemma(new Word(verb));
+        wordVerb.setPrepositions(new Word(prepositions));
+        wordVerb.setTransitivity(new Word(transitivity));
+        knowledgeBase.add(wordVerb);
+        return wordVerb;
+    }
+
+    public void addVerbConjugation(String word, WordVerb verb, Tag tag, String tense, String person) {
+        WordVerbConjugation verbConjugation = new WordVerbConjugation(word);
+        verbConjugation.setLemma(verb);
+        verbConjugation.setTag(tag.name());
+        verbConjugation.setTense(new Word(tense));
+        verbConjugation.setPerson(new Word(person));
+        knowledgeBase.add(verbConjugation);
+    }
+
+    public Iterator<Word> getWords(String name) {
+        RepositoryCursor<Concept> cursor = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name));
+        return new RepositoryConceptCursorToWordMapper(cursor).iterator();
     }
 
     @Override
@@ -42,23 +67,24 @@ public class WordKnowledgeBase implements Repository<Concept> {
     }
 
     @Override
-    public Collection<Concept> getValues() {
-        return knowledgeBase.getValues();
+    public Iterator<Concept> iterator() {
+        return knowledgeBase.iterator();
     }
 
     @Override
-    public Concept insert(String key, Concept concept) {
-        return knowledgeBase.insert(key, concept);
+    public Concept add(String key, Concept concept) {
+        return knowledgeBase.add(key, concept);
     }
 
     @Override
-    public void save(Concept concept) {
-        knowledgeBase.save(concept);
+    public String add(Concept concept) {
+        return knowledgeBase.add(concept);
     }
 
     @Override
-    public Concept get(String key) {
-        return knowledgeBase.get(key);
+    public Word get(String key) {
+        Concept concept = knowledgeBase.get(key);
+        return new Word(concept.getName()).wrap(concept);
     }
 
     @Override
@@ -80,4 +106,48 @@ public class WordKnowledgeBase implements Repository<Concept> {
     public boolean isClosed() {
         return knowledgeBase.isClosed();
     }
+
+    @Override
+    public RepositoryCursor<Concept> find() {
+        return knowledgeBase.find();
+    }
+
+    @Override
+    public RepositoryCursor<Concept> find(Filter filter) {
+        return knowledgeBase.find(filter);
+    }
+
+    public WordVerb findVerbByWordId(String wordId) {
+        Concept concept = knowledgeBase.find(eq(Concept.ATTRIBUTE_ID, wordId)).iterator().next();
+        return new WordVerb(concept.getName()).wrap(concept);
+    }
+
+    /*
+    @Override
+    public Map<String, Word> getAll() {
+        Map<String, Word> result = new HashMap<>();
+        Map<String, Concept> all = knowledgeBase.getAll();
+        for (Map.Entry<String, Concept> entry : all.entrySet()) {
+            Concept concept = entry.getValue();
+            result.put(entry.getKey(), new Word(concept.getName()).wrap(concept));
+        }
+        return result;
+    }
+
+    @Override
+    public Iterator<Word> getValues() {
+        RepositoryCursor<Concept> cursor = knowledgeBase.find();
+        return new RepositoryConceptCursorToWordMapper(cursor).iterator();
+    }
+
+    @Override
+    public RepositoryCursor<Word> find() {
+        return knowledgeBase.find();
+    }
+
+    @Override
+    public RepositoryCursor<Word> find(Filter filter) {
+        return knowledgeBase.find(filter);
+    }*/
+
 }

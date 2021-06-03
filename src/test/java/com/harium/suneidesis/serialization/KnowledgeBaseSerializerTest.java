@@ -4,9 +4,8 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.WordNoun;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
-import com.harium.suneidesis.repository.word.MemoryWordBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
-import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
+import com.harium.suneidesis.repository.nitrite.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;
 import org.json.JSONException;
@@ -18,7 +17,7 @@ import java.io.IOException;
 
 public class KnowledgeBaseSerializerTest {
 
-    private static final boolean PRINT_RESULT = false;
+    private static final boolean PRINT_RESULT = true;
 
     private KnowledgeBaseJacksonSerializer serializer;
 
@@ -75,7 +74,7 @@ public class KnowledgeBaseSerializerTest {
         apple.id("1");
 
         appleTree.set("fruit", apple);
-        KnowledgeBase base = new NitriteMemoryKnowledgeBase("database");
+        KnowledgeBase base = new MemoryKnowledgeBase("database");
         base.add(appleTree);
 
         return base;
@@ -91,15 +90,16 @@ public class KnowledgeBaseSerializerTest {
         apple.is(food);
 
         appleTree.set("fruit", apple);
-        NitriteMemoryKnowledgeBase base = new NitriteMemoryKnowledgeBase("database");
+        MemoryKnowledgeBase base = new MemoryKnowledgeBase("database");
         base.add(appleTree);
 
         return base;
     }
 
-    private KnowledgeBase buildWordDatabase() {
-        WordKnowledgeBase database = new WordKnowledgeBase("dictionary");
-        database.addWord("cat", Tag.NOUN);
+    private MemoryKnowledgeBase buildWordDatabase() {
+        MemoryKnowledgeBase db = new MemoryKnowledgeBase("dictionary");
+        WordKnowledgeBase database = new WordKnowledgeBase(db);
+        database.addWord("cat", Tag.NOUN.name());
 
         WordNoun duck = new WordNoun("duck");
         database.add(duck);
@@ -107,7 +107,7 @@ public class KnowledgeBaseSerializerTest {
         WordVerb go = database.addVerb("go", "on|through", "");
         database.addVerbConjugation("went", go, Tag.VERB_CONJUGATION, "PAST", "");
 
-        return database;
+        return db;
     }
 
     private void print(String result) {

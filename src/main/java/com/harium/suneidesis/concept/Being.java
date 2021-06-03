@@ -29,11 +29,11 @@ public class Being extends Concept {
     }
 
     public void setAncestry(Ancestry ancestry) {
-        this.getAttributes().insert(ATTRIBUTE_ANCESTRY, ancestry);
+        this.getAttributes().add(ATTRIBUTE_ANCESTRY, ancestry);
     }
 
     public void setGender(Concept gender) {
-        this.getAttributes().insert(ATTRIBUTE_GENDER, gender);
+        this.getAttributes().add(ATTRIBUTE_GENDER, gender);
     }
 
     @Override

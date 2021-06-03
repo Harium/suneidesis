@@ -33,44 +33,44 @@ public class Word extends Primitive {
         this.id(id);
     }
 
-    public Word getLemma() {
-        return (Word) getAttributes().get(ATTRIBUTE_LEMMA);
+    public Concept getLemmaConcept() {
+        return getAttributes().get(ATTRIBUTE_LEMMA);
     }
 
-    public String getLemmaWord() {
-        return getAttributes().get(ATTRIBUTE_LEMMA).getName();
+    public String getLemma() {
+        return getLemmaConcept().getName();
     }
 
     public void setLemma(Word lemma) {
-        getAttributes().insert(ATTRIBUTE_LEMMA, lemma);
+        getAttributes().add(ATTRIBUTE_LEMMA, lemma);
     }
 
-    public Word getTag() {
-        return (Word) getAttributes().get(ATTRIBUTE_TAG);
+    public Concept getTagConcept() {
+        return getAttributes().get(ATTRIBUTE_TAG);
     }
 
-    public String getTagWord() {
+    public String getTag() {
         return getAttributes().get(ATTRIBUTE_TAG).getName();
     }
 
     public void setTag(Word tag) {
-        getAttributes().insert(ATTRIBUTE_TAG, tag);
+        getAttributes().add(ATTRIBUTE_TAG, tag);
     }
 
     public void setTag(String tagName) {
-        getAttributes().insert(ATTRIBUTE_TAG, new Word(tagName));
+        getAttributes().add(ATTRIBUTE_TAG, new Word(tagName));
     }
 
-    public Word getWordType() {
-        return (Word) getAttributes().get(ATTRIBUTE_WORD_TYPE);
+    public Concept getWordTypeConcept() {
+        return getAttributes().get(ATTRIBUTE_WORD_TYPE);
     }
 
-    public String getWordTypeText() {
-        return getWordType().getName();
+    public String getWordType() {
+        return getWordTypeConcept().getName();
     }
 
     public void setWordType(Word Type) {
-        getAttributes().insert(ATTRIBUTE_WORD_TYPE, Type);
+        getAttributes().add(ATTRIBUTE_WORD_TYPE, Type);
     }
 
     @Override

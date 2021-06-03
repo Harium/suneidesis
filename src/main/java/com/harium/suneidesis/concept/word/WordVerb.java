@@ -23,8 +23,8 @@ public class WordVerb extends Word {
 		return getAttributes().get(ATTRIBUTE_PREPOSITIONS).getName();
 	}
 
-	public void setPrepositions(Word gender) {
-		getAttributes().insert(ATTRIBUTE_PREPOSITIONS, gender);
+	public void setPrepositions(Word prepositions) {
+		getAttributes().add(ATTRIBUTE_PREPOSITIONS, prepositions);
 	}
 
 	public Word getTransitivity() {
@@ -36,7 +36,7 @@ public class WordVerb extends Word {
 	}
 
 	public void setTransitivity(Word Transitivity) {
-		getAttributes().insert(ATTRIBUTE_TRANSITIVITY, Transitivity);
+		getAttributes().add(ATTRIBUTE_TRANSITIVITY, Transitivity);
 	}
 
 	@Override

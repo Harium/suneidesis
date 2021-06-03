@@ -3,14 +3,13 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 import com.harium.suneidesis.linguistic.nlp.pos.POSTagger;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.repository.word.WordRepository;
-import com.harium.suneidesis.linguistic.portuguese.nlp.database.MemoryWordBase;
+import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 
 public abstract class DatabasePOSTagger implements POSTagger {
 
-    protected WordRepository database;
+    protected WordKnowledgeBase database;
 
-    public DatabasePOSTagger(WordRepository database) {
+    public DatabasePOSTagger(WordKnowledgeBase database) {
         this.database = database;
     }
 

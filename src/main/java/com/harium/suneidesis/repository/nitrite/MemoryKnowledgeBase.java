@@ -2,13 +2,13 @@ package com.harium.suneidesis.repository.nitrite;
 
 import com.harium.suneidesis.repository.PersistentKnowledgeBase;
 
-public class NitriteMemoryKnowledgeBase extends PersistentKnowledgeBase {
+public class MemoryKnowledgeBase extends PersistentKnowledgeBase {
 
-    public NitriteMemoryKnowledgeBase() {
+    public MemoryKnowledgeBase() {
         super();
     }
 
-    public NitriteMemoryKnowledgeBase(String name) {
+    public MemoryKnowledgeBase(String name) {
         super();
         setName(name);
     }

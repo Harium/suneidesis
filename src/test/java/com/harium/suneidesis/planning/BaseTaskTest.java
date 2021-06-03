@@ -4,7 +4,7 @@ import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.planning.instruction.FindTask;
-import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
+import com.harium.suneidesis.repository.nitrite.MemoryKnowledgeBase;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -25,7 +25,7 @@ public class BaseTaskTest {
         //task.source(new Concept("sensors"));
         task.subject(fridge);
 
-        NitriteMemoryKnowledgeBase environment = new NitriteMemoryKnowledgeBase("environment");
+        MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.add(task);
 
         BaseTask chopGarlic = new BaseTask("chop garlic");
@@ -47,7 +47,7 @@ public class BaseTaskTest {
         //task.source(new Concept("sensors"));
         task.subject(fridge);
 
-        NitriteMemoryKnowledgeBase environment = new NitriteMemoryKnowledgeBase("environment");
+        MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.add(task);
 
         BaseTask chopGarlic = new BaseTask("chop garlic");

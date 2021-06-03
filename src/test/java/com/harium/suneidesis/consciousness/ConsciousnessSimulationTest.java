@@ -6,7 +6,7 @@ import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.concept.measurement.Time;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.RepositoryConceptCursor;
-import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
+import com.harium.suneidesis.repository.nitrite.MemoryKnowledgeBase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,15 +15,15 @@ import static org.junit.Assert.assertEquals;
 
 public class ConsciousnessSimulationTest {
 
-    private NitriteMemoryKnowledgeBase alexa;
-    private NitriteMemoryKnowledgeBase siri;
+    private MemoryKnowledgeBase alexa;
+    private MemoryKnowledgeBase siri;
 
     @Before
     public void setUp() {
-        alexa = new NitriteMemoryKnowledgeBase("Alexa");
+        alexa = new MemoryKnowledgeBase("Alexa");
         buildSelf(alexa);
 
-        siri = new NitriteMemoryKnowledgeBase("Siri");
+        siri = new MemoryKnowledgeBase("Siri");
         buildSelf(siri);
     }
 
@@ -43,7 +43,7 @@ public class ConsciousnessSimulationTest {
         myself.is(robot);
         Concept autoKnowledge = new Concept("auto knowledge");
         Provenance.setSubject(autoKnowledge, myself);
-        consciousness.insert(KnowledgeBase.SELF, autoKnowledge);
+        consciousness.add(KnowledgeBase.SELF, autoKnowledge);
 
         Concept internet = new Concept("Internet");
         Concept data = new Concept("data");

@@ -13,7 +13,7 @@ public class RuleBasedPOSTaggerTest {
 
     @Before
     public void setUp() {
-        tagger = new RuleBasedPOSTagger();
+        tagger = new RuleBasedPOSTagger(null);
     }
 
     @Test

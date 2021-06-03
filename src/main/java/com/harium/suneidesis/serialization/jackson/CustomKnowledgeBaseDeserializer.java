@@ -58,7 +58,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             Map.Entry<String, JsonNode> child = it.next();
             // Deserialize concepts
             Concept concept = deserializeConcept(child, base, relationshipList);
-            base.insert(child.getKey(), concept);
+            base.add(child.getKey(), concept);
         }
 
         for (Relationship relationship : relationshipList) {
@@ -67,19 +67,19 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             if (target != null) {
                 if (!Relationship.INHERITANCE.equals(relationship.relation)) {
                     from.set(relationship.relation, target);
-                    base.save(from);
+                    base.add(from);
                 } else {
                     from.is(target);
-                    base.save(from);
+                    base.add(from);
                 }
             } else {
                 if (!Relationship.INHERITANCE.equals(relationship.relation)) {
                     from.set(relationship.relation, new Concept(relationship.target));
-                    base.save(from);
+                    base.add(from);
                 } else {
                     // It should never happen (otherwise the inheritance is missing)
                     from.is(new Concept(relationship.target));
-                    base.save(from);
+                    base.add(from);
                 }
             }
         }
@@ -101,7 +101,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         } else {
             concept = new Concept(ConceptType.UNKNOWN_TYPE);
         }
-
+        // Set Id
         concept.id(id);
 
         for (Iterator<Map.Entry<String, JsonNode>> it = node.fields(); it.hasNext(); ) {

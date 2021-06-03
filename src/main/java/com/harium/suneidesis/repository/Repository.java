@@ -2,19 +2,20 @@ package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Thing;
+import org.dizitart.no2.Filter;
 
-import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
 public interface Repository<T extends Thing> {
 
     Map<String, T> getAll();
 
-    Collection<T> getValues();
+    Iterator<T> iterator();
 
-    Concept insert(String key, T t);
+    T add(String key, T t);
 
-    void save(Concept concept);
+    String add(Concept concept);
 
     T get(String key);
 
@@ -26,4 +27,7 @@ public interface Repository<T extends Thing> {
 
     boolean isClosed();
 
+    RepositoryCursor<T> find();
+
+    RepositoryCursor<T> find(Filter filter);
 }

@@ -11,7 +11,9 @@ import org.dizitart.no2.IndexType;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteCollection;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import static org.dizitart.no2.IndexOptions.indexOptions;
@@ -59,31 +61,69 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     }
 
     @Override
-    public Concept insert(String key, Concept concept) {
-        save(concept);
-        super.insert(key, concept);
-        return concept;
-    }
-
-    @Override
-    public void save(Concept concept) {
+    public Concept add(String key, Concept concept) {
         Document saved = collection.find(eq(Concept.ATTRIBUTE_ID, concept.getId())).firstOrDefault();
         boolean exists = saved != null;
 
+        Document doc;
         if (!exists) {
-            Document doc = DocumentMapper.mapToDocument(concept);
+            doc = DocumentMapper.mapToDocument(concept);
+        } else {
+            doc = DocumentMapper.mapToDocument(saved, concept);
+        }
+        upsert(doc);
+
+        return concept;
+    }
+
+    private void upsert(Document doc) {
+        Document saved = null;
+
+        boolean exists = false;
+        if (doc.containsKey(Concept.ATTRIBUTE_ID)) {
+            String id = doc.get(Concept.ATTRIBUTE_ID).toString();
+            saved = collection.find(eq(Concept.ATTRIBUTE_ID, id)).firstOrDefault();
+            if (saved != null) {
+                // Merge documents
+                saved.putAll(doc);
+                exists = true;
+            }
+        }
+
+        if (!exists) {
             collection.insert(doc);
         } else {
-            Document doc = DocumentMapper.mapToDocument(saved, concept);
-            collection.update(doc);
+            //MERGE
+            //Document abd = DocumentMapper.mapToDocument(saved, concept);
+
+            collection.update(saved);
         }
+
+        for (Object nested : doc.values()) {
+            if (nested instanceof Document) {
+                Document d = (Document) nested;
+                upsert(d);
+            }
+        }
+    }
+
+    @Override
+    public String add(Concept concept) {
+        Concept id = concept.getIdConcept();
+        if (id.isUnknown()) {
+            String idText = idGenerator.generateId();
+            concept.id(idText);
+        }
+
+        add(concept.getId(), concept);
+        return concept.getId();
     }
 
     @Override
     public void merge(KnowledgeBase concepts) {
         Map<String, Concept> map = concepts.getAll();
         for (Map.Entry<String, Concept> entry : map.entrySet()) {
-            insert(entry.getKey(), entry.getValue());
+            add(entry.getKey(), entry.getValue());
         }
     }
 
@@ -109,11 +149,19 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
 
         for (Document document : cursor) {
             Concept concept = DocumentMapper.mapFromDocument(document);
-            String id = document.get(Concept.ATTRIBUTE_ID).toString();
-            conceptMap.put(id, concept);
+            if (document.containsKey(Concept.ATTRIBUTE_ID)) {
+                String id = document.get(Concept.ATTRIBUTE_ID).toString();
+                conceptMap.put(id, concept);
+            }
         }
 
         return conceptMap;
+    }
+
+    @Override
+    public Iterator<Concept> iterator() {
+        Cursor cursor = collection.find();
+        return new RepositoryConceptCursor(cursor).iterator();
     }
 
     @Override
@@ -132,7 +180,6 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
         return cursor.iterator().hasNext();
     }
 
-    // TODO Unify find methods and move to repository
     public RepositoryConceptCursor find() {
         return new RepositoryConceptCursor(collection.find());
     }

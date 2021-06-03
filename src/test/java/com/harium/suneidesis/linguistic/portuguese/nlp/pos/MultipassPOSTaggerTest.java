@@ -3,9 +3,9 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.repository.word.WordRepository;
+import com.harium.suneidesis.repository.nitrite.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import com.harium.suneidesis.linguistic.nlp.tokenization.Tokenizer;
-import com.harium.suneidesis.linguistic.portuguese.nlp.database.MemoryWordBase;
 import com.harium.suneidesis.linguistic.portuguese.nlp.tokenization.RuleBasedTokenizer;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,7 +19,7 @@ public class MultipassPOSTaggerTest {
 
     Tokenizer tokenizer;
     MultipassPOSTagger tagger;
-    WordRepository database;
+    WordKnowledgeBase database;
 
     @Before
     public void setUp() {
@@ -28,8 +28,9 @@ public class MultipassPOSTaggerTest {
         tokenizer = new RuleBasedTokenizer();
     }
 
-    private WordRepository buildDatabase() {
-        MemoryWordBase database = new MemoryWordBase();
+    private WordKnowledgeBase buildDatabase() {
+        MemoryKnowledgeBase db = new MemoryKnowledgeBase();
+        WordKnowledgeBase database = new WordKnowledgeBase(db);
 
         WordVerb go = database.addVerb("ir", "a|de|X", "");
         database.addVerbConjugation("fui", go, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), FIRST_PERSON_SINGULAR);
