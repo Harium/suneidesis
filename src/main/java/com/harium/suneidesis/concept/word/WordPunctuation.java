@@ -10,11 +10,6 @@ public class WordPunctuation extends Word {
         super(name, Tag.PUNCTUATION);
     }
 
-    public WordPunctuation(String name, String type) {
-        this(name);
-        setWordType(new Word(type));
-    }
-
     @Override
     public WordPunctuation wrap(Concept concept) {
         super.wrap(concept);

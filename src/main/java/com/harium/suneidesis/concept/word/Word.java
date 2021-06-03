@@ -50,7 +50,7 @@ public class Word extends Primitive {
     }
 
     public String getTag() {
-        return getAttributes().get(ATTRIBUTE_TAG).getName();
+        return getTagConcept().getName();
     }
 
     public void setTag(Word tag) {
@@ -58,7 +58,7 @@ public class Word extends Primitive {
     }
 
     public void setTag(String tagName) {
-        getAttributes().add(ATTRIBUTE_TAG, new Word(tagName));
+        setTag(new Word(tagName));
     }
 
     public Concept getWordTypeConcept() {
@@ -69,8 +69,8 @@ public class Word extends Primitive {
         return getWordTypeConcept().getName();
     }
 
-    public void setWordType(Word Type) {
-        getAttributes().add(ATTRIBUTE_WORD_TYPE, Type);
+    public void setWordType(Word type) {
+        getAttributes().add(ATTRIBUTE_WORD_TYPE, type);
     }
 
     @Override

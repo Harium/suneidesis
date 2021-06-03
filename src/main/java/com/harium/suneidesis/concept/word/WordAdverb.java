@@ -9,11 +9,6 @@ public class WordAdverb extends Word {
         super(name, Tag.ADVERB);
     }
 
-    public WordAdverb(String name, String type) {
-        this(name);
-        setWordType(new Word(type));
-    }
-
     @Override
     public WordAdverb wrap(Concept concept) {
         super.wrap(concept);
