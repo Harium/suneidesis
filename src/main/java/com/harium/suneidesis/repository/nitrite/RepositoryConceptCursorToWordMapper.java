@@ -1,4 +1,4 @@
-package com.harium.suneidesis.repository.word;
+package com.harium.suneidesis.repository.nitrite;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;

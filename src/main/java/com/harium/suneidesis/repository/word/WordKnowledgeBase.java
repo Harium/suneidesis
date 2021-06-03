@@ -9,6 +9,7 @@ import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.Repository;
 import com.harium.suneidesis.repository.RepositoryCursor;
+import com.harium.suneidesis.repository.nitrite.RepositoryConceptCursorToWordMapper;
 import org.dizitart.no2.Filter;
 
 import java.util.Iterator;
@@ -117,15 +118,10 @@ public class WordKnowledgeBase implements Repository<Concept> {
         return knowledgeBase.find(filter);
     }
 
-    public WordVerb findVerbByWordId(String wordId) {
-        Concept concept = knowledgeBase.find(eq(Concept.ATTRIBUTE_ID, wordId)).iterator().next();
-        return new WordVerb(concept.getName()).wrap(concept);
-    }
-
     public WordVerb findVerb(String name) {
         Iterator<Concept> result = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name)).iterator();
 
-        while(result.hasNext()) {
+        while (result.hasNext()) {
             Concept concept = result.next();
             if (Tag.VERB.name().equals(concept.get(Word.ATTRIBUTE_TAG).getName())) {
                 return new WordVerb(concept.getName()).wrap(concept);
@@ -134,33 +130,5 @@ public class WordKnowledgeBase implements Repository<Concept> {
 
         return null;
     }
-
-    /*
-    @Override
-    public Map<String, Word> getAll() {
-        Map<String, Word> result = new HashMap<>();
-        Map<String, Concept> all = knowledgeBase.getAll();
-        for (Map.Entry<String, Concept> entry : all.entrySet()) {
-            Concept concept = entry.getValue();
-            result.put(entry.getKey(), new Word(concept.getName()).wrap(concept));
-        }
-        return result;
-    }
-
-    @Override
-    public Iterator<Word> getValues() {
-        RepositoryCursor<Concept> cursor = knowledgeBase.find();
-        return new RepositoryConceptCursorToWordMapper(cursor).iterator();
-    }
-
-    @Override
-    public RepositoryCursor<Word> find() {
-        return knowledgeBase.find();
-    }
-
-    @Override
-    public RepositoryCursor<Word> find(Filter filter) {
-        return knowledgeBase.find(filter);
-    }*/
 
 }

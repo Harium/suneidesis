@@ -2,15 +2,13 @@ package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.repository.decorator.EntryDecorator;
-import com.harium.suneidesis.repository.decorator.TimeDecorator;
 import com.harium.suneidesis.repository.generator.BaseIdGenerator;
-import com.harium.suneidesis.repository.generator.BaseTimeGenerator;
 import com.harium.suneidesis.repository.generator.IdGenerator;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public abstract class KnowledgeBase implements Repository<Concept> {
 
@@ -37,8 +35,13 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         this.idGenerator = idGenerator;
     }
 
-    protected void initDecorators() {
-        decorators.add(new TimeDecorator(new BaseTimeGenerator()));
+    public abstract String add(Concept concept);
+
+    public void merge(KnowledgeBase concepts) {
+        Map<String, Concept> map = concepts.getAll();
+        for (Map.Entry<String, Concept> entry : map.entrySet()) {
+            add(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
@@ -46,21 +49,11 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         return getAll().values().iterator();
     }
 
-    public abstract String add(Concept concept);
-
-    public abstract void merge(KnowledgeBase concepts);
-
-    public void addAll(Collection<Concept> concepts) {
-        for (Concept concept : concepts) {
-            add(concept);
-        }
-    }
-
-    protected Concept decorate(Concept info) {
+    protected Concept decorate(Concept concept) {
         for (EntryDecorator decorator : decorators) {
-            decorator.decorate(info);
+            decorator.decorate(concept);
         }
-        return info;
+        return concept;
     }
 
     public String getName() {

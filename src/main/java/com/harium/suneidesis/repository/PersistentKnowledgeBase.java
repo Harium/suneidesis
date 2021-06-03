@@ -93,9 +93,6 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
         if (!exists) {
             collection.insert(doc);
         } else {
-            //MERGE
-            //Document abd = DocumentMapper.mapToDocument(saved, concept);
-
             collection.update(saved);
         }
 
@@ -115,16 +112,10 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
             concept.id(idText);
         }
 
+        decorate(concept);
+
         add(concept.getId(), concept);
         return concept.getId();
-    }
-
-    @Override
-    public void merge(KnowledgeBase concepts) {
-        Map<String, Concept> map = concepts.getAll();
-        for (Map.Entry<String, Concept> entry : map.entrySet()) {
-            add(entry.getKey(), entry.getValue());
-        }
     }
 
     public void clear() {
