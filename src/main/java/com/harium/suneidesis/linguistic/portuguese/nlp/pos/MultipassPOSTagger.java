@@ -55,20 +55,15 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
                 continue;
             }
             Iterator<Word> words = database.getWords(tagPair.getWord());
-            if (!words.hasNext()) {
-                continue;
-            }
-
-            Stream<Word> stream = StreamSupport.stream(
-                    Spliterators.spliteratorUnknownSize(words, Spliterator.ORDERED),
-                    false);
-
-            if (stream.anyMatch(word -> DETERMINER.name().equals(word.getTagConcept().getName()))) {
-                tagPair.setTag(DETERMINER);
-                // Verify next words (they could be adjective, numerals and so on)
-                if (output.length > i + 1) {
-                    TagPair next = output[i + 1];
-                    next.setTag(NOUN);
+            while (words.hasNext()) {
+                Word word = words.next();
+                if (DETERMINER.name().equals(word.getTagConcept().getName())) {
+                    tagPair.setTag(DETERMINER);
+                    // Verify next words (they could be adjective, numerals and so on)
+                    if (output.length > i + 1) {
+                        TagPair next = output[i + 1];
+                        next.setTag(NOUN);
+                    }
                 }
             }
         }

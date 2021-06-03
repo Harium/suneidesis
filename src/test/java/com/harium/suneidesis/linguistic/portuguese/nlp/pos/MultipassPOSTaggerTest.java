@@ -3,6 +3,7 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
+import com.harium.suneidesis.linguistic.portuguese.nlp.database.PortugueseDatabase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import com.harium.suneidesis.linguistic.nlp.tokenization.Tokenizer;
@@ -29,8 +30,7 @@ public class MultipassPOSTaggerTest {
     }
 
     private WordKnowledgeBase buildDatabase() {
-        MemoryKnowledgeBase db = new MemoryKnowledgeBase();
-        WordKnowledgeBase database = new WordKnowledgeBase(db);
+        database = new PortugueseDatabase(new MemoryKnowledgeBase());
 
         WordVerb go = database.addVerb("ir", "a|de|X", "");
         database.addVerbConjugation("fui", go, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), FIRST_PERSON_SINGULAR);
@@ -41,13 +41,13 @@ public class MultipassPOSTaggerTest {
 
     @Test
     public void testSingleWord() {
-        TagPair[] answer = tagger.posTag(tokenize("fui"));
+        TagPair[] answer = tagger.posTag(tokenizer.tokenize("fui"));
         Assert.assertEquals(Tag.VERB, answer[0].getTag());
     }
 
     @Test
     public void testVerbPreposition() {
-        TagPair[] answer = tagger.posTag(tokenize("foi de carro"));
+        TagPair[] answer = tagger.posTag(tokenizer.tokenize("foi de carro"));
         Assert.assertEquals(Tag.VERB, answer[0].getTag());
         Assert.assertEquals(Tag.PREPOSITION, answer[1].getTag());
         Assert.assertEquals(Tag.NOUN, answer[2].getTag());
@@ -55,15 +55,11 @@ public class MultipassPOSTaggerTest {
 
     @Test
     public void testVerbPrepositionAndArticle() {
-        TagPair[] answer = tagger.posTag(tokenize("foi à casa"));
+        TagPair[] answer = tagger.posTag(tokenizer.tokenize("foi à casa"));
         Assert.assertEquals(Tag.VERB, answer[0].getTag());
         Assert.assertEquals(Tag.PREPOSITION, answer[1].getTag());
         Assert.assertEquals(Tag.DETERMINER, answer[2].getTag());
         Assert.assertEquals(Tag.NOUN, answer[3].getTag());
-    }
-
-    private String[] tokenize(String sentence) {
-        return tokenizer.tokenize(sentence);
     }
 
 }

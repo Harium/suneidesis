@@ -4,9 +4,9 @@ import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 
-public class MemoryWordBase extends WordKnowledgeBase {
+public class PortugueseDatabase extends WordKnowledgeBase {
 
-    public MemoryWordBase(KnowledgeBase knowledgeBase) {
+    public PortugueseDatabase(KnowledgeBase knowledgeBase) {
         super(knowledgeBase);
         addPunctuation();
         addDeterminers();
