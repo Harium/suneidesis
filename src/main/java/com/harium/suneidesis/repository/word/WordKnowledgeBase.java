@@ -122,6 +122,14 @@ public class WordKnowledgeBase implements Repository<Concept> {
         return new WordVerb(concept.getName()).wrap(concept);
     }
 
+    public WordVerb findVerb(String name) {
+        Concept concept = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name)).iterator().next();
+        if (concept == null) {
+            return null;
+        }
+        return new WordVerb(concept.getName()).wrap(concept);
+    }
+
     /*
     @Override
     public Map<String, Word> getAll() {

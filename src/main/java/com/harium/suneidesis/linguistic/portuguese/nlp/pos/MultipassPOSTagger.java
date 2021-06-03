@@ -79,7 +79,7 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
                 while(words.hasNext()) {
                     Word w = words.next();
                     if (isVerb(w.getTag())) {
-                        verb = database.findVerbByWordId(w.getLemmaConcept().getId());
+                        verb = database.findVerb(w.getLemmaConcept().getName());
 
                         String[] prepositionsList = verb.getPrepositionsWord().split("\\|");
                         Set<String> prepositions = new HashSet<>(Arrays.asList(prepositionsList));
@@ -108,9 +108,6 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
         for (int i = 0; i < output.length; i++) {
             String word = output[i].getWord();
             Iterator<Word> words = database.getWords(word);
-            if (!words.hasNext()) {
-                continue;
-            }
 
             while (words.hasNext()) {
                 Word w = words.next();
