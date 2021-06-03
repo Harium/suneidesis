@@ -4,7 +4,7 @@ import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.planning.instruction.FindTask;
-import com.harium.suneidesis.repository.nitrite.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

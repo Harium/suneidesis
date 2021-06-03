@@ -5,7 +5,7 @@ import com.harium.suneidesis.concept.word.WordNoun;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.repository.KnowledgeBase;
-import com.harium.suneidesis.repository.nitrite.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;
 import org.json.JSONException;

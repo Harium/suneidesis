@@ -3,7 +3,7 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.repository.nitrite.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import com.harium.suneidesis.linguistic.nlp.tokenization.Tokenizer;
 import com.harium.suneidesis.linguistic.portuguese.nlp.tokenization.RuleBasedTokenizer;

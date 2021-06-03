@@ -30,10 +30,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
             output[i] = new TagPair(word, Tag.UNKNOWN);
             Iterator<Word> words = database.getWords(word);
 
-            if (!words.hasNext()) {
-                if (words.hasNext()) {
-                    // TODO Disambiguation
-                }
+            if (words != null && words.hasNext()) {
                 lastTag = Tag.valueOf(words.next().getTag());
                 output[i].setTag(lastTag);
             } else {

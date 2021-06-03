@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class RuleBasedPOSTaggerTest {
 
-    RuleBasedPOSTagger tagger;
+    private RuleBasedPOSTagger tagger;
 
     @Before
     public void setUp() {

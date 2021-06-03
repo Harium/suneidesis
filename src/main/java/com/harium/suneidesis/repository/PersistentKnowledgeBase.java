@@ -4,6 +4,7 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.attribute.Attributes;
 import com.harium.suneidesis.repository.nitrite.DocumentMapper;
+import com.harium.suneidesis.repository.nitrite.RepositoryConceptCursor;
 import org.dizitart.no2.Cursor;
 import org.dizitart.no2.Document;
 import org.dizitart.no2.Filter;
@@ -11,7 +12,6 @@ import org.dizitart.no2.IndexType;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteCollection;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

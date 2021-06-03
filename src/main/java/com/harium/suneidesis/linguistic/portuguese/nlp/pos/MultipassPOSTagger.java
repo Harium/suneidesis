@@ -106,7 +106,7 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
         if (tag == null) {
             return false;
         }
-        return tag.startsWith("VERB");
+        return tag.startsWith(VERB.name());
     }
 
     private void handleFixedTags(TagPair[] output) {
@@ -117,14 +117,15 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
                 continue;
             }
 
-            Stream<Word> stream = StreamSupport.stream(
-                    Spliterators.spliteratorUnknownSize(words, Spliterator.ORDERED),
-                    false);
-
-            if (stream.anyMatch(w -> PUNCTUATION.name().equals(w.getTag()))) {
-                output[i].setTag(PUNCTUATION);
-            } else if (stream.anyMatch(w -> VERB.name().equals(w.getTag()) || VERB_PAST_TENSE.name().equals(w.getTag()))) {
-                output[i].setTag(VERB);
+            while (words.hasNext()) {
+                Word w = words.next();
+                if (PUNCTUATION.name().equals(w.getTag())) {
+                    output[i].setTag(PUNCTUATION);
+                    break;
+                } else if(VERB.name().equals(w.getTag()) || VERB_PAST_TENSE.name().equals(w.getTag())) {
+                    output[i].setTag(VERB);
+                    break;
+                }
             }
         }
 

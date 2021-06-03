@@ -1,6 +1,4 @@
-package com.harium.suneidesis.repository.nitrite;
-
-import com.harium.suneidesis.repository.PersistentKnowledgeBase;
+package com.harium.suneidesis.repository;
 
 public class MemoryKnowledgeBase extends PersistentKnowledgeBase {
 

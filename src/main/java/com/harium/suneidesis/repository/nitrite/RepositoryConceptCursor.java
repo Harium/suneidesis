@@ -1,7 +1,8 @@
-package com.harium.suneidesis.repository;
+package com.harium.suneidesis.repository.nitrite;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
+import com.harium.suneidesis.repository.RepositoryCursor;
 import com.harium.suneidesis.repository.nitrite.DocumentMapper;
 import org.dizitart.no2.Cursor;
 import org.dizitart.no2.Document;

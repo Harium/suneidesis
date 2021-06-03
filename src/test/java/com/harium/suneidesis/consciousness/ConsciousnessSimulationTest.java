@@ -5,8 +5,8 @@ import com.harium.suneidesis.concept.Measurement;
 import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.concept.measurement.Time;
 import com.harium.suneidesis.repository.KnowledgeBase;
-import com.harium.suneidesis.repository.RepositoryConceptCursor;
-import com.harium.suneidesis.repository.nitrite.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.nitrite.RepositoryConceptCursor;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import org.junit.Before;
 import org.junit.Test;
 
