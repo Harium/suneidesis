@@ -24,7 +24,7 @@ public class ConceptList extends Concept {
 
     public void add(Concept concept) {
         String key = Integer.toString(size);
-        getAttributes().insert(key, concept);
+        getAttributes().add(key, concept);
         size++;
     }
 
@@ -60,7 +60,7 @@ public class ConceptList extends Concept {
                 realLength--;
                 for (int k = i + 1; k < size; k++) {
                     Concept concept = getAttributes().get(Integer.toString(k));
-                    getAttributes().insert(Integer.toString(k - 1), concept);
+                    getAttributes().add(Integer.toString(k - 1), concept);
                 }
             }
         }

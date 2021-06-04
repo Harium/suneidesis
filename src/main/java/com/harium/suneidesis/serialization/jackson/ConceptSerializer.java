@@ -81,12 +81,9 @@ public class ConceptSerializer extends StdSerializer<Concept> {
                 continue;
             }
 
-            if (DataType.PRIMITIVE == entry.getValue().getDataType()) {
-                if (entry.getValue() instanceof Word) {
-                    Word word = (Word) entry.getValue();
-                    jgen.writeObjectField(entry.getKey(), word.getName());
-                }
-
+            Concept value = entry.getValue();
+            if (DataType.PRIMITIVE == value.getDataType()) {
+                jgen.writeObjectField(entry.getKey(), value.getValue());
                 continue;
             }
 

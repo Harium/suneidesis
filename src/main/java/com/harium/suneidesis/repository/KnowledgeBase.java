@@ -1,21 +1,14 @@
 package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.DataType;
-import com.harium.suneidesis.concept.attribute.Inheritance;
-import com.harium.suneidesis.repository.generator.BaseIdGenerator;
-import com.harium.suneidesis.repository.generator.BaseTimeGenerator;
-import com.harium.suneidesis.repository.generator.IdGenerator;
 import com.harium.suneidesis.repository.decorator.EntryDecorator;
-import com.harium.suneidesis.repository.decorator.TimeDecorator;
-import com.harium.suneidesis.repository.listener.RepositoryListener;
+import com.harium.suneidesis.repository.generator.BaseIdGenerator;
+import com.harium.suneidesis.repository.generator.IdGenerator;
 
-import java.util.*;
-
-import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
-import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_INHERITANCE;
-import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
-import static com.harium.suneidesis.repository.decorator.TimeDecorator.ATTRIBUTE_CREATED_AT;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public abstract class KnowledgeBase implements Repository<Concept> {
 
@@ -24,10 +17,9 @@ public abstract class KnowledgeBase implements Repository<Concept> {
 
     private String name;
 
-    private IdGenerator idGenerator = new BaseIdGenerator();
+    protected IdGenerator idGenerator = new BaseIdGenerator();
 
     protected List<EntryDecorator> decorators = new ArrayList<>();
-    protected List<RepositoryListener> listeners = new ArrayList<>();
 
     public KnowledgeBase() {
         super();
@@ -43,75 +35,25 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         this.idGenerator = idGenerator;
     }
 
-    protected void initDecorators() {
-        decorators.add(new TimeDecorator(new BaseTimeGenerator()));
+    public abstract String add(Concept concept);
+
+    public void merge(KnowledgeBase concepts) {
+        Map<String, Concept> map = concepts.getAll();
+        for (Map.Entry<String, Concept> entry : map.entrySet()) {
+            add(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
-    public Collection<Concept> getValues() {
-        return getAll().values();
+    public Iterator<Concept> iterator() {
+        return getAll().values().iterator();
     }
 
-    @Override
-    public Concept insert(String key, Concept concept) {
-        for (RepositoryListener repositoryListener: listeners) {
-            repositoryListener.onInsert(key, concept);
+    protected Concept decorate(Concept concept) {
+        for (EntryDecorator decorator : decorators) {
+            decorator.decorate(concept);
         }
         return concept;
-    }
-
-    @Override
-    public void save(Concept concept) {
-        insert(concept.getId(), concept);
-    }
-
-    public abstract void merge(KnowledgeBase concepts);
-
-    public void addAll(Collection<Concept> concepts) {
-        for (Concept concept : concepts) {
-            add(concept);
-        }
-    }
-
-    public String add(Concept concept) {
-        Concept id = concept.getIdConcept();
-        if (!id.isUnknown() && contains(id.getName())) {
-            return id.getName();
-        }
-        Concept wrap = decorate(concept);
-
-        String idText = idGenerator.generateId();
-        wrap.id(idText);
-        insert(idText, wrap);
-
-        if (DataType.OBJECT == concept.getDataType()) {
-            for (Map.Entry<String, Concept> entry : concept.getAttributes().entrySet()) {
-                if (ATTRIBUTE_CREATED_AT.equals(entry.getKey())) {
-                    continue;
-                }
-                if (ATTRIBUTE_NAME.equals(entry.getKey())) {
-                    continue;
-                }
-                if (ATTRIBUTE_ID.equals(entry.getKey())) {
-                    continue;
-                }
-                if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
-                    Inheritance inheritance = (Inheritance) entry.getValue();
-                    addAll(inheritance.getMap().values());
-                    continue;
-                }
-                add(entry.getValue());
-            }
-        }
-
-        return idText;
-    }
-
-    protected Concept decorate(Concept info) {
-        for (EntryDecorator decorator : decorators) {
-            decorator.decorate(info);
-        }
-        return info;
     }
 
     public String getName() {
@@ -130,7 +72,4 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         this.idGenerator = idGenerator;
     }
 
-    public void addListener(RepositoryListener listener) {
-        listeners.add(listener);
-    }
 }

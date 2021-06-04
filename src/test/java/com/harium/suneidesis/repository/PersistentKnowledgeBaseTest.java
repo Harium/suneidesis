@@ -32,7 +32,7 @@ public class PersistentKnowledgeBaseTest {
         appleTree.set("fruit", apple);
         appleTree.set("intValue", new Primitive("1234"));
 
-        persistentKnowledgeBase.insert("randomKey1", appleTree);
+        persistentKnowledgeBase.add("randomKey1", appleTree);
 
         Concept result = persistentKnowledgeBase.get("1");
         assertEquals("1", result.getId());

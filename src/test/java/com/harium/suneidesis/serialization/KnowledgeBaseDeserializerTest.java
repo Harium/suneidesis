@@ -3,11 +3,10 @@ package com.harium.suneidesis.serialization;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.helper.Inspector;
-import com.harium.suneidesis.linguistic.repository.MemoryWordBase;
-import com.harium.suneidesis.linguistic.repository.WordKnowledgeBase;
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
-import com.harium.suneidesis.repository.nitrite.NitriteMemoryKnowledgeBase;
 import com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseDeserializer;
 import com.harium.suneidesis.serialization.jackson.KnowledgeBaseJacksonSerializer;
 import org.json.JSONException;
@@ -20,7 +19,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
@@ -39,7 +38,7 @@ public class KnowledgeBaseDeserializerTest {
     public void testSimple() throws IOException, URISyntaxException, JSONException {
         String json = loadFileAsString("database_simple.json");
 
-        KnowledgeBase database = new NitriteMemoryKnowledgeBase();
+        KnowledgeBase database = new MemoryKnowledgeBase();
         deserializer.deserialize(json, database);
 
         assertEquals("database", database.getName());
@@ -60,7 +59,7 @@ public class KnowledgeBaseDeserializerTest {
     public void testComplex() throws IOException, URISyntaxException, JSONException {
         String json = loadFileAsString("database_complex.json");
 
-        KnowledgeBase database = new NitriteMemoryKnowledgeBase();
+        KnowledgeBase database = new MemoryKnowledgeBase();
         deserializer.deserialize(json, database);
 
         assertEquals("database", database.getName());
@@ -87,17 +86,20 @@ public class KnowledgeBaseDeserializerTest {
         KnowledgeBase database = new MemoryKnowledgeBase();
         deserializer.deserialize(json, database);
 
-        WordKnowledgeBase wordDatabase = new MemoryWordBase("");
-        wordDatabase.merge(database);
+        WordKnowledgeBase wordDatabase = new WordKnowledgeBase(database);
 
         assertEquals("dictionary", database.getName());
         assertEquals(4, database.getAll().size());
 
-        List<Word> words = wordDatabase.getWords("cat");
-        assertEquals("cat", words.get(0).getName());
+        Iterator<Word> words = wordDatabase.getWords("cat");
+        Word cat = words.next();
+        assertEquals("cat", cat.getName());
+        assertEquals(Tag.NOUN.name(), cat.getTag());
 
         words = wordDatabase.getWords("duck");
-        assertEquals("duck", words.get(0).getName());
+        Word duck = words.next();
+        assertEquals("duck", duck.getName());
+        assertEquals(Tag.NOUN.name(), duck.getTag());
 
         String serialized = new KnowledgeBaseJacksonSerializer().serialize(database);
         JSONAssert.assertEquals(json, serialized, false);

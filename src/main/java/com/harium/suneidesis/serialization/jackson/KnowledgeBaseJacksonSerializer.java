@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.attribute.Inheritance;
-import com.harium.suneidesis.linguistic.repository.WordKnowledgeBase;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.serialization.KnowledgeBaseSerializer;
 

@@ -4,8 +4,10 @@ import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.Measurement;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
+import com.harium.suneidesis.repository.RepositoryCursor;
+import org.apache.commons.lang3.NotImplementedException;
+import org.dizitart.no2.Filter;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -74,6 +76,16 @@ public class Attributes implements Repository<Concept> {
         return false;
     }
 
+    @Override
+    public RepositoryCursor<Concept> find() {
+        throw new NotImplementedException("Not implemented");
+    }
+
+    @Override
+    public RepositoryCursor<Concept> find(Filter filter) {
+        throw new NotImplementedException("Not implemented");
+    }
+
     public boolean queryIs(String key) {
         return getInheritance().queryIs(key);
     }
@@ -84,17 +96,19 @@ public class Attributes implements Repository<Concept> {
     }
 
     @Override
-    public Collection<Concept> getValues() {
-        return attributeMap.values();
+    public Iterator<Concept> iterator() {
+        return attributeMap.values().iterator();
     }
 
-    public Concept insert(String key, Concept concept) {
+    public Concept add(String key, Concept concept) {
         return attributeMap.put(key, concept);
     }
 
     @Override
-    public void save(Concept concept) {
-        insert(concept.getId(), concept);
+    public String add(Concept concept) {
+        String id = concept.getId();
+        add(id, concept);
+        return id;
     }
 
     public boolean remove(Concept concept) {

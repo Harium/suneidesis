@@ -1,4 +1,4 @@
-package com.harium.suneidesis.linguistic.repository;
+package com.harium.suneidesis.repository.word;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;

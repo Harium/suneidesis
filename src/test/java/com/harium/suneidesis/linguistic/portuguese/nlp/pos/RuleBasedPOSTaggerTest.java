@@ -2,6 +2,8 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
+import com.harium.suneidesis.linguistic.portuguese.nlp.database.PortugueseDatabase;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -9,11 +11,12 @@ import org.junit.Test;
 
 public class RuleBasedPOSTaggerTest {
 
-    RuleBasedPOSTagger tagger;
+    private RuleBasedPOSTagger tagger;
 
     @Before
     public void setUp() {
-        tagger = new RuleBasedPOSTagger();
+        PortugueseDatabase portugueseDatabase = new PortugueseDatabase(new MemoryKnowledgeBase());
+        tagger = new RuleBasedPOSTagger(portugueseDatabase);
     }
 
     @Test
