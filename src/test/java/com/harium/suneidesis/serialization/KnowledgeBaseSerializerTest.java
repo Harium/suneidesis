@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class KnowledgeBaseSerializerTest {
 
-    private static final boolean PRINT_RESULT = true;
+    private static final boolean PRINT_RESULT = false;
 
     private KnowledgeBaseJacksonSerializer serializer;
 
