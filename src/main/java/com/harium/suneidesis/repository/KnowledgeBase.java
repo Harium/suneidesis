@@ -40,9 +40,11 @@ public abstract class KnowledgeBase implements Repository<Concept> {
     @Override
     public String add(Concept concept) {
         Concept id = concept.getIdConcept();
-        String idText = id.getValue();
+        String idText;
         if (id.isUnknown()) {
             idText = idGenerator.generateId();
+        } else {
+            idText = id.getId();
         }
 
         decorate(concept);
