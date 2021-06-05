@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class PersistentKnowledgeBaseTest {
@@ -41,6 +42,34 @@ public class PersistentKnowledgeBaseTest {
         Concept fruit = result.get("fruit");
         assertEquals("2", fruit.getId());
         assertEquals("77", fruit.get("kcal").getValue());
+    }
+
+    @Test
+    public void testGetInvalid() {
+        Concept concept = persistentKnowledgeBase.get("randomKey");
+        assertTrue(concept.isUnknown());
+    }
+
+    @Test
+    public void testAddConceptTwice_NullId() {
+        persistentKnowledgeBase.add("randomKey", new Concept("concept"));
+        persistentKnowledgeBase.add("randomKey", new Concept("concept"));
+
+        Concept concept = persistentKnowledgeBase.get("randomKey");
+        assertFalse(concept.isUnknown());
+    }
+
+    @Test
+    public void testMerge() {
+        PersistentKnowledgeBase anotherDB = new PersistentKnowledgeBase();
+        anotherDB.add("randomKey1", new Concept("concept1"));
+
+        persistentKnowledgeBase.add("randomKey2", new Concept("concept2"));
+        persistentKnowledgeBase.merge(anotherDB);
+
+        Concept concept = persistentKnowledgeBase.get("randomKey1");
+        assertFalse(concept.isUnknown());
+        assertEquals("concept1", concept.getName());
     }
 
 }

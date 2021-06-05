@@ -62,6 +62,9 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
 
     @Override
     public Concept add(String key, Concept concept) {
+        if (concept.getId() == null) {
+            concept.id(key);
+        }
         Document saved = collection.find(eq(Concept.ATTRIBUTE_ID, concept.getId())).firstOrDefault();
         boolean exists = saved != null;
 
@@ -102,20 +105,6 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
                 upsert(d);
             }
         }
-    }
-
-    @Override
-    public String add(Concept concept) {
-        Concept id = concept.getIdConcept();
-        if (id.isUnknown()) {
-            String idText = idGenerator.generateId();
-            concept.id(idText);
-        }
-
-        decorate(concept);
-
-        add(concept.getId(), concept);
-        return concept.getId();
     }
 
     public void clear() {
@@ -159,8 +148,8 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     public Concept get(String key) {
         Cursor cursor = collection.find(eq(Concept.ATTRIBUTE_ID, key));
 
-        if (cursor == null) {
-            return ConceptType.UNKNOWN_TYPE;
+        if (cursor.size() == 0) {
+            return ConceptType.UNKNOWN;
         }
         return DocumentMapper.mapFromDocument(cursor.firstOrDefault());
     }

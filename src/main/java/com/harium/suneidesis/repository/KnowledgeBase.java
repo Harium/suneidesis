@@ -35,12 +35,27 @@ public abstract class KnowledgeBase implements Repository<Concept> {
         this.idGenerator = idGenerator;
     }
 
-    public abstract String add(Concept concept);
+    public abstract Concept add(String key, Concept concept);
 
-    public void merge(KnowledgeBase concepts) {
-        Map<String, Concept> map = concepts.getAll();
-        for (Map.Entry<String, Concept> entry : map.entrySet()) {
-            add(entry.getKey(), entry.getValue());
+    @Override
+    public String add(Concept concept) {
+        Concept id = concept.getIdConcept();
+        String idText = id.getValue();
+        if (id.isUnknown()) {
+            idText = idGenerator.generateId();
+        }
+
+        decorate(concept);
+
+        add(idText, concept);
+        return idText;
+    }
+
+    public void merge(KnowledgeBase knowledgeBase) {
+        Iterator<Concept> iterator = knowledgeBase.iterator();
+        while (iterator.hasNext()) {
+            Concept concept = iterator.next();
+            add(concept.getId(), concept);
         }
     }
 

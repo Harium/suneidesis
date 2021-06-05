@@ -1,6 +1,5 @@
 package com.harium.suneidesis.repository;
 
-import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Thing;
 import org.dizitart.no2.Filter;
 
@@ -13,9 +12,9 @@ public interface Repository<T extends Thing> {
 
     Iterator<T> iterator();
 
-    T add(String key, T t);
+    String add(T concept);
 
-    String add(Concept concept);
+    T add(String key, T t);
 
     T get(String key);
 
