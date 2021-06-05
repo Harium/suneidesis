@@ -56,8 +56,11 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
 
     private void init() {
         collection = database.getCollection("db");
-        collection.createIndex(Concept.ATTRIBUTE_ID, indexOptions(IndexType.Unique));
-        collection.createIndex(Attributes.ATTRIBUTE_NAME, indexOptions(IndexType.NonUnique));
+        if (!collection.hasIndex(Concept.ATTRIBUTE_ID)) {
+            collection.createIndex(Concept.ATTRIBUTE_ID, indexOptions(IndexType.Unique));
+        } else if (!collection.hasIndex(Attributes.ATTRIBUTE_NAME)) {
+            collection.createIndex(Attributes.ATTRIBUTE_NAME, indexOptions(IndexType.NonUnique));
+        }
     }
 
     @Override
