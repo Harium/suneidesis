@@ -5,16 +5,18 @@ import java.util.List;
 
 public class ConceptList extends Concept {
 
-    private int size = 0;
+    private static final String ATTRIBUTE_SIZE = "size";
 
     public ConceptList(String name) {
         super(name);
         dataType(DataType.ARRAY);
+        setSize(0L);
     }
 
     public ConceptList(ConceptType type) {
         super(type);
         dataType(DataType.ARRAY);
+        setSize(0L);
     }
 
     public Concept get(int index) {
@@ -23,9 +25,18 @@ public class ConceptList extends Concept {
     }
 
     public void add(Concept concept) {
-        String key = Integer.toString(size);
+        String key = get(ATTRIBUTE_SIZE).getValue();
         getAttributes().add(key, concept);
-        size++;
+        incrementSize();
+    }
+
+    private void incrementSize() {
+        long size = getSize();
+        setSize(size + 1);
+    }
+
+    private void setSize(Long size) {
+        has(ATTRIBUTE_SIZE, new Primitive(Long.toString(size)));
     }
 
     public void remove(Concept concept) {
@@ -38,8 +49,8 @@ public class ConceptList extends Concept {
         removeAndPack(index, true);
     }
 
-    private void removeAndPack(int index, boolean pack) {
-        String key = Integer.toString(index);
+    private void removeAndPack(long index, boolean pack) {
+        String key = Long.toString(index);
         Concept removed = getAttributes().removeAttribute(key);
         if (pack && removed != null) {
             pack();
@@ -53,7 +64,8 @@ public class ConceptList extends Concept {
     }
 
     private void pack() {
-        int realLength = size;
+        long size = getSize();
+        long realLength = size;
         // Rearrange concepts so they can be contiguous
         for (int i = 0; i < size; i++) {
             if (!getAttributes().contains(Integer.toString(i))) {
@@ -65,27 +77,23 @@ public class ConceptList extends Concept {
             }
         }
         // Update Size
-        size = realLength;
+        setSize(realLength);
     }
 
     private void refresh() {
         // Rearrange concepts so they can be contiguous
-        int i = 0;
-        while (getAttributes().contains(Integer.toString(i))) {
-            for (int k = i + 1; k < size; k++) {
-                Concept concept = getAttributes().get(Integer.toString(k));
-                getAttributes().add(Integer.toString(k - 1), concept);
-            }
+        long i = 0;
+        while (getAttributes().contains(Long.toString(i))) {
             i++;
         }
         // Update Size
-        size = i;
+        setSize(i);
     }
 
     public List<Concept> getAll() {
         List<Concept> items = new ArrayList<>();
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < getSize(); i++) {
             String key = Integer.toString(i);
 
             Concept item = getAttributes().get(key);
@@ -97,18 +105,18 @@ public class ConceptList extends Concept {
     }
 
     public void clear() {
-        for (int i = size - 1; i >= 0; i--) {
+        for (long i = getSize() - 1; i >= 0; i--) {
             removeAndPack(i, false);
         }
-        size = 0;
+        setSize(0L);
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return getSize() == 0;
     }
 
-    public int getSize() {
-        return size;
+    public long getSize() {
+        return Long.parseLong(get(ATTRIBUTE_SIZE).getValue());
     }
 
     @Override
