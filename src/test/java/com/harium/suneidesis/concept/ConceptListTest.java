@@ -79,6 +79,21 @@ public class ConceptListTest {
     }
 
     @Test
+    public void testWrap() {
+        Concept list = new Concept("Just a List");
+
+        list.has("0", new Concept("item 0"));
+        list.has("1", new Concept("item 1"));
+
+        ConceptList wrapped = new ConceptList("list").wrap(list);
+
+        Assert.assertEquals(2, wrapped.getSize());
+        Assert.assertEquals("item 0", wrapped.get(0).getName());
+        Assert.assertEquals("item 1", wrapped.get(1).getName());
+        Assert.assertTrue(wrapped.get(2).isUnknown());
+    }
+
+    @Test
     public void testClear() {
         ConceptList list = new ConceptList("Just a List");
 

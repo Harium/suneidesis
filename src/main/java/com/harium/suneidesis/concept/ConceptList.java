@@ -68,6 +68,20 @@ public class ConceptList extends Concept {
         size = realLength;
     }
 
+    private void refresh() {
+        // Rearrange concepts so they can be contiguous
+        int i = 0;
+        while (getAttributes().contains(Integer.toString(i))) {
+            for (int k = i + 1; k < size; k++) {
+                Concept concept = getAttributes().get(Integer.toString(k));
+                getAttributes().add(Integer.toString(k - 1), concept);
+            }
+            i++;
+        }
+        // Update Size
+        size = i;
+    }
+
     public List<Concept> getAll() {
         List<Concept> items = new ArrayList<>();
 
@@ -97,4 +111,10 @@ public class ConceptList extends Concept {
         return size;
     }
 
+    @Override
+    public ConceptList wrap(Concept concept) {
+        super.wrap(concept);
+        refresh();
+        return this;
+    }
 }
