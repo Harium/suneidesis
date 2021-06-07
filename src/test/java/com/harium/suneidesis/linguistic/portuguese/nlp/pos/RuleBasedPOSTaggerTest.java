@@ -2,21 +2,34 @@ package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.linguistic.portuguese.nlp.database.PortugueseDatabase;
+import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.word.WordKnowledgeBase;
+import com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseDeserializer;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static com.harium.suneidesis.serialization.KnowledgeBaseDeserializerTest.loadFileAsString;
+
 public class RuleBasedPOSTaggerTest {
 
-    private RuleBasedPOSTagger tagger;
+    private static RuleBasedPOSTagger tagger;
 
-    @Before
-    public void setUp() {
-        PortugueseDatabase portugueseDatabase = new PortugueseDatabase(new MemoryKnowledgeBase());
-        tagger = new RuleBasedPOSTagger(portugueseDatabase);
+    @BeforeClass
+    public static void setUp() throws IOException, URISyntaxException {
+        CustomKnowledgeBaseDeserializer deserializer = new CustomKnowledgeBaseDeserializer();
+        String json = loadFileAsString("dictionary_portuguese.json");
+
+        KnowledgeBase database = new MemoryKnowledgeBase();
+        deserializer.deserialize(json, database);
+        WordKnowledgeBase wordKnowledgeBase = new WordKnowledgeBase(database);
+
+        tagger = new RuleBasedPOSTagger(wordKnowledgeBase);
     }
 
     @Test
@@ -73,7 +86,7 @@ public class RuleBasedPOSTaggerTest {
     public void testTagMisc() {
         TagPair[] answer = tagger.posTag(new String[]{"eu", "sou", "sempre", "muito", "chato"});
         Assert.assertEquals(Tag.PERSONAL_PRONOUN, answer[0].getTag());
-        Assert.assertEquals(Tag.VERB, answer[1].getTag());
+        Assert.assertEquals(Tag.VERB_CONJUGATION, answer[1].getTag());
         Assert.assertEquals(Tag.ADVERB, answer[2].getTag());
         Assert.assertEquals(Tag.ADVERB, answer[3].getTag());
         Assert.assertEquals(Tag.ADJECTIVE, answer[4].getTag());
@@ -103,11 +116,11 @@ public class RuleBasedPOSTaggerTest {
         Assert.assertEquals(Tag.WH_PRONOUN, answer[0].getTag());
         Assert.assertEquals(Tag.PREPOSITION, answer[1].getTag());
         Assert.assertEquals(Tag.NOUN, answer[2].getTag());
-        Assert.assertEquals(Tag.VERB, answer[3].getTag());
+        Assert.assertEquals(Tag.VERB_CONJUGATION, answer[3].getTag());
         Assert.assertEquals(Tag.PREPOSITION, answer[4].getTag());
         Assert.assertEquals(Tag.NOUN, answer[5].getTag());
-        Assert.assertEquals(Tag.VERB, answer[6].getTag());
-        Assert.assertEquals(Tag.VERB, answer[7].getTag());
+        Assert.assertEquals(Tag.VERB_CONJUGATION, answer[6].getTag());
+        Assert.assertEquals(Tag.ADJECTIVE, answer[7].getTag());
     }
 
     @Test

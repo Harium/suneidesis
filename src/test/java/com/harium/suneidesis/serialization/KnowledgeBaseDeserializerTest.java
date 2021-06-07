@@ -105,7 +105,7 @@ public class KnowledgeBaseDeserializerTest {
         JSONAssert.assertEquals(json, serialized, false);
     }
 
-    private String loadFileAsString(String filename) throws IOException, URISyntaxException {
+    public static String loadFileAsString(String filename) throws IOException, URISyntaxException {
         ClassLoader loader = ClassLoader.getSystemClassLoader();
 
         return Files.lines(Paths.get(loader.getResource(filename).toURI()))

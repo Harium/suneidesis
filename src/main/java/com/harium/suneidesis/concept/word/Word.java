@@ -10,6 +10,10 @@ public class Word extends Primitive {
     public static final String ATTRIBUTE_TAG = "tag";
     public static final String ATTRIBUTE_LEMMA = "lemma";
     public static final String ATTRIBUTE_WORD_TYPE = "word_type";
+    // Plural / Singular
+    public static final String ATTRIBUTE_NUMBER = "number";
+    public static final String ATTRIBUTE_NUMBER_PLURAL = "plural";
+    public static final String ATTRIBUTE_NUMBER_SINGULAR = "single";
 
     public Word(String name) {
         super(name, ConceptType.WORD);
@@ -43,6 +47,26 @@ public class Word extends Primitive {
 
     public void setLemma(Word lemma) {
         getAttributes().add(ATTRIBUTE_LEMMA, lemma);
+    }
+
+    public Concept getNumberConcept() {
+        return getAttributes().get(ATTRIBUTE_NUMBER);
+    }
+
+    public String getNumber() {
+        return getNumberConcept().getName();
+    }
+
+    public void setNumber(Word number) {
+        getAttributes().add(ATTRIBUTE_NUMBER, number);
+    }
+
+    public void setNumberPlural() {
+        setNumber(new Word(ATTRIBUTE_NUMBER_PLURAL));
+    }
+
+    public void setNumberSingular() {
+        setNumber(new Word(ATTRIBUTE_NUMBER_SINGULAR));
     }
 
     public Concept getTagConcept() {

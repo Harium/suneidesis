@@ -44,7 +44,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                 } else {
                     output[i].setTag(Tag.NOUN);
 
-                    if (lastTag.equals(Tag.VERB)) {
+                    if (isVerb(lastTag.name())) {
                         Iterator<Word> ws = database.getWords(word);
                         while (ws.hasNext()) {
                             Word wv = ws.next();
@@ -85,6 +85,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
         if (tag == null) {
             return false;
         }
+        // It can be Verb or verb conjugation
         return tag.startsWith("VERB");
     }
 

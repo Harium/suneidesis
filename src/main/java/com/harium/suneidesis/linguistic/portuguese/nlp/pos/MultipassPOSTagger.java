@@ -114,7 +114,7 @@ public class MultipassPOSTagger extends DatabasePOSTagger {
                 if (PUNCTUATION.name().equals(w.getTag())) {
                     output[i].setTag(PUNCTUATION);
                     break;
-                } else if(VERB.name().equals(w.getTag()) || VERB_PAST_TENSE.name().equals(w.getTag())) {
+                } else if(isVerb(w.getTag())) {
                     output[i].setTag(VERB);
                     break;
                 }

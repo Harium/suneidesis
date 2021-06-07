@@ -1,42 +1,43 @@
 package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 
-import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
-import com.harium.suneidesis.linguistic.portuguese.nlp.database.PortugueseDatabase;
+import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import com.harium.suneidesis.linguistic.nlp.tokenization.Tokenizer;
 import com.harium.suneidesis.linguistic.portuguese.nlp.tokenization.RuleBasedTokenizer;
+import com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseDeserializer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import static com.harium.suneidesis.serialization.KnowledgeBaseDeserializerTest.loadFileAsString;
+
 public class MultipassPOSTaggerTest {
 
-    private static final String INFINITIVE = "inf";
-    private static final String FIRST_PERSON_SINGULAR = "eu";
-    private static final String THIRD_PERSON_SINGULAR = "ele";
-
-    Tokenizer tokenizer;
-    MultipassPOSTagger tagger;
-    WordKnowledgeBase database;
+    private Tokenizer tokenizer;
+    private MultipassPOSTagger tagger;
+    private WordKnowledgeBase database;
 
     @Before
-    public void setUp() {
+    public void setUp() throws IOException, URISyntaxException {
         database = buildDatabase();
         tagger = new MultipassPOSTagger(database);
         tokenizer = new RuleBasedTokenizer();
     }
 
-    private WordKnowledgeBase buildDatabase() {
-        database = new PortugueseDatabase(new MemoryKnowledgeBase());
+    private WordKnowledgeBase buildDatabase() throws IOException, URISyntaxException {
+        CustomKnowledgeBaseDeserializer deserializer = new CustomKnowledgeBaseDeserializer();
+        String json = loadFileAsString("dictionary_portuguese.json");
 
-        WordVerb go = database.addVerb("ir", "a|de|X", "");
-        database.addVerbConjugation("fui", go, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), FIRST_PERSON_SINGULAR);
-        database.addVerbConjugation("foi", go, Tag.VERB_PAST_TENSE, Tag.VERB_PAST_TENSE.name(), THIRD_PERSON_SINGULAR);
+        KnowledgeBase database = new MemoryKnowledgeBase();
+        deserializer.deserialize(json, database);
 
-        return database;
+        return new WordKnowledgeBase(database);
     }
 
     @Test
