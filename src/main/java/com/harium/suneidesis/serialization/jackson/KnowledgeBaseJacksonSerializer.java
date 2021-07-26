@@ -9,6 +9,7 @@ import com.harium.suneidesis.serialization.KnowledgeBaseSerializer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 public class KnowledgeBaseJacksonSerializer implements KnowledgeBaseSerializer {
 
@@ -25,9 +26,13 @@ public class KnowledgeBaseJacksonSerializer implements KnowledgeBaseSerializer {
 
     public String serialize(KnowledgeBase knowledgeBase) throws IOException {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        return serialize(knowledgeBase, stream).toString();
+    }
 
+    @Override
+    public OutputStream serialize(KnowledgeBase knowledgeBase, OutputStream stream) throws IOException {
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(stream, knowledgeBase);
-        return new String(stream.toByteArray());
+        return stream;
     }
 
 }
