@@ -163,12 +163,22 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
         return cursor.iterator().hasNext();
     }
 
-    public RepositoryConceptCursor find() {
+    public RepositoryConceptCursor findAll() {
         return new RepositoryConceptCursor(collection.find());
     }
 
     public RepositoryConceptCursor find(Filter filter) {
         return new RepositoryConceptCursor(collection.find(filter));
+    }
+
+    public Concept findById(String id) {
+        Iterator<Concept> result = find(eq(Concept.ATTRIBUTE_ID, id)).iterator();
+
+        while (result.hasNext()) {
+            return result.next();
+        }
+
+        return null;
     }
 
 }

@@ -76,16 +76,6 @@ public class Attributes implements Repository<Concept> {
         return false;
     }
 
-    @Override
-    public RepositoryCursor<Concept> find() {
-        throw new NotImplementedException("Not implemented");
-    }
-
-    @Override
-    public RepositoryCursor<Concept> find(Filter filter) {
-        throw new NotImplementedException("Not implemented");
-    }
-
     public boolean queryIs(String key) {
         return getInheritance().queryIs(key);
     }

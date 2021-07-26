@@ -25,8 +25,4 @@ public interface Repository<T extends Thing> {
     void close();
 
     boolean isClosed();
-
-    RepositoryCursor<T> find();
-
-    RepositoryCursor<T> find(Filter filter);
 }

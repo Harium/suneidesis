@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public abstract class KnowledgeBase implements Repository<Concept> {
+public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> {
 
     // Reserved word for introspection
     public static final String SELF = "self";

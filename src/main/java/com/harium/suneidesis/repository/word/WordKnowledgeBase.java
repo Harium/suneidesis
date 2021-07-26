@@ -7,6 +7,7 @@ import com.harium.suneidesis.concept.word.WordVerb;
 import com.harium.suneidesis.concept.word.WordVerbConjugation;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.repository.KnowledgeBase;
+import com.harium.suneidesis.repository.KnowledgeBaseRepository;
 import com.harium.suneidesis.repository.Repository;
 import com.harium.suneidesis.repository.RepositoryCursor;
 import com.harium.suneidesis.repository.nitrite.RepositoryConceptCursorToWordMapper;
@@ -17,12 +18,17 @@ import java.util.Map;
 
 import static org.dizitart.no2.filters.Filters.eq;
 
-public class WordKnowledgeBase implements Repository<Concept> {
+public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
 
     protected final KnowledgeBase knowledgeBase;
 
     public WordKnowledgeBase(KnowledgeBase knowledgeBase) {
         this.knowledgeBase = knowledgeBase;
+    }
+
+    public Word addWord(Word word) {
+        knowledgeBase.add(word);
+        return word;
     }
 
     public Word addWord(String word, String tag) {
@@ -109,13 +115,23 @@ public class WordKnowledgeBase implements Repository<Concept> {
     }
 
     @Override
-    public RepositoryCursor<Concept> find() {
-        return knowledgeBase.find();
+    public RepositoryCursor<Concept> findAll() {
+        return knowledgeBase.findAll();
     }
 
     @Override
     public RepositoryCursor<Concept> find(Filter filter) {
         return knowledgeBase.find(filter);
+    }
+
+    public Word findById(String id) {
+
+        Concept concept = knowledgeBase.findById(id);
+        if (concept == null) {
+            return null;
+        }
+
+        return new Word(concept.getName()).wrap(concept);
     }
 
     public WordVerb findVerb(String name) {
