@@ -25,6 +25,8 @@ import static org.dizitart.no2.filters.Filters.eq;
  */
 public class PersistentKnowledgeBase extends KnowledgeBase {
 
+    private static final String COLLECTION_NAME = "db";
+
     private Nitrite database;
     private NitriteCollection collection;
 
@@ -55,7 +57,7 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     }
 
     private void init() {
-        collection = database.getCollection("db");
+        collection = database.getCollection(COLLECTION_NAME);
         if (!collection.hasIndex(Concept.ATTRIBUTE_ID)) {
             collection.createIndex(Concept.ATTRIBUTE_ID, indexOptions(IndexType.Unique));
         } else if (!collection.hasIndex(Attributes.ATTRIBUTE_NAME)) {
@@ -125,6 +127,11 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     }
 
     @Override
+    public long count() {
+        return collection.size();
+    }
+
+    @Override
     public Map<String, Concept> getAll() {
         Cursor cursor = collection.find();
 
@@ -174,11 +181,11 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     public Concept findById(String id) {
         Iterator<Concept> result = find(eq(Concept.ATTRIBUTE_ID, id)).iterator();
 
-        while (result.hasNext()) {
+        if (result.hasNext()) {
             return result.next();
         }
 
-        return null;
+        return ConceptType.UNKNOWN;
     }
 
 }

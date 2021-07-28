@@ -8,7 +8,6 @@ import com.harium.suneidesis.concept.word.WordVerbConjugation;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.KnowledgeBaseRepository;
-import com.harium.suneidesis.repository.Repository;
 import com.harium.suneidesis.repository.RepositoryCursor;
 import com.harium.suneidesis.repository.nitrite.RepositoryConceptCursorToWordMapper;
 import org.dizitart.no2.Filter;
@@ -55,9 +54,13 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     public void addVerbConjugation(String word, WordVerb verb, Tag tag, String tense, String person) {
+        addVerbConjugation(word, verb, tag.name(), tense, person);
+    }
+
+    public void addVerbConjugation(String word, Word verbLemma, String tag, String tense, String person) {
         WordVerbConjugation verbConjugation = new WordVerbConjugation(word);
-        verbConjugation.setLemma(verb);
-        verbConjugation.setTag(tag.name());
+        verbConjugation.setLemma(verbLemma);
+        verbConjugation.setTag(tag);
         verbConjugation.setTense(new Word(tense));
         verbConjugation.setPerson(new Word(person));
         knowledgeBase.add(verbConjugation);
@@ -100,6 +103,11 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     @Override
+    public long count() {
+        return knowledgeBase.count();
+    }
+
+    @Override
     public void clear() {
         knowledgeBase.clear();
     }
@@ -112,6 +120,10 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     @Override
     public boolean isClosed() {
         return knowledgeBase.isClosed();
+    }
+
+    public KnowledgeBase getKnowledgeBase() {
+        return knowledgeBase;
     }
 
     @Override

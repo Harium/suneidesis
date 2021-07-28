@@ -1,7 +1,6 @@
 package com.harium.suneidesis.repository;
 
 import com.harium.suneidesis.concept.Thing;
-import org.dizitart.no2.Filter;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -19,6 +18,8 @@ public interface Repository<T extends Thing> {
     T get(String key);
 
     boolean contains(String key);
+
+    long count();
 
     void clear();
 

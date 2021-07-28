@@ -59,6 +59,12 @@ public class Attributes implements Repository<Concept> {
     }
 
     @Override
+    public long count() {
+        // TODO Change this value to take properties/abilities/inheritance into account
+        return attributeMap.size();
+    }
+
+    @Override
     public void clear() {
         attributeMap.clear();
         properties.getAttributes().clear();

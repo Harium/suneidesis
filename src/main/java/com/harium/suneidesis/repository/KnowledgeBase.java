@@ -8,31 +8,36 @@ import com.harium.suneidesis.repository.generator.IdGenerator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> {
 
     // Reserved word for introspection
-    public static final String SELF = "self";
+    public static final String SELF = "_self";
 
     private String name;
 
-    protected IdGenerator idGenerator = new BaseIdGenerator();
+    private IdGenerator idGenerator;
 
     protected List<EntryDecorator> decorators = new ArrayList<>();
 
     public KnowledgeBase() {
         super();
+        initGenerators();
     }
 
     public KnowledgeBase(String name) {
         super();
         this.name = name;
+        initGenerators();
     }
 
     public KnowledgeBase(IdGenerator idGenerator) {
         super();
         this.idGenerator = idGenerator;
+    }
+
+    public void initGenerators() {
+        idGenerator = new BaseIdGenerator();
     }
 
     public abstract Concept add(String key, Concept concept);
@@ -42,7 +47,7 @@ public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> 
         Concept id = concept.getIdConcept();
         String idText;
         if (id.isUnknown()) {
-            idText = idGenerator.generateId();
+            idText = idGenerator.generateId(concept);
         } else {
             idText = id.getId();
         }
