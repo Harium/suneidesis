@@ -16,7 +16,7 @@ public class PersistentKnowledgeBaseTest {
 
     @Before
     public void setUp() {
-        persistentKnowledgeBase = new PersistentKnowledgeBase();
+        persistentKnowledgeBase = new MemoryKnowledgeBase();
     }
 
     @After

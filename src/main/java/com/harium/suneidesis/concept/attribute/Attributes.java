@@ -16,12 +16,12 @@ import java.util.Set;
 public class Attributes implements Repository<Concept> {
 
     public static final String ATTRIBUTE_NAME = "name";
-    public static final String ATTRIBUTE_DATA_TYPE = "dataType";
-
-    public static final String ATTRIBUTE_ABILITIES = "abilities";
-    public static final String ATTRIBUTE_PROPERTIES = "props";
-    public static final String ATTRIBUTE_INHERITANCE = "inheritance";
     public static final String ATTRIBUTE_LOCATION = "location";
+
+    public static final String ATTRIBUTE_DATA_TYPE = "_dataType";
+    public static final String ATTRIBUTE_ABILITIES = "_abilities";
+    public static final String ATTRIBUTE_PROPERTIES = "_props";
+    public static final String ATTRIBUTE_INHERITANCE = "_inheritance";
 
     private String name = "";
     private DataType dataType = DataType.OBJECT;

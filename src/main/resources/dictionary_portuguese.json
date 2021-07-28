@@ -101,6 +101,8 @@
     "de-tempos-em-tempos-1": {"name" : "de tempos em tempos", "type" : "WORD", "tag" : "ADVERB"},
     "em-breve-1": {"name" : "em breve", "type" : "WORD", "tag" : "ADVERB"},
     "hoje-em-dia-1": {"name" : "hoje em dia", "type" : "WORD", "tag" : "ADVERB"},
+    "e-2": {"name" : "é", "type" : "VERB", "tag" : "VERB_CONJUGATION"},
+    "ser-1": {"name" : "ser", "type" : "WORD", "tag" : "VERB"},
     "ir-1": {"name" : "ir", "type" : "WORD", "tag" : "VERB", "prepositions": "a|de|X"},
     "foi-1": {"name" : "foi", "type" : "WORD", "lemma": "ir", "tag" : "VERB_CONJUGATION", "tense": "VERB_PAST_TENSE"},
     "fui-1": {"name" : "fui", "type" : "WORD", "lemma": "ir", "tag" : "VERB_CONJUGATION", "tense": "VERB_PAST_TENSE"},

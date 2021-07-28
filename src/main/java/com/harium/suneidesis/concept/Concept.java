@@ -6,8 +6,9 @@ import java.util.Map;
 
 public class Concept extends Thing {
 
-	public static final String ATTRIBUTE_ID = "id";
-	public static final String ATTRIBUTE_TYPE = "type";
+	// Suneidesis' ID
+	public static final String ATTRIBUTE_ID = "_sid";
+	public static final String ATTRIBUTE_TYPE = "_type";
 
 	private String id;
 

@@ -2,10 +2,11 @@ package com.harium.suneidesis.repository.nitrite;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
-import com.harium.suneidesis.concept.attribute.Attributes;
 import org.dizitart.no2.Document;
 import org.junit.Test;
 
+import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
+import static com.harium.suneidesis.concept.attribute.Attributes.ATTRIBUTE_NAME;
 import static org.junit.Assert.assertEquals;
 
 public class DocumentMapperTest {
@@ -20,8 +21,8 @@ public class DocumentMapperTest {
         Document document = DocumentMapper.mapToDocument(concept);
 
         assertEquals("idd", document.get(Concept.ATTRIBUTE_ID));
-        assertEquals("Namibia", document.get(Attributes.ATTRIBUTE_NAME));
-        assertEquals(ConceptType.PLACE.getName(), ((Document)document.get("type")).get("name"));
+        assertEquals("Namibia", document.get(ATTRIBUTE_NAME));
+        assertEquals(ConceptType.PLACE.getName(), ((Document)document.get(ATTRIBUTE_TYPE)).get(ATTRIBUTE_NAME));
         assertEquals("apple", ((Document)document.get("fruit")).get("name"));
     }
 

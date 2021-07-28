@@ -21,12 +21,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
 import static com.harium.suneidesis.concept.attribute.Attributes.*;
 import static com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseSerializer.ATTR_CONCEPTS;
 
 public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserializer {
+
+    private static final String SERIALIZED_ID = "id";
 
     private final ObjectMapper objectMapper;
 
@@ -142,9 +143,9 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
                 continue;
             }
 
-            if (value.isObject() && value.has(ATTRIBUTE_ID)) {
+            if (value.isObject() && value.has(SERIALIZED_ID)) {
                 String key = entry.getKey();
-                String targetId = value.get(ATTRIBUTE_ID).asText();
+                String targetId = value.get(SERIALIZED_ID).asText();
                 assignConcept(base, concept, targetId, key, relationshipList);
             }
         }

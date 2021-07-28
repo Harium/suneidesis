@@ -67,7 +67,7 @@ public class RuleBasedPOSTaggerTest {
     public void testTagPronouns() {
         TagPair[] answer = tagger.posTag(new String[]{"você", "é", "esperto"});
         Assert.assertEquals(Tag.PERSONAL_PRONOUN, answer[0].getTag());
-        Assert.assertEquals(Tag.VERB, answer[1].getTag());
+        Assert.assertEquals(Tag.VERB_CONJUGATION, answer[1].getTag());
         Assert.assertEquals(Tag.ADJECTIVE, answer[2].getTag());
     }
 

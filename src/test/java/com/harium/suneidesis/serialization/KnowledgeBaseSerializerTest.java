@@ -45,7 +45,7 @@ public class KnowledgeBaseSerializerTest {
 
         String expected = "{name:\"database\", \"concepts\":{"
                 + "\"0\":{\"name\":\"apple tree\",\"fruit\":{\"id\":\"1\"}},"
-                + "\"1\":{\"name\":\"apple\",\"inheritance\":[\"2\"]},"
+                + "\"1\":{\"name\":\"apple\",\"_inheritance\":[\"2\"]},"
                 + "\"2\":{\"name\":\"food\"}"
                 +"}}";
         JSONAssert.assertEquals(expected, result, false);

@@ -11,7 +11,7 @@
     "1" : {
       "name" : "apple",
       "dataType" : "OBJECT",
-      "inheritance" : [ "2" ]
+      "_inheritance" : [ "2" ]
     },
     "2" : {
       "name" : "food",
