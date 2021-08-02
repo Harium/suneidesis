@@ -31,6 +31,11 @@ public class WordIdGenerator implements IdGenerator {
         return id;
     }
 
+    @Override
+    public void update(KnowledgeBase knowledgeBase) {
+
+    }
+
     private boolean idExists(String id) {
         return !knowledgeBase.findById(id).isUnknown();
     }

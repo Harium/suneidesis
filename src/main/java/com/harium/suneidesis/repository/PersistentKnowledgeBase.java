@@ -128,7 +128,8 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
 
     @Override
     public long count() {
-        return collection.size();
+        // TODO Improve count
+        return getAll().size();
     }
 
     @Override

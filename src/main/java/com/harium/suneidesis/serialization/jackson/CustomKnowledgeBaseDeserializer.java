@@ -12,6 +12,9 @@ import com.harium.suneidesis.concept.attribute.Inheritance;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.decorator.TimeDecorator;
+import com.harium.suneidesis.repository.merge.MergeStrategy;
+import com.harium.suneidesis.repository.merge.MergeStrategyType;
+import com.harium.suneidesis.serialization.BaseDeserializer;
 import com.harium.suneidesis.serialization.KnowledgeBaseDeserializer;
 
 import java.io.IOException;
@@ -25,13 +28,18 @@ import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
 import static com.harium.suneidesis.concept.attribute.Attributes.*;
 import static com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseSerializer.ATTR_CONCEPTS;
 
-public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserializer {
+public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements KnowledgeBaseDeserializer {
 
     private static final String SERIALIZED_ID = "id";
 
     private final ObjectMapper objectMapper;
 
     public CustomKnowledgeBaseDeserializer() {
+        this(MergeStrategyType.CREATE_NEW);
+    }
+
+    public CustomKnowledgeBaseDeserializer(MergeStrategyType mergeStrategyType) {
+        super(mergeStrategyType);
         objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
         module.addSerializer(KnowledgeBase.class, new CustomKnowledgeBaseSerializer());
@@ -42,15 +50,17 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
 
     public void deserialize(InputStream stream, KnowledgeBase base) throws IOException {
         JsonNode node = objectMapper.readTree(stream);
-        parseNode(node, base);
+        MergeStrategy mergeStrategy = buildMergeStrategy(base);
+        parseNode(node, mergeStrategy, base);
     }
 
     public void deserialize(String json, KnowledgeBase base) throws JsonProcessingException {
         JsonNode node = objectMapper.readTree(json);
-        parseNode(node, base);
+        MergeStrategy mergeStrategy = buildMergeStrategy(base);
+        parseNode(node, mergeStrategy, base);
     }
 
-    private void parseNode(JsonNode node, KnowledgeBase base) {
+    private void parseNode(JsonNode node, MergeStrategy mergeStrategy, KnowledgeBase base) {
         base.setName(node.get(CustomKnowledgeBaseSerializer.ATTR_NAME).asText());
 
         List<Relationship> relationshipList = new ArrayList<>();
@@ -58,8 +68,8 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         for (Iterator<Map.Entry<String, JsonNode>> it = node.get(ATTR_CONCEPTS).fields(); it.hasNext(); ) {
             Map.Entry<String, JsonNode> child = it.next();
             // Deserialize concepts
-            Concept concept = deserializeConcept(child, base, relationshipList);
-            base.add(child.getKey(), concept);
+            Concept concept = deserializeConcept(mergeStrategy, base, child, relationshipList);
+            base.add(concept.getId(), concept);
         }
 
         for (Relationship relationship : relationshipList) {
@@ -68,26 +78,23 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             if (target != null) {
                 if (!Relationship.INHERITANCE.equals(relationship.relation)) {
                     from.set(relationship.relation, target);
-                    base.add(from);
                 } else {
                     from.is(target);
-                    base.add(from);
                 }
             } else {
+                Concept placeHolder = new Concept(relationship.target);
                 if (!Relationship.INHERITANCE.equals(relationship.relation)) {
-                    from.set(relationship.relation, new Concept(relationship.target));
-                    base.add(from);
+                    from.set(relationship.relation, placeHolder);
                 } else {
                     // It should never happen (otherwise the inheritance is missing)
-                    from.is(new Concept(relationship.target));
-                    base.add(from);
+                    from.is(placeHolder);
                 }
             }
+            base.add(from);
         }
     }
 
-    private Concept deserializeConcept(Map.Entry<String, JsonNode> conceptEntry, KnowledgeBase base, List<Relationship> relationshipList) {
-        String id = conceptEntry.getKey();
+    private Concept deserializeConcept(MergeStrategy mergeStrategy, KnowledgeBase knowledgeBase, Map.Entry<String, JsonNode> conceptEntry, List<Relationship> relationshipList) {
         JsonNode node = conceptEntry.getValue();
 
         Concept concept;
@@ -103,7 +110,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             concept = new Concept(ConceptType.UNKNOWN_TYPE);
         }
         // Set Id
-        concept.id(id);
+        mergeStrategy.setId(concept, conceptEntry.getKey());
 
         for (Iterator<Map.Entry<String, JsonNode>> it = node.fields(); it.hasNext(); ) {
             Map.Entry<String, JsonNode> entry = it.next();
@@ -125,7 +132,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             if (ATTRIBUTE_INHERITANCE.equals(entry.getKey())) {
                 List<String> inheritances = deserializeInheritanceList(entry.getValue());
                 for (String targetId: inheritances) {
-                    assignConcept(base, concept, targetId, Relationship.INHERITANCE, relationshipList);
+                    assignConcept(knowledgeBase, concept, targetId, Relationship.INHERITANCE, relationshipList);
                 }
                 continue;
             }
@@ -146,7 +153,7 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
             if (value.isObject() && value.has(SERIALIZED_ID)) {
                 String key = entry.getKey();
                 String targetId = value.get(SERIALIZED_ID).asText();
-                assignConcept(base, concept, targetId, key, relationshipList);
+                assignConcept(knowledgeBase, concept, targetId, key, relationshipList);
             }
         }
         return concept;
@@ -168,11 +175,11 @@ public class CustomKnowledgeBaseDeserializer implements KnowledgeBaseDeserialize
         return ConceptType.WORD.getName().equals(type.asText());
     }
 
-    private void assignConcept(KnowledgeBase base, Concept concept, String targetId, String relation, List<Relationship> relationshipList) {
+    private void assignConcept(KnowledgeBase knowledgeBase, Concept concept, String targetId, String relation, List<Relationship> relationshipList) {
         // If concept is already loaded
-        if (base.contains(targetId)) {
+        if (knowledgeBase.contains(targetId)) {
             // Assign concept
-            Concept target = base.get(targetId);
+            Concept target = knowledgeBase.get(targetId);
             if (!Relationship.INHERITANCE.equals(relation)) {
                 concept.set(relation, target);
             } else {
