@@ -76,6 +76,9 @@ public class Measurement extends Concept {
     }
 
     public boolean equals(Measurement q) {
+        if (q == null) {
+            return false;
+        }
         boolean sameValue = q.getValue().equals(getValue());
         boolean sameUnit = q.getUnit().equals(getUnit());
 

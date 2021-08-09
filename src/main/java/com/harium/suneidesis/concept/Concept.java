@@ -8,7 +8,12 @@ public class Concept extends Thing {
 
 	// Suneidesis' ID
 	public static final String ATTRIBUTE_ID = "_sid";
+
 	public static final String ATTRIBUTE_TYPE = "_type";
+	public static final String ATTRIBUTE_MEANING = "_meaning";
+
+	// Those are the requirements to reveal the concept
+	public static final String ATTRIBUTE_SECRET_REQUIREMENTS = "_secret";
 
 	private String id;
 
@@ -35,6 +40,24 @@ public class Concept extends Thing {
 
 	public String getValue() {
 		return getName();
+	}
+
+	public Concept getMeaning() {
+		return getAttributes().get(ATTRIBUTE_MEANING);
+	}
+
+	public Concept meaning(Concept meaning) {
+		getAttributes().add(ATTRIBUTE_MEANING, meaning);
+		return this;
+	}
+
+	public Concept getSecretRequirements() {
+		return getAttributes().get(ATTRIBUTE_SECRET_REQUIREMENTS);
+	}
+
+	public Concept secretRequirements(Concept secretRequirements) {
+		getAttributes().add(ATTRIBUTE_SECRET_REQUIREMENTS, secretRequirements);
+		return this;
 	}
 
 	public Concept getType() {
@@ -126,8 +149,12 @@ public class Concept extends Thing {
 		return ConceptType.UNKNOWN_TYPE.equals(getType());
 	}
 
-	public boolean isSecret() {
-		return ConceptType.SECRET_TYPE.equals(getType());
+	public boolean isSecret(Concept requester) {
+		Concept requirements = getSecretRequirements();
+		if (requirements.isUnknown()) {
+			return false;
+		}
+		return !requirements.getAttributes().equals(requester.getAttributes());
 	}
 
 	public boolean isPrimitive() {

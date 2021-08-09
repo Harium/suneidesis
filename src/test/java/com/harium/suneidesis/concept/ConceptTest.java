@@ -3,6 +3,7 @@ package com.harium.suneidesis.concept;
 import com.harium.suneidesis.concept.beign.Gender;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ConceptTest {
@@ -41,6 +42,25 @@ public class ConceptTest {
     public void testIsUnknown() {
         Concept concept = new Concept(ConceptType.UNKNOWN_TYPE);
         assertTrue(concept.isUnknown());
+    }
+
+    @Test
+    public void testSecret() {
+        Concept animalThing = new Concept("meow");
+
+        Concept hasToHavePaw = new Concept("requirements");
+        hasToHavePaw.hasQuantity("paw", new Measurement("four"));
+        animalThing.secretRequirements(hasToHavePaw);
+
+        Concept cat = new Concept("cat");
+        cat.hasQuantity("paw", new Measurement("four"));
+
+        Concept requester = new Concept("Requester");
+        requester.hasQuantity("leg", new Measurement("two"));
+        requester.hasQuantity("arm", new Measurement("two"));
+
+        assertTrue(animalThing.isSecret(requester));
+        assertFalse(animalThing.isSecret(cat));
     }
 
 }

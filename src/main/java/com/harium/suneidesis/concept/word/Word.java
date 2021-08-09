@@ -13,7 +13,7 @@ public class Word extends Primitive {
     // Plural / Singular
     public static final String ATTRIBUTE_NUMBER = "number";
     public static final String ATTRIBUTE_NUMBER_PLURAL = "plural";
-    public static final String ATTRIBUTE_NUMBER_SINGULAR = "single";
+    public static final String ATTRIBUTE_NUMBER_SINGULAR = "singular";
 
     public Word(String name) {
         super(name, ConceptType.WORD);
