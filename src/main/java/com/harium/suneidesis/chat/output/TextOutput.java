@@ -22,8 +22,9 @@ public class TextOutput extends BaseOutput {
     }
 
     @Override
-    public void produceFile(String path, String description) {
-        out.println(description + ":" + path);
+    public void produceFile(byte[] data, String description) {
+        String content = new String(data);
+        out.println(description + ":" + content);
         out.flush();
     }
 }

@@ -8,7 +8,7 @@ public class SilentOutput extends BaseOutput {
     }
 
     @Override
-    public void produceFile(String path, String description) {
+    public void produceFile(byte[] data, String description) {
 
     }
 

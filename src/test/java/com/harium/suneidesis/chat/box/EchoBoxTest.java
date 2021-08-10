@@ -1,7 +1,7 @@
 package com.harium.suneidesis.chat.box;
 
 import com.harium.suneidesis.chat.instance.LanguageBox;
-import com.harium.suneidesis.chat.output.Output;
+import com.harium.suneidesis.chat.output.BaseOutput;
 import com.harium.suneidesis.chat.output.OutputContext;
 import org.junit.Assert;
 import org.junit.Before;
@@ -37,8 +37,8 @@ public class EchoBoxTest {
         Assert.assertEquals("Thank you for listen to me", output.answer);
     }
 
-    class Out implements Output {
-        public String answer;
+    class Out extends BaseOutput {
+        public String answer = "";
 
         @Override
         public void print(String sentence, OutputContext context) {
@@ -46,8 +46,8 @@ public class EchoBoxTest {
         }
 
         @Override
-        public void produceFile(String path, String description) {
-            this.answer = path;
+        public void produceFile(byte[] data, String description) {
+            this.answer = new String(data);
         }
     }
 }
