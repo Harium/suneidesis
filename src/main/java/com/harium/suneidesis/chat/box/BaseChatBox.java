@@ -5,19 +5,24 @@ import com.harium.suneidesis.chat.Interceptor;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
+import com.harium.suneidesis.chat.output.OutputContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseChatBox implements ChatBox {
+import static com.harium.suneidesis.chat.input.InputContext.CHANNEL_ID;
+
+public abstract class BaseChatBox implements ChatBox, Parser {
+
+    protected Output output;
 
     protected boolean skipEmptySentences = true;
     protected List<Parser> parsers = new ArrayList<>();
     protected List<Interceptor> interceptors = new ArrayList<>();
 
-    protected void parseInput(InputContext input, Output output) {
+    public boolean parse(InputContext input, Output output) {
         if (shouldSkipSentence(input)) {
-           return;
+           return false;
         }
 
         for (Interceptor interceptor : interceptors) {
@@ -25,10 +30,14 @@ public abstract class BaseChatBox implements ChatBox {
         }
 
         Parser parser = runParsers(input, output);
+        if (parser == null) {
+            return false;
+        }
 
         for (Interceptor interceptor : interceptors) {
             interceptor.postParsing(input, output, parser);
         }
+        return true;
     }
 
     private boolean shouldSkipSentence(InputContext input) {
@@ -55,4 +64,23 @@ public abstract class BaseChatBox implements ChatBox {
         parsers.add(parser);
     }
 
+    @Override
+    public void sendMessage(String channel, String message) {
+        if (output == null) {
+            return;
+        }
+        OutputContext context = new OutputContext();
+        context.getProperties().put(CHANNEL_ID, channel);
+        output.print(message);
+    }
+
+    @Override
+    public Output getOutput() {
+        return output;
+    }
+
+    @Override
+    public void setOutput(Output output) {
+        this.output = output;
+    }
 }

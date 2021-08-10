@@ -3,7 +3,6 @@ package com.harium.suneidesis.chat.input;
 import com.harium.suneidesis.chat.Interceptor;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.box.BaseChatBox;
-import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.chat.output.TextOutput;
 
 import java.util.Scanner;
@@ -13,10 +12,9 @@ public class Terminal extends BaseChatBox {
     private String language = "";
     private String userName = "";
 
-    private Output output = new TextOutput();
-
     public Terminal() {
         super();
+        output = new TextOutput();
     }
 
     public void init() {
@@ -40,7 +38,7 @@ public class Terminal extends BaseChatBox {
         context.setSentence(sentence);
         enhanceInputContext(context);
 
-        parseInput(context, output);
+        parse(context, output);
     }
 
     protected void enhanceInputContext(InputContext context) {
@@ -94,21 +92,6 @@ public class Terminal extends BaseChatBox {
         interceptors.add(interceptor);
     }
 
-    @Override
-    public void sendMessage(String channel, String message) {
-        output.print(message);
-    }
-
-    @Override
-    public void setOutput(Output output) {
-        this.output = output;
-    }
-
-    @Override
-    public Output getOutput() {
-        return output;
-    }
-
     public void setLanguage(String language) {
         this.language = language;
     }
@@ -116,4 +99,5 @@ public class Terminal extends BaseChatBox {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 }
