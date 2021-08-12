@@ -20,8 +20,8 @@ public class WordVerbConjugation extends Word {
 		return getAttributes().get(ATTRIBUTE_PERSON).getName();
 	}
 
-	public void setPerson(Word gender) {
-		getAttributes().add(ATTRIBUTE_PERSON, gender);
+	public void setPerson(Word person) {
+		getAttributes().add(ATTRIBUTE_PERSON, person);
 	}
 
 	public Word getTense() {
@@ -32,8 +32,8 @@ public class WordVerbConjugation extends Word {
 		return getTense().getName();
 	}
 
-	public void setTense(Word Tense) {
-		getAttributes().add(ATTRIBUTE_TENSE, Tense);
+	public void setTense(Word tense) {
+		getAttributes().add(ATTRIBUTE_TENSE, tense);
 	}
 
 	@Override
