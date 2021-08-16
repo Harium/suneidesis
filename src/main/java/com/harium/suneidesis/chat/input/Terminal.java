@@ -1,7 +1,5 @@
 package com.harium.suneidesis.chat.input;
 
-import com.harium.suneidesis.chat.Interceptor;
-import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.box.BaseChatBox;
 import com.harium.suneidesis.chat.output.TextOutput;
 
@@ -11,6 +9,8 @@ public class Terminal extends BaseChatBox {
 
     private String language = "";
     private String userName = "";
+    private String channelId = "";
+    private String channelName = "";
 
     public Terminal() {
         super();
@@ -44,19 +44,11 @@ public class Terminal extends BaseChatBox {
     protected void enhanceInputContext(InputContext context) {
         // Custom Properties
         context.getProperties().put(InputContext.USER_USERNAME, getUsername());
-        // Fill with the same data until we find a better way to get user's id
         context.getProperties().put(InputContext.USER_ID, getUserId());
         context.getProperties().put(InputContext.USER_NAME, getUserName());
-        context.getProperties().put(InputContext.CHANNEL_ID, "");
-        context.getProperties().put(InputContext.CHANNEL_NAME, "");
+        context.getProperties().put(InputContext.CHANNEL_ID, getChannelId());
+        context.getProperties().put(InputContext.CHANNEL_NAME, getChannelName());
         context.getProperties().put(InputContext.LANGUAGE, getLanguage());
-    }
-
-    protected String getUserName() {
-        if (userName != null && !userName.isEmpty()) {
-            return userName;
-        }
-        return "";
     }
 
     protected String getUsername() {
@@ -64,6 +56,7 @@ public class Terminal extends BaseChatBox {
     }
 
     protected String getUserId() {
+        // Fill with the same data until we find a better way to get user's id
         return getUsername();
     }
 
@@ -74,6 +67,10 @@ public class Terminal extends BaseChatBox {
         return getSystemProperty("user.language");
     }
 
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     private String getSystemProperty(String property) {
         String value = System.getProperty(property);
         if (value == null || value.trim().isEmpty()) {
@@ -82,22 +79,35 @@ public class Terminal extends BaseChatBox {
         return value;
     }
 
-    @Override
-    public void addParser(Parser parser) {
-        parsers.add(parser);
+    protected String getChannelId() {
+        return getOrEmpty(channelId);
     }
 
-    @Override
-    public void addInterceptor(Interceptor interceptor) {
-        interceptors.add(interceptor);
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    protected String getChannelName() {
+        return getOrEmpty(channelName);
+    }
+
+    public void setChannelName(String channelName) {
+        this.channelName = channelName;
+    }
+
+    protected String getUserName() {
+        return getOrEmpty(userName);
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    private String getOrEmpty(String value) {
+        if (value != null && !value.isEmpty()) {
+            return value;
+        }
+        return "";
     }
 
 }
