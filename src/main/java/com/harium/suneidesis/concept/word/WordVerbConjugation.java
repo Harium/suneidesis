@@ -5,19 +5,32 @@ import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
 public class WordVerbConjugation extends Word {
 
+	public static final String ATTRIBUTE_MOOD = "mood";
 	public static final String ATTRIBUTE_PERSON = "person";
 	public static final String ATTRIBUTE_TENSE = "tense";
 
 	public WordVerbConjugation(String name) {
 		super(name, Tag.VERB_CONJUGATION);
 	}
-	
+
+	public Word getMood() {
+		return (Word) getAttributes().get(ATTRIBUTE_MOOD);
+	}
+
+	public String getMoodWord() {
+		return getMood().getName();
+	}
+
+	public void setMood(Word mood) {
+		getAttributes().add(ATTRIBUTE_MOOD, mood);
+	}
+
 	public Word getPerson() {
 		return (Word) getAttributes().get(ATTRIBUTE_PERSON);
 	}
 
 	public String getPersonWord() {
-		return getAttributes().get(ATTRIBUTE_PERSON).getName();
+		return getPerson().getName();
 	}
 
 	public void setPerson(Word person) {
