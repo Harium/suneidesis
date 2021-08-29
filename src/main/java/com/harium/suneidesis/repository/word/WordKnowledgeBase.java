@@ -66,6 +66,16 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
         knowledgeBase.add(verbConjugation);
     }
 
+    public void addVerbConjugation(String word, Word verbLemma, String tag, String tense, String person, String mood) {
+        WordVerbConjugation verbConjugation = new WordVerbConjugation(word);
+        verbConjugation.setLemma(verbLemma);
+        verbConjugation.setTag(tag);
+        verbConjugation.setTense(new Word(tense));
+        verbConjugation.setPerson(new Word(person));
+        verbConjugation.setMood(new Word(mood));
+        knowledgeBase.add(verbConjugation);
+    }
+
     public Iterator<Word> getWords(String name) {
         RepositoryCursor<Concept> cursor = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name));
         return new RepositoryConceptCursorToWordMapper(cursor).iterator();
