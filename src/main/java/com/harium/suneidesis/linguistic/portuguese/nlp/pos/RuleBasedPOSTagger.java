@@ -56,7 +56,7 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                             }
                         }
                     }
-                    if (output.length > 2) {
+                    if (i >= 2) {
                         if (lastTag.equals(Tag.COORDINATING_CONJUCTION)) {
                             // Copy tag
                             output[i] = output[i - 2];

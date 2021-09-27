@@ -17,6 +17,8 @@ import com.harium.suneidesis.repository.merge.MergeStrategyType;
 import com.harium.suneidesis.serialization.BaseDeserializer;
 import com.harium.suneidesis.serialization.KnowledgeBaseDeserializer;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -46,6 +48,10 @@ public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements
         module.addSerializer(Concept.class, new ConceptSerializer());
         module.addSerializer(Inheritance.class, new InheritanceSerializer());
         objectMapper.registerModule(module);
+    }
+
+    public void deserialize(File file, KnowledgeBase base) throws IOException {
+        deserialize(new FileInputStream(file), base);
     }
 
     public void deserialize(InputStream stream, KnowledgeBase base) throws IOException {

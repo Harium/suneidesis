@@ -2,9 +2,8 @@ package com.harium.suneidesis.linguistic.nlp.pos;
 
 public class TagPair {
 
-    String word;
-
-    Tag tag;
+    private String word;
+    private Tag tag;
 
     public TagPair() {
 
@@ -29,5 +28,10 @@ public class TagPair {
 
     public void setTag(Tag tag) {
         this.tag = tag;
+    }
+
+    @Override
+    public String toString() {
+        return "('" + word + "'" + ", '" + tag + "')";
     }
 }
