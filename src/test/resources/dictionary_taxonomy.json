@@ -1,0 +1,27 @@
+{
+  "name" : "dictionary",
+  "concepts" : {
+    "cat-meaning" : {
+      "name" : "cat-meaning",
+      "_dataType" : "OBJECT",
+      "domain": "eukarya",
+      "kingdom": "animalia"
+    },
+    "cat" : {
+      "name" : "cat",
+      "_dataType" : "WORD",
+      "tag" : "NOUN",
+      "meaning" : "cat-meaning"
+    },
+    "eukarya" : {
+      "name" : "Eukarya",
+      "_dataType" : "WORD",
+      "tag" : "NOUN"
+    },
+    "animalia" : {
+      "name" : "Animalia",
+      "_dataType" : "WORD",
+      "tag" : "NOUN"
+    }
+  }
+}
