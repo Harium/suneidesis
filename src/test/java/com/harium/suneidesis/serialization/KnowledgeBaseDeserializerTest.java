@@ -1,6 +1,7 @@
 package com.harium.suneidesis.serialization;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.helper.Inspector;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
@@ -102,6 +103,30 @@ public class KnowledgeBaseDeserializerTest {
         assertEquals(Tag.NOUN.name(), duck.getTag());
 
         String serialized = new KnowledgeBaseJacksonSerializer().serialize(database);
+        JSONAssert.assertEquals(json, serialized, false);
+    }
+
+    @Test
+    public void testTaxonomy() throws IOException, URISyntaxException, JSONException {
+        String json = loadFileAsString("dictionary_taxonomy.json");
+
+        KnowledgeBase database = new MemoryKnowledgeBase();
+        deserializer.deserialize(json, database);
+
+        WordKnowledgeBase wordDatabase = new WordKnowledgeBase(database);
+
+        assertEquals("taxonomy", database.getName());
+        assertEquals(8, database.getAll().size());
+
+        Iterator<Word> words = wordDatabase.getWords("cat");
+        Word cat = words.next();
+        assertTrue(ConceptType.isWord(cat));
+        assertEquals("cat", cat.getName());
+        assertEquals(Tag.NOUN.name(), cat.getTag());
+
+        String serialized = new KnowledgeBaseJacksonSerializer().serialize(database);
+        System.out.println(serialized);
+
         JSONAssert.assertEquals(json, serialized, false);
     }
 

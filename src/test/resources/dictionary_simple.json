@@ -3,17 +3,17 @@
   "concepts" : {
     "0" : {
       "name" : "cat",
-      "type" : "WORD",
+      "_type" : "WORD",
       "tag" : "NOUN"
     },
     "1" : {
       "name" : "duck",
-      "type" : "WORD",
+      "_type" : "WORD",
       "tag" : "NOUN"
     },
     "2" : {
       "name" : "go",
-      "type" : "WORD",
+      "_type" : "WORD",
       "transitivity" : "",
       "lemma" : "go",
       "tag" : "VERB",
@@ -21,7 +21,7 @@
     },
     "3" : {
       "name" : "went",
-      "type" : "WORD",
+      "_type" : "WORD",
       "person" : "",
       "lemma" : "go",
       "tag" : "VERB_CONJUGATION",

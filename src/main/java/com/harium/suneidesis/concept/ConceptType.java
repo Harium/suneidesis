@@ -74,5 +74,8 @@ public class ConceptType extends Concept {
 
         return UNKNOWN_TYPE;
     }
-    
+
+    public static boolean isWord(Concept concept) {
+        return WORD.getName().equals(concept.getType().getName());
+    }
 }

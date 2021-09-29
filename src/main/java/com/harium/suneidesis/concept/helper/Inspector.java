@@ -5,6 +5,7 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.attribute.Attributes;
 import com.harium.suneidesis.concept.Measurement;
+import com.harium.suneidesis.concept.word.Word;
 
 public class Inspector {
 
@@ -26,7 +27,18 @@ public class Inspector {
         }
 
         // Compare attributes
-        return this.concept.getAttributes().equals(concept.getAttributes());
+        Attributes from = this.concept.getAttributes();
+        if (ConceptType.isWord(this.concept)) {
+            from = this.concept.get(Word.ATTRIBUTE_MEANING).getAttributes();
+        }
+
+        Attributes target = concept.getAttributes();
+        if (ConceptType.isWord(concept)) {
+            target = concept.get(Word.ATTRIBUTE_MEANING).getAttributes();
+        }
+
+        // Else, compare attributes
+        return from.equals(target);
     }
 
     public boolean can(Action action) {

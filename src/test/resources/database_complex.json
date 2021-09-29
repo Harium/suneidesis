@@ -3,19 +3,19 @@
   "concepts" : {
     "0" : {
       "name" : "apple tree",
-      "dataType" : "OBJECT",
+      "_dataType" : "OBJECT",
       "fruit" : {
         "id" : "1"
       }
     },
     "1" : {
       "name" : "apple",
-      "dataType" : "OBJECT",
+      "_dataType" : "OBJECT",
       "_inheritance" : [ "2" ]
     },
     "2" : {
       "name" : "food",
-      "dataType" : "OBJECT"
+      "_dataType" : "OBJECT"
     }
   }
 }

@@ -1,26 +1,54 @@
 {
-  "name" : "dictionary",
+  "name" : "taxonomy",
   "concepts" : {
+    "animal" : {
+      "name" : "Animal",
+      "_type" : "WORD",
+      "tag" : "NOUN",
+      "meaning" : "animal-meaning"
+    },
+    "animal-meaning" : {
+      "name" : "meaning",
+      "_dataType" : "OBJECT",
+      "taxonomy": "animal-taxonomy"
+    },
+    "animal-taxonomy" : {
+      "name" : "taxonomy",
+      "_dataType" : "OBJECT",
+      "taxonomy_domain": "eukarya",
+      "taxonomy_kingdom": "animalia"
+    },
+    "cat-taxonomy" : {
+      "name" : "taxonomy",
+      "_dataType" : "OBJECT",
+      "_inheritance" : [ "animal-taxonomy" ],
+      "taxonomy_phylum": "chordata",
+      "taxonomy_class": "mammalia",
+      "taxonomy_order": "carnivora",
+      "taxonomy_suborder": "feliformia",
+      "taxonomy_family": "felidae",
+      "taxonomy_subfamily": "felinae",
+      "taxonomy_genus": "felis"
+    },
     "cat-meaning" : {
       "name" : "cat-meaning",
       "_dataType" : "OBJECT",
-      "domain": "eukarya",
-      "kingdom": "animalia"
+      "taxonomy": "cat-taxonomy"
     },
     "cat" : {
       "name" : "cat",
-      "_dataType" : "WORD",
+      "_type" : "WORD",
       "tag" : "NOUN",
       "meaning" : "cat-meaning"
     },
     "eukarya" : {
       "name" : "Eukarya",
-      "_dataType" : "WORD",
+      "_type" : "WORD",
       "tag" : "NOUN"
     },
     "animalia" : {
       "name" : "Animalia",
-      "_dataType" : "WORD",
+      "_type" : "WORD",
       "tag" : "NOUN"
     }
   }
