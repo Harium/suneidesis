@@ -45,7 +45,7 @@ public class KnowledgeBaseSerializerTest {
 
         String expected = "{name:\"database\", \"concepts\":{"
                 + "\"0\":{\"name\":\"apple tree\",\"fruit\":{\"id\":\"1\"}},"
-                + "\"1\":{\"name\":\"apple\",\"_inheritance\":[\"2\"]},"
+                + "\"1\":{\"name\":\"apple\",\"_inheritance\":[\"2\"], \"tree\":\"0\"},"
                 + "\"2\":{\"name\":\"food\"}"
                 +"}}";
         JSONAssert.assertEquals(expected, result, false);
@@ -85,6 +85,8 @@ public class KnowledgeBaseSerializerTest {
         appleTree.id("0");
         Concept apple = new Concept("apple");
         apple.id("1");
+        apple.set("tree", appleTree);
+
         Concept food = new Concept("food");
         food.id("2");
         apple.is(food);

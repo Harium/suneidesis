@@ -62,7 +62,19 @@ public class DocumentMapper {
         return mapFromDocument((Document)pair.getValue());
     }
 
+    public static Document mapToDocument(Concept concept) {
+        return mapToDocument(null, concept, null);
+    }
+
+    public static Document mapToDocument(Concept concept, Concept parent) {
+        return mapToDocument(null, concept, parent);
+    }
+
     public static Document mapToDocument(Document document, Concept concept) {
+        return mapToDocument(document, concept, null);
+    }
+
+    public static Document mapToDocument(Document document, Concept concept, Concept parent) {
         if (document == null) {
             document = Document.createDocument(Attributes.ATTRIBUTE_NAME, concept.getName());
         }
@@ -77,15 +89,18 @@ public class DocumentMapper {
             if (v.isPrimitive()) {
                 document.put(entry.getKey(), v.getName());
             } else {
-                document.put(entry.getKey(), mapToDocument(v));
+                // Circular Dependency
+                if (parent != null && parent.getId() != null && parent.getId().equals(v.getId())) {
+                    // Save id only
+                    document.put(entry.getKey(), v.getId());
+                    continue;
+                }
+
+                document.put(entry.getKey(), mapToDocument(null, v, concept));
             }
         }
 
         return document;
-    }
-
-    public static Document mapToDocument(Concept concept) {
-        return mapToDocument(null, concept);
     }
 
 }

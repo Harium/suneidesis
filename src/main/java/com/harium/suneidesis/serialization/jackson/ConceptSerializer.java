@@ -83,6 +83,11 @@ public class ConceptSerializer extends StdSerializer<Concept> {
 
             Concept value = entry.getValue();
             if (DataType.PRIMITIVE == value.getDataType()) {
+                // Circular dependency
+                if (concept.getId().equals(value.getId())) {
+                    serializeConceptId(jgen, entry.getKey(), entry.getValue());
+                    continue;
+                }
                 jgen.writeObjectField(entry.getKey(), value.getValue());
                 continue;
             }
