@@ -26,6 +26,10 @@ public class Inspector {
             return true;
         }
 
+        if (this.concept.isPrimitive()) {
+           return this.concept.getValue().equals(concept.getValue());
+        }
+
         // Compare attributes
         Attributes from = this.concept.getAttributes();
         if (ConceptType.isWord(this.concept)) {
@@ -38,7 +42,7 @@ public class Inspector {
         }
 
         // Else, compare attributes
-        return from.equals(target);
+        return target.equals(from);
     }
 
     public boolean can(Action action) {

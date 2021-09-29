@@ -29,6 +29,7 @@ import java.util.Map;
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
 import static com.harium.suneidesis.concept.attribute.Attributes.*;
 import static com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseSerializer.ATTR_CONCEPTS;
+import static com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseSerializer.ATTR_NAME;
 
 public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements KnowledgeBaseDeserializer {
 
@@ -78,7 +79,9 @@ public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements
             base.add(concept.getId(), concept);
         }
 
-        for (Relationship relationship : relationshipList) {
+        // Iterate relationships in reverse so we can build it bottom-top
+        for (int i = relationshipList.size() - 1; i >= 0; i--) {
+            Relationship relationship = relationshipList.get(i);
             Concept from = base.get(relationship.from);
             Concept target = base.get(relationship.target);
             if (target != null) {
@@ -106,9 +109,11 @@ public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements
         Concept concept;
 
         if (node.has(ATTRIBUTE_NAME)) {
-            if (isWord(node) || isPrimitive(node)) {
+            if (isPrimitive(node)) {
                 // Init concept as primitive
                 concept = new Primitive(node.get(ATTRIBUTE_NAME).asText());
+            } else if (isWord(node)) {
+                concept = new Word(node.get(ATTRIBUTE_NAME).asText());
             } else {
                 concept = new Concept(node.get(ATTRIBUTE_NAME).asText());
             }

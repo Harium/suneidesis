@@ -1,27 +1,37 @@
 {
-  "name" : "taxonomy",
-  "concepts" : {
-    "animal" : {
-      "name" : "Animal",
-      "_type" : "WORD",
-      "tag" : "NOUN",
-      "meaning" : "animal-meaning"
+  "name": "taxonomy",
+  "concepts": {
+    "animal": {
+      "name": "animal",
+      "_type": "WORD",
+      "tag": "NOUN",
+      "meaning": {
+        "id": "animal-meaning"
+      }
     },
-    "animal-meaning" : {
-      "name" : "meaning",
-      "_dataType" : "OBJECT",
-      "taxonomy": "animal-taxonomy"
+    "animal-meaning": {
+      "name": "animal-meaning",
+      "_dataType": "OBJECT",
+      "taxonomy": {
+        "id": "animal-taxonomy"
+      }
     },
-    "animal-taxonomy" : {
-      "name" : "taxonomy",
-      "_dataType" : "OBJECT",
-      "taxonomy_domain": "eukarya",
-      "taxonomy_kingdom": "animalia"
+    "animal-taxonomy": {
+      "name": "taxonomy",
+      "_dataType": "OBJECT",
+      "taxonomy_domain": {
+        "id": "eukarya"
+      },
+      "taxonomy_kingdom": {
+        "id": "animalia"
+      }
     },
-    "cat-taxonomy" : {
-      "name" : "taxonomy",
-      "_dataType" : "OBJECT",
-      "_inheritance" : [ "animal-taxonomy" ],
+    "cat-taxonomy": {
+      "name": "taxonomy",
+      "_dataType": "OBJECT",
+      "_inheritance": [
+        "animal-taxonomy"
+      ],
       "taxonomy_phylum": "chordata",
       "taxonomy_class": "mammalia",
       "taxonomy_order": "carnivora",
@@ -30,26 +40,30 @@
       "taxonomy_subfamily": "felinae",
       "taxonomy_genus": "felis"
     },
-    "cat-meaning" : {
-      "name" : "cat-meaning",
-      "_dataType" : "OBJECT",
-      "taxonomy": "cat-taxonomy"
+    "cat-meaning": {
+      "name": "cat-meaning",
+      "_dataType": "OBJECT",
+      "taxonomy": {
+        "id": "cat-taxonomy"
+      }
     },
-    "cat" : {
-      "name" : "cat",
-      "_type" : "WORD",
-      "tag" : "NOUN",
-      "meaning" : "cat-meaning"
+    "cat": {
+      "name": "cat",
+      "_type": "WORD",
+      "tag": "NOUN",
+      "meaning": {
+        "id": "cat-meaning"
+      }
     },
-    "eukarya" : {
-      "name" : "Eukarya",
-      "_type" : "WORD",
-      "tag" : "NOUN"
+    "eukarya": {
+      "name": "Eukarya",
+      "_type": "WORD",
+      "tag": "NOUN"
     },
-    "animalia" : {
-      "name" : "Animalia",
-      "_type" : "WORD",
-      "tag" : "NOUN"
+    "animalia": {
+      "name": "Animalia",
+      "_type": "WORD",
+      "tag": "NOUN"
     }
   }
 }

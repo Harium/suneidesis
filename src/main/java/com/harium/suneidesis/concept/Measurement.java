@@ -6,6 +6,7 @@ public class Measurement extends Concept {
     private static final String ATTRIBUTE_UNIT = "unit";
     private static final String ATTRIBUTE_VALUE = "value";
 
+    public static final String VALUE_UNKNOWN = "";
     public static final Unit DEFAULT_UNIT = new Unit("unit", "u");
     public static final Measurement ZERO = new Measurement("0", DEFAULT_UNIT);
 
@@ -43,7 +44,7 @@ public class Measurement extends Concept {
     public String getValue() {
         Concept value = getAttributes().get(ATTRIBUTE_VALUE);
         if (value.isUnknown()) {
-            return "0";
+            return VALUE_UNKNOWN;
         }
         return value.getValue();
     }
@@ -57,7 +58,7 @@ public class Measurement extends Concept {
     }
 
     public Measurement value(String value) {
-        getAttributes().add(ATTRIBUTE_VALUE, new Concept(value));
+        getAttributes().add(ATTRIBUTE_VALUE, new Primitive(value));
         return this;
     }
 

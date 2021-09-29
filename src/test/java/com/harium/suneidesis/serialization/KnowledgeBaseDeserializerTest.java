@@ -118,14 +118,20 @@ public class KnowledgeBaseDeserializerTest {
         assertEquals("taxonomy", database.getName());
         assertEquals(8, database.getAll().size());
 
-        Iterator<Word> words = wordDatabase.getWords("cat");
+        Iterator<Word> words = wordDatabase.getWords("animal");
+        Word animal = words.next();
+        assertTrue(ConceptType.isWord(animal));
+        assertEquals("animal", animal.getName());
+
+        words = wordDatabase.getWords("cat");
         Word cat = words.next();
         assertTrue(ConceptType.isWord(cat));
         assertEquals("cat", cat.getName());
         assertEquals(Tag.NOUN.name(), cat.getTag());
 
+        assertTrue(Inspector.does(cat).is(animal));
+
         String serialized = new KnowledgeBaseJacksonSerializer().serialize(database);
-        System.out.println(serialized);
 
         JSONAssert.assertEquals(json, serialized, false);
     }
