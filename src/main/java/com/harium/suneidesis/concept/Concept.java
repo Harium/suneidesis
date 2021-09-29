@@ -10,7 +10,6 @@ public class Concept extends Thing {
 	public static final String ATTRIBUTE_ID = "_sid";
 
 	public static final String ATTRIBUTE_TYPE = "_type";
-	public static final String ATTRIBUTE_MEANING = "_meaning";
 
 	// Those are the requirements to reveal the concept
 	public static final String ATTRIBUTE_SECRET_REQUIREMENTS = "_secret";
@@ -40,15 +39,6 @@ public class Concept extends Thing {
 
 	public String getValue() {
 		return getName();
-	}
-
-	public Concept getMeaning() {
-		return getAttributes().get(ATTRIBUTE_MEANING);
-	}
-
-	public Concept meaning(Concept meaning) {
-		getAttributes().add(ATTRIBUTE_MEANING, meaning);
-		return this;
 	}
 
 	public Concept getSecretRequirements() {

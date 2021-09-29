@@ -10,6 +10,8 @@ public class Word extends Primitive {
     public static final String ATTRIBUTE_TAG = "tag";
     public static final String ATTRIBUTE_LEMMA = "lemma";
     public static final String ATTRIBUTE_WORD_TYPE = "word_type";
+    public static final String ATTRIBUTE_MEANING = "meaning";
+
     // Plural / Singular
     public static final String ATTRIBUTE_NUMBER = "number";
     public static final String ATTRIBUTE_NUMBER_PLURAL = "plural";
@@ -47,6 +49,18 @@ public class Word extends Primitive {
 
     public void setLemma(Word lemma) {
         getAttributes().add(ATTRIBUTE_LEMMA, lemma);
+    }
+
+    public Concept getMeaningConcept() {
+        return getAttributes().get(ATTRIBUTE_MEANING);
+    }
+
+    public String getMeaning() {
+        return getMeaningConcept().getName();
+    }
+
+    public void setMeaning(Concept meaning) {
+        getAttributes().add(ATTRIBUTE_MEANING, meaning);
     }
 
     public Concept getNumberConcept() {
