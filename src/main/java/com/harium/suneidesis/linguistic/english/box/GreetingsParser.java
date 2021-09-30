@@ -6,7 +6,7 @@ import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.linguistic.matcher.Eq;
 import com.harium.suneidesis.linguistic.matcher.Or;
 import com.harium.suneidesis.linguistic.nlp.tokenization.LowerCaseTokenizer;
-import com.harium.suneidesis.linguistic.nlp.tokenization.Tokenizer;
+import com.harium.suneidesis.linguistic.nlp.Tokenizer;
 
 public class GreetingsParser implements Parser {
 

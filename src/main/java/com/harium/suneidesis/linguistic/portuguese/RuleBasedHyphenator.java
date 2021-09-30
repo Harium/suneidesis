@@ -1,6 +1,6 @@
 package com.harium.suneidesis.linguistic.portuguese;
 
-import com.harium.suneidesis.linguistic.hyphenization.Hyphenator;
+import com.harium.suneidesis.linguistic.nlp.Hyphenator;
 
 import java.util.ArrayList;
 import java.util.List;

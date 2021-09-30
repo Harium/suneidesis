@@ -5,7 +5,7 @@ import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
 import com.harium.suneidesis.repository.KnowledgeBase;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
-import com.harium.suneidesis.linguistic.nlp.tokenization.Tokenizer;
+import com.harium.suneidesis.linguistic.nlp.Tokenizer;
 import com.harium.suneidesis.linguistic.portuguese.nlp.tokenization.RuleBasedTokenizer;
 import com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseDeserializer;
 import org.junit.Assert;

@@ -267,7 +267,6 @@ public class Attributes implements Repository<Concept> {
                 if (value.isPrimitive() && toCompare.isPrimitive()) {
                     equals &= value.getName().equals(toCompare.getName());
                 } else if (!value.isPrimitive() && !toCompare.isPrimitive()) {
-                    //equals &= equals(value.getAttributes(), toCompare.getAttributes(), true);
                     equals &= equals(value.getAttributes(), toCompare.getAttributes(), false);
                 } else {
                     return false;

@@ -1,6 +1,6 @@
 package com.harium.suneidesis.linguistic.portuguese.nlp.tokenization;
 
-import com.harium.suneidesis.linguistic.nlp.tokenization.Tokenizer;
+import com.harium.suneidesis.linguistic.nlp.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;

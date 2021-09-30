@@ -1,7 +1,7 @@
 package com.harium.suneidesis.linguistic.portuguese;
 
-import com.harium.suneidesis.linguistic.hyphenization.Hyphenator;
-import com.harium.suneidesis.linguistic.hyphenization.Phonetizer;
+import com.harium.suneidesis.linguistic.nlp.Hyphenator;
+import com.harium.suneidesis.linguistic.nlp.Phonetizer;
 
 import java.util.ArrayList;
 import java.util.List;

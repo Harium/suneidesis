@@ -2,10 +2,8 @@ package com.harium.suneidesis.linguistic.nlp;
 
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
 
-public interface NLP {
+public interface POSTagger {
 
-    TagPair[] posTag(String sentence);
-
-    String lemmatize(String word);
+    TagPair[] posTag(String[] tokens);
 
 }

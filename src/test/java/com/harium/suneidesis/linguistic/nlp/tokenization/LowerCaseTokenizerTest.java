@@ -1,5 +1,6 @@
 package com.harium.suneidesis.linguistic.nlp.tokenization;
 
+import com.harium.suneidesis.linguistic.nlp.Tokenizer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

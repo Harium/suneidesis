@@ -1,8 +1,6 @@
-package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
+package com.harium.suneidesis.linguistic.nlp.pos;
 
-import com.harium.suneidesis.linguistic.nlp.pos.POSTagger;
-import com.harium.suneidesis.linguistic.nlp.pos.Tag;
-import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
+import com.harium.suneidesis.linguistic.nlp.POSTagger;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 
 public abstract class DatabasePOSTagger implements POSTagger {

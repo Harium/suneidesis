@@ -1,5 +1,6 @@
 package com.harium.suneidesis.linguistic.portuguese.nlp.pos;
 
+import com.harium.suneidesis.linguistic.nlp.pos.DatabasePOSTagger;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
 import com.harium.suneidesis.repository.word.WordKnowledgeBase;
@@ -8,7 +9,7 @@ import com.harium.suneidesis.concept.word.Word;
 import java.util.Iterator;
 
 /**
- * Simple POSTagger with few words
+ * Simple POSTagger with few logics
  * <p>
  * Good source: http://lxcenter.di.fc.ul.pt/tools/en/LXTaggerEN.html
  */
