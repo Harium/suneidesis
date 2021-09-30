@@ -131,7 +131,7 @@ public class RuleBasedPOSTaggerTest {
         Assert.assertEquals(Tag.NOUN, answer[1].getTag());
         Assert.assertEquals(Tag.PREPOSITION, answer[2].getTag());
         Assert.assertEquals(Tag.DETERMINER, answer[3].getTag());
-        Assert.assertEquals(Tag.NOUN, answer[4].getTag());
+        Assert.assertEquals(Tag.NOUN_PROPER, answer[4].getTag());
         Assert.assertEquals(Tag.VERB, answer[5].getTag());
         Assert.assertEquals(Tag.DETERMINER, answer[6].getTag());
         Assert.assertEquals(Tag.NOUN, answer[7].getTag());
