@@ -35,9 +35,8 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                 lastTag = Tag.valueOf(words.next().getTag());
                 output[i].setTag(lastTag);
             } else {
-                if (Character.isUpperCase(word.charAt(0))) {
-                    // Name
-                    output[i].setTag(Tag.NOUN);
+                if (i > 0 && Character.isUpperCase(word.charAt(0))) {
+                    output[i].setTag(Tag.NOUN_PROPER);
                 } else if (lastTag.equals(Tag.ADVERB)) {
                     output[i].setTag(Tag.ADJECTIVE);
                 } else if (guessVerb(word)) {
