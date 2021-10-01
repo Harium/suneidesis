@@ -12,7 +12,9 @@ import com.harium.suneidesis.repository.RepositoryCursor;
 import com.harium.suneidesis.repository.nitrite.RepositoryConceptCursorToWordMapper;
 import org.dizitart.no2.Filter;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import static org.dizitart.no2.filters.Filters.eq;
@@ -167,6 +169,18 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
         }
 
         return null;
+    }
+
+    public List<Word> findByTag(Tag tag) {
+        Iterator<Concept> result = knowledgeBase.find(eq(Word.ATTRIBUTE_TAG, tag.name())).iterator();
+
+        List<Word> words = new ArrayList<>();
+        while (result.hasNext()) {
+            Concept concept = result.next();
+            words.add(new Word(concept.getName()).wrap(concept));
+        }
+
+        return words;
     }
 
 }

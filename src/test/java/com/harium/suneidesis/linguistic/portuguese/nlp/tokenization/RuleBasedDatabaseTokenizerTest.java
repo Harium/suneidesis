@@ -1,23 +1,46 @@
 package com.harium.suneidesis.linguistic.portuguese.nlp.tokenization;
 
+import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.concept.word.WordPunctuation;
+import com.harium.suneidesis.concept.word.WordShort;
 import com.harium.suneidesis.linguistic.nlp.Tokenizer;
+import com.harium.suneidesis.repository.KnowledgeBase;
+import com.harium.suneidesis.repository.MemoryKnowledgeBase;
+import com.harium.suneidesis.repository.word.WordKnowledgeBase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RuleBasedTokenizerTest {
+public class RuleBasedDatabaseTokenizerTest {
 
     Tokenizer tokenizer;
 
     @Before
     public void setUp() {
-        tokenizer = new RuleBasedTokenizer();
+        KnowledgeBase knowledgeBase = new MemoryKnowledgeBase();
+        WordKnowledgeBase database = new WordKnowledgeBase(knowledgeBase);
+        database.addWord(new WordPunctuation(","));
+        database.addWord(new WordPunctuation("."));
+
+        Word voce = new Word("você");
+        database.addWord(voce);
+        Word vc = new WordShort("vc");
+        vc.setLemma(voce);
+        database.addWord(vc);
+
+        tokenizer = new RuleBasedDatabaseTokenizer(database);
     }
 
     @Test
     public void testSingleWord() {
         String[] answer = tokenizer.tokenize("casa");
         Assert.assertArrayEquals(new String[]{"casa"}, answer);
+    }
+
+    @Test
+    public void testAbbreviation() {
+        String[] answer = tokenizer.tokenize("Vi vc na casa");
+        Assert.assertArrayEquals(new String[]{"Vi", "você", "em", "a", "casa"}, answer);
     }
 
     @Test

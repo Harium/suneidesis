@@ -48,5 +48,6 @@ public enum Tag {
     WH_POSSESSIVE_PRONOUN,
     WH_ADVERB,
     PUNCTUATION,
+    SHORT,
     UNKNOWN;
 }

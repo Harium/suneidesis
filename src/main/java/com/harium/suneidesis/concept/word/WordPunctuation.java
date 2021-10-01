@@ -1,6 +1,5 @@
 package com.harium.suneidesis.concept.word;
 
-
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
