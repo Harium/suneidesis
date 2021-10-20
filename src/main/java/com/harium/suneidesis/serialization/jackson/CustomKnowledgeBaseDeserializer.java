@@ -28,8 +28,8 @@ import java.util.Map;
 
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
 import static com.harium.suneidesis.concept.attribute.Attributes.*;
+import static com.harium.suneidesis.repository.merge.MergeStrategyFactory.buildMergeStrategy;
 import static com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseSerializer.ATTR_CONCEPTS;
-import static com.harium.suneidesis.serialization.jackson.CustomKnowledgeBaseSerializer.ATTR_NAME;
 
 public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements KnowledgeBaseDeserializer {
 
@@ -57,13 +57,13 @@ public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements
 
     public void deserialize(InputStream stream, KnowledgeBase base) throws IOException {
         JsonNode node = objectMapper.readTree(stream);
-        MergeStrategy mergeStrategy = buildMergeStrategy(base);
+        MergeStrategy mergeStrategy = buildMergeStrategy(mergeStrategyType, base);
         parseNode(node, mergeStrategy, base);
     }
 
     public void deserialize(String json, KnowledgeBase base) throws JsonProcessingException {
         JsonNode node = objectMapper.readTree(json);
-        MergeStrategy mergeStrategy = buildMergeStrategy(base);
+        MergeStrategy mergeStrategy = buildMergeStrategy(mergeStrategyType, base);
         parseNode(node, mergeStrategy, base);
     }
 

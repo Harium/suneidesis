@@ -4,6 +4,7 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.repository.decorator.EntryDecorator;
 import com.harium.suneidesis.repository.generator.BaseIdGenerator;
 import com.harium.suneidesis.repository.generator.IdGenerator;
+import com.harium.suneidesis.repository.merge.MergeStrategy;
 
 import java.util.ArrayList;
 import java.util.Iterator;
