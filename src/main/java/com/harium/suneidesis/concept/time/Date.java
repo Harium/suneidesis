@@ -2,6 +2,7 @@ package com.harium.suneidesis.concept.time;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;
+import com.harium.suneidesis.utils.DateUtils;
 
 public class Date extends Time {
 
@@ -25,25 +26,8 @@ public class Date extends Time {
         hours(Integer.toString(hours));
         minutes(Integer.toString(minutes));
         seconds(Integer.toString(seconds));
-        value(toISO());
-    }
 
-    public String toISO() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(getYear());
-        builder.append("-");
-        builder.append(getMonth());
-        builder.append("-");
-        builder.append(getDay());
-        builder.append("T");
-        builder.append(getHours());
-        builder.append(":");
-        builder.append(getMinutes());
-        builder.append(":");
-        builder.append(getSeconds());
-        builder.append(".000Z");
-
-        return builder.toString();
+        value(DateUtils.toISO(this));
     }
 
     public String getDay() {
