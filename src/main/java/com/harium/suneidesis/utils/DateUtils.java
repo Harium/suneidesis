@@ -6,20 +6,27 @@ public class DateUtils {
 
     public static String toISO(Date date) {
         StringBuilder builder = new StringBuilder();
-        builder.append(date.getYear());
+        builder.append(round(date.getYear()));
         builder.append("-");
-        builder.append(date.getMonth());
+        builder.append(round(date.getMonth()));
         builder.append("-");
-        builder.append(date.getDay());
+        builder.append(round(date.getDay()));
         builder.append("T");
-        builder.append(date.getHours());
+        builder.append(round(date.getHours()));
         builder.append(":");
-        builder.append(date.getMinutes());
+        builder.append(round(date.getMinutes()));
         builder.append(":");
-        builder.append(date.getSeconds());
+        builder.append(round(date.getSeconds()));
         builder.append(".000Z");
 
         return builder.toString();
+    }
+
+    private static String round(String value) {
+        if (value.length() == 1) {
+            return "0" + value;
+        }
+        return value;
     }
 
     public static String toCronExpression(Date date) {
@@ -39,23 +46,31 @@ public class DateUtils {
     }
 
     public static boolean checkCronExpression(String expression, Date date) {
-        String wildcard = "*";
         String[] parts = expression.split(" ");
+        if (parts.length < 6) {
+            return false;
+        }
 
-        if (!parts[0].equals(wildcard) && !parts[0].equals(date.getSeconds())) {
+        if (!isWildcard(parts[0]) && !parts[0].equals(date.getSeconds())) {
             return false;
-        } else if (!parts[1].equals(wildcard) && !parts[1].equals(date.getMinutes())) {
+        } else if (!isWildcard(parts[1]) && !parts[1].equals(date.getMinutes())) {
             return false;
-        } else if (!parts[2].equals(wildcard) && !parts[2].equals(date.getHours())) {
+        } else if (!isWildcard(parts[2]) && !parts[2].equals(date.getHours())) {
             return false;
-        } else if (!parts[3].equals(wildcard) && !parts[3].equals(date.getDay())) {
+        } else if (!isWildcard(parts[3]) && !parts[3].equals(date.getDay())) {
             return false;
-        } else if (!parts[4].equals(wildcard) && !parts[4].equals(date.getMonth())) {
+        } else if (!isWildcard(parts[4]) && !parts[4].equals(date.getMonth())) {
             return false;
-        } else if (!parts[5].equals(wildcard) && !parts[5].equals(date.getYear())) {
+        } else if (!isWildcard(parts[5]) && !parts[5].equals(date.getYear())) {
             return false;
         }
 
         return true;
+    }
+
+    private static boolean isWildcard(String part) {
+        String wildcard = "*";
+        String questionMark = "?";
+        return wildcard.equals(part) || questionMark.equals(part);
     }
 }

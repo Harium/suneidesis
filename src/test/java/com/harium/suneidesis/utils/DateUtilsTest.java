@@ -14,6 +14,7 @@ public class DateUtilsTest {
         assertTrue(DateUtils.checkCronExpression("* * * * * *", date));
         assertTrue(DateUtils.checkCronExpression("0 0 0 ? * *", date));
         assertFalse(DateUtils.checkCronExpression("1 0 0 ? * *", date));
+        assertFalse(DateUtils.checkCronExpression(" * *", date));
     }
 
 }

@@ -35,8 +35,7 @@ public class Date extends Time {
     }
 
     public Date day(String day) {
-        String value = round(day);
-        has(ATTRIBUTE_DAY, new Word(value));
+        has(ATTRIBUTE_DAY, new Word(day));
         return this;
     }
 
@@ -45,8 +44,7 @@ public class Date extends Time {
     }
 
     public Date month(String month) {
-        String value = round(month);
-        has(ATTRIBUTE_MONTH, new Word(value));
+        has(ATTRIBUTE_MONTH, new Word(month));
         return this;
     }
 
@@ -64,8 +62,7 @@ public class Date extends Time {
     }
 
     public Date hours(String hour) {
-        String value = round(hour);
-        has(ATTRIBUTE_HOUR, new Word(value));
+        has(ATTRIBUTE_HOUR, new Word(hour));
         return this;
     }
 
@@ -74,8 +71,7 @@ public class Date extends Time {
     }
 
     public Date minutes(String minute) {
-        String value = round(minute);
-        has(ATTRIBUTE_MINUTE, new Word(value));
+        has(ATTRIBUTE_MINUTE, new Word(minute));
         return this;
     }
 
@@ -84,16 +80,8 @@ public class Date extends Time {
     }
 
     public Date seconds(String second) {
-        String value = round(second);
-        has(ATTRIBUTE_SECOND, new Word(value));
+        has(ATTRIBUTE_SECOND, new Word(second));
         return this;
-    }
-
-    private String round(String value) {
-        if (value.length() == 1) {
-            return "0" + value;
-        }
-        return value;
     }
 
     @Override
