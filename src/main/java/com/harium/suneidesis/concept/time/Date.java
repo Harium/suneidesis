@@ -13,6 +13,10 @@ public class Date extends Time {
     private static final String ATTRIBUTE_MINUTE = "minute";
     private static final String ATTRIBUTE_SECOND = "second";
 
+    public Date() {
+        super();
+    }
+
     public Date(int year, int month, int day, int hours, int minutes, int seconds) {
         super(TimeUnit.DATE);
         year(Integer.toString(year));

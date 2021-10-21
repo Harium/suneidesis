@@ -8,6 +8,10 @@ public class Time extends Measurement {
     public static final Time NOW = new Time("time_now");
     public static final Time YESTERDAY = new Time("time_yesterday");
 
+    public Time() {
+        super(TimeUnit.DATE);
+    }
+
     public Time(String name) {
         super(name, TimeUnit.DATE);
     }
