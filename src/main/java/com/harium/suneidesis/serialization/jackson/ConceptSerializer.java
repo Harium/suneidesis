@@ -4,11 +4,9 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.DataType;
 import com.harium.suneidesis.concept.attribute.Attributes;
 import com.harium.suneidesis.concept.attribute.Inheritance;
-import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.serialization.ConceptId;
 
 import java.io.IOException;
@@ -17,8 +15,6 @@ import java.util.Map;
 
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_ID;
 import static com.harium.suneidesis.concept.Concept.ATTRIBUTE_TYPE;
-import static com.harium.suneidesis.concept.measurement.Time.ATTRIBUTE_END;
-import static com.harium.suneidesis.concept.measurement.Time.ATTRIBUTE_START;
 import static com.harium.suneidesis.concept.attribute.Attributes.*;
 
 public class ConceptSerializer extends StdSerializer<Concept> {

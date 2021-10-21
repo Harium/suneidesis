@@ -10,6 +10,11 @@ public class Measurement extends Concept {
     public static final Unit DEFAULT_UNIT = new Unit("unit", "u");
     public static final Measurement ZERO = new Measurement("0", DEFAULT_UNIT);
 
+    public Measurement(Concept unit) {
+        super(ConceptType.MEASUREMENT);
+        unit(unit);
+    }
+
     /**
      * This constructor uses value instead of name in purpose
      * @param value - the value in unknown units

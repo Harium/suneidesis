@@ -1,6 +1,6 @@
 package com.harium.suneidesis.concept;
 
-import com.harium.suneidesis.concept.measurement.Time;
+import com.harium.suneidesis.concept.time.Time;
 
 public class Action extends Concept {
 

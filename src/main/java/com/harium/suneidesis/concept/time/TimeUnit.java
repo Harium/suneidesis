@@ -1,4 +1,4 @@
-package com.harium.suneidesis.concept.measurement;
+package com.harium.suneidesis.concept.time;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Unit;
@@ -6,9 +6,7 @@ import com.harium.suneidesis.concept.Unit;
 public class TimeUnit extends Unit {
 
     public static final TimeUnit DATE = new TimeUnit("date", "");
-    public static final TimeUnit HOUR = new TimeUnit("hour", "h");
-    public static final TimeUnit MINUTE = new TimeUnit("minute", "m");
-    public static final TimeUnit SECOND = new TimeUnit("second", "s");
+    public static final TimeUnit RANGE = new TimeUnit("date", "~");
 
     public TimeUnit(String name) {
         super(name);
