@@ -9,6 +9,7 @@ public class WordVerb extends Word {
 	// E.g: to,from,of,X <- None
 	// TODO change to list of concepts instead
 	public static final String ATTRIBUTE_PREPOSITIONS = "prepositions";
+	public static final String ATTRIBUTE_REGULARITY = "regularity";
 	public static final String ATTRIBUTE_TRANSITIVITY = "transitivity";
 
 	public WordVerb(String name) {
@@ -27,6 +28,18 @@ public class WordVerb extends Word {
 		getAttributes().add(ATTRIBUTE_PREPOSITIONS, prepositions);
 	}
 
+	public Word getRegularity() {
+		return (Word) getAttributes().get(ATTRIBUTE_REGULARITY);
+	}
+
+	public String getRegularityWord() {
+		return getRegularity().getName();
+	}
+
+	public void setRegularity(Word Transitivity) {
+		getAttributes().add(ATTRIBUTE_REGULARITY, Transitivity);
+	}
+
 	public Word getTransitivity() {
 		return (Word) getAttributes().get(ATTRIBUTE_TRANSITIVITY);
 	}
@@ -35,8 +48,8 @@ public class WordVerb extends Word {
 		return getTransitivity().getName();
 	}
 
-	public void setTransitivity(Word Transitivity) {
-		getAttributes().add(ATTRIBUTE_TRANSITIVITY, Transitivity);
+	public void setTransitivity(Word transitivity) {
+		getAttributes().add(ATTRIBUTE_TRANSITIVITY, transitivity);
 	}
 
 	@Override
