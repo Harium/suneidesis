@@ -6,6 +6,7 @@ import com.harium.suneidesis.concept.word.Word;
  * Tags borrowed from Penn Treebank/Nltk
  */
 public enum Tag {
+    ANY,
     CONJUCTION, // Generalization of Conjuctions
     COORDINATING_CONJUCTION,
     DETERMINER,
