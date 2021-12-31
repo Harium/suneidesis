@@ -17,6 +17,10 @@ public class NLPInterceptor implements Interceptor {
 
     protected Map<String, NLP> nlpMap = new HashMap<>();
 
+    public NLPInterceptor() {
+
+    }
+
     public NLPInterceptor(NLP nlp) {
         this(DEFAULT_LANGUAGE, nlp);
     }
