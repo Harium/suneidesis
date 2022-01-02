@@ -46,7 +46,7 @@ public class Concept extends Thing {
 	}
 
 	public Concept secretRequirements(Concept secretRequirements) {
-		getAttributes().add(ATTRIBUTE_SECRET_REQUIREMENTS, secretRequirements);
+		getAttributes().save(ATTRIBUTE_SECRET_REQUIREMENTS, secretRequirements);
 		return this;
 	}
 
@@ -55,7 +55,7 @@ public class Concept extends Thing {
 	}
 
 	public Concept type(Concept type) {
-		getAttributes().add(ATTRIBUTE_TYPE, type);
+		getAttributes().save(ATTRIBUTE_TYPE, type);
 		return this;
 	}
 
@@ -69,7 +69,7 @@ public class Concept extends Thing {
 
 	public Concept id(String id) {
 		this.id = id;
-		getAttributes().add(ATTRIBUTE_ID, new Word(id));
+		getAttributes().save(ATTRIBUTE_ID, new Word(id));
 		return this;
 	}
 
@@ -101,7 +101,7 @@ public class Concept extends Thing {
 	}
 
 	public Concept set(String key, Concept property) {
-		this.getAttributes().add(key, property);
+		this.getAttributes().save(key, property);
 		return this;
 	}
 

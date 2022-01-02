@@ -63,12 +63,12 @@ public class Measurement extends Concept {
     }
 
     public Measurement value(String value) {
-        getAttributes().add(ATTRIBUTE_VALUE, new Primitive(value));
+        getAttributes().save(ATTRIBUTE_VALUE, new Primitive(value));
         return this;
     }
 
     public Measurement unit(Concept unit) {
-        getAttributes().add(ATTRIBUTE_UNIT, unit);
+        getAttributes().save(ATTRIBUTE_UNIT, unit);
         return this;
     }
 
@@ -77,7 +77,7 @@ public class Measurement extends Concept {
     }
 
     public Measurement accuracy(String accuracy) {
-        getAttributes().add(ATTRIBUTE_ACCURACY, new Concept(accuracy));
+        getAttributes().save(ATTRIBUTE_ACCURACY, new Concept(accuracy));
         return this;
     }
 

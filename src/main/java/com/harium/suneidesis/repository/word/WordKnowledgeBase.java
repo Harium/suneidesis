@@ -28,13 +28,13 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     public Word addWord(Word word) {
-        knowledgeBase.add(word);
+        knowledgeBase.save(word);
         return word;
     }
 
     public Word addWord(String word, String tag) {
         Word w = new Word(word, tag);
-        knowledgeBase.add(w);
+        knowledgeBase.save(w);
         return w;
     }
 
@@ -42,7 +42,7 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
         Word w = new Word(word, tag);
         w.setLemma(new Word(lemma));
 
-        knowledgeBase.add(w);
+        knowledgeBase.save(w);
         return w;
     }
 
@@ -51,7 +51,7 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
         wordVerb.setLemma(new Word(verb));
         wordVerb.setPrepositions(new Word(prepositions));
         wordVerb.setTransitivity(new Word(transitivity));
-        knowledgeBase.add(wordVerb);
+        knowledgeBase.save(wordVerb);
         return wordVerb;
     }
 
@@ -65,7 +65,7 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
         verbConjugation.setTag(tag);
         verbConjugation.setTense(new Word(tense));
         verbConjugation.setPerson(new Word(person));
-        knowledgeBase.add(verbConjugation);
+        knowledgeBase.save(verbConjugation);
     }
 
     public void addVerbConjugation(String word, Word verbLemma, String tag, String tense, String person, String mood) {
@@ -75,7 +75,7 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
         verbConjugation.setTense(new Word(tense));
         verbConjugation.setPerson(new Word(person));
         verbConjugation.setMood(new Word(mood));
-        knowledgeBase.add(verbConjugation);
+        knowledgeBase.save(verbConjugation);
     }
 
     public Iterator<Word> getWords(String name) {
@@ -94,13 +94,13 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     @Override
-    public Concept add(String key, Concept concept) {
-        return knowledgeBase.add(key, concept);
+    public Concept save(String key, Concept concept) {
+        return knowledgeBase.save(key, concept);
     }
 
     @Override
-    public String add(Concept concept) {
-        return knowledgeBase.add(concept);
+    public String save(Concept concept) {
+        return knowledgeBase.save(concept);
     }
 
     @Override

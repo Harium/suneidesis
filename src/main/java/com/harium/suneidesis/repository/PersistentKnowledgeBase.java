@@ -66,7 +66,7 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     }
 
     @Override
-    public Concept add(String key, Concept concept) {
+    public Concept save(String key, Concept concept) {
         if (concept.getId() == null) {
             concept.id(key);
         }

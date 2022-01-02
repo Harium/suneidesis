@@ -4,9 +4,6 @@ import com.harium.suneidesis.concept.*;
 import com.harium.suneidesis.concept.Measurement;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
-import com.harium.suneidesis.repository.RepositoryCursor;
-import org.apache.commons.lang3.NotImplementedException;
-import org.dizitart.no2.Filter;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -98,14 +95,14 @@ public class Attributes implements Repository<Concept> {
         return attributeMap.values().iterator();
     }
 
-    public Concept add(String key, Concept concept) {
+    public Concept save(String key, Concept concept) {
         return attributeMap.put(key, concept);
     }
 
     @Override
-    public String add(Concept concept) {
+    public String save(Concept concept) {
         String id = concept.getId();
-        add(id, concept);
+        save(id, concept);
         return id;
     }
 

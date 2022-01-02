@@ -76,7 +76,7 @@ public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements
             Map.Entry<String, JsonNode> child = it.next();
             // Deserialize concepts
             Concept concept = deserializeConcept(mergeStrategy, base, child, relationshipList);
-            base.add(concept.getId(), concept);
+            base.save(concept.getId(), concept);
         }
 
         // Iterate relationships in reverse so we can build it bottom-top
@@ -99,7 +99,7 @@ public class CustomKnowledgeBaseDeserializer extends BaseDeserializer implements
                     from.is(placeHolder);
                 }
             }
-            base.add(from);
+            base.save(from);
         }
     }
 

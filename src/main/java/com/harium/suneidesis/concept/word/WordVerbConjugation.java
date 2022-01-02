@@ -22,7 +22,7 @@ public class WordVerbConjugation extends Word {
 	}
 
 	public void setMood(Word mood) {
-		getAttributes().add(ATTRIBUTE_MOOD, mood);
+		getAttributes().save(ATTRIBUTE_MOOD, mood);
 	}
 
 	public Word getPerson() {
@@ -34,7 +34,7 @@ public class WordVerbConjugation extends Word {
 	}
 
 	public void setPerson(Word person) {
-		getAttributes().add(ATTRIBUTE_PERSON, person);
+		getAttributes().save(ATTRIBUTE_PERSON, person);
 	}
 
 	public Word getTense() {
@@ -46,7 +46,7 @@ public class WordVerbConjugation extends Word {
 	}
 
 	public void setTense(Word tense) {
-		getAttributes().add(ATTRIBUTE_TENSE, tense);
+		getAttributes().save(ATTRIBUTE_TENSE, tense);
 	}
 
 	@Override

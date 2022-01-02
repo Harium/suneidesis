@@ -20,7 +20,7 @@ public class WordPreposition extends Word {
 	}
 
 	public void setUse(Word use) {
-		getAttributes().add(ATTRIBUTE_USE, use);
+		getAttributes().save(ATTRIBUTE_USE, use);
 	}
 
 	@Override

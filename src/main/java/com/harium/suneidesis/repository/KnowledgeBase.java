@@ -4,7 +4,6 @@ import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.repository.decorator.EntryDecorator;
 import com.harium.suneidesis.repository.generator.BaseIdGenerator;
 import com.harium.suneidesis.repository.generator.IdGenerator;
-import com.harium.suneidesis.repository.merge.MergeStrategy;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,10 +40,10 @@ public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> 
         idGenerator = new BaseIdGenerator();
     }
 
-    public abstract Concept add(String key, Concept concept);
+    public abstract Concept save(String key, Concept concept);
 
     @Override
-    public String add(Concept concept) {
+    public String save(Concept concept) {
         Concept id = concept.getIdConcept();
         String idText;
         if (id.isUnknown()) {
@@ -55,7 +54,7 @@ public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> 
 
         decorate(concept);
 
-        add(idText, concept);
+        save(idText, concept);
         return idText;
     }
 
@@ -63,7 +62,7 @@ public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> 
         Iterator<Concept> iterator = knowledgeBase.iterator();
         while (iterator.hasNext()) {
             Concept concept = iterator.next();
-            add(concept.getId(), concept);
+            save(concept.getId(), concept);
         }
     }
 

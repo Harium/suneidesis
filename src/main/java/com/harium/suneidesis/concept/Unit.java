@@ -18,7 +18,7 @@ public class Unit extends Concept {
     }
 
     public Unit symbol(String accuracy) {
-        getAttributes().add(ATTRIBUTE_SYMBOL, new Concept(accuracy));
+        getAttributes().save(ATTRIBUTE_SYMBOL, new Concept(accuracy));
         return this;
     }
 
@@ -31,7 +31,7 @@ public class Unit extends Concept {
     }
 
     public Unit unitType(String unitType) {
-        getAttributes().add(ATTRIBUTE_UNIT_TYPE, new Concept(unitType));
+        getAttributes().save(ATTRIBUTE_UNIT_TYPE, new Concept(unitType));
         return this;
     }
 

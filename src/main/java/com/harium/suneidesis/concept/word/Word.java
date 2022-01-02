@@ -49,7 +49,7 @@ public class Word extends Primitive {
     }
 
     public void setLemma(Word lemma) {
-        getAttributes().add(ATTRIBUTE_LEMMA, lemma);
+        getAttributes().save(ATTRIBUTE_LEMMA, lemma);
     }
 
     public Concept getMeaningConcept() {
@@ -61,7 +61,7 @@ public class Word extends Primitive {
     }
 
     public void setMeaning(Concept meaning) {
-        getAttributes().add(ATTRIBUTE_MEANING, meaning);
+        getAttributes().save(ATTRIBUTE_MEANING, meaning);
     }
 
     public Concept getLanguageConcept() {
@@ -73,7 +73,7 @@ public class Word extends Primitive {
     }
 
     public void setLanguage(Concept language) {
-        getAttributes().add(ATTRIBUTE_LANGUAGE, language);
+        getAttributes().save(ATTRIBUTE_LANGUAGE, language);
     }
 
     public Concept getNumberConcept() {
@@ -85,7 +85,7 @@ public class Word extends Primitive {
     }
 
     public void setNumber(Word number) {
-        getAttributes().add(ATTRIBUTE_NUMBER, number);
+        getAttributes().save(ATTRIBUTE_NUMBER, number);
     }
 
     public void setNumberPlural() {
@@ -105,7 +105,7 @@ public class Word extends Primitive {
     }
 
     public void setTag(Word tag) {
-        getAttributes().add(ATTRIBUTE_TAG, tag);
+        getAttributes().save(ATTRIBUTE_TAG, tag);
     }
 
     public void setTag(String tagName) {
@@ -121,7 +121,7 @@ public class Word extends Primitive {
     }
 
     public void setWordType(Word type) {
-        getAttributes().add(ATTRIBUTE_WORD_TYPE, type);
+        getAttributes().save(ATTRIBUTE_WORD_TYPE, type);
     }
 
     @Override

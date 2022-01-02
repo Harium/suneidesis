@@ -21,7 +21,7 @@ public class Action extends Concept {
     }
 
     public Action subject(Concept subject) {
-        getAttributes().add(ATTRIBUTE_SUBJECT, subject);
+        getAttributes().save(ATTRIBUTE_SUBJECT, subject);
         return this;
     }
 
@@ -30,7 +30,7 @@ public class Action extends Concept {
     }
 
     public Action predicate(Concept predicate) {
-        getAttributes().add(ATTRIBUTE_PREDICATE, predicate);
+        getAttributes().save(ATTRIBUTE_PREDICATE, predicate);
         return this;
     }
 
@@ -39,7 +39,7 @@ public class Action extends Concept {
     }
 
     public Action object(Concept object) {
-        getAttributes().add(ATTRIBUTE_OBJECT, object);
+        getAttributes().save(ATTRIBUTE_OBJECT, object);
         return this;
     }
 
@@ -48,7 +48,7 @@ public class Action extends Concept {
     }
 
     public Action objectPart(Concept objectPart) {
-        getAttributes().add(ATTRIBUTE_OBJECT_PART, objectPart);
+        getAttributes().save(ATTRIBUTE_OBJECT_PART, objectPart);
         return this;
     }
 
@@ -57,7 +57,7 @@ public class Action extends Concept {
     }
 
     public Action place(Place place) {
-        getAttributes().add(ATTRIBUTE_PLACE, place);
+        getAttributes().save(ATTRIBUTE_PLACE, place);
         return this;
     }
 
@@ -66,7 +66,7 @@ public class Action extends Concept {
     }
 
     public Action time(Time time) {
-        getAttributes().add(ATTRIBUTE_TIME, time);
+        getAttributes().save(ATTRIBUTE_TIME, time);
         return this;
     }
 
@@ -79,7 +79,7 @@ public class Action extends Concept {
     }
 
     public Action phenomenon(Phenomenon phenomenon) {
-        getAttributes().add(ATTRIBUTE_PHENOMENON, phenomenon);
+        getAttributes().save(ATTRIBUTE_PHENOMENON, phenomenon);
         return this;
     }
 

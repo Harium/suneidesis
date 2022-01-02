@@ -25,7 +25,7 @@ public class WordVerb extends Word {
 	}
 
 	public void setPrepositions(Word prepositions) {
-		getAttributes().add(ATTRIBUTE_PREPOSITIONS, prepositions);
+		getAttributes().save(ATTRIBUTE_PREPOSITIONS, prepositions);
 	}
 
 	public Word getRegularity() {
@@ -37,7 +37,7 @@ public class WordVerb extends Word {
 	}
 
 	public void setRegularity(Word Transitivity) {
-		getAttributes().add(ATTRIBUTE_REGULARITY, Transitivity);
+		getAttributes().save(ATTRIBUTE_REGULARITY, Transitivity);
 	}
 
 	public Word getTransitivity() {
@@ -49,7 +49,7 @@ public class WordVerb extends Word {
 	}
 
 	public void setTransitivity(Word transitivity) {
-		getAttributes().add(ATTRIBUTE_TRANSITIVITY, transitivity);
+		getAttributes().save(ATTRIBUTE_TRANSITIVITY, transitivity);
 	}
 
 	@Override

@@ -24,7 +24,7 @@ public class WordNoun extends Word {
 	}
 
 	public void setGender(Word gender) {
-		getAttributes().add(ATTRIBUTE_GENDER, gender);
+		getAttributes().save(ATTRIBUTE_GENDER, gender);
 	}
 
 	@Override

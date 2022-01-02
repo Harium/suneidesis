@@ -28,7 +28,7 @@ public class Quantifier {
     }
 
     public static void setQuantifier(Concept concept, String quantifier) {
-        concept.getAttributes().add(ATTRIBUTE_QUANTIFIER, new Concept(quantifier));
+        concept.getAttributes().save(ATTRIBUTE_QUANTIFIER, new Concept(quantifier));
     }
 
 }

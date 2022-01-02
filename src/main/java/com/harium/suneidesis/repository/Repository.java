@@ -11,9 +11,9 @@ public interface Repository<T extends Thing> {
 
     Iterator<T> iterator();
 
-    String add(T concept);
+    String save(T concept);
 
-    T add(String key, T t);
+    T save(String key, T t);
 
     T get(String key);
 

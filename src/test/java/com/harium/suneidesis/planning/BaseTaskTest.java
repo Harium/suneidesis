@@ -26,7 +26,7 @@ public class BaseTaskTest {
         task.subject(fridge);
 
         MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
-        environment.add(task);
+        environment.save(task);
 
         BaseTask chopGarlic = new BaseTask("chop garlic");
         chopGarlic.addTask(new FindTask("find garlic", garlic));
@@ -48,7 +48,7 @@ public class BaseTaskTest {
         task.subject(fridge);
 
         MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
-        environment.add(task);
+        environment.save(task);
 
         BaseTask chopGarlic = new BaseTask("chop garlic");
         chopGarlic.addTask(new FindTask("find garlic", garlic));

@@ -75,7 +75,7 @@ public class KnowledgeBaseSerializerTest {
 
         appleTree.set("fruit", apple);
         KnowledgeBase base = new MemoryKnowledgeBase("database");
-        base.add(appleTree);
+        base.save(appleTree);
 
         return base;
     }
@@ -93,7 +93,7 @@ public class KnowledgeBaseSerializerTest {
 
         appleTree.set("fruit", apple);
         MemoryKnowledgeBase base = new MemoryKnowledgeBase("database");
-        base.add(appleTree);
+        base.save(appleTree);
 
         return base;
     }
@@ -104,7 +104,7 @@ public class KnowledgeBaseSerializerTest {
         database.addWord("cat", Tag.NOUN.name());
 
         WordNoun duck = new WordNoun("duck");
-        database.add(duck);
+        database.save(duck);
 
         WordVerb go = database.addVerb("go", "on|through", "");
         database.addVerbConjugation("went", go, Tag.VERB_CONJUGATION, "PAST", "");

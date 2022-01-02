@@ -33,7 +33,7 @@ public class PersistentKnowledgeBaseTest {
         appleTree.set("fruit", apple);
         appleTree.set("intValue", new Primitive("1234"));
 
-        persistentKnowledgeBase.add("randomKey1", appleTree);
+        persistentKnowledgeBase.save("randomKey1", appleTree);
 
         Concept result = persistentKnowledgeBase.get("1");
         assertEquals("1", result.getId());
@@ -52,8 +52,8 @@ public class PersistentKnowledgeBaseTest {
 
     @Test
     public void testAddConceptTwice_NullId() {
-        persistentKnowledgeBase.add("randomKey", new Concept("concept"));
-        persistentKnowledgeBase.add("randomKey", new Concept("concept"));
+        persistentKnowledgeBase.save("randomKey", new Concept("concept"));
+        persistentKnowledgeBase.save("randomKey", new Concept("concept"));
 
         Concept concept = persistentKnowledgeBase.get("randomKey");
         assertFalse(concept.isUnknown());
@@ -62,9 +62,9 @@ public class PersistentKnowledgeBaseTest {
     @Test
     public void testMerge() {
         PersistentKnowledgeBase anotherDB = new PersistentKnowledgeBase();
-        anotherDB.add("randomKey1", new Concept("concept1"));
+        anotherDB.save("randomKey1", new Concept("concept1"));
 
-        persistentKnowledgeBase.add("randomKey2", new Concept("concept2"));
+        persistentKnowledgeBase.save("randomKey2", new Concept("concept2"));
         persistentKnowledgeBase.merge(anotherDB);
 
         Concept concept = persistentKnowledgeBase.get("randomKey1");
