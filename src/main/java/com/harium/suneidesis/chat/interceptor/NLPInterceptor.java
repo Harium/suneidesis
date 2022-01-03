@@ -29,6 +29,10 @@ public class NLPInterceptor implements Interceptor {
         if (!DEFAULT_LANGUAGE.equals(language)) {
             nlpMap.put(DEFAULT_LANGUAGE, nlp);
         }
+        registerNLP(language, nlp);
+    }
+
+    public void registerNLP(String language, NLP nlp) {
         if (language != null) {
             nlpMap.put(language, nlp);
         }
