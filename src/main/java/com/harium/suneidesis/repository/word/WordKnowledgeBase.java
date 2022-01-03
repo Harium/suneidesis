@@ -183,4 +183,15 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
         return words;
     }
 
+    public List<Word> findByName(String name) {
+        Iterator<Concept> result = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name)).iterator();
+
+        List<Word> words = new ArrayList<>();
+        while (result.hasNext()) {
+            Concept concept = result.next();
+            words.add(new Word(concept.getName()).wrap(concept));
+        }
+
+        return words;
+    }
 }
