@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import static org.dizitart.no2.filters.Filters.and;
 import static org.dizitart.no2.filters.Filters.eq;
 
 public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
@@ -149,7 +150,6 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     public Word findById(String id) {
-
         Concept concept = knowledgeBase.findById(id);
         if (concept == null) {
             return null;
@@ -172,19 +172,22 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     public List<Word> findByTag(Tag tag) {
-        Iterator<Concept> result = knowledgeBase.find(eq(Word.ATTRIBUTE_TAG, tag.name())).iterator();
-
-        List<Word> words = new ArrayList<>();
-        while (result.hasNext()) {
-            Concept concept = result.next();
-            words.add(new Word(concept.getName()).wrap(concept));
-        }
-
-        return words;
+        Filter filter = eq(Word.ATTRIBUTE_TAG, tag.name());
+        return findAsListWords(filter);
     }
 
     public List<Word> findByName(String name) {
-        Iterator<Concept> result = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name)).iterator();
+        Filter filter = eq(Attributes.ATTRIBUTE_NAME, name);
+        return findAsListWords(filter);
+    }
+
+    public List<Word> findByNameAndTag(String name, Tag tag) {
+        Filter filter = and(eq(Attributes.ATTRIBUTE_NAME, name), eq(Word.ATTRIBUTE_TAG, tag.name()));
+        return findAsListWords(filter);
+    }
+
+    private List<Word> findAsListWords(Filter filter) {
+        Iterator<Concept> result = knowledgeBase.find(filter).iterator();
 
         List<Word> words = new ArrayList<>();
         while (result.hasNext()) {

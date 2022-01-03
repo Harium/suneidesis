@@ -40,4 +40,15 @@ public class WordKnowledgeBaseTest {
         assertEquals(2, words.size());
     }
 
+    @Test
+    public void testFindByNameAndTag() {
+        Word concept1 = new Word("name", Tag.NOUN);
+        Word concept2 = new Word("name", Tag.ADJECTIVE);
+        wordKnowledgeBase.addWord(concept1);
+        wordKnowledgeBase.addWord(concept2);
+
+        List<Word> words = wordKnowledgeBase.findByNameAndTag(concept1.getName(), Tag.ADJECTIVE);
+        assertEquals(1, words.size());
+    }
+
 }
