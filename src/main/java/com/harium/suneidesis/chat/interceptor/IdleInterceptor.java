@@ -11,7 +11,7 @@ public class IdleInterceptor implements Interceptor {
 
     @Override
     public void preParsing(InputContext input, Output output) {
-        lastMessageTime = System.currentTimeMillis();
+        lastMessageTime = getTimeNow();
     }
 
     @Override
@@ -21,5 +21,19 @@ public class IdleInterceptor implements Interceptor {
 
     public long getLastMessageTime() {
         return lastMessageTime;
+    }
+
+    /**
+     * Method to check if chatbot is idle for more than (or equal to) interval (milliseconds)
+     * @param interval - milliseconds
+     * @return if is idle
+     */
+    public boolean isIdle(long interval) {
+        long now = getTimeNow();
+        return now - lastMessageTime >= interval;
+    }
+
+    protected long getTimeNow() {
+        return System.currentTimeMillis();
     }
 }
