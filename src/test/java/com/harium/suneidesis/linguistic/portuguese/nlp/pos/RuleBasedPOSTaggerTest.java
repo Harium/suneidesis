@@ -39,6 +39,12 @@ public class RuleBasedPOSTaggerTest {
     }
 
     @Test
+    public void testSingleWord_Unknown() {
+        TagPair[] answer = tagger.posTag(new String[]{"xiforínfola"});
+        Assert.assertEquals(Tag.UNKNOWN, answer[0].getTag());
+    }
+
+    @Test
     public void testTagArticles() {
         TagPair[] answer = tagger.posTag(new String[]{"a", "casa"});
         Assert.assertEquals(Tag.DETERMINER, answer[0].getTag());

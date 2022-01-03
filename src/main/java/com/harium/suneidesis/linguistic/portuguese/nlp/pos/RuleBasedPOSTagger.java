@@ -39,10 +39,13 @@ public class RuleBasedPOSTagger extends DatabasePOSTagger {
                     output[i].setTag(Tag.NOUN_PROPER);
                 } else if (lastTag.equals(Tag.ADVERB)) {
                     output[i].setTag(Tag.ADJECTIVE);
+                } else if (lastTag.equals(Tag.DETERMINER)) {
+                    // If the last word is a determiner, current word could be a noun
+                    output[i].setTag(Tag.NOUN);
                 } else if (guessVerb(word)) {
                     output[i].setTag(Tag.VERB);
                 } else {
-                    output[i].setTag(Tag.NOUN);
+                    output[i].setTag(Tag.UNKNOWN);
 
                     if (isVerb(lastTag.name())) {
                         Iterator<Word> ws = database.getWords(word);

@@ -109,6 +109,10 @@
     "fere-1": {"name" : "fere", "type" : "WORD", "tag" : "VERB_CONJUGATION"},
     "ferido-1": {"name" : "ferido", "type" : "WORD", "tag" : "ADJECTIVE"},
     "sera-1": {"name" : "será", "type" : "WORD", "tag" : "VERB_CONJUGATION"},
-    "sou-1": {"name" : "sou", "type" : "WORD", "tag" : "VERB_CONJUGATION"}
+    "sou-1": {"name" : "sou", "type" : "WORD", "tag" : "VERB_CONJUGATION"},
+    "casa-1": {"name" : "casa", "type" : "WORD", "tag" : "NOUN"},
+    "ferro-1": {"name" : "ferro", "type" : "WORD", "tag" : "NOUN"},
+    "papel-1": {"name" : "papel", "type" : "WORD", "tag" : "NOUN"},
+    "grande-1": {"name" : "grande", "type" : "WORD", "tag" : "ADJECTIVE"}
   }
 }
