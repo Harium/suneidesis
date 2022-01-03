@@ -35,6 +35,7 @@ public class Terminal extends BaseChatBox {
 
     protected void input(String sentence) {
         InputContext context = new InputContext();
+        context.setOriginalSentence(sentence);
         context.setSentence(sentence);
         enhanceInputContext(context);
 
