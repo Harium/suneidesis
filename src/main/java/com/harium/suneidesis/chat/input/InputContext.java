@@ -85,6 +85,14 @@ public class InputContext {
         return (String) properties.getOrDefault(LANGUAGE, DEFAULT_LANGUAGE);
     }
 
+    /**
+     * Helper method to set the language, ISO 639-1 is recommended
+     * @param language
+     */
+    public void setLanguage(String language) {
+        properties.put(LANGUAGE, language);
+    }
+
     public String getOriginalSentence() {
         return (String) properties.getOrDefault(ORIGINAL_SENTENCE, "");
     }

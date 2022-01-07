@@ -1,7 +1,8 @@
 package com.harium.suneidesis.concept;
 
 /**
- * Class that represents primitive data
+ * Class that represents primitive data.
+ * It can represent quantity, text or simply plain data
  */
 public class Primitive extends Concept {
 
