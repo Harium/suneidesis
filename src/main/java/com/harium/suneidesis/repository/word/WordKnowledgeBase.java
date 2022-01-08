@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static org.dizitart.no2.filters.Filters.and;
 import static org.dizitart.no2.filters.Filters.eq;
+import static org.dizitart.no2.filters.Filters.or;
 
 public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
 
@@ -80,7 +81,7 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     public Iterator<Word> getWords(String name) {
-        RepositoryCursor<Concept> cursor = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name));
+        RepositoryCursor<Concept> cursor = knowledgeBase.find(filterName(name));
         return new RepositoryConceptCursorToWordMapper(cursor).iterator();
     }
 
@@ -159,31 +160,71 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     public WordVerb findVerb(String name) {
-        Iterator<Concept> result = knowledgeBase.find(eq(Attributes.ATTRIBUTE_NAME, name)).iterator();
+        Iterator<Concept> result = knowledgeBase.find(and(filterName(name),
+                                                          eq(Word.ATTRIBUTE_TAG, Tag.VERB.name()))).iterator();
 
-        while (result.hasNext()) {
+        if (result.hasNext()) {
             Concept concept = result.next();
-            if (Tag.VERB.name().equals(concept.get(Word.ATTRIBUTE_TAG).getName())) {
-                return new WordVerb(concept.getName()).wrap(concept);
-            }
+            return new WordVerb(concept.getName()).wrap(concept);
+        }
+
+        return null;
+    }
+
+    public Concept findVerbOrConjugation(String name) {
+        Iterator<Concept> result = knowledgeBase.find(and(filterName(name),
+                                                          filterTags(Tag.VERB, Tag.VERB_CONJUGATION))).iterator();
+
+        if (result.hasNext()) {
+            return result.next();
         }
 
         return null;
     }
 
     public List<Word> findByTag(Tag tag) {
-        Filter filter = eq(Word.ATTRIBUTE_TAG, tag.name());
-        return findAsListWords(filter);
+        return findAsListWords(filterTag(tag.name()));
+    }
+
+    public List<Word> findByTags(Tag ... tags) {
+        return findAsListWords(filterTags(tags));
     }
 
     public List<Word> findByName(String name) {
-        Filter filter = eq(Attributes.ATTRIBUTE_NAME, name);
-        return findAsListWords(filter);
+        return findAsListWords(filterName(name));
     }
 
     public List<Word> findByNameAndTag(String name, Tag tag) {
-        Filter filter = and(eq(Attributes.ATTRIBUTE_NAME, name), eq(Word.ATTRIBUTE_TAG, tag.name()));
+        Filter filter = and(filterName(name), filterTag(tag.name()));
         return findAsListWords(filter);
+    }
+
+    private Filter filterName(String name) {
+        return eq(Attributes.ATTRIBUTE_NAME, name);
+    }
+
+    private Filter filterTag(String tag) {
+        return eq(Word.ATTRIBUTE_TAG, tag);
+    }
+
+    private Filter filterTags(Tag ... tags) {
+        String[] tagNames = new String[tags.length];
+
+        for (int i = 0; i < tags.length; i++) {
+            tagNames[i] = tags[i].name();
+        }
+
+        return filterTags(tagNames);
+    }
+
+    private Filter filterTags(String ... tags) {
+        Filter[] filters = new Filter[tags.length];
+
+        for (int i = 0; i < tags.length; i++) {
+            filters[i] = eq(Word.ATTRIBUTE_TAG, tags[i]);
+        }
+
+        return or(filters);
     }
 
     private List<Word> findAsListWords(Filter filter) {
