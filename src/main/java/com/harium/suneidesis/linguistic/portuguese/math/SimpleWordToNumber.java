@@ -52,8 +52,8 @@ public class SimpleWordToNumber implements WordToNumber {
     private static final String BILLION_PLURAL = "bilhões";
 
     @Override
-    public BigDecimal toNumber(String word) {
-        String[] parts = word.split(" ");
+    public BigDecimal toNumber(String sentence) {
+        String[] parts = sentence.split(" ");
 
         long safe = 0;
         long number = 0;

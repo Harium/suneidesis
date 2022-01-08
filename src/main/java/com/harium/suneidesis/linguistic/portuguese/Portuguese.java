@@ -1,6 +1,20 @@
 package com.harium.suneidesis.linguistic.portuguese;
 
-public class Portuguese {
+import com.harium.suneidesis.linguistic.LanguageCode;
+import com.harium.suneidesis.linguistic.LanguageHelper;
+import com.harium.suneidesis.linguistic.math.NumberToWord;
+import com.harium.suneidesis.linguistic.math.WordToNumber;
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
+import com.harium.suneidesis.linguistic.portuguese.math.SimpleNumberToWord;
+import com.harium.suneidesis.linguistic.portuguese.math.SimpleWordToNumber;
+
+import java.math.BigDecimal;
+
+public class Portuguese implements LanguageHelper {
+
+    private final NumberToWord numberToWord = new SimpleNumberToWord();
+
+    private final WordToNumber wordToNumber = new SimpleWordToNumber();
 
     public static boolean hasTilde(char c) {
         return c == 'ã' || c == 'õ';
@@ -164,5 +178,86 @@ public class Portuguese {
             default:
                 return rawVowel;
         }
+    }
+
+    @Override
+    public Tag getTagFromText(String tagText) {
+        if (tagText == null || tagText.isEmpty()) {
+            return null;
+        }
+
+        String tag = tagText.toLowerCase();
+
+        if ("artigo".equalsIgnoreCase(tag)) {
+            return Tag.DETERMINER;
+        } else if ("adjetivo".equalsIgnoreCase(tag)) {
+            return Tag.ADJECTIVE;
+        } else if ("advérbio".equalsIgnoreCase(tag)) {
+            return Tag.ADVERB;
+        } else if ("numeral".equalsIgnoreCase(tag)) {
+            return Tag.NUMERAL;
+        } else if ("conjunção".equalsIgnoreCase(tag)) {
+            return Tag.CONJUCTION;
+        } else if ("interjeição".equalsIgnoreCase(tag)) {
+            return Tag.INTERJECTION;
+        } else if ("verbo".equalsIgnoreCase(tag)) {
+            return Tag.VERB;
+        } else if ("conjugação verbal".equalsIgnoreCase(tag)) {
+            return Tag.VERB_CONJUGATION;
+        } else if ("substantivo".equalsIgnoreCase(tag)) {
+            return Tag.NOUN;
+        } else if ("substantivo próprio".equalsIgnoreCase(tag)) {
+            return Tag.NOUN_PROPER;
+        } else if ("pronome pessoal".equalsIgnoreCase(tag)) {
+            return Tag.PERSONAL_PRONOUN;
+        } else if ("pronome".equalsIgnoreCase(tag)) {
+            return Tag.PRONOUN;
+        } else if ("preposição".equalsIgnoreCase(tag)) {
+            return Tag.PREPOSITION;
+        }
+
+        return null;
+    }
+
+    @Override
+    public String getLanguageCode(String languageName) {
+        if (languageName == null || languageName.isEmpty()) {
+            return null;
+        }
+        if ("inglês".equalsIgnoreCase(languageName)) {
+            return LanguageCode.ENGLISH;
+        } else if ("francês".equalsIgnoreCase(languageName)) {
+            return LanguageCode.FRENCH;
+        } else if ("português".equalsIgnoreCase(languageName)) {
+            return LanguageCode.PORTUGUESE;
+        }
+        return null;
+    }
+
+    @Override
+    public String toWord(int number) {
+        return numberToWord.toWord(number);
+    }
+
+    @Override
+    public String toWord(double number) {
+        return numberToWord.toWord(number);
+    }
+
+    @Override
+    public String toWord(BigDecimal number) {
+        return numberToWord.toWord(number);
+    }
+
+    @Override
+    public BigDecimal toNumber(String sentence) {
+        return wordToNumber.toNumber(sentence);
+    }
+
+    public static boolean isPortuguese(String language) {
+        if (language == null || language.isEmpty()) {
+            return false;
+        }
+        return language.startsWith(LanguageCode.PORTUGUESE);
     }
 }
