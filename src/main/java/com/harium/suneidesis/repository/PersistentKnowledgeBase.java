@@ -63,6 +63,7 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
         } else if (!collection.hasIndex(Attributes.ATTRIBUTE_NAME)) {
             collection.createIndex(Attributes.ATTRIBUTE_NAME, indexOptions(IndexType.NonUnique));
         }
+        idGenerator.update(this);
     }
 
     @Override

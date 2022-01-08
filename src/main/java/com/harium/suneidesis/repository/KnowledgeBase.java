@@ -14,9 +14,9 @@ public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> 
     // Reserved word for introspection
     public static final String SELF = "_self";
 
-    private String name;
+    protected String name;
 
-    private IdGenerator idGenerator;
+    protected IdGenerator idGenerator;
 
     protected List<EntryDecorator> decorators = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> 
         if (id.isUnknown()) {
             idText = idGenerator.generateId(concept);
         } else {
-            idText = id.getId();
+            idText = id.getName();
         }
 
         decorate(concept);
@@ -92,6 +92,8 @@ public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> 
 
     public void setIdGenerator(IdGenerator idGenerator) {
         this.idGenerator = idGenerator;
+        // Update idGenerator if it's updated dynamically to prevent clashes
+        this.idGenerator.update(this);
     }
 
 }

@@ -2,7 +2,7 @@ package com.harium.suneidesis.concept;
 
 public class Language extends Concept {
 
-    protected static final String ATTRIBUTE_CODE = "lang_code";
+    public static final String ATTRIBUTE_CODE = "lang_code";
 
     public Language(String name) {
         super(name, ConceptType.LANGUAGE);

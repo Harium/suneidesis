@@ -1,6 +1,8 @@
 package com.harium.suneidesis.repository.word;
 
 import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
+import com.harium.suneidesis.concept.Language;
 import com.harium.suneidesis.concept.attribute.Attributes;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.concept.word.WordVerb;
@@ -161,7 +163,7 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
 
     public WordVerb findVerb(String name) {
         Iterator<Concept> result = knowledgeBase.find(and(filterName(name),
-                                                          eq(Word.ATTRIBUTE_TAG, Tag.VERB.name()))).iterator();
+                                                          filterTag(Tag.VERB.name()))).iterator();
 
         if (result.hasNext()) {
             Concept concept = result.next();
@@ -179,7 +181,7 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
             return result.next();
         }
 
-        return null;
+        return ConceptType.UNKNOWN;
     }
 
     public List<Word> findByTag(Tag tag) {
@@ -197,6 +199,18 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     public List<Word> findByNameAndTag(String name, Tag tag) {
         Filter filter = and(filterName(name), filterTag(tag.name()));
         return findAsListWords(filter);
+    }
+
+    public Concept findLanguageByCode(String languageCode) {
+        Iterator<Concept> result = knowledgeBase.find(and(eq(Concept.ATTRIBUTE_TYPE, ConceptType.LANGUAGE),
+                                                          eq(Language.ATTRIBUTE_CODE, languageCode))).iterator();
+
+        if (result.hasNext()) {
+            Concept concept = result.next();
+            return new Language(concept.getName()).wrap(concept);
+        }
+
+        return ConceptType.UNKNOWN;
     }
 
     private Filter filterName(String name) {
