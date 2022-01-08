@@ -59,7 +59,7 @@ public class NLPInterceptor implements Interceptor {
         input.getProperties().put(PROPERTY_NLP, tags);
     }
 
-    private NLP getNLP(String language) {
+    protected NLP getNLP(String language) {
         NLP nlp = nlpMap.get(language);
         if (nlp == null) {
             return nlpMap.get(DEFAULT_LANGUAGE);
