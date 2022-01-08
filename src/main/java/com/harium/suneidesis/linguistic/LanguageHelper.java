@@ -10,4 +10,5 @@ public interface LanguageHelper extends NumberToWord, WordToNumber {
 
     String getLanguageCode(String languageName);
 
+    String getLanguageName(String languageCode);
 }

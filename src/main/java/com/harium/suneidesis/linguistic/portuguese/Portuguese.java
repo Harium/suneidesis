@@ -12,6 +12,10 @@ import java.math.BigDecimal;
 
 public class Portuguese implements LanguageHelper {
 
+    private static final String LANGUAGE_ENGLISH = "inglês";
+    private static final String LANGUAGE_FRENCH = "francês";
+    private static final String LANGUAGE_PORTUGUESE = "português";
+
     private final NumberToWord numberToWord = new SimpleNumberToWord();
 
     private final WordToNumber wordToNumber = new SimpleWordToNumber();
@@ -224,12 +228,27 @@ public class Portuguese implements LanguageHelper {
         if (languageName == null || languageName.isEmpty()) {
             return null;
         }
-        if ("inglês".equalsIgnoreCase(languageName)) {
+        if (LANGUAGE_ENGLISH.equalsIgnoreCase(languageName)) {
             return LanguageCode.ENGLISH;
-        } else if ("francês".equalsIgnoreCase(languageName)) {
+        } else if (LANGUAGE_FRENCH.equalsIgnoreCase(languageName)) {
             return LanguageCode.FRENCH;
         } else if ("português".equalsIgnoreCase(languageName)) {
             return LanguageCode.PORTUGUESE;
+        }
+        return null;
+    }
+
+    @Override
+    public String getLanguageName(String languageCode) {
+        if (languageCode == null || languageCode.isEmpty()) {
+            return null;
+        }
+        if (LanguageCode.ENGLISH.equalsIgnoreCase(languageCode)) {
+            return LANGUAGE_ENGLISH;
+        } else if (LanguageCode.FRENCH.equalsIgnoreCase(languageCode)) {
+            return LANGUAGE_FRENCH;
+        } else if (LanguageCode.PORTUGUESE.equalsIgnoreCase(languageCode)) {
+            return LANGUAGE_PORTUGUESE;
         }
         return null;
     }
