@@ -28,9 +28,11 @@ public class BaseTaskTest {
         MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.save(task);
 
-        BaseTask chopGarlic = new BaseTask("chop garlic");
-        chopGarlic.addTask(new FindTask("find garlic", garlic));
-        boolean executed = chopGarlic.execute(myself, environment);
+        ComplexTask chopGarlic = new ComplexTask("chop garlic");
+        chopGarlic.setSubject(myself);
+        chopGarlic.addSubTask(new FindTask("find garlic", garlic));
+
+        boolean executed = chopGarlic.start(environment);
         assertTrue(executed);
     }
 
@@ -50,9 +52,11 @@ public class BaseTaskTest {
         MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.save(task);
 
-        BaseTask chopGarlic = new BaseTask("chop garlic");
-        chopGarlic.addTask(new FindTask("find garlic", garlic));
-        boolean executed = chopGarlic.execute(myself, environment);
+        ComplexTask chopGarlic = new ComplexTask("chop garlic");
+        chopGarlic.setSubject(myself);
+        chopGarlic.addSubTask(new FindTask("find garlic", garlic));
+
+        boolean executed = chopGarlic.start( environment);
         assertFalse(executed);
     }
 

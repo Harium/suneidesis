@@ -1,4 +1,6 @@
-package com.harium.suneidesis.planning;
+package com.harium.suneidesis.processing;
+
+import com.harium.suneidesis.repository.KnowledgeBase;
 
 public interface Task {
 
@@ -9,20 +11,21 @@ public interface Task {
     boolean canStart();
 
     /**
-     * Method to execute the task
-     */
-    void start();
-
-    /**
      * Method to check if the task is currently happening
      * @return if task is in progress
      */
-    boolean inProgress();
+    boolean isInProgress();
 
     /**
      * Method to check if the task finished to run
      * @return if task is finished
      */
     boolean isDone();
+
+    /**
+     * Method to actually execute the task
+     * @return if task can be executed
+     */
+    boolean start(KnowledgeBase database);
 
 }
