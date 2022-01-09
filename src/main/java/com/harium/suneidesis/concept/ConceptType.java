@@ -12,7 +12,6 @@ public class ConceptType extends Concept {
     public static final ConceptType EVENT = new ConceptType("EVENT");
     public static final ConceptType FEELING = new ConceptType("FEELING");
     public static final ConceptType LANGUAGE = new ConceptType("LANGUAGE");
-    public static final ConceptType MEANING = new ConceptType("MEANING");
     public static final ConceptType PART = new ConceptType("PART");
     public static final ConceptType PHENOMENON = new ConceptType("PHENOMENA");
     public static final ConceptType PLACE = new ConceptType("PLACE");
@@ -49,8 +48,6 @@ public class ConceptType extends Concept {
             return FEELING;
         } else if (LANGUAGE.getName().equals(name)) {
             return LANGUAGE;
-        } else if (MEANING.getName().equals(name)) {
-            return MEANING;
         } else if (PART.getName().equals(name)) {
             return PART;
         } else if (PHENOMENON.getName().equals(name)) {
