@@ -11,6 +11,7 @@ import org.dizitart.no2.Filter;
 import org.dizitart.no2.IndexType;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.NitriteCollection;
+import org.dizitart.no2.WriteResult;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -154,6 +155,12 @@ public class PersistentKnowledgeBase extends KnowledgeBase {
     public Iterator<Concept> iterator() {
         Cursor cursor = collection.find();
         return new RepositoryConceptCursor(cursor).iterator();
+    }
+
+    @Override
+    public boolean delete(String key) {
+        WriteResult result = collection.remove(eq(Concept.ATTRIBUTE_ID, key));
+        return result.getAffectedCount() > 0;
     }
 
     @Override

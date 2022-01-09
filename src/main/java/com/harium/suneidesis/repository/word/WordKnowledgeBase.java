@@ -98,6 +98,11 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     }
 
     @Override
+    public String delete(Concept concept) {
+        return knowledgeBase.delete(concept);
+    }
+
+    @Override
     public Concept save(String key, Concept concept) {
         return knowledgeBase.save(key, concept);
     }
@@ -105,6 +110,11 @@ public class WordKnowledgeBase implements KnowledgeBaseRepository<Concept> {
     @Override
     public String save(Concept concept) {
         return knowledgeBase.save(concept);
+    }
+
+    @Override
+    public boolean delete(String key) {
+        return knowledgeBase.delete(key);
     }
 
     @Override

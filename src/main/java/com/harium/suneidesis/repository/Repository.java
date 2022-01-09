@@ -11,7 +11,11 @@ public interface Repository<T extends Thing> {
 
     Iterator<T> iterator();
 
+    String delete(T concept);
+
     String save(T concept);
+
+    boolean delete(String key);
 
     T save(String key, T t);
 

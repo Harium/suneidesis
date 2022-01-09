@@ -95,6 +95,13 @@ public class Attributes implements Repository<Concept> {
         return attributeMap.values().iterator();
     }
 
+    @Override
+    public String delete(Concept concept) {
+        String id = concept.getId();
+        delete(id);
+        return id;
+    }
+
     public Concept save(String key, Concept concept) {
         return attributeMap.put(key, concept);
     }
@@ -104,6 +111,12 @@ public class Attributes implements Repository<Concept> {
         String id = concept.getId();
         save(id, concept);
         return id;
+    }
+
+    @Override
+    public boolean delete(String key) {
+        attributeMap.remove(key);
+        return true;
     }
 
     public boolean remove(Concept concept) {

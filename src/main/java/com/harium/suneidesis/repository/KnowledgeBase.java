@@ -43,6 +43,13 @@ public abstract class KnowledgeBase implements KnowledgeBaseRepository<Concept> 
     public abstract Concept save(String key, Concept concept);
 
     @Override
+    public String delete(Concept concept) {
+        String id = concept.getId();
+        delete(id);
+        return id;
+    }
+
+    @Override
     public String save(Concept concept) {
         Concept id = concept.getIdConcept();
         String idText;

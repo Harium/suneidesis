@@ -32,4 +32,22 @@ public class MemoryKnowledgeBaseTest {
         assertFalse(knowledgeBase.findById("1").isUnknown());
     }
 
+    @Test
+    public void testDeleteConcept() {
+        Concept concept1 = new Concept("concept1");
+        Concept concept2 = new Concept("concept1");
+
+        knowledgeBase.save(concept1);
+        knowledgeBase.save(concept2);
+        assertEquals(2, knowledgeBase.count());
+
+        knowledgeBase.delete(concept1.getId());
+        assertEquals(1, knowledgeBase.count());
+        knowledgeBase.delete(concept2.getId());
+        assertEquals(0, knowledgeBase.count());
+
+        knowledgeBase.save(concept1);
+        assertEquals(1, knowledgeBase.count());
+    }
+
 }
