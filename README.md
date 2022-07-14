@@ -25,6 +25,7 @@ Suneidesis is a project to represent knowledge and build chatbots easily. This p
 - [sunbot-http](https://github.com/Harium/sunbot-http/)
 - [sunbot-http-client](https://github.com/Harium/sunbot-http-client)
 - [sunbot-mqtt](https://github.com/Harium/sunbot-mqtt/)
+- [sunbot-telegram](https://github.com/Harium/sunbot-telegram/)
 
 ## Examples
 
