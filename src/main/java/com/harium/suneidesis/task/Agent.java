@@ -11,7 +11,7 @@ public class Agent {
 
     protected int index = 0;
     protected Task currentTask = null;
-    private List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
 
     public boolean update() {
         // If there is no task, we ignore it
@@ -33,6 +33,10 @@ public class Agent {
         } else {
             return false;
         }
+    }
+
+    public boolean isDone() {
+        return index >= tasks.size();
     }
 
     private void nextTask() {
