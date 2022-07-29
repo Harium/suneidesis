@@ -1,4 +1,4 @@
-package com.harium.suneidesis.processing;
+package com.harium.suneidesis.task;
 
 import com.harium.suneidesis.concept.Concept;
 

@@ -1,4 +1,4 @@
-package com.harium.suneidesis.processing;
+package com.harium.suneidesis.task.database;
 
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.word.Word;
@@ -11,14 +11,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class FindAndRemoveDuplicateWords extends BaseTask {
+public class FindAndRemoveDuplicateWords extends KnowledgeTask {
 
-    public FindAndRemoveDuplicateWords(String name) {
-        super(name);
+    public FindAndRemoveDuplicateWords(String name, KnowledgeBase database) {
+        super(name, database);
     }
 
     @Override
-    public boolean start(KnowledgeBase database) {
+    public boolean start() {
         if (!canStart()) {
             return false;
         }

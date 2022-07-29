@@ -1,4 +1,4 @@
-package com.harium.suneidesis.planning;
+package com.harium.suneidesis.task.planning;
 
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;

@@ -1,10 +1,12 @@
-package com.harium.suneidesis.planning;
+package com.harium.suneidesis.task;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.planning.instruction.FindTask;
 import com.harium.suneidesis.repository.MemoryKnowledgeBase;
+import com.harium.suneidesis.task.planning.ComplexKnowledgeTask;
+import com.harium.suneidesis.task.planning.FindTask;
+import com.harium.suneidesis.task.planning.Inventory;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -28,11 +30,11 @@ public class BaseTaskTest {
         MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.save(task);
 
-        ComplexTask chopGarlic = new ComplexTask("chop garlic");
+        ComplexKnowledgeTask chopGarlic = new ComplexKnowledgeTask("chop garlic", environment);
         chopGarlic.setSubject(myself);
-        chopGarlic.addSubTask(new FindTask("find garlic", garlic));
+        chopGarlic.addSubTask(new FindTask("find garlic", garlic, environment));
 
-        boolean executed = chopGarlic.start(environment);
+        boolean executed = chopGarlic.start();
         assertTrue(executed);
     }
 
@@ -52,11 +54,11 @@ public class BaseTaskTest {
         MemoryKnowledgeBase environment = new MemoryKnowledgeBase("environment");
         environment.save(task);
 
-        ComplexTask chopGarlic = new ComplexTask("chop garlic");
+        ComplexKnowledgeTask chopGarlic = new ComplexKnowledgeTask("chop garlic", environment);
         chopGarlic.setSubject(myself);
-        chopGarlic.addSubTask(new FindTask("find garlic", garlic));
+        chopGarlic.addSubTask(new FindTask("find garlic", garlic, environment));
 
-        boolean executed = chopGarlic.start( environment);
+        boolean executed = chopGarlic.start();
         assertFalse(executed);
     }
 

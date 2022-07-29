@@ -1,6 +1,4 @@
-package com.harium.suneidesis.processing;
-
-import com.harium.suneidesis.repository.KnowledgeBase;
+package com.harium.suneidesis.task;
 
 public interface Task {
 
@@ -26,6 +24,6 @@ public interface Task {
      * Method to actually execute the task
      * @return if task can be executed
      */
-    boolean start(KnowledgeBase database);
+    boolean start();
 
 }

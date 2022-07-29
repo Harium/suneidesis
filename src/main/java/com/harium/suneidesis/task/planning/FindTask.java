@@ -1,26 +1,24 @@
-package com.harium.suneidesis.planning.instruction;
+package com.harium.suneidesis.task.planning;
 
 import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.planning.ComplexTask;
-import com.harium.suneidesis.planning.Inventory;
 import com.harium.suneidesis.repository.KnowledgeBase;
 
 import java.util.Iterator;
 
-public class FindTask extends ComplexTask {
+public class FindTask extends ComplexKnowledgeTask {
 
     public static final String ATTRIBUTE_TARGET = "target";
 
-    public FindTask(String name, Concept target) {
-        super(name);
+    public FindTask(String name, Concept target, KnowledgeBase database) {
+        super(name, database);
         setTarget(target);
     }
 
     @Override
-    public boolean start(KnowledgeBase environment) {
+    public boolean start() {
         boolean found = false;
-        Iterator<Concept> iterator = environment.iterator();
+        Iterator<Concept> iterator = database.iterator();
 
         while (iterator.hasNext()) {
             Concept concept = iterator.next();
@@ -48,7 +46,7 @@ public class FindTask extends ComplexTask {
         }
 
         // Execute subTasks
-        return super.start(environment);
+        return super.start();
     }
 
     public Concept setTarget(Concept target) {

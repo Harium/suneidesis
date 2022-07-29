@@ -1,9 +1,9 @@
-package com.harium.suneidesis.planning;
+package com.harium.suneidesis.task.planning;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.processing.BaseTask;
-import com.harium.suneidesis.processing.Task;
 import com.harium.suneidesis.repository.KnowledgeBase;
+import com.harium.suneidesis.task.Task;
+import com.harium.suneidesis.task.database.KnowledgeTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +11,17 @@ import java.util.List;
 /**
  * Class to represent high level instructions (many subtasks)
  */
-public class ComplexTask extends BaseTask {
+public class ComplexKnowledgeTask extends KnowledgeTask {
 
     public static final String ATTRIBUTE_SUBJECT = "subject";
 
     private List<Task> subTasks = new ArrayList<>();
 
-    public ComplexTask(String name) {
-        super(name);
+    public ComplexKnowledgeTask(String name, KnowledgeBase database) {
+        super(name, database);
     }
 
-    public boolean start(KnowledgeBase environment) {
+    public boolean start() {
         if (!canStart()) {
            return false;
         }
@@ -29,7 +29,7 @@ public class ComplexTask extends BaseTask {
         inProgress = true;
         boolean success = true;
         for (Task task : subTasks) {
-            success &= task.start(environment);
+            success &= task.start();
         }
 
         inProgress = false;
