@@ -1,7 +1,8 @@
 Suneidesis (συνείδησις)
 =======================
 
-Suneidesis is a project to represent knowledge and build chatbots easily. This project started as an experiment to store stories but because querying data using code  became so complex, it was turned into a chatbot library.
+Suneidesis is a project to represent knowledge and build chatbots easily. This project started as an experiment to store stories but because querying data using code 
+became so complex, it was turned into a chatbot library.
 
 [![CircleCI](https://circleci.com/gh/Harium/suneidesis.svg?style=svg)](https://circleci.com/gh/Harium/suneidesis)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.harium.suneidesis/core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.harium.suneidesis/core/)
@@ -13,7 +14,7 @@ Suneidesis is a project to represent knowledge and build chatbots easily. This p
 <dependency>
     <groupId>com.harium.suneidesis</groupId>
     <artifactId>core</artifactId>
-    <version>1.6.6</version>
+    <version>1.6.7</version>
 </dependency>
 ```
 
