@@ -1,5 +1,6 @@
-package com.harium.suneidesis.task;
+package com.harium.suneidesis.behavior;
 
+import com.harium.suneidesis.task.Task;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class AgentTest {
 
     @Before
     public void setUp() {
-        agent = new Agent();
+        agent = new Agent("agent");
     }
 
     @Test
