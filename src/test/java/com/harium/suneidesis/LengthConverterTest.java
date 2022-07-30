@@ -18,9 +18,13 @@ public class LengthConverterTest {
     @Test
     public void testConversion() {
         assertEquals("2.5", lengthConverter.convert("2500", LengthConverter.METER, LengthConverter.KILOMETER));
+        assertEquals("1.553427975", lengthConverter.convert("2500", LengthConverter.METER, LengthConverter.MILE));
+        assertEquals("8202.10000", lengthConverter.convert("2500", LengthConverter.METER, LengthConverter.FOOT));
+        assertEquals("98425.2500", lengthConverter.convert("2500", LengthConverter.METER, LengthConverter.INCH));
+
         assertEquals("1000", lengthConverter.convert("1", LengthConverter.KILOMETER, LengthConverter.METER));
-        assertEquals("0.6213711899", lengthConverter.convert("1", LengthConverter.KILOMETER, LengthConverter.MILE).substring(0,12));
-        assertEquals("4.828032", lengthConverter.convert("3", LengthConverter.MILE, LengthConverter.KILOMETER).substring(0,8));
+        assertEquals("0.62137119", lengthConverter.convert("1", LengthConverter.KILOMETER, LengthConverter.MILE));
+        assertEquals("4.828032", lengthConverter.convert("3", LengthConverter.MILE, LengthConverter.KILOMETER));
     }
 
 }
