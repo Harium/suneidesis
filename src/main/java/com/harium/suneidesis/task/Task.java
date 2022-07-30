@@ -22,7 +22,7 @@ public interface Task {
 
     /**
      * Method to actually execute the task
-     * @return if task can be executed
+     * @return if task was executed
      */
     boolean start();
 

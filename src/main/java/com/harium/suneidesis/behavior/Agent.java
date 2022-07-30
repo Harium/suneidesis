@@ -65,4 +65,7 @@ public class Agent extends Concept implements Behavior {
         tasks.add(task);
     }
 
+    public Task getCurrentTask() {
+        return currentTask;
+    }
 }

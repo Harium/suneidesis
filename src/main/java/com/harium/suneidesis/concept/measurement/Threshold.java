@@ -3,10 +3,12 @@ package com.harium.suneidesis.concept.measurement;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.Primitive;
 
+import java.math.BigDecimal;
+
 public class Threshold extends Range {
 
     // Threshold level of a need (if any)
-    private static final String ATTRIBUTE_THRESHOLD = "need_threshold";
+    private static final String ATTRIBUTE_THRESHOLD = "threshold";
 
     public Threshold() {
         super();
@@ -24,6 +26,10 @@ public class Threshold extends Range {
         return getAttributes().get(ATTRIBUTE_THRESHOLD);
     }
 
+    public BigDecimal getThresholdAsBigDecimal() {
+        return asBigDecimal(getThreshold());
+    }
+
     public void setThreshold(String threshold) {
         this.getAttributes().save(ATTRIBUTE_THRESHOLD, new Primitive(threshold));
     }
@@ -33,4 +39,23 @@ public class Threshold extends Range {
         return this;
     }
 
+    @Override
+    public Threshold wrap(Concept concept) {
+        super.wrap(concept);
+        return this;
+    }
+
+    public boolean isBelowThreshold() {
+        BigDecimal value = getValueAsBigDecimal();
+        BigDecimal threshold = getThresholdAsBigDecimal();
+
+        return value != null && value.compareTo(threshold) < 0;
+    }
+
+    public boolean isAboveThreshold() {
+        BigDecimal value = getValueAsBigDecimal();
+        BigDecimal threshold = getThresholdAsBigDecimal();
+
+        return value != null && value.compareTo(threshold) > 0;
+    }
 }

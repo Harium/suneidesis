@@ -40,4 +40,13 @@ public class MeasurementTest {
         assertFalse(measurement.equals(anotherMeasurement));
     }
 
+    @Test
+    public void testIncrement() {
+        Measurement measurement = new Measurement("5.0", "m");
+        measurement.increment(1);
+        assertEquals("6.0", measurement.getValue());
+
+        measurement.increment(-1.2);
+        assertEquals("4.8", measurement.getValue());
+    }
 }

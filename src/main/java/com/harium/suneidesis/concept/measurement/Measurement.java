@@ -6,6 +6,8 @@ import com.harium.suneidesis.concept.Primitive;
 import com.harium.suneidesis.concept.Unit;
 import com.harium.suneidesis.concept.helper.MeasureMatcher;
 
+import java.math.BigDecimal;
+
 public class Measurement extends Concept {
 
     private static final String ATTRIBUTE_ACCURACY = "accuracy";
@@ -71,17 +73,21 @@ public class Measurement extends Concept {
         return value.getValue();
     }
 
+    public BigDecimal getValueAsBigDecimal() {
+        return asBigDecimal(getValue());
+    }
+
+    public Measurement value(String value) {
+        getAttributes().save(ATTRIBUTE_VALUE, new Primitive(value));
+        return this;
+    }
+
     public Concept getUnitConcept() {
         return getAttributes().get(ATTRIBUTE_UNIT);
     }
 
     public String getUnit() {
         return getUnitConcept().getName();
-    }
-
-    public Measurement value(String value) {
-        getAttributes().save(ATTRIBUTE_VALUE, new Primitive(value));
-        return this;
     }
 
     public Measurement unit(Concept unit) {
@@ -98,6 +104,18 @@ public class Measurement extends Concept {
         return this;
     }
 
+    protected BigDecimal asBigDecimal(String value) {
+        if (VALUE_UNKNOWN.equals(value)) {
+            return null;
+        }
+
+        return new BigDecimal(value);
+    }
+
+    public boolean matches(MeasureMatcher matcher) {
+        return matcher.evaluate(getValue());
+    }
+
     public boolean equals(Measurement q) {
         if (q == null) {
             return false;
@@ -108,7 +126,11 @@ public class Measurement extends Concept {
         return sameValue && sameUnit;
     }
 
-    public boolean matches(MeasureMatcher matcher) {
-        return matcher.evaluate(getValue());
+    public Measurement increment(double increment) {
+        BigDecimal decimal = getValueAsBigDecimal();
+        String value = decimal.add(BigDecimal.valueOf(increment)).toPlainString();
+        value(value);
+
+        return this;
     }
 }

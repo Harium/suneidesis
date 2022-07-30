@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ThresholdTest {
 
@@ -19,6 +20,20 @@ public class ThresholdTest {
 
         LowerThan matcher = new LowerThan(new BigDecimal(hemoglobin.getThreshold()));
         assertFalse(hemoglobin.matches(matcher));
+    }
+
+    @Test
+    public void testInsideRange() {
+        Threshold taxBracket = new Threshold();
+        taxBracket.unit("$");
+        taxBracket.min("1000");
+        taxBracket.max("2000");
+        taxBracket.threshold("1500");
+        taxBracket.value("1100");
+
+        assertTrue(taxBracket.isInsideRange());
+        assertTrue(taxBracket.isBelowThreshold());
+        assertFalse(taxBracket.isAboveThreshold());
     }
 
 }
