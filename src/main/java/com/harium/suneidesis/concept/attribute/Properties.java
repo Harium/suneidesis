@@ -1,12 +1,12 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Measurement;
+import com.harium.suneidesis.concept.measurement.Measurement;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.harium.suneidesis.concept.Measurement.ZERO;
+import static com.harium.suneidesis.concept.measurement.Measurement.ZERO;
 
 public class Properties extends Concept {
 

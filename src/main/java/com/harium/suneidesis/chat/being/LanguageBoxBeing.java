@@ -1,5 +1,6 @@
 package com.harium.suneidesis.chat.being;
 
+import com.harium.suneidesis.concept.beign.Identity;
 import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.concept.Being;
 import com.harium.suneidesis.concept.Concept;

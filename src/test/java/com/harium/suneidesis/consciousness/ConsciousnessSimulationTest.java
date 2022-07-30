@@ -1,7 +1,7 @@
 package com.harium.suneidesis.consciousness;
 
 import com.harium.suneidesis.concept.*;
-import com.harium.suneidesis.concept.Measurement;
+import com.harium.suneidesis.concept.measurement.Measurement;
 import com.harium.suneidesis.concept.helper.Provenance;
 import com.harium.suneidesis.concept.time.Time;
 import com.harium.suneidesis.repository.KnowledgeBase;
@@ -50,7 +50,7 @@ public class ConsciousnessSimulationTest {
         Action dataTransfer = new Action("data transfer");
         Concept searchEngine = new Concept("search engine");
         searchEngine.is(software);
-        searchEngine.hasQuantity(data, new Measurement("a lot"));
+        searchEngine.hasQuantity(data, new Measurement().value("a lot"));
 
         Concept robot1 = new Concept("robot 1");
         robot1.is(robot);

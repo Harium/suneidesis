@@ -1,11 +1,13 @@
 package com.harium.suneidesis.concept.attribute;
 
-import com.harium.suneidesis.concept.*;
+import com.harium.suneidesis.concept.Action;
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.measurement.Measurement;
+import com.harium.suneidesis.concept.Place;
 import com.harium.suneidesis.concept.helper.Inspector;
 import com.harium.suneidesis.concept.helper.matchers.Equals;
 import com.harium.suneidesis.concept.helper.matchers.GreaterThan;
 import com.harium.suneidesis.concept.helper.matchers.LowerThan;
-import com.harium.suneidesis.concept.Measurement;
 import org.junit.Test;
 
 import static com.harium.suneidesis.concept.helper.Inspector.does;
@@ -17,7 +19,7 @@ public class AttributesTest {
     public void testSimple() {
         Concept bat = new Concept("bat");
         bat.can(new Action("fly"));
-        bat.hasQuantity(new Concept("wing"), new Measurement("2"));
+        bat.hasQuantity(new Concept("wing"), new Measurement().value("2"));
         bat.isLocatedAt(new Place("cave"));
 
         assertTrue(does(bat).hasPart("wing", new GreaterThan("1")));
@@ -78,7 +80,7 @@ public class AttributesTest {
         mammal.is(animal);
 
         horse.hasNoQuantity("horn");
-        unicorn.hasQuantity("horn", new Measurement("1"));
+        unicorn.hasQuantity("horn", new Measurement().value("1"));
 
         assertTrue(Inspector.does(horse).is(animal));
         assertTrue(Inspector.does(horse).hasPart("horn", new Equals("0")));

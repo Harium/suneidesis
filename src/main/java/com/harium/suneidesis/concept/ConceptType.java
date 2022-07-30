@@ -6,6 +6,7 @@ public class ConceptType extends Concept {
     public static final ConceptType SECRET_TYPE = new ConceptType("SECRET");
     public static final ConceptType ACTION = new ConceptType("ACTION");
     public static final ConceptType ARTIFACT = new ConceptType("ARTIFACT");
+    public static final ConceptType AGENT = new ConceptType("AGENT");
     public static final ConceptType BEING = new ConceptType("BEING");
     public static final ConceptType CHARACTERISTIC = new ConceptType("CHARACTERISTIC");
     public static final ConceptType DATA = new ConceptType("DATA");

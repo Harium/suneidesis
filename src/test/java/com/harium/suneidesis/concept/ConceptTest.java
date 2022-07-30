@@ -1,6 +1,7 @@
 package com.harium.suneidesis.concept;
 
 import com.harium.suneidesis.concept.beign.Gender;
+import com.harium.suneidesis.concept.measurement.Measurement;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -33,9 +34,9 @@ public class ConceptTest {
 
         Story story = new Story("Red Riding Hood");
         story.author("Charles Perrault")
-             .title("Little Red Riding Hood")
-             .storyType(Story.TYPE_FICTIONAL)
-             .begin(wasAtHome.then(momAskedFavor.then(challengeAccepted)));
+                .title("Little Red Riding Hood")
+                .storyType(Story.TYPE_FICTIONAL)
+                .begin(wasAtHome.then(momAskedFavor.then(challengeAccepted)));
     }
 
     @Test
@@ -49,15 +50,15 @@ public class ConceptTest {
         Concept animalThing = new Concept("meow");
 
         Concept hasToHavePaw = new Concept("requirements");
-        hasToHavePaw.hasQuantity("paw", new Measurement("four"));
+        hasToHavePaw.hasQuantity("paw", new Measurement().value("four"));
         animalThing.secretRequirements(hasToHavePaw);
 
         Concept cat = new Concept("cat");
-        cat.hasQuantity("paw", new Measurement("four"));
+        cat.hasQuantity("paw", new Measurement().value("four"));
 
         Concept requester = new Concept("Requester");
-        requester.hasQuantity("leg", new Measurement("two"));
-        requester.hasQuantity("arm", new Measurement("two"));
+        requester.hasQuantity("leg", new Measurement().value("two"));
+        requester.hasQuantity("arm", new Measurement().value("two"));
 
         assertTrue(animalThing.isSecret(requester));
         assertFalse(animalThing.isSecret(cat));

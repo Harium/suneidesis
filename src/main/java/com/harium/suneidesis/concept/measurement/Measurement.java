@@ -1,4 +1,10 @@
-package com.harium.suneidesis.concept;
+package com.harium.suneidesis.concept.measurement;
+
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.ConceptType;
+import com.harium.suneidesis.concept.Primitive;
+import com.harium.suneidesis.concept.Unit;
+import com.harium.suneidesis.concept.helper.MeasureMatcher;
 
 public class Measurement extends Concept {
 
@@ -10,26 +16,37 @@ public class Measurement extends Concept {
     public static final Unit DEFAULT_UNIT = new Unit("unit", "u");
     public static final Measurement ZERO = new Measurement("0", DEFAULT_UNIT);
 
+    public Measurement() {
+        super(ConceptType.MEASUREMENT);
+    }
+
     public Measurement(Concept unit) {
         super(ConceptType.MEASUREMENT);
         unit(unit);
     }
 
-    /**
-     * This constructor uses value instead of name in purpose
-     * @param value - the value in unknown units
-     */
-    public Measurement(String value) {
-        super(ConceptType.MEASUREMENT);
-        value(value);
+    public Measurement(String name) {
+        super(name, ConceptType.MEASUREMENT);
     }
 
+    /**
+     * Convenient constructor that receives value and unit
+     *
+     * @param value
+     * @param unit
+     */
     public Measurement(String value, Concept unit) {
         super(ConceptType.MEASUREMENT);
         value(value);
         unit(unit);
     }
 
+    /**
+     * Convenient constructor that receives value and unit
+     *
+     * @param value
+     * @param unit
+     */
     public Measurement(String value, String unit) {
         super(ConceptType.MEASUREMENT);
         value(value);
@@ -89,5 +106,9 @@ public class Measurement extends Concept {
         boolean sameUnit = q.getUnit().equals(getUnit());
 
         return sameValue && sameUnit;
+    }
+
+    public boolean matches(MeasureMatcher matcher) {
+        return matcher.evaluate(getValue());
     }
 }

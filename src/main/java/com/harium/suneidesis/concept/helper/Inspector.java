@@ -4,7 +4,7 @@ import com.harium.suneidesis.concept.Action;
 import com.harium.suneidesis.concept.Concept;
 import com.harium.suneidesis.concept.ConceptType;
 import com.harium.suneidesis.concept.attribute.Attributes;
-import com.harium.suneidesis.concept.Measurement;
+import com.harium.suneidesis.concept.measurement.Measurement;
 import com.harium.suneidesis.concept.word.Word;
 
 public class Inspector {

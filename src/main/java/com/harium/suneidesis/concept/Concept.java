@@ -1,5 +1,6 @@
 package com.harium.suneidesis.concept;
 
+import com.harium.suneidesis.concept.measurement.Measurement;
 import com.harium.suneidesis.concept.word.Word;
 
 import java.util.Map;

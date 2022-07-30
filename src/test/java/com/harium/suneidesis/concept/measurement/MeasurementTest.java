@@ -1,5 +1,7 @@
-package com.harium.suneidesis.concept;
+package com.harium.suneidesis.concept.measurement;
 
+import com.harium.suneidesis.concept.Concept;
+import com.harium.suneidesis.concept.measurement.Measurement;
 import org.junit.Test;
 
 import static com.harium.suneidesis.concept.helper.Inspector.does;

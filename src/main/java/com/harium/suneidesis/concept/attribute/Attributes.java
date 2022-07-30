@@ -1,7 +1,7 @@
 package com.harium.suneidesis.concept.attribute;
 
 import com.harium.suneidesis.concept.*;
-import com.harium.suneidesis.concept.Measurement;
+import com.harium.suneidesis.concept.measurement.Measurement;
 import com.harium.suneidesis.concept.word.Word;
 import com.harium.suneidesis.repository.Repository;
 

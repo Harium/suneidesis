@@ -1,7 +1,7 @@
 package com.harium.suneidesis.concept.time;
 
 import com.harium.suneidesis.concept.Concept;
-import com.harium.suneidesis.concept.Measurement;
+import com.harium.suneidesis.concept.measurement.Measurement;
 
 public class Time extends Measurement {
 

@@ -1,5 +1,6 @@
 package com.harium.suneidesis.concept;
 
+import com.harium.suneidesis.concept.measurement.Measurement;
 import org.junit.Assert;
 import org.junit.Test;
 

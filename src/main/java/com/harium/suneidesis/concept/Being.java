@@ -1,6 +1,7 @@
 package com.harium.suneidesis.concept;
 
 import com.harium.suneidesis.concept.beign.ancestry.Ancestry;
+import com.harium.suneidesis.concept.measurement.Measurement;
 
 /**
  * Being here should be stateless
