@@ -1,9 +1,7 @@
 package com.harium.suneidesis.linguistic.nlp.pos;
 
-import com.harium.suneidesis.concept.word.Word;
-
 /**
- * Tags borrowed from Penn Treebank/Nltk
+ * Tags borrowed from Penn Treebank / NLTK / SPACY
  */
 public enum Tag {
     ANY,
@@ -31,6 +29,7 @@ public enum Tag {
     ADVERB,
     ADVERB_COMPARATIVE,
     ADVERB_SUPERLATIVE,
+    AUXILIARY,
     PARTICLE,
     SYMBOL,
     CURRENCY,// Financial Symbol
@@ -50,5 +49,6 @@ public enum Tag {
     WH_ADVERB,
     PUNCTUATION,
     SHORT,
+    SPACE,
     UNKNOWN;
 }
