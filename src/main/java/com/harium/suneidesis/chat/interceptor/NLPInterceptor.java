@@ -5,7 +5,7 @@ import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.linguistic.nlp.NLP;
-import com.harium.suneidesis.linguistic.nlp.pos.TagPair;
+import com.harium.suneidesis.linguistic.nlp.Token;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,22 +48,18 @@ public class NLPInterceptor implements Interceptor {
             return;
         }
 
-        // Process Part Of Speech (POS) tags
-        TagPair[] tags = nlp.posTag(sentence);
-        // Replace words by lemma
-        for (TagPair tagPair : tags) {
-            String lemma = nlp.lemmatize(tagPair.getWord());
-            tagPair.setWord(lemma);
-        }
-
-        input.getProperties().put(PROPERTY_NLP, tags);
+        // Process Part Of Speech (POS) tags, lemma, etc
+        Token[] tokens = nlp.nlp(sentence);
+        input.getProperties().put(PROPERTY_NLP, tokens);
     }
 
     protected NLP getNLP(String language) {
         NLP nlp = nlpMap.get(language);
         if (nlp == null) {
             return nlpMap.get(DEFAULT_LANGUAGE);
-        }
+        } else /*if (offline) {
+            // Get fallback NLP
+        }*/
         return nlp;
     }
 
