@@ -48,7 +48,7 @@ public class NLPInterceptor implements Interceptor {
             return;
         }
 
-        // Process Part Of Speech (POS) tags, lemma, etc
+        // Process Part Of Speech (POS) tags, lemma, etc.
         Token[] tokens = nlp.nlp(sentence);
         input.getProperties().put(PROPERTY_NLP, tokens);
     }
@@ -57,9 +57,7 @@ public class NLPInterceptor implements Interceptor {
         NLP nlp = nlpMap.get(language);
         if (nlp == null) {
             return nlpMap.get(DEFAULT_LANGUAGE);
-        } else /*if (offline) {
-            // Get fallback NLP
-        }*/
+        }
         return nlp;
     }
 
