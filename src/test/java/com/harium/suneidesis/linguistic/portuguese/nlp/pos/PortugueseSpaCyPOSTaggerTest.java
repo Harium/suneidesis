@@ -56,16 +56,16 @@ public class PortugueseSpaCyPOSTaggerTest {
         Assert.assertEquals(Tag.NOUN, answer[3].getTag());
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void testTagPronouns() {
         TagPair[] answer = tagger.posTag(new String[]{"você", "é", "esperto"});
         Assert.assertEquals(Tag.PRONOUN, answer[0].getTag());
-        Assert.assertEquals(Tag.VERB_CONJUGATION, answer[1].getTag());
+        Assert.assertEquals(Tag.VERB, answer[1].getTag());
         Assert.assertEquals(Tag.ADJECTIVE, answer[2].getTag());
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void testTagConjunction() {
         TagPair[] answer = tagger.posTag(new String[]{"você", "é", "chato", "e", "bobo"});
@@ -80,8 +80,8 @@ public class PortugueseSpaCyPOSTaggerTest {
     public void testTagMisc() {
         TagPair[] answer = tagger.posTag(new String[]{"eu", "sou", "sempre", "muito", "chato"});
         Assert.assertEquals(Tag.PRONOUN, answer[0].getTag());
-        //Assert.assertEquals(Tag.VERB_CONJUGATION, answer[1].getTag());
-        Assert.assertEquals(Tag.AUXILIARY, answer[1].getTag());
+        Assert.assertEquals(Tag.VERB, answer[1].getTag());
+        //Assert.assertEquals(Tag.AUXILIARY, answer[1].getTag());
         Assert.assertEquals(Tag.ADVERB, answer[2].getTag());
         Assert.assertEquals(Tag.ADVERB, answer[3].getTag());
         Assert.assertEquals(Tag.ADJECTIVE, answer[4].getTag());
@@ -91,7 +91,7 @@ public class PortugueseSpaCyPOSTaggerTest {
     public void testUnknownVerbs() {
         TagPair[] answer = tagger.posTag(new String[]{"ele", "vai", "voar"});
         Assert.assertEquals(Tag.PRONOUN, answer[0].getTag());
-        Assert.assertEquals(Tag.AUXILIARY, answer[1].getTag());
+        Assert.assertEquals(Tag.VERB, answer[1].getTag());
         Assert.assertEquals(Tag.VERB, answer[2].getTag());
 
         answer = tagger.posTag(new String[]{"tomamos", "uma", "decisão"});
@@ -114,7 +114,7 @@ public class PortugueseSpaCyPOSTaggerTest {
         Assert.assertEquals(Tag.VERB, answer[3].getTag());
         Assert.assertEquals(Tag.PREPOSITION, answer[4].getTag());
         Assert.assertEquals(Tag.NOUN, answer[5].getTag());
-        Assert.assertEquals(Tag.AUXILIARY, answer[6].getTag());
+        Assert.assertEquals(Tag.VERB, answer[6].getTag());
         Assert.assertEquals(Tag.VERB, answer[7].getTag());
     }
 

@@ -18,7 +18,8 @@ public class SpaCyUniversalTagConverter implements StringToTagConverter {
         } else if ("ADV".equals(tag)) {
             return Tag.ADVERB;
         } else if ("AUX".equals(tag)) {
-            return Tag.AUXILIARY;
+            //return Tag.AUXILIARY;
+            return Tag.VERB;
         } else if ("CONJ".equals(tag)) {
             return Tag.CONJUCTION;
         } else if ("CCONJ".equals(tag)) {

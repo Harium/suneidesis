@@ -26,7 +26,7 @@ public class SpaCyPOSTagger implements POSTagger {
     @Override
     public TagPair[] posTag(String[] tokens) {
         String sentence = joinTokens(tokens);
-        String[] cmd = {"/bin/sh", "-c", "cd src/main/python/; python pos.py " + languageModel + " '" + sentence + "'"};
+        String[] cmd = {"/bin/sh", "-c", "cd src/main/python/; python nlp.py " + languageModel + " '" + sentence + "'"};
         String output = Processor.runOutput(cmd);
 
         String[] lines = output.split("\n");
@@ -35,7 +35,7 @@ public class SpaCyPOSTagger implements POSTagger {
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];
             String[] tags = line.split(" ");
-            result[i] = new TagPair(tags[0], converter.convert(tags[1]));
+            result[i] = new TagPair(tags[0], converter.convert(tags[2]));
         }
 
         return result;
