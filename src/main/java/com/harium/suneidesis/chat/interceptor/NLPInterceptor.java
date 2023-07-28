@@ -6,6 +6,7 @@ import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.linguistic.nlp.NLP;
 import com.harium.suneidesis.linguistic.nlp.Token;
+import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,6 +65,18 @@ public class NLPInterceptor implements Interceptor {
     @Override
     public void postParsing(InputContext input, Output output, Parser parser) {
 
+    }
+
+    public static boolean tokensContains(Token[] tokens, String word, Tag tag) {
+        if (tokens == null) {
+            return false;
+        }
+        for (Token token : tokens) {
+            if (word.equals(token.word) && tag.equals(token.tag)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
