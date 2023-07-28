@@ -7,9 +7,19 @@ import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.converter.SpaCyUniversalTagConverter;
 import com.harium.suneidesis.linguistic.nlp.pos.converter.StringToTagConverter;
 
-import java.util.StringJoiner;
-
 public class SpaCyNLP implements NLP {
+
+    public static final String PORTUGUESE_MODULE = "pt_core_news_md";
+
+    public static final String VAR_MODEL = "$model";
+    public static final String VAR_SENTENCE = "$sentence";
+
+    private final String PYTHON_NLP =
+                          "import spacy\n" +
+                          "nlp = spacy.load('" + VAR_MODEL + "')\n" +
+                          "document = nlp('" + VAR_SENTENCE + "')\n" +
+                          "for token in document:\n" +
+                          "  print(token, token.lemma_, token.tag_)\n";
 
     private final String languageModel;
 
@@ -24,10 +34,12 @@ public class SpaCyNLP implements NLP {
         this.converter = converter;
     }
 
-
     @Override
     public Token[] nlp(String sentence) {
-        String[] cmd = {"/bin/sh", "-c", "cd src/main/python/; python nlp.py " + languageModel + " '" + sentence + "'"};
+        // TODO sanitize sequence to prevent code execution
+        String code = PYTHON_NLP.replace(VAR_MODEL, languageModel).replace(VAR_SENTENCE, sentence);
+
+        String[] cmd = {"python", "-c", code};
         String output = Processor.runOutput(cmd);
 
         String[] lines = output.split("\n");

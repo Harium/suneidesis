@@ -1,31 +1,33 @@
 package com.harium.suneidesis.linguistic.nlp.pos;
 
+import com.harium.suneidesis.linguistic.nlp.Token;
+
 public class NLPMatcher {
 
     public static final String SEPARATOR = ",";
 
-    public static boolean match(TagPair[] tagPairs, String tagsRegex) {
+    public static boolean match(Token[] tokens, String tagsRegex) {
         StringBuilder currentTags = new StringBuilder();
 
-        for (TagPair tagPair : tagPairs) {
-            currentTags.append(tagPair.getTag());
+        for (Token token : tokens) {
+            currentTags.append(token.tag);
             currentTags.append(SEPARATOR);
         }
 
         return currentTags.toString().matches(tagsRegex);
     }
 
-    public static boolean match(TagPair[] tagPairs, String[] tagsRegex) {
+    public static boolean match(Token[] tokens, String[] tagsRegex) {
         StringBuilder matcher = new StringBuilder();
         for (String s : tagsRegex) {
             matcher.append(s);
             matcher.append(SEPARATOR);
         }
 
-        return match(tagPairs, matcher.toString());
+        return match(tokens, matcher.toString());
     }
 
-    public static boolean match(TagPair[] tagPairs, Tag[] tags) {
+    public static boolean match(Token[] tagPairs, Tag[] tags) {
         if (tagPairs.length < tags.length) {
             return false;
         }
@@ -33,7 +35,7 @@ public class NLPMatcher {
         int currentTagIndex = 0;
         for (int i = 0; i < tags.length; i++) {
             Tag tag = tags[i];
-            Tag currentTag = tagPairs[currentTagIndex].getTag();
+            Tag currentTag = tagPairs[currentTagIndex].tag;
 
             if (tag.equals(currentTag)) {
                 currentTagIndex++;
@@ -43,7 +45,7 @@ public class NLPMatcher {
                     if (!nextTag.equals(currentTag)) {
                         currentTagIndex++;
                     }
-                    currentTag = tagPairs[j].getTag();
+                    currentTag = tagPairs[j].tag;
                 }
             } else {
                 return false;
