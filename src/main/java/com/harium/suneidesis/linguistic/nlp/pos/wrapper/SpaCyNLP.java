@@ -19,7 +19,7 @@ public class SpaCyNLP implements NLP {
                           "nlp = spacy.load('" + VAR_MODEL + "')\n" +
                           "document = nlp('" + VAR_SENTENCE + "')\n" +
                           "for token in document:\n" +
-                          "  print(token, token.lemma_, token.tag_)\n";
+                          "  print(token, token.tag_, token.lemma_)\n";
 
     private final String languageModel;
 
@@ -50,8 +50,16 @@ public class SpaCyNLP implements NLP {
             String[] tags = line.split(" ");
 
             String word = tags[0];
-            String lemma = tags[1];
-            Tag tag = converter.convert(tags[2]);
+            Tag tag = converter.convert(tags[1]);
+
+            StringBuilder sb = new StringBuilder();
+            for (int s = 2; s < tags.length; s++) {
+                sb.append(tags[s]);
+                if (s < tags.length - 1) {
+                    sb.append(" ");
+                }
+            }
+            String lemma = sb.toString();
 
             result[i] = new Token(word, lemma, tag);
         }

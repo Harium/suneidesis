@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class NLPInterceptor implements Interceptor {
 
-    public static final String PROPERTY_NLP = "NLP";
-    private static final String DEFAULT_LANGUAGE = "DEFAULT_LANG";
+    public static final String PROPERTY_NLP = "nlp";
+    private static final String DEFAULT_LANGUAGE = "default_lang";
 
     protected Map<String, NLP> nlpMap = new HashMap<>();
 
