@@ -8,6 +8,8 @@ import com.harium.suneidesis.linguistic.nlp.pos.converter.StringToTagConverter;
 
 import java.util.StringJoiner;
 
+import static com.harium.suneidesis.linguistic.nlp.pos.wrapper.SpaCyNLP.buildCode;
+
 public class SpaCyPOSTagger implements POSTagger {
 
     private final String languageModel;
@@ -26,7 +28,9 @@ public class SpaCyPOSTagger implements POSTagger {
     @Override
     public TagPair[] posTag(String[] tokens) {
         String sentence = joinTokens(tokens);
-        String[] cmd = {"/bin/sh", "-c", "cd src/main/python/; python nlp.py " + languageModel + " '" + sentence + "'"};
+        String code = buildCode(languageModel, sentence);
+
+        String[] cmd = {"python", "-c", code};
         String output = Processor.runOutput(cmd);
 
         String[] lines = output.split("\n");
@@ -35,7 +39,7 @@ public class SpaCyPOSTagger implements POSTagger {
         for (int i = 0; i < lines.length; i++) {
             String line = lines[i];
             String[] tags = line.split(" ");
-            result[i] = new TagPair(tags[0], converter.convert(tags[2]));
+            result[i] = new TagPair(tags[0], converter.convert(tags[1]));
         }
 
         return result;

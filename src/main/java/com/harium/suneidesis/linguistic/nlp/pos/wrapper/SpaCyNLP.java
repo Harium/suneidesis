@@ -6,6 +6,7 @@ import com.harium.suneidesis.linguistic.nlp.Token;
 import com.harium.suneidesis.linguistic.nlp.pos.Tag;
 import com.harium.suneidesis.linguistic.nlp.pos.converter.SpaCyUniversalTagConverter;
 import com.harium.suneidesis.linguistic.nlp.pos.converter.StringToTagConverter;
+import org.jetbrains.annotations.NotNull;
 
 public class SpaCyNLP implements NLP {
 
@@ -14,7 +15,7 @@ public class SpaCyNLP implements NLP {
     public static final String VAR_MODEL = "$model";
     public static final String VAR_SENTENCE = "$sentence";
 
-    private final String PYTHON_NLP =
+    private static final String PYTHON_NLP =
                           "import spacy\n" +
                           "nlp = spacy.load('" + VAR_MODEL + "')\n" +
                           "document = nlp('" + VAR_SENTENCE + "')\n" +
@@ -36,8 +37,7 @@ public class SpaCyNLP implements NLP {
 
     @Override
     public Token[] nlp(String sentence) {
-        // TODO sanitize sequence to prevent code execution
-        String code = PYTHON_NLP.replace(VAR_MODEL, languageModel).replace(VAR_SENTENCE, sentence);
+        String code = buildCode(languageModel, sentence);
 
         String[] cmd = {"python", "-c", code};
         String output = Processor.runOutput(cmd);
@@ -65,6 +65,11 @@ public class SpaCyNLP implements NLP {
         }
 
         return result;
+    }
+
+    public static String buildCode(String languageModel, String sentence) {
+        // TODO sanitize sequence to prevent code execution
+        return PYTHON_NLP.replace(VAR_MODEL, languageModel).replace(VAR_SENTENCE, sentence);
     }
 
 }
