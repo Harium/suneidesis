@@ -6,6 +6,9 @@ import com.harium.suneidesis.chat.Parser;
 import com.harium.suneidesis.chat.input.InputContext;
 import com.harium.suneidesis.chat.output.Output;
 import com.harium.suneidesis.chat.output.OutputContext;
+import com.harium.suneidesis.chat.interceptor.NLPInterceptor;
+import com.harium.suneidesis.chat.interceptor.QuestionMarkRemoverInterceptor;
+import com.harium.suneidesis.chat.interceptor.SpellingInterceptor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +23,15 @@ public abstract class BaseChatBox implements ChatBox, Parser {
     protected List<Parser> parsers = new ArrayList<>();
     protected List<Interceptor> interceptors = new ArrayList<>();
 
+    public BaseChatBox() {
+        interceptors.add(new NLPInterceptor());
+        interceptors.add(new QuestionMarkRemoverInterceptor());
+        interceptors.add(new SpellingInterceptor());
+    }
+
     public boolean parse(InputContext input, Output output) {
         if (shouldSkipSentence(input)) {
-           return false;
+            return false;
         }
 
         for (Interceptor interceptor : interceptors) {
